@@ -3,42 +3,24 @@ plugins {
     id 'jacoco'
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/java']
-        }
-    }
-    test {
-        java {
-            srcDirs = ['test/java']
-        }
-    }
-}
+group = 'ru.nsu.ermakov'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-    dependsOn test
     reports {
         xml.required = true
-        html.required = true
-        xml.outputLocation = layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml")
-    }
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [])
-        }))
     }
 }
