@@ -26,14 +26,19 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport 
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-    dependsOn test 
+    dependsOn test
     reports {
         xml.required = true
         html.required = true
-        xml.outputLocation = layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml") 
+        xml.outputLocation = layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml")
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [])
+        }))
     }
 }
