@@ -3,8 +3,7 @@ import java.util.Scanner;
 /**
  * Класс для сортировки массива с помощью алгоритма пирамидальной сортировки (Heapsort)
  */
-public class HeapSort{
-
+public class HeapSort {
 
     /**
      * Конструктор класса Heapsort
@@ -62,33 +61,67 @@ public class HeapSort{
      * Выполняет пирамидальную сортировку массива
      * @param array массив для сортировки
      * @return строка с отсортированным массивом в формате [1, 2, 3]
+     * @throws IllegalArgumentException если массив null
      */
     public static String heapsort(int[] array){
-        int n = array.length;
-        buildMaxHeap(array, n);
-        for(int i = n - 1; i >= 0; i--){
-            swap(array, 0, i);
-            heapify(array, i, 0);
+        if (array == null) {
+            throw new IllegalArgumentException("Массив не может быть null");
         }
-        String result = "[";
+        
+        int n = array.length;
+        if (n == 0) {
+            return "[]";
+        }
+        
+        int[] sortedArray = array.clone();
+        buildMaxHeap(sortedArray, n);
+        for(int i = n - 1; i >= 0; i--){
+            swap(sortedArray, 0, i);
+            heapify(sortedArray, i, 0);
+        }
+        
+        return arrayToString(sortedArray);
+    }
+
+    /**
+     * Преобразует массив в строку
+     * @param array массив
+     * @return строка в формате [1, 2, 3]
+     */
+    private static String arrayToString(int[] array) {
+        StringBuilder result = new StringBuilder("[");
         for(int i = 0; i < array.length; i++){
-            result += array[i];
+            result.append(array[i]);
             if (i < array.length - 1) {
-                result += ", ";
+                result.append(", ");
             }
         }
-        result+="]";
-        return result;
+        result.append("]");
+        return result.toString();
     }
 
     /**
      * Вспомогательный метод для тестирования
      * @param array массив для сортировки
      * @return отсортированная копия массива
+     * @throws IllegalArgumentException если массив null
      */
     public static int[] heapsortForTest(int[] array) {
+        if (array == null) {
+            throw new IllegalArgumentException("Массив не может быть null");
+        }
+        
         int[] copy = array.clone();
-        heapsort(copy);
+        if (copy.length == 0) {
+            return copy;
+        }
+        
+        int n = copy.length;
+        buildMaxHeap(copy, n);
+        for(int i = n - 1; i >= 0; i--){
+            swap(copy, 0, i);
+            heapify(copy, i, 0);
+        }
         return copy;
     }
 
@@ -103,19 +136,26 @@ public class HeapSort{
 
         if (input.trim().isEmpty()) {
             System.out.println("Вы не ввели числа!");
+            scanner.close();
             return;
         }
 
-        String[] numbers = input.split(" ");
-        int[] array = new int[numbers.length];
-        for (int i = 0; i < numbers.length; i++) {
-            array[i] = Integer.parseInt(numbers[i]);
+        try {
+            String[] numbers = input.split(" ");
+            int[] array = new int[numbers.length];
+            for (int i = 0; i < numbers.length; i++) {
+                array[i] = Integer.parseInt(numbers[i]);
+            }
+
+            String result = heapsort(array);
+            System.out.println("Отсортированный массив:");
+            System.out.println(result);
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка: введите только целые числа!");
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
+        } finally {
+            scanner.close();
         }
-
-        String result = heapsort(array);
-        System.out.println("Отсортированный массив:");
-        System.out.println(result);
-
-        scanner.close();
     }
 }
