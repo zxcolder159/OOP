@@ -109,7 +109,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#heapsort(int%5B%5D)" class="member-name-link">heapsort</a><wbr>(int[]&nbsp;array)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Выполняет пирамидальную сортировку массива</div>
+<div class="block">Выполняет пирамидальную сортировку и возвращает строковое представление</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#heapsortForTest(int%5B%5D)" class="member-name-link">heapsortForTest</a><wbr>(int[]&nbsp;array)</code></div>
@@ -120,6 +120,11 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Главный метод приложения</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sort(int%5B%5D)" class="member-name-link">sort</a><wbr>(int[]&nbsp;array)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Выполняет пирамидальную сортировку массива (изменяет исходный массив)</div>
 </div>
 </div>
 </div>
@@ -154,17 +159,28 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="sort(int[])">
+<h3>sort</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sort</span><wbr><span class="parameters">(int[]&nbsp;array)</span></div>
+<div class="block">Выполняет пирамидальную сортировку массива (изменяет исходный массив)</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив для сортировки</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - если массив null</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="heapsort(int[])">
 <h3>heapsort</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">heapsort</span><wbr><span class="parameters">(int[]&nbsp;array)</span></div>
-<div class="block">Выполняет пирамидальную сортировку массива</div>
+<div class="block">Выполняет пирамидальную сортировку и возвращает строковое представление</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>array</code> - массив для сортировки</dd>
 <dt>Returns:</dt>
-<dd>строка с отсортированным массивом в формате [1, 2, 3]</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - если массив null</dd>
+<dd>строка с отсортированным массивом</dd>
 </dl>
 </section>
 </li>
@@ -178,8 +194,6 @@ loadScripts(document, 'script');</script>
 <dd><code>array</code> - массив для сортировки</dd>
 <dt>Returns:</dt>
 <dd>отсортированная копия массива</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - если массив null</dd>
 </dl>
 </section>
 </li>
