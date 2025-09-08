@@ -3,8 +3,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'ru.nsu.ermakov'
-version = '1.0-SNAPSHOT'
+
 
 repositories {
     mavenCentral()
