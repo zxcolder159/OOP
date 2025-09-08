@@ -19,7 +19,7 @@ public class HeapSort{
      * @param i индекс первого элемента
      * @param j индекс второго элемента
      */
-    public static void swap(int[] array, int i, int j){
+    private static void swap(int[] array, int i, int j){
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
@@ -52,7 +52,7 @@ public class HeapSort{
      * @param array массив для преобразования
      * @param n размер массива
      */
-    public static void buildMaxHeap(int[] array, int n) {
+    private static void buildMaxHeap(int[] array, int n) {
         for(int i = n / 2 - 1; i >= 0; i--){
             heapify(array, n, i);
         }
