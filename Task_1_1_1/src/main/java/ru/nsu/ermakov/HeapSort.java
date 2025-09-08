@@ -5,13 +5,13 @@ import java.util.Scanner;
  */
 public class HeapSort{
 
+
     /**
      * Конструктор класса Heapsort
      */
     public HeapSort() {
         // Конструктор по умолчанию
     }
-
 
     /**
      * Меняет местами два элемента массива
