@@ -58,29 +58,40 @@ public class HeapSort {
     }
 
     /**
-     * Выполняет пирамидальную сортировку массива
+     * Выполняет пирамидальную сортировку массива (изменяет исходный массив)
      * @param array массив для сортировки
-     * @return строка с отсортированным массивом в формате [1, 2, 3]
      * @throws IllegalArgumentException если массив null
      */
-    public static String heapsort(int[] array){
+    public static void sort(int[] array) {
         if (array == null) {
             throw new IllegalArgumentException("Массив не может быть null");
         }
         
         int n = array.length;
-        if (n == 0) {
-            return "[]";
+        if (n <= 1) {
+            return;
         }
         
-        int[] sortedArray = array.clone();
-        buildMaxHeap(sortedArray, n);
+        buildMaxHeap(array, n);
         for(int i = n - 1; i >= 0; i--){
-            swap(sortedArray, 0, i);
-            heapify(sortedArray, i, 0);
+            swap(array, 0, i);
+            heapify(array, i, 0);
+        }
+    }
+
+    /**
+     * Выполняет пирамидальную сортировку и возвращает строковое представление
+     * @param array массив для сортировки
+     * @return строка с отсортированным массивом
+     */
+    public static String heapsort(int[] array) {
+        if (array == null) {
+            throw new IllegalArgumentException("Массив не может быть null");
         }
         
-        return arrayToString(sortedArray);
+        int[] copy = array.clone();
+        sort(copy);
+        return arrayToString(copy);
     }
 
     /**
@@ -89,6 +100,10 @@ public class HeapSort {
      * @return строка в формате [1, 2, 3]
      */
     private static String arrayToString(int[] array) {
+        if (array.length == 0) {
+            return "[]";
+        }
+        
         StringBuilder result = new StringBuilder("[");
         for(int i = 0; i < array.length; i++){
             result.append(array[i]);
@@ -104,7 +119,6 @@ public class HeapSort {
      * Вспомогательный метод для тестирования
      * @param array массив для сортировки
      * @return отсортированная копия массива
-     * @throws IllegalArgumentException если массив null
      */
     public static int[] heapsortForTest(int[] array) {
         if (array == null) {
@@ -112,16 +126,7 @@ public class HeapSort {
         }
         
         int[] copy = array.clone();
-        if (copy.length == 0) {
-            return copy;
-        }
-        
-        int n = copy.length;
-        buildMaxHeap(copy, n);
-        for(int i = n - 1; i >= 0; i--){
-            swap(copy, 0, i);
-            heapify(copy, i, 0);
-        }
+        sort(copy);
         return copy;
     }
 
