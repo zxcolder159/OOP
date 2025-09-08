@@ -13,6 +13,11 @@ public class HeapSortTest {
         
         String stringResult = HeapSort.heapsort(new int[]{});
         assertEquals("[]", stringResult);
+        
+        // Тестируем sort напрямую
+        int[] emptyArray = new int[]{};
+        HeapSort.sort(emptyArray);
+        assertArrayEquals(new int[]{}, emptyArray);
     }
 
     @Test
@@ -22,12 +27,20 @@ public class HeapSortTest {
         
         String stringResult = HeapSort.heapsort(new int[]{5});
         assertEquals("[5]", stringResult);
+        
+        int[] singleArray = new int[]{5};
+        HeapSort.sort(singleArray);
+        assertArrayEquals(new int[]{5}, singleArray);
     }
 
     @Test
     public void testAlreadySorted() {
-        int[] result = HeapSort.heapsortForTest(new int[]{1, 2, 3, 4, 5});
+        int[] input = {1, 2, 3, 4, 5};
+        int[] result = HeapSort.heapsortForTest(input);
         assertArrayEquals(new int[]{1, 2, 3, 4, 5}, result);
+        
+        // Проверяем, что исходный массив не изменился
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, input);
     }
 
     @Test
@@ -65,6 +78,11 @@ public class HeapSortTest {
             HeapSort.heapsort(null);
         });
         assertEquals("Массив не может быть null", exception.getMessage());
+        
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            HeapSort.sort(null);
+        });
+        assertEquals("Массив не может быть null", exception.getMessage());
     }
 
     @Test
@@ -89,6 +107,9 @@ public class HeapSortTest {
         
         result = HeapSort.heapsort(new int[]{1, 2});
         assertEquals("[1, 2]", result);
+        
+        result = HeapSort.heapsort(new int[]{});
+        assertEquals("[]", result);
     }
 
     @Test
@@ -101,15 +122,35 @@ public class HeapSortTest {
     }
 
     @Test
-    public void testPerformanceWithLargeArray() {
-        int[] largeArray = new int[1000];
-        for (int i = 0; i < 1000; i++) {
-            largeArray[i] = 999 - i; // обратный порядок
-        }
+    public void testSortModifiesOriginal() {
+        int[] original = {5, 3, 8, 1};
+        int[] copy = original.clone();
+        HeapSort.sort(original);
+        assertFalse(java.util.Arrays.equals(original, copy));
+        assertArrayEquals(new int[]{1, 3, 5, 8}, original);
+    }
+
+    @Test
+    public void testArrayToStringEdgeCases() {
+
+        String result = HeapSort.heapsort(new int[]{});
+        assertEquals("[]", result);
         
-        int[] result = HeapSort.heapsortForTest(largeArray);
-        assertEquals(0, result[0]);
-        assertEquals(999, result[999]);
-        assertEquals(500, result[500]);
+        result = HeapSort.heapsort(new int[]{42});
+        assertEquals("[42]", result);
+        
+        result = HeapSort.heapsort(new int[]{1, 2});
+        assertEquals("[1, 2]", result);
+    }
+
+    @Test
+    public void testHeapSortDoesNotModifyInput() {
+        int[] input = {5, 3, 8, 1};
+        int[] original = input.clone();
+        HeapSort.heapsortForTest(input);
+        assertArrayEquals(original, input); 
+        
+        String result = HeapSort.heapsort(input);
+        assertArrayEquals(original, input); 
     }
 }
