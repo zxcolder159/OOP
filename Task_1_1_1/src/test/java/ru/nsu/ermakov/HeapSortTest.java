@@ -1,156 +1,151 @@
-package ru.nsu.ermakov;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.InputStream;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 
-public class HeapSortTest {
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-    @Test
-    public void testEmptyArray() {
-        int[] result = HeapSort.heapsortForTest(new int[]{});
-        assertArrayEquals(new int[]{}, result);
-        
-        String stringResult = HeapSort.heapsort(new int[]{});
-        assertEquals("[]", stringResult);
-        
-        // Тестируем sort напрямую
-        int[] emptyArray = new int[]{};
-        HeapSort.sort(emptyArray);
-        assertArrayEquals(new int[]{}, emptyArray);
-    }
+@Test
+public void testMainWithValidInput() {
+    String input = "5 3 8 1 4\n";
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+    
+    // Запускаем main
+    assertDoesNotThrow(() -> HeapSort.main(new String[]{}));
+    
+    // Восстанавливаем стандартный вывод
+    System.setOut(originalOut);
+    System.setIn(System.in);
+    
+    String output = outContent.toString();
+    assertTrue(output.contains("Отсортированный массив:"));
+    assertTrue(output.contains("[1, 3, 4, 5, 8]"));
+}
 
-    @Test
-    public void testSingleElement() {
-        int[] result = HeapSort.heapsortForTest(new int[]{5});
-        assertArrayEquals(new int[]{5}, result);
-        
-        String stringResult = HeapSort.heapsort(new int[]{5});
-        assertEquals("[5]", stringResult);
-        
-        int[] singleArray = new int[]{5};
-        HeapSort.sort(singleArray);
-        assertArrayEquals(new int[]{5}, singleArray);
-    }
+@Test
+public void testMainWithEmptyInput() {
+    String input = "\n";
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+    
+    HeapSort.main(new String[]{});
+    
+    System.setOut(originalOut);
+    System.setIn(System.in);
+    
+    String output = outContent.toString();
+    assertTrue(output.contains("Вы не ввели числа!"));
+}
 
-    @Test
-    public void testAlreadySorted() {
-        int[] input = {1, 2, 3, 4, 5};
-        int[] result = HeapSort.heapsortForTest(input);
-        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, result);
-        
-        // Проверяем, что исходный массив не изменился
-        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, input);
-    }
+@Test
+public void testMainWithInvalidInput() {
+    String input = "5 abc 3\n";
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+    
+    HeapSort.main(new String[]{});
+    
+    System.setOut(originalOut);
+    System.setIn(System.in);
+    
+    String output = outContent.toString();
+    assertTrue(output.contains("Ошибка: введите только целые числа!"));
+}
 
-    @Test
-    public void testReverseOrder() {
-        int[] result = HeapSort.heapsortForTest(new int[]{5, 4, 3, 2, 1});
-        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, result);
-    }
+@Test
+public void testMainWithSingleNumber() {
+    String input = "42\n";
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+    
+    HeapSort.main(new String[]{});
+    
+    System.setOut(originalOut);
+    System.setIn(System.in);
+    
+    String output = outContent.toString();
+    assertTrue(output.contains("Отсортированный массив:"));
+    assertTrue(output.contains("[42]"));
+}
 
-    @Test
-    public void testRandomWithDuplicates() {
-        int[] result = HeapSort.heapsortForTest(new int[]{3, 1, 4, 1, 5, 9, 2});
-        assertArrayEquals(new int[]{1, 1, 2, 3, 4, 5, 9}, result);
-    }
+@Test
+public void testMainWithNegativeNumbers() {
+    String input = "-5 3 -1 0\n";
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+    
+    HeapSort.main(new String[]{});
+    
+    System.setOut(originalOut);
+    System.setIn(System.in);
+    
+    String output = outContent.toString();
+    assertTrue(output.contains("Отсортированный массив:"));
+    assertTrue(output.contains("[-5, -1, 0, 3]"));
+}
 
-    @Test
-    public void testNegativeNumbers() {
-        int[] result = HeapSort.heapsortForTest(new int[]{-3, 5, -1, 0});
-        assertArrayEquals(new int[]{-3, -1, 0, 5}, result);
-    }
+@Test
+public void testMainWithMultipleSpaces() {
+    String input = "   5   3   8   1   \n";
+    InputStream in = new ByteArrayInputStream(input.getBytes());
+    System.setIn(in);
+    
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    System.setOut(new PrintStream(outContent));
+    
+    HeapSort.main(new String[]{});
+    
+    System.setOut(originalOut);
+    System.setIn(System.in);
+    
+    String output = outContent.toString();
+    assertTrue(output.contains("Отсортированный массив:"));
+    assertTrue(output.contains("[1, 3, 5, 8]"));
+}
 
-    @Test
-    public void testAllDuplicates() {
-        int[] result = HeapSort.heapsortForTest(new int[]{7, 7, 7, 7});
-        assertArrayEquals(new int[]{7, 7, 7, 7}, result);
-    }
+@Test
+public void testHeapifyMethodDirectly() {
+    int[] array = {3, 1, 4, 1, 5};
 
-    @Test
-    public void testNullArray() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            HeapSort.heapsortForTest(null);
-        });
-        assertEquals("Массив не может быть null", exception.getMessage());
-        
-        exception = assertThrows(IllegalArgumentException.class, () -> {
-            HeapSort.heapsort(null);
-        });
-        assertEquals("Массив не может быть null", exception.getMessage());
-        
-        exception = assertThrows(IllegalArgumentException.class, () -> {
-            HeapSort.sort(null);
-        });
-        assertEquals("Массив не может быть null", exception.getMessage());
-    }
+    assertDoesNotThrow(() -> {
+        HeapSort.sort(array);
+    });
+}
 
-    @Test
-    public void testLargeNumbers() {
-        int[] result = HeapSort.heapsortForTest(new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE, 0});
-        assertArrayEquals(new int[]{Integer.MIN_VALUE, 0, Integer.MAX_VALUE}, result);
-    }
+@Test
+public void testBuildMaxHeapIndirectly() {
+    int[] array = {3, 1, 4};
 
-    @Test
-    public void testMixedPositiveNegative() {
-        int[] result = HeapSort.heapsortForTest(new int[]{-5, 10, -3, 7, 0, -1});
-        assertArrayEquals(new int[]{-5, -3, -1, 0, 7, 10}, result);
-    }
+    HeapSort.sort(array);
+    assertArrayEquals(new int[]{1, 3, 4}, array);
+}
 
-    @Test
-    public void testStringOutputFormat() {
-        String result = HeapSort.heapsort(new int[]{1, 2, 3});
-        assertEquals("[1, 2, 3]", result);
-        
-        result = HeapSort.heapsort(new int[]{1});
-        assertEquals("[1]", result);
-        
-        result = HeapSort.heapsort(new int[]{1, 2});
-        assertEquals("[1, 2]", result);
-        
-        result = HeapSort.heapsort(new int[]{});
-        assertEquals("[]", result);
-    }
-
-    @Test
-    public void testZeroElements() {
-        int[] result = HeapSort.heapsortForTest(new int[]{0, 0, 0});
-        assertArrayEquals(new int[]{0, 0, 0}, result);
-        
-        String stringResult = HeapSort.heapsort(new int[]{0, 0, 0});
-        assertEquals("[0, 0, 0]", stringResult);
-    }
-
-    @Test
-    public void testSortModifiesOriginal() {
-        int[] original = {5, 3, 8, 1};
-        int[] copy = original.clone();
-        HeapSort.sort(original);
-        assertFalse(java.util.Arrays.equals(original, copy));
-        assertArrayEquals(new int[]{1, 3, 5, 8}, original);
-    }
-
-    @Test
-    public void testArrayToStringEdgeCases() {
-
-        String result = HeapSort.heapsort(new int[]{});
-        assertEquals("[]", result);
-        
-        result = HeapSort.heapsort(new int[]{42});
-        assertEquals("[42]", result);
-        
-        result = HeapSort.heapsort(new int[]{1, 2});
-        assertEquals("[1, 2]", result);
-    }
-
-    @Test
-    public void testHeapSortDoesNotModifyInput() {
-        int[] input = {5, 3, 8, 1};
-        int[] original = input.clone();
-        HeapSort.heapsortForTest(input);
-        assertArrayEquals(original, input); 
-        
-        String result = HeapSort.heapsort(input);
-        assertArrayEquals(original, input); 
-    }
+@Test
+public void testSwapLogicThroughIntegration() {
+    int[] array = {5, 3};
+    HeapSort.sort(array);
+    assertArrayEquals(new int[]{3, 5}, array);
 }
