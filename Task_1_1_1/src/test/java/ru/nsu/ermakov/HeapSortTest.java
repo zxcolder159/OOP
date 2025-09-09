@@ -285,4 +285,89 @@ public class HeapSortTest {
         assertArrayEquals(result1, result2);
         assertArrayEquals(input1, input2);
     }
+    @Test
+        public void testConstructor() {
+        HeapSort heapSort = new HeapSort();
+        assertNotNull(heapSort);
+    }
+
+    @Test
+    public void testHeapifyEdgeCases() {
+        int[] array1 = {1, 2, 3};
+        HeapSort.heapsortForTest(array1);
+    
+        int[] array2 = {1, 2, 3, 4};
+        HeapSort.heapsortForTest(array2);
+    
+        int[] array3 = {3, 1, 2};
+        HeapSort.heapsortForTest(array3);
+    }
+
+    @Test
+    public void testBuildMaxHeapWithSmallArrays() {
+        int[] array1 = {1};
+        HeapSort.heapsortForTest(array1);
+        
+        int[] array2 = {2, 1};
+        HeapSort.heapsortForTest(array2);
+    
+        int[] array3 = {1, 2, 3};
+        HeapSort.heapsortForTest(array3);
+    }
+
+    @Test
+    public void testArrayToStringWithVariousInputs() {
+        String result = HeapSort.heapsort(new int[]{-1, 0, 1});
+        assertEquals("[-1, 0, 1]", result);
+    
+        result = HeapSort.heapsort(new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE});
+        assertEquals("[" + Integer.MIN_VALUE + ", " + Integer.MAX_VALUE + "]", result);
+    }
+
+    @Test
+    public void testMainMethodWithValidInput() {
+        String input = "5 3 8 1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+    
+        assertDoesNotThrow(() -> HeapSort.main(new String[]{}));
+    }
+
+    @Test
+    public void testMainMethodWithEmptyInput() {
+        String input = "\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        
+        assertDoesNotThrow(() -> HeapSort.main(new String[]{}));
+    }
+
+    @Test
+    public void testMainMethodWithInvalidInput() {
+        String input = "1 2 abc 4\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+    
+        assertDoesNotThrow(() -> HeapSort.main(new String[]{}));
+    }
+
+    @Test
+    public void testSortWithSingleElement() {
+        int[] single = {5};
+        HeapSort.sort(single);
+        assertArrayEquals(new int[]{5}, single);
+    }
+
+    @Test
+    public void testSortWithEmptyArray() {
+        int[] empty = {};
+        HeapSort.sort(empty);
+        assertArrayEquals(new int[]{}, empty);
+    }
+
+    @Test
+    public void testHeapifyNoSwapScenario() {
+        int[] array = {3, 1, 2};
+        int[] original = array.clone();
+    
+        int[] result = HeapSort.heapsortForTest(array);
+        assertArrayEquals(new int[]{1, 2, 3}, result);
+    }
 }
