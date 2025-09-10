@@ -1,5 +1,8 @@
+# This is a basic workflow to help you get started with Actions
+
 name: CI
 
+# Controls when the workflow will run
 on:
   pull_request:
     branches: [ "main" ]  
@@ -11,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Task1_1_1  # ← Исправлено здесь
+        working-directory: ./${{ github.event.pull_request.title }}
     steps:
       - uses: actions/checkout@v3
       
@@ -19,25 +22,25 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Make gradlew executable
-        run: chmod +x ./Task1_1_1/gradlew  # ← Добавлен путь
+        run: chmod +x ./gradlew
     
       - name: Execute Gradle build
-        run: ./Task1_1_1/gradlew build  # ← Добавлен путь
+        run: ./gradlew build
 
       - name: Generate Jacoco report
-        run: ./Task1_1_1/gradlew jacocoTestReport  # ← Добавлен путь
+        run: ./gradlew jacocoTestReport
 
       - name: Check coverage and publish
         id: jacoco
         uses: madrapps/jacoco-report@v1.2
         with:
-          paths: ./Task1_1_1/build/reports/jacoco/test/jacocoTestReport.xml  # ← Исправлено
+          paths: ./${{ github.event.pull_request.title }}/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
 
       - name: Generate javadoc
-        run: ./Task1_1_1/gradlew javadoc  # ← Добавлен путь
+        run: ./gradlew javadoc
 
       - name: Publish javadoc
         uses: JamesIves/github-pages-deploy-action@v4
@@ -45,8 +48,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           clean: true
-          folder: ./Task1_1_1/build/docs/javadoc  
-          target-folder: Task1_1_1
+          folder: ${{ github.event.pull_request.title }}/build/docs/javadoc
+          target-folder: ${{ github.event.pull_request.title }}
 
   checkstyle:
     runs-on: ubuntu-latest
@@ -54,18 +57,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Debug - show project structure
-        run: |
-          echo "Current structure:"
-          ls -la
-          echo "Java files found:"
-          find . -name "*.java" -type f
-
       - name: Run check style
         uses: nikitasavinov/checkstyle-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           checkstyle_config: '.github/google_checks.xml'
-          workdir: './Task1_1_1'  
           reporter: 'github-pr-check'
-          fail_on_error: false
