@@ -1,39 +1,44 @@
 package ru.nsu.ermakov;
+
 import java.util.Scanner;
+
 /**
- * Класс для сортировки массива с помощью алгоритма пирамидальной сортировки (Heapsort)
+ * Класс для сортировки массива с помощью алгоритма пирамидальной сортировки (Heapsort).
  */
 public class HeapSort {
 
     /**
-     * Конструктор класса Heapsort
+     * Конструктор класса Heapsort.
      */
     public HeapSort() {
         // Конструктор по умолчанию
     }
 
     /**
-     * Меняет местами два элемента массива
+     * Меняет местами два элемента массива.
+     *
      * @param array массив
      * @param i индекс первого элемента
      * @param j индекс второго элемента
      */
-    private static void swap(int[] array, int i, int j){
+    private static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
 
     /**
-     * Преобразует поддерево в max-кучу
+     * Преобразует поддерево в max-кучу.
+     *
      * @param array массив
      * @param n размер кучи
      * @param i корневой индекс
      */
-    private static void heapify(int[] array, int n, int i){
+    private static void heapify(int[] array, int n, int i) {
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
+
         if (left < n && array[left] > array[largest]) {
             largest = left;
         }
@@ -47,40 +52,43 @@ public class HeapSort {
     }
 
     /**
-     * Строит max-кучу из массива
+     * Строит max-кучу из массива.
+     *
      * @param array массив для преобразования
      * @param n размер массива
      */
     private static void buildMaxHeap(int[] array, int n) {
-        for(int i = n / 2 - 1; i >= 0; i--){
+        for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(array, n, i);
         }
     }
 
     /**
-     * Выполняет пирамидальную сортировку массива (изменяет исходный массив)
+     * Выполняет пирамидальную сортировку массива (изменяет исходный массив).
+     *
      * @param array массив для сортировки
-     * @throws IllegalArgumentException если массив null
+     * @throws IllegalArgumentException если массив {@code null}
      */
     public static void sort(int[] array) {
         if (array == null) {
             throw new IllegalArgumentException("Массив не может быть null");
         }
-        
+
         int n = array.length;
         if (n <= 1) {
             return;
         }
-        
+
         buildMaxHeap(array, n);
-        for(int i = n - 1; i >= 0; i--){
+        for (int i = n - 1; i >= 0; i--) {
             swap(array, 0, i);
             heapify(array, i, 0);
         }
     }
 
     /**
-     * Выполняет пирамидальную сортировку и возвращает строковое представление
+     * Выполняет пирамидальную сортировку и возвращает строковое представление.
+     *
      * @param array массив для сортировки
      * @return строка с отсортированным массивом
      */
@@ -88,14 +96,15 @@ public class HeapSort {
         if (array == null) {
             throw new IllegalArgumentException("Массив не может быть null");
         }
-        
+
         int[] copy = array.clone();
         sort(copy);
         return arrayToString(copy);
     }
 
     /**
-     * Преобразует массив в строку
+     * Преобразует массив в строку.
+     *
      * @param array массив
      * @return строка в формате [1, 2, 3]
      */
@@ -103,9 +112,9 @@ public class HeapSort {
         if (array.length == 0) {
             return "[]";
         }
-        
+
         StringBuilder result = new StringBuilder("[");
-        for(int i = 0; i < array.length; i++){
+        for (int i = 0; i < array.length; i++) {
             result.append(array[i]);
             if (i < array.length - 1) {
                 result.append(", ");
@@ -116,7 +125,8 @@ public class HeapSort {
     }
 
     /**
-     * Вспомогательный метод для тестирования
+     * Вспомогательный метод для тестирования.
+     *
      * @param array массив для сортировки
      * @return отсортированная копия массива
      */
@@ -124,17 +134,18 @@ public class HeapSort {
         if (array == null) {
             throw new IllegalArgumentException("Массив не может быть null");
         }
-        
+
         int[] copy = array.clone();
         sort(copy);
         return copy;
     }
 
     /**
-     * Главный метод приложения
+     * Главный метод приложения.
+     *
      * @param args аргументы командной строки
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите числа через пробел:");
         String input = scanner.nextLine();
