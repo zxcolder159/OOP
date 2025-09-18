@@ -89,7 +89,8 @@ class GameTest {
                 new Card("Туз", "Пики"),
                 new Card("5", "Червы"),
                 new Card("Король", "Бубны"),
-                new Card("2", "Трефы")
+                new Card("2", "Трефы"),
+                new Card("7", "Червы") // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -106,7 +107,8 @@ class GameTest {
                 new Card("5", "Червы"),
                 new Card("9", "Бубны"),
                 new Card("2", "Трефы"),
-                new Card("5", "Пики")
+                new Card("5", "Пики"),
+                new Card("8", "Червы") // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("1\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -123,7 +125,8 @@ class GameTest {
                 new Card("9", "Червы"),
                 new Card("8", "Бубны"),
                 new Card("6", "Трефы"),
-                new Card("10", "Червы")
+                new Card("10", "Червы"),
+                new Card("2", "Пики") // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -139,7 +142,8 @@ class GameTest {
                 new Card("10", "Пики"),
                 new Card("9", "Червы"),
                 new Card("8", "Бубны"),
-                new Card("9", "Трефы")
+                new Card("9", "Трефы"),
+                new Card("2", "Червы") // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -148,23 +152,15 @@ class GameTest {
         assertTrue(out.toString().contains("Ничья"));
     }
 
-    private Deck fixedDeck(List<Card> orderedCards) {
-        return new Deck(0) {
-            private final List<Card> cards = new ArrayList<>(orderedCards);
-            @Override
-            public Card draw() {
-                return cards.remove(0);
-            }
-        };
-    }
     @Test
     void testBlackjackPlayerTakesCardAndStops() {
         Deck deck = fixedDeck(List.of(
-                new Card("5", "Пики"),   // игрок
-                new Card("2", "Червы"),  // дилер
-                new Card("5", "Бубны"),  // игрок
-                new Card("3", "Трефы"),  // дилер
-                new Card("9", "Пики")    // игрок берет -> 19
+                new Card("5", "Пики"),
+                new Card("2", "Червы"),
+                new Card("5", "Бубны"),
+                new Card("3", "Трефы"),
+                new Card("9", "Пики"),
+                new Card("7", "Червы") // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("1\n0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -178,10 +174,11 @@ class GameTest {
     @Test
     void testBlackjackDealerWinsNormally() {
         Deck deck = fixedDeck(List.of(
-                new Card("9", "Пики"),   // игрок
-                new Card("10", "Червы"), // дилер
-                new Card("7", "Бубны"),  // игрок
-                new Card("7", "Трефы")   // дилер
+                new Card("9", "Пики"),
+                new Card("10", "Червы"),
+                new Card("7", "Бубны"),
+                new Card("7", "Трефы"),
+                new Card("2", "Червы") // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -198,7 +195,9 @@ class GameTest {
                 new Card("9", "Пики"),
                 new Card("8", "Червы"),
                 new Card("7", "Бубны"),
-                new Card("6", "Трефы")
+                new Card("6", "Трефы"),
+                new Card("2", "Пики"),
+                new Card("3", "Червы")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\nn\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -207,5 +206,15 @@ class GameTest {
         String output = out.toString();
         assertTrue(output.contains("Добро пожаловать в Блэкджек!"));
         assertTrue(output.contains("Раунд 1"));
+    }
+
+    private Deck fixedDeck(List<Card> orderedCards) {
+        return new Deck(0) {
+            private final List<Card> cards = new ArrayList<>(orderedCards);
+            @Override
+            public Card draw() {
+                return cards.remove(0);
+            }
+        };
     }
 }
