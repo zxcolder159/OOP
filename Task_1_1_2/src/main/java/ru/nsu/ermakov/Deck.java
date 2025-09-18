@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Класс, представляющий колоду карт.
+ * Представляет колоду игральных карт.
  */
 public class Deck {
     private final List<Card> cards = new ArrayList<>();
@@ -17,7 +17,9 @@ public class Deck {
     };
 
     /**
-     * Создает одну или несколько колод из 52 карт.
+     * Создаёт указанное количество колод по 52 карты.
+     *
+     * @param numDecks количество колод
      */
     public Deck(int numDecks) {
         for (int n = 0; n < numDecks; n++) {
@@ -30,13 +32,28 @@ public class Deck {
         shuffle();
     }
 
-    /** Перемешивает колоду. */
+    /**
+     * Перемешивает колоду.
+     */
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
-    /** Берет верхнюю карту из колоды. */
+    /**
+     * Берёт верхнюю карту из колоды.
+     *
+     * @return карта
+     */
     public Card draw() {
         return cards.remove(cards.size() - 1);
+    }
+
+    /**
+     * Возвращает текущее количество карт в колоде.
+     *
+     * @return количество карт
+     */
+    public int size() {
+        return cards.size();
     }
 }
