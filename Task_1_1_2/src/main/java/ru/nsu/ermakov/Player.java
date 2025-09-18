@@ -4,26 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс, представляющий игрока (или дилера).
+ * Представляет игрока (или дилера) в игре Блэкджек.
  */
 public class Player {
     private final String name;
     private final List<Card> hand = new ArrayList<>();
 
+    /**
+     * Создаёт игрока с заданным именем.
+     *
+     * @param name имя игрока
+     */
     public Player(String name) {
         this.name = name;
     }
 
+    /**
+     * Добавляет карту в руку.
+     *
+     * @param card карта
+     */
     public void addCard(Card card) {
         hand.add(card);
     }
 
+    /**
+     * Очищает руку.
+     */
     public void clearHand() {
         hand.clear();
     }
 
     /**
-     * Подсчет суммы очков (тузы считаются как 11 или 1).
+     * Подсчитывает сумму очков на руке игрока.
+     * Тузы считаются как 11, но могут уменьшаться до 1,
+     * если сумма превышает 21.
+     *
+     * @return сумма очков
      */
     public int getScore() {
         int total = 0;
@@ -41,18 +58,29 @@ public class Player {
         return total;
     }
 
+    /**
+     * Возвращает список карт игрока.
+     *
+     * @return карты игрока
+     */
     public List<Card> getHand() {
         return hand;
     }
 
+    /**
+     * Возвращает имя игрока.
+     *
+     * @return имя игрока
+     */
     public String getName() {
         return name;
     }
 
     /**
-     * Показать карты игрока.
+     * Возвращает строковое представление руки игрока.
      *
-     * @param hideFirst скрыть ли первую карту (для дилера)
+     * @param hideFirst если true, первая карта скрыта
+     * @return строка с картами и очками
      */
     public String showHand(boolean hideFirst) {
         StringBuilder sb = new StringBuilder("[");
@@ -60,7 +88,7 @@ public class Player {
             if (i == 1 && hideFirst) {
                 sb.append("<закрытая карта>");
             } else {
-                sb.append(hand.get(i).toString());
+                sb.append(hand.get(i));
             }
             if (i < hand.size() - 1) {
                 sb.append(", ");
