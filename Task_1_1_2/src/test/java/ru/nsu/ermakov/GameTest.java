@@ -213,4 +213,14 @@ class GameTest {
         assertTrue(output.contains("Добро пожаловать в Блэкджек!"));
         assertTrue(output.contains("Раунд 1"));
     }
+    private Deck fixedDeck(List<Card> orderedCards) {
+        return new Deck(0) {
+            private final List<Card> cards = new ArrayList<>(orderedCards);
+
+            @Override
+            public Card draw() {
+                return cards.remove(0);
+            }
+        };
+    }
 }
