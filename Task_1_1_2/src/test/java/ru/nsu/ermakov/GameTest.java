@@ -1,18 +1,18 @@
 package ru.nsu.ermakov;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GameTest {
 
-    // --- Card ---
     @Test
     void testCardValues() {
         assertEquals(7, new Card("7", "Пики").getBaseValue());
@@ -25,7 +25,6 @@ class GameTest {
         assertEquals("Дама Трефы", new Card("Дама", "Трефы").toString());
     }
 
-    // --- Deck ---
     @Test
     void testDeckSizeAndDraw() {
         Deck deck = new Deck(1);
@@ -35,7 +34,6 @@ class GameTest {
         assertEquals(51, deck.size());
     }
 
-    // --- Player ---
     @Test
     void testPlayerScoreWithoutAce() {
         Player p = new Player("Игрок");
@@ -82,15 +80,14 @@ class GameTest {
         assertTrue(hidden.contains("<закрытая карта>"));
     }
 
-    // --- Blackjack ---
-        @Test
+    @Test
     void testBlackjackNatural21() {
         Deck deck = fixedDeck(List.of(
-                new Card("Туз", "Пики"),
-                new Card("5", "Червы"),
-                new Card("Король", "Бубны"),
-                new Card("2", "Трефы"),
-                new Card("7", "Червы") // запас
+            new Card("Туз", "Пики"),
+            new Card("5", "Червы"),
+            new Card("Король", "Бубны"),
+            new Card("2", "Трефы"),
+            new Card("7", "Червы")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -103,12 +100,12 @@ class GameTest {
     @Test
     void testBlackjackPlayerBust() {
         Deck deck = fixedDeck(List.of(
-                new Card("10", "Пики"),
-                new Card("5", "Червы"),
-                new Card("9", "Бубны"),
-                new Card("2", "Трефы"),
-                new Card("5", "Пики"),
-                new Card("8", "Червы") // запас
+            new Card("10", "Пики"),
+            new Card("5", "Червы"),
+            new Card("9", "Бубны"),
+            new Card("2", "Трефы"),
+            new Card("5", "Пики"),
+            new Card("8", "Червы")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("1\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -121,12 +118,12 @@ class GameTest {
     @Test
     void testBlackjackDealerBust() {
         Deck deck = fixedDeck(List.of(
-                new Card("10", "Пики"),
-                new Card("9", "Червы"),
-                new Card("8", "Бубны"),
-                new Card("6", "Трефы"),
-                new Card("10", "Червы"),
-                new Card("2", "Пики") // запас
+            new Card("10", "Пики"),
+            new Card("9", "Червы"),
+            new Card("8", "Бубны"),
+            new Card("6", "Трефы"),
+            new Card("10", "Червы"),
+            new Card("2", "Пики")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -139,11 +136,11 @@ class GameTest {
     @Test
     void testBlackjackDraw() {
         Deck deck = fixedDeck(List.of(
-                new Card("10", "Пики"),
-                new Card("9", "Червы"),
-                new Card("8", "Бубны"),
-                new Card("9", "Трефы"),
-                new Card("2", "Червы") // запас
+            new Card("10", "Пики"),
+            new Card("9", "Червы"),
+            new Card("8", "Бубны"),
+            new Card("9", "Трефы"),
+            new Card("2", "Червы")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -155,16 +152,16 @@ class GameTest {
     @Test
     void testBlackjackPlayerTakesCardAndStops() {
         Deck deck = fixedDeck(List.of(
-                new Card("5", "Пики"),
-                new Card("2", "Червы"),
-                new Card("5", "Бубны"),
-                new Card("3", "Трефы"),
-                new Card("9", "Пики"),
-                new Card("7", "Червы"),
-                new Card("8", "Бубны"),   // запас
-                new Card("10", "Пики"),   // запас
-                new Card("6", "Червы"),   // запас
-                new Card("4", "Трефы")    // запас
+            new Card("5", "Пики"),
+            new Card("2", "Червы"),
+            new Card("5", "Бубны"),
+            new Card("3", "Трефы"),
+            new Card("9", "Пики"),
+            new Card("7", "Червы"),
+            new Card("8", "Бубны"),
+            new Card("10", "Пики"),
+            new Card("6", "Червы"),
+            new Card("4", "Трефы")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("1\n0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -178,12 +175,12 @@ class GameTest {
     @Test
     void testBlackjackDealerWinsNormally() {
         Deck deck = fixedDeck(List.of(
-                new Card("9", "Пики"),
-                new Card("10", "Червы"),
-                new Card("7", "Бубны"),
-                new Card("7", "Трефы"),
-                new Card("2", "Червы"), // запас
-                new Card("3", "Пики")   // запас
+            new Card("9", "Пики"),
+            new Card("10", "Червы"),
+            new Card("7", "Бубны"),
+            new Card("7", "Трефы"),
+            new Card("2", "Червы"),
+            new Card("3", "Пики")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -197,13 +194,13 @@ class GameTest {
     @Test
     void testBlackjackStartMethodOneRound() {
         Deck deck = fixedDeck(List.of(
-                new Card("9", "Пики"),
-                new Card("8", "Червы"),
-                new Card("7", "Бубны"),
-                new Card("6", "Трефы"),
-                new Card("2", "Пики"),
-                new Card("3", "Червы"),
-                new Card("4", "Бубны") // запас
+            new Card("9", "Пики"),
+            new Card("8", "Червы"),
+            new Card("7", "Бубны"),
+            new Card("6", "Трефы"),
+            new Card("2", "Пики"),
+            new Card("3", "Червы"),
+            new Card("4", "Бубны")
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\nn\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -213,6 +210,7 @@ class GameTest {
         assertTrue(output.contains("Добро пожаловать в Блэкджек!"));
         assertTrue(output.contains("Раунд 1"));
     }
+
     private Deck fixedDeck(List<Card> orderedCards) {
         return new Deck(0) {
             private final List<Card> cards = new ArrayList<>(orderedCards);
@@ -222,5 +220,9 @@ class GameTest {
                 return cards.remove(0);
             }
         };
+    }
+
+    private void assertNotNull(Object o) {
+        assertTrue(o != null);
     }
 }
