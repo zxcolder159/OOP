@@ -3,7 +3,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'ru.nsu.masolygin'
+group = 'ru.nsu.ermakov'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -20,7 +20,9 @@ test {
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.required = true
+        html.required = true
     }
 }
