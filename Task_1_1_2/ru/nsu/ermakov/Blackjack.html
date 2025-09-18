@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Blackjack</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Класс, реализующий консольную игру Блэкджек.</div>
+<div class="block">Консольная реализация игры Блэкджек.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,12 +90,18 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Blackjack</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Конструктор по умолчанию.</div>
+<div class="block">Создает игру, используя стандартные потоки ввода и вывода.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.io.InputStream,java.io.PrintStream)" class="member-name-link">Blackjack</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Конструктор для задания потоков ввода-вывода.</div>
+<div class="block">Создает игру с заданными потоками ввода и вывода.</div>
+</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.io.InputStream,java.io.PrintStream,ru.nsu.ermakov.Deck)" class="member-name-link">Blackjack</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out,
+ <a href="Deck.html" title="class in ru.nsu.ermakov">Deck</a>&nbsp;deck)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Создает игру с заданными потоками и колодой (для тестов).</div>
 </div>
 </div>
 </section>
@@ -134,7 +140,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Точка входа в программу.</div>
+<div class="block">Точка входа в игру.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#playRound()" class="member-name-link">playRound</a>()</code></div>
@@ -144,7 +150,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Запускает игру.</div>
+<div class="block">Запускает игру, состоящую из последовательности раундов.</div>
 </div>
 </div>
 </div>
@@ -167,7 +173,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Blackjack</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Blackjack</span>()</div>
-<div class="block">Конструктор по умолчанию. Использует стандартные потоки ввода-вывода.</div>
+<div class="block">Создает игру, используя стандартные потоки ввода и вывода.</div>
 </section>
 </li>
 <li>
@@ -175,12 +181,26 @@ loadScripts(document, 'script');</script>
 <h3>Blackjack</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Blackjack</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out)</span></div>
-<div class="block">Конструктор для задания потоков ввода-вывода.
- Удобен для тестирования.</div>
+<div class="block">Создает игру с заданными потоками ввода и вывода.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>in</code> - входной поток</dd>
 <dd><code>out</code> - выходной поток</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.io.InputStream,java.io.PrintStream,ru.nsu.ermakov.Deck)">
+<h3>Blackjack</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Blackjack</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out,
+ <a href="Deck.html" title="class in ru.nsu.ermakov">Deck</a>&nbsp;deck)</span></div>
+<div class="block">Создает игру с заданными потоками и колодой (для тестов).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>in</code> - входной поток</dd>
+<dd><code>out</code> - выходной поток</dd>
+<dd><code>deck</code> - кастомная колода</dd>
 </dl>
 </section>
 </li>
@@ -196,17 +216,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
-<div class="block">Запускает игру. Состоит из последовательности раундов,
- пока игрок не выберет выход.</div>
+<div class="block">Запускает игру, состоящую из последовательности раундов.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="playRound()">
 <h3>playRound</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">playRound</span>()</div>
-<div class="block">Проводит один раунд игры.
- Раздаёт карты, обрабатывает ходы игрока и дилера,
- определяет победителя.</div>
+<div class="block">Проводит один раунд игры.</div>
 </section>
 </li>
 <li>
@@ -257,7 +274,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="main(java.lang.String[])">
 <h3>main</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">main</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span></div>
-<div class="block">Точка входа в программу.</div>
+<div class="block">Точка входа в игру.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>args</code> - аргументы командной строки</dd>
