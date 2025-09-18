@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Blackjack</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Консольная игра Блэкджек.</div>
+<div class="block">Класс, реализующий консольную игру Блэкджек.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +89,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Blackjack</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор по умолчанию.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.io.InputStream,java.io.PrintStream)" class="member-name-link">Blackjack</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Конструктор для задания потоков ввода-вывода.</div>
+</div>
 </div>
 </section>
 </li>
@@ -104,12 +111,41 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Player.html" title="class in ru.nsu.ermakov">Player</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDealer()" class="member-name-link">getDealer</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает дилера.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDealerScoreTotal()" class="member-name-link">getDealerScoreTotal</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает общий счёт дилера по раундам.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Player.html" title="class in ru.nsu.ermakov">Player</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPlayer()" class="member-name-link">getPlayer</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает игрока.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPlayerScoreTotal()" class="member-name-link">getPlayerScoreTotal</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает общий счёт игрока по раундам.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Точка входа в программу.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#playRound()" class="member-name-link">playRound</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проводит один раунд игры.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Запускает игру.</div>
+</div>
 </div>
 </div>
 </div>
@@ -131,6 +167,21 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Blackjack</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Blackjack</span>()</div>
+<div class="block">Конструктор по умолчанию. Использует стандартные потоки ввода-вывода.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.io.InputStream,java.io.PrintStream)">
+<h3>Blackjack</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Blackjack</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintStream.html" title="class or interface in java.io" class="external-link">PrintStream</a>&nbsp;out)</span></div>
+<div class="block">Конструктор для задания потоков ввода-вывода.
+ Удобен для тестирования.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>in</code> - входной поток</dd>
+<dd><code>out</code> - выходной поток</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -145,12 +196,72 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Запускает игру. Состоит из последовательности раундов,
+ пока игрок не выберет выход.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="playRound()">
+<h3>playRound</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">playRound</span>()</div>
+<div class="block">Проводит один раунд игры.
+ Раздаёт карты, обрабатывает ходы игрока и дилера,
+ определяет победителя.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getPlayerScoreTotal()">
+<h3>getPlayerScoreTotal</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getPlayerScoreTotal</span>()</div>
+<div class="block">Возвращает общий счёт игрока по раундам.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>счёт игрока</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getDealerScoreTotal()">
+<h3>getDealerScoreTotal</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getDealerScoreTotal</span>()</div>
+<div class="block">Возвращает общий счёт дилера по раундам.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>счёт дилера</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getPlayer()">
+<h3>getPlayer</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Player.html" title="class in ru.nsu.ermakov">Player</a></span>&nbsp;<span class="element-name">getPlayer</span>()</div>
+<div class="block">Возвращает игрока.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>объект игрока</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getDealer()">
+<h3>getDealer</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Player.html" title="class in ru.nsu.ermakov">Player</a></span>&nbsp;<span class="element-name">getDealer</span>()</div>
+<div class="block">Возвращает дилера.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>объект дилера</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="main(java.lang.String[])">
 <h3>main</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">main</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span></div>
+<div class="block">Точка входа в программу.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>args</code> - аргументы командной строки</dd>
+</dl>
 </section>
 </li>
 </ul>

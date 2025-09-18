@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Card</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Класс, представляющий карту в игре Блэкджек.</div>
+<div class="block">Представляет игральную карту для игры Блэкджек.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,7 +91,7 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">Card</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rank,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;suit)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Конструктор карты.</div>
+<div class="block">Создаёт карту.</div>
 </div>
 </div>
 </section>
@@ -110,7 +110,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBaseValue()" class="member-name-link">getBaseValue</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Возвращает базовое значение карты.</div>
+<div class="block">Возвращает базовое значение карты:
+ 
+   числовые карты — их значение,
+   картинки — 10,
+   туз — 11 (корректировка до 1 выполняется в Player).
+ </div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRank()" class="member-name-link">getRank</a>()</code></div>
@@ -147,7 +152,7 @@ loadScripts(document, 'script');</script>
 <h3>Card</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Card</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;rank,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;suit)</span></div>
-<div class="block">Конструктор карты.</div>
+<div class="block">Создаёт карту.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>rank</code> - номинал карты (2–10, Валет, Дама, Король, Туз)</dd>
@@ -168,6 +173,10 @@ loadScripts(document, 'script');</script>
 <h3>getRank</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getRank</span>()</div>
 <div class="block">Возвращает номинал карты.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>номинал карты</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -175,14 +184,26 @@ loadScripts(document, 'script');</script>
 <h3>getSuit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getSuit</span>()</div>
 <div class="block">Возвращает масть карты.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>масть карты</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getBaseValue()">
 <h3>getBaseValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getBaseValue</span>()</div>
-<div class="block">Возвращает базовое значение карты.
- Для туза всегда 11, коррекция до 1 выполняется в Player.getScore().</div>
+<div class="block">Возвращает базовое значение карты:
+ <ul>
+   <li>числовые карты — их значение,</li>
+   <li>картинки — 10,</li>
+   <li>туз — 11 (корректировка до 1 выполняется в Player).</li>
+ </ul></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>значение карты</dd>
+</dl>
 </section>
 </li>
 <li>

@@ -52,62 +52,97 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Player.html#addCard(ru.nsu.ermakov.Card)" class="member-name-link">addCard(Card)</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Player.html" title="class in ru.nsu.ermakov">Player</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Добавляет карту в руку.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Blackjack.html" class="type-name-link" title="class in ru.nsu.ermakov">Blackjack</a> - Class in <a href="ru/nsu/ermakov/package-summary.html">ru.nsu.ermakov</a></dt>
 <dd>
-<div class="block">Консольная игра Блэкджек.</div>
+<div class="block">Класс, реализующий консольную игру Блэкджек.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Blackjack.html#%3Cinit%3E()" class="member-name-link">Blackjack()</a> - Constructor for class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Конструктор по умолчанию.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/Blackjack.html#%3Cinit%3E(java.io.InputStream,java.io.PrintStream)" class="member-name-link">Blackjack(InputStream, PrintStream)</a> - Constructor for class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
+<dd>
+<div class="block">Конструктор для задания потоков ввода-вывода.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Card.html" class="type-name-link" title="class in ru.nsu.ermakov">Card</a> - Class in <a href="ru/nsu/ermakov/package-summary.html">ru.nsu.ermakov</a></dt>
 <dd>
-<div class="block">Класс, представляющий карту в игре Блэкджек.</div>
+<div class="block">Представляет игральную карту для игры Блэкджек.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Card.html#%3Cinit%3E(java.lang.String,java.lang.String)" class="member-name-link">Card(String, String)</a> - Constructor for class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Card.html" title="class in ru.nsu.ermakov">Card</a></dt>
 <dd>
-<div class="block">Конструктор карты.</div>
+<div class="block">Создаёт карту.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Player.html#clearHand()" class="member-name-link">clearHand()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Player.html" title="class in ru.nsu.ermakov">Player</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Очищает руку.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Deck.html" class="type-name-link" title="class in ru.nsu.ermakov">Deck</a> - Class in <a href="ru/nsu/ermakov/package-summary.html">ru.nsu.ermakov</a></dt>
 <dd>
-<div class="block">Класс, представляющий колоду карт.</div>
+<div class="block">Представляет колоду игральных карт.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Deck.html#%3Cinit%3E(int)" class="member-name-link">Deck(int)</a> - Constructor for class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Deck.html" title="class in ru.nsu.ermakov">Deck</a></dt>
 <dd>
-<div class="block">Создает одну или несколько колод из 52 карт.</div>
+<div class="block">Создаёт указанное количество колод по 52 карты.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Deck.html#draw()" class="member-name-link">draw()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Deck.html" title="class in ru.nsu.ermakov">Deck</a></dt>
 <dd>
-<div class="block">Берет верхнюю карту из колоды.</div>
+<div class="block">Берёт верхнюю карту из колоды.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Card.html#getBaseValue()" class="member-name-link">getBaseValue()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Card.html" title="class in ru.nsu.ermakov">Card</a></dt>
 <dd>
-<div class="block">Возвращает базовое значение карты.</div>
+<div class="block">Возвращает базовое значение карты:
+ 
+   числовые карты — их значение,
+   картинки — 10,
+   туз — 11 (корректировка до 1 выполняется в Player).
+ </div>
+</dd>
+<dt><a href="ru/nsu/ermakov/Blackjack.html#getDealer()" class="member-name-link">getDealer()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
+<dd>
+<div class="block">Возвращает дилера.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/Blackjack.html#getDealerScoreTotal()" class="member-name-link">getDealerScoreTotal()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
+<dd>
+<div class="block">Возвращает общий счёт дилера по раундам.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Player.html#getHand()" class="member-name-link">getHand()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Player.html" title="class in ru.nsu.ermakov">Player</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает список карт игрока.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/Player.html#getName()" class="member-name-link">getName()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Player.html" title="class in ru.nsu.ermakov">Player</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает имя игрока.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/Blackjack.html#getPlayer()" class="member-name-link">getPlayer()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
+<dd>
+<div class="block">Возвращает игрока.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/Blackjack.html#getPlayerScoreTotal()" class="member-name-link">getPlayerScoreTotal()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
+<dd>
+<div class="block">Возвращает общий счёт игрока по раундам.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/Card.html#getRank()" class="member-name-link">getRank()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Card.html" title="class in ru.nsu.ermakov">Card</a></dt>
 <dd>
 <div class="block">Возвращает номинал карты.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Player.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Player.html" title="class in ru.nsu.ermakov">Player</a></dt>
 <dd>
-<div class="block">Подсчет суммы очков (тузы считаются как 11 или 1).</div>
+<div class="block">Подсчитывает сумму очков на руке игрока.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Card.html#getSuit()" class="member-name-link">getSuit()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Card.html" title="class in ru.nsu.ermakov">Card</a></dt>
 <dd>
@@ -117,16 +152,24 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Blackjack.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Точка входа в программу.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Player.html" class="type-name-link" title="class in ru.nsu.ermakov">Player</a> - Class in <a href="ru/nsu/ermakov/package-summary.html">ru.nsu.ermakov</a></dt>
 <dd>
-<div class="block">Класс, представляющий игрока (или дилера).</div>
+<div class="block">Представляет игрока (или дилера) в игре Блэкджек.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Player.html#%3Cinit%3E(java.lang.String)" class="member-name-link">Player(String)</a> - Constructor for class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Player.html" title="class in ru.nsu.ermakov">Player</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создаёт игрока с заданным именем.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/Blackjack.html#playRound()" class="member-name-link">playRound()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
+<dd>
+<div class="block">Проводит один раунд игры.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
@@ -137,14 +180,20 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/Player.html#showHand(boolean)" class="member-name-link">showHand(boolean)</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Player.html" title="class in ru.nsu.ermakov">Player</a></dt>
 <dd>
-<div class="block">Показать карты игрока.</div>
+<div class="block">Возвращает строковое представление руки игрока.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/Deck.html#shuffle()" class="member-name-link">shuffle()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Deck.html" title="class in ru.nsu.ermakov">Deck</a></dt>
 <dd>
 <div class="block">Перемешивает колоду.</div>
 </dd>
+<dt><a href="ru/nsu/ermakov/Deck.html#size()" class="member-name-link">size()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Deck.html" title="class in ru.nsu.ermakov">Deck</a></dt>
+<dd>
+<div class="block">Возвращает текущее количество карт в колоде.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/Blackjack.html#start()" class="member-name-link">start()</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/Blackjack.html" title="class in ru.nsu.ermakov">Blackjack</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Запускает игру.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">

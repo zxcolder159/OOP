@@ -76,7 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Deck</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Класс, представляющий колоду карт.</div>
+<div class="block">Представляет колоду игральных карт.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,7 +90,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">Deck</a><wbr>(int&nbsp;numDecks)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Создает одну или несколько колод из 52 карт.</div>
+<div class="block">Создаёт указанное количество колод по 52 карты.</div>
 </div>
 </div>
 </section>
@@ -109,12 +109,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Card.html" title="class in ru.nsu.ermakov">Card</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#draw()" class="member-name-link">draw</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Берет верхнюю карту из колоды.</div>
+<div class="block">Берёт верхнюю карту из колоды.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shuffle()" class="member-name-link">shuffle</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Перемешивает колоду.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#size()" class="member-name-link">size</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает текущее количество карт в колоде.</div>
 </div>
 </div>
 </div>
@@ -137,7 +142,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>Deck</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Deck</span><wbr><span class="parameters">(int&nbsp;numDecks)</span></div>
-<div class="block">Создает одну или несколько колод из 52 карт.</div>
+<div class="block">Создаёт указанное количество колод по 52 карты.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>numDecks</code> - количество колод</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -159,7 +168,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="draw()">
 <h3>draw</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.html" title="class in ru.nsu.ermakov">Card</a></span>&nbsp;<span class="element-name">draw</span>()</div>
-<div class="block">Берет верхнюю карту из колоды.</div>
+<div class="block">Берёт верхнюю карту из колоды.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>карта</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="size()">
+<h3>size</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">size</span>()</div>
+<div class="block">Возвращает текущее количество карт в колоде.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>количество карт</dd>
+</dl>
 </section>
 </li>
 </ul>
