@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 /**
  * Юнит-тесты для классов Card, Deck и Player.
- * Покрытие >80% методов.
  */
 class GameTest {
 
@@ -112,5 +111,50 @@ class GameTest {
         player.addCard(new Card("Дама", "Червы"));
         String result = player.showHand(true);
         assertTrue(result.contains("<закрытая карта>"));
+    }
+    @Test
+    void testBlackjackInitialization() {
+        Blackjack game = new Blackjack();
+        assertNotNull(game);
+    }
+
+    @Test
+    void testBlackjackOneRoundStopImmediately() throws Exception {
+        // эмулируем ввод: "0\n" (сразу остановиться) и "n\n" (не играть снова)
+        String input = "0\nn\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        System.setIn(in);
+        System.setOut(new PrintStream(out));
+
+        Blackjack game = new Blackjack();
+
+        // вызываем приватный метод playRound через reflection
+        Method playRound = Blackjack.class.getDeclaredMethod("playRound");
+        playRound.setAccessible(true);
+        playRound.invoke(game);
+
+        String output = out.toString();
+        assertTrue(output.contains("Ваши карты"));
+        assertTrue(output.contains("Карты дилера"));
+    }
+
+    @Test
+    void testBlackjackStartGame() {
+        // эмулируем ввод: "0\nn\n" (один раунд, игрок сразу останавливается, потом выход)
+        String input = "0\nn\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        System.setIn(in);
+        System.setOut(new PrintStream(out));
+
+        Blackjack game = new Blackjack();
+        game.start();
+
+        String output = out.toString();
+        assertTrue(output.contains("Добро пожаловать в Блэкджек!"));
+        assertTrue(output.contains("Раунд 1"));
     }
 }
