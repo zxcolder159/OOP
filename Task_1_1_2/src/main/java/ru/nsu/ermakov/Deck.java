@@ -10,10 +10,13 @@ import java.util.List;
 public class Deck {
     private final List<Card> cards = new ArrayList<>();
 
-    private static final String[] SUITS = {"Пики", "Червы", "Бубны", "Трефы"};
+    private static final String[] SUITS = {
+        "Пики", "Червы", "Бубны", "Трефы"
+    };
+
     private static final String[] RANKS = {
-            "2", "3", "4", "5", "6", "7", "8", "9", "10",
-            "Валет", "Дама", "Король", "Туз"
+        "2", "3", "4", "5", "6", "7", "8", "9", "10",
+        "Валет", "Дама", "Король", "Туз"
     };
 
     /**
