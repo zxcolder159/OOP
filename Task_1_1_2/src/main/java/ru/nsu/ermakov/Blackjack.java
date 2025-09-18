@@ -5,10 +5,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * Класс, реализующий консольную игру Блэкджек.
+ * Консольная реализация игры Блэкджек.
  */
 public class Blackjack {
-    private final Deck deck = new Deck(1);
+    private Deck deck;
     private final Player player = new Player("Игрок");
     private final Player dealer = new Player("Дилер");
     private int scorePlayer = 0;
@@ -17,15 +17,14 @@ public class Blackjack {
     private final PrintStream out;
 
     /**
-     * Конструктор по умолчанию. Использует стандартные потоки ввода-вывода.
+     * Создает игру, используя стандартные потоки ввода и вывода.
      */
     public Blackjack() {
         this(System.in, System.out);
     }
 
     /**
-     * Конструктор для задания потоков ввода-вывода.
-     * Удобен для тестирования.
+     * Создает игру с заданными потоками ввода и вывода.
      *
      * @param in  входной поток
      * @param out выходной поток
@@ -33,11 +32,24 @@ public class Blackjack {
     public Blackjack(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
         this.out = out;
+        this.deck = new Deck(1);
     }
 
     /**
-     * Запускает игру. Состоит из последовательности раундов,
-     * пока игрок не выберет выход.
+     * Создает игру с заданными потоками и колодой (для тестов).
+     *
+     * @param in   входной поток
+     * @param out  выходной поток
+     * @param deck кастомная колода
+     */
+    public Blackjack(InputStream in, PrintStream out, Deck deck) {
+        this.scanner = new Scanner(in);
+        this.out = out;
+        this.deck = deck;
+    }
+
+    /**
+     * Запускает игру, состоящую из последовательности раундов.
      */
     public void start() {
         out.println("Добро пожаловать в Блэкджек!");
@@ -56,14 +68,11 @@ public class Blackjack {
 
     /**
      * Проводит один раунд игры.
-     * Раздаёт карты, обрабатывает ходы игрока и дилера,
-     * определяет победителя.
      */
     public void playRound() {
         player.clearHand();
         dealer.clearHand();
 
-        // Раздача
         player.addCard(deck.draw());
         dealer.addCard(deck.draw());
         player.addCard(deck.draw());
@@ -73,18 +82,16 @@ public class Blackjack {
         out.println("Ваши карты: " + player.showHand(false));
         out.println("Карты дилера: " + dealer.showHand(true));
 
-        // Проверка на блэкджек
         if (player.getScore() == 21) {
             out.println("У вас блэкджек! 🎉");
             scorePlayer++;
             return;
         }
 
-        // Ход игрока
         while (true) {
             out.println("\nВаш ход");
             out.print("Введите '1', чтобы взять карту, и '0', чтобы остановиться: ");
-            int choice = scanner.nextInt();
+            int choice = scanner.hasNextInt() ? scanner.nextInt() : 0;
             if (choice == 1) {
                 Card card = deck.draw();
                 player.addCard(card);
@@ -100,7 +107,6 @@ public class Blackjack {
             }
         }
 
-        // Ход дилера
         out.println("\nХод дилера");
         out.println("Дилер открывает закрытую карту: " + dealer.getHand().get(1));
         out.println("Карты дилера: " + dealer.showHand(false));
@@ -112,7 +118,6 @@ public class Blackjack {
             out.println("Карты дилера: " + dealer.showHand(false));
         }
 
-        // Определение победителя
         int p = player.getScore();
         int d = dealer.getScore();
 
@@ -164,7 +169,7 @@ public class Blackjack {
     }
 
     /**
-     * Точка входа в программу.
+     * Точка входа в игру.
      *
      * @param args аргументы командной строки
      */
