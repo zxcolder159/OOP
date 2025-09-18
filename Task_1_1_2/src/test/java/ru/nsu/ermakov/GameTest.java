@@ -83,7 +83,7 @@ class GameTest {
     }
 
     // --- Blackjack ---
-    @Test
+        @Test
     void testBlackjackNatural21() {
         Deck deck = fixedDeck(List.of(
                 new Card("Туз", "Пики"),
@@ -160,7 +160,11 @@ class GameTest {
                 new Card("5", "Бубны"),
                 new Card("3", "Трефы"),
                 new Card("9", "Пики"),
-                new Card("7", "Червы") // запас
+                new Card("7", "Червы"),
+                new Card("8", "Бубны"),   // запас
+                new Card("10", "Пики"),   // запас
+                new Card("6", "Червы"),   // запас
+                new Card("4", "Трефы")    // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("1\n0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -178,7 +182,8 @@ class GameTest {
                 new Card("10", "Червы"),
                 new Card("7", "Бубны"),
                 new Card("7", "Трефы"),
-                new Card("2", "Червы") // запас
+                new Card("2", "Червы"), // запас
+                new Card("3", "Пики")   // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -197,7 +202,8 @@ class GameTest {
                 new Card("7", "Бубны"),
                 new Card("6", "Трефы"),
                 new Card("2", "Пики"),
-                new Card("3", "Червы")
+                new Card("3", "Червы"),
+                new Card("4", "Бубны") // запас
         ));
         ByteArrayInputStream in = new ByteArrayInputStream("0\nn\n".getBytes());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -206,15 +212,5 @@ class GameTest {
         String output = out.toString();
         assertTrue(output.contains("Добро пожаловать в Блэкджек!"));
         assertTrue(output.contains("Раунд 1"));
-    }
-
-    private Deck fixedDeck(List<Card> orderedCards) {
-        return new Deck(0) {
-            private final List<Card> cards = new ArrayList<>(orderedCards);
-            @Override
-            public Card draw() {
-                return cards.remove(0);
-            }
-        };
     }
 }
