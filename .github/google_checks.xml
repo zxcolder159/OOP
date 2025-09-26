@@ -269,6 +269,9 @@
     </module>
     <module name="NoWhitespaceBeforeCaseDefaultColon"/>
     <module name="OverloadMethodsDeclarationOrder"/>
+    <module name="VariableDeclarationUsageDistance"/>
+    <module name="CustomImportOrder">
+    </module>
     <module name="MethodParamPad">
       <property name="tokens"
                value="CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF,
