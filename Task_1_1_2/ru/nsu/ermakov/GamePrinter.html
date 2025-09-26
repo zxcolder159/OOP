@@ -44,13 +44,13 @@ loadScripts(document, 'script');</script>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
 </div>
@@ -74,25 +74,13 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GamePrinter</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">GamePrinter</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Утилита для вывода сообщений на экран.</div>
+<div class="block">Утилитный класс для вывода сообщений в консоль во время игры.
+ Все методы статические, чтобы удобно было вызывать из любого места.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<li>
-<section class="constructor-summary" id="constructor-summary">
-<h2>Constructor Summary</h2>
-<div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
-<div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">GamePrinter</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-</div>
-</section>
-</li>
 <!-- ========== METHOD SUMMARY =========== -->
 <li>
 <section class="method-summary" id="method-summary">
@@ -107,32 +95,51 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printDealerDraw(ru.nsu.ermakov.Card,ru.nsu.ermakov.Dealer)" class="member-name-link">printDealerDraw</a><wbr>(<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&nbsp;card,
  <a href="Dealer.html" title="class in ru.nsu.ermakov">Dealer</a>&nbsp;dealer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает карту, которую вытянул дилер, и его текущую руку.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printDealerInitial(ru.nsu.ermakov.Dealer)" class="member-name-link">printDealerInitial</a><wbr>(<a href="Dealer.html" title="class in ru.nsu.ermakov">Dealer</a>&nbsp;dealer)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает стартовое состояние дилера после раздачи
+ (вторая карта закрыта).</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printDealerReveal(ru.nsu.ermakov.Dealer)" class="member-name-link">printDealerReveal</a><wbr>(<a href="Dealer.html" title="class in ru.nsu.ermakov">Dealer</a>&nbsp;dealer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает вскрытие закрытой карты дилера и его текущую руку.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printGoodbye(ru.nsu.ermakov.GameStats)" class="member-name-link">printGoodbye</a><wbr>(<a href="GameStats.html" title="class in ru.nsu.ermakov">GameStats</a>&nbsp;stats)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает итоговое сообщение об окончании игры и общий счёт.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printPlayerBust()" class="member-name-link">printPlayerBust</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает сообщение о переборе у игрока.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printPlayerHand(ru.nsu.ermakov.Player,boolean)" class="member-name-link">printPlayerHand</a><wbr>(<a href="Player.html" title="class in ru.nsu.ermakov">Player</a>&nbsp;player,
  boolean&nbsp;hideFirst)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает карты игрока.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printResult(ru.nsu.ermakov.GameResult)" class="member-name-link">printResult</a><wbr>(<a href="GameResult.html" title="enum class in ru.nsu.ermakov">GameResult</a>&nbsp;result)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает результат раунда.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printRoundStart(int)" class="member-name-link">printRoundStart</a><wbr>(int&nbsp;round)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает заголовок раунда.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#printWelcome()" class="member-name-link">printWelcome</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Печатает приветствие.</div>
+</div>
 </div>
 </div>
 </div>
@@ -145,20 +152,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<li>
-<section class="constructor-details" id="constructor-detail">
-<h2>Constructor Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="&lt;init&gt;()">
-<h3>GamePrinter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GamePrinter</span>()</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ============ METHOD DETAIL ========== -->
 <li>
 <section class="method-details" id="method-detail">
@@ -168,18 +161,29 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="printWelcome()">
 <h3>printWelcome</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printWelcome</span>()</div>
+<div class="block">Печатает приветствие.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="printGoodbye(ru.nsu.ermakov.GameStats)">
 <h3>printGoodbye</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printGoodbye</span><wbr><span class="parameters">(<a href="GameStats.html" title="class in ru.nsu.ermakov">GameStats</a>&nbsp;stats)</span></div>
+<div class="block">Печатает итоговое сообщение об окончании игры и общий счёт.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>stats</code> - статистика игры</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="printRoundStart(int)">
 <h3>printRoundStart</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printRoundStart</span><wbr><span class="parameters">(int&nbsp;round)</span></div>
+<div class="block">Печатает заголовок раунда.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>round</code> - номер раунда</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -187,18 +191,35 @@ loadScripts(document, 'script');</script>
 <h3>printPlayerHand</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printPlayerHand</span><wbr><span class="parameters">(<a href="Player.html" title="class in ru.nsu.ermakov">Player</a>&nbsp;player,
  boolean&nbsp;hideFirst)</span></div>
+<div class="block">Печатает карты игрока.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>player</code> - игрок</dd>
+<dd><code>hideFirst</code> - скрыть ли первую карту (обычно false для игрока)</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="printDealerInitial(ru.nsu.ermakov.Dealer)">
 <h3>printDealerInitial</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printDealerInitial</span><wbr><span class="parameters">(<a href="Dealer.html" title="class in ru.nsu.ermakov">Dealer</a>&nbsp;dealer)</span></div>
+<div class="block">Печатает стартовое состояние дилера после раздачи
+ (вторая карта закрыта).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>dealer</code> - дилер</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="printDealerReveal(ru.nsu.ermakov.Dealer)">
 <h3>printDealerReveal</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printDealerReveal</span><wbr><span class="parameters">(<a href="Dealer.html" title="class in ru.nsu.ermakov">Dealer</a>&nbsp;dealer)</span></div>
+<div class="block">Печатает вскрытие закрытой карты дилера и его текущую руку.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>dealer</code> - дилер</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -206,18 +227,30 @@ loadScripts(document, 'script');</script>
 <h3>printDealerDraw</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printDealerDraw</span><wbr><span class="parameters">(<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&nbsp;card,
  <a href="Dealer.html" title="class in ru.nsu.ermakov">Dealer</a>&nbsp;dealer)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="printResult(ru.nsu.ermakov.GameResult)">
-<h3>printResult</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printResult</span><wbr><span class="parameters">(<a href="GameResult.html" title="enum class in ru.nsu.ermakov">GameResult</a>&nbsp;result)</span></div>
+<div class="block">Печатает карту, которую вытянул дилер, и его текущую руку.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>card</code> - вытянутая карта</dd>
+<dd><code>dealer</code> - дилер</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="printPlayerBust()">
 <h3>printPlayerBust</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printPlayerBust</span>()</div>
+<div class="block">Печатает сообщение о переборе у игрока.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="printResult(ru.nsu.ermakov.GameResult)">
+<h3>printResult</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">printResult</span><wbr><span class="parameters">(<a href="GameResult.html" title="enum class in ru.nsu.ermakov">GameResult</a>&nbsp;result)</span></div>
+<div class="block">Печатает результат раунда.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>result</code> - результат (победа игрока, дилера или ничья)</dd>
+</dl>
 </section>
 </li>
 </ul>
