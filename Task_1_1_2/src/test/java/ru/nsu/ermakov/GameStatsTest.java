@@ -3,29 +3,31 @@ package ru.nsu.ermakov;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GameStatsTest {
     @Test
-    void testInitialStats() {
+    void testInitialValues() {
         GameStats stats = new GameStats();
         assertEquals(0, stats.getPlayerWins());
         assertEquals(0, stats.getDealerWins());
-        assertEquals(0, stats.getDraws());
     }
 
     @Test
-    void testIncrementStats() {
+    void testAddWins() {
         GameStats stats = new GameStats();
-        stats.incrementPlayerWins();
-        stats.incrementDealerWins();
-        stats.incrementDraws();
-
+        stats.addPlayerWin();
+        stats.addDealerWin();
         assertEquals(1, stats.getPlayerWins());
         assertEquals(1, stats.getDealerWins());
-        assertEquals(1, stats.getDraws());
-        assertFalse(stats.isEmpty());
-        assertTrue(stats.getTotalGames() > 0);
+    }
+
+    @Test
+    void testUpdate() {
+        GameStats stats = new GameStats();
+        stats.update(GameResult.PLAYER_WIN);
+        stats.update(GameResult.DEALER_WIN);
+        stats.update(GameResult.DRAW); 
+        assertEquals(1, stats.getPlayerWins());
+        assertEquals(1, stats.getDealerWins());
     }
 }
