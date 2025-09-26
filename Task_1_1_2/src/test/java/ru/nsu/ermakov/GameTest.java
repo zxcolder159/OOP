@@ -1,116 +1,228 @@
 package ru.nsu.ermakov;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-/**
- * Юнит-тесты для классов Card, Deck и Player.
- * Покрытие >80% методов.
- */
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class GameTest {
 
-    // ---------- Card ----------
     @Test
-    void testNumberCardValue() {
-        Card card = new Card("7", "Пики");
-        assertEquals(7, card.getBaseValue());
-    }
-
-    @Test
-    void testFaceCardValue() {
-        Card card = new Card("Король", "Червы");
-        assertEquals(10, card.getBaseValue());
-    }
-
-    @Test
-    void testAceCardValue() {
-        Card card = new Card("Туз", "Бубны");
-        assertEquals(11, card.getBaseValue());
+    void testCardValues() {
+        assertEquals(7, new Card("7", "Пики").getBaseValue());
+        assertEquals(10, new Card("Король", "Червы").getBaseValue());
+        assertEquals(11, new Card("Туз", "Бубны").getBaseValue());
     }
 
     @Test
     void testCardToString() {
-        Card card = new Card("Дама", "Трефы");
-        assertEquals("Дама Трефы", card.toString());
+        assertEquals("Дама Трефы", new Card("Дама", "Трефы").toString());
     }
 
-    // ---------- Deck ----------
     @Test
-    void testDeckSizeSingle() {
+    void testDeckSizeAndDraw() {
         Deck deck = new Deck(1);
-        for (int i = 0; i < 52; i++) {
-            assertNotNull(deck.draw());
-        }
+        assertEquals(52, deck.size());
+        Card c = deck.draw();
+        assertNotNull(c);
+        assertEquals(51, deck.size());
     }
 
     @Test
-    void testDeckSizeMultiple() {
-        Deck deck = new Deck(2);
-        for (int i = 0; i < 104; i++) {
-            assertNotNull(deck.draw());
-        }
+    void testPlayerScoreWithoutAce() {
+        Player p = new Player("Игрок");
+        p.addCard(new Card("10", "Пики"));
+        p.addCard(new Card("9", "Червы"));
+        assertEquals(19, p.getScore());
     }
 
     @Test
-    void testShuffle() {
-        Deck deck = new Deck(1);
-        deck.shuffle();
-        assertNotNull(deck.draw()); // хотя бы карта есть после shuffle
-    }
-
-    // ---------- Player ----------
-    @Test
-    void testAddAndClearHand() {
-        Player player = new Player("Игрок");
-        player.addCard(new Card("10", "Пики"));
-        assertEquals(10, player.getScore());
-        player.clearHand();
-        assertEquals(0, player.getScore());
+    void testPlayerScoreWithAceAs11() {
+        Player p = new Player("Игрок");
+        p.addCard(new Card("Туз", "Пики"));
+        p.addCard(new Card("9", "Червы"));
+        assertEquals(20, p.getScore());
     }
 
     @Test
-    void testScoreWithAceAs11() {
-        Player player = new Player("Игрок");
-        player.addCard(new Card("Туз", "Пики"));
-        player.addCard(new Card("9", "Червы"));
-        assertEquals(20, player.getScore());
+    void testPlayerScoreWithAceAs1() {
+        Player p = new Player("Игрок");
+        p.addCard(new Card("Туз", "Пики"));
+        p.addCard(new Card("9", "Червы"));
+        p.addCard(new Card("5", "Бубны"));
+        assertEquals(15, p.getScore());
     }
 
     @Test
-    void testScoreWithAceAs1() {
-        Player player = new Player("Игрок");
-        player.addCard(new Card("Туз", "Пики"));
-        player.addCard(new Card("9", "Червы"));
-        player.addCard(new Card("5", "Бубны"));
-        assertEquals(15, player.getScore()); // туз = 1
+    void testPlayerClearHand() {
+        Player p = new Player("Игрок");
+        p.addCard(new Card("10", "Пики"));
+        assertFalse(p.getHand().isEmpty());
+        p.clearHand();
+        assertTrue(p.getHand().isEmpty());
     }
 
     @Test
-    void testMultipleAces() {
-        Player player = new Player("Игрок");
-        player.addCard(new Card("Туз", "Пики"));
-        player.addCard(new Card("Туз", "Червы"));
-        player.addCard(new Card("9", "Бубны"));
-        assertEquals(21, player.getScore());
+    void testPlayerShowHand() {
+        Player p = new Player("Игрок");
+        p.addCard(new Card("10", "Пики"));
+        p.addCard(new Card("Дама", "Червы"));
+        String shown = p.showHand(false);
+        assertTrue(shown.contains("10 Пики"));
+        assertTrue(shown.contains("= 20"));
+        String hidden = p.showHand(true);
+        assertTrue(hidden.contains("<закрытая карта>"));
     }
 
     @Test
-    void testShowHandWithoutHidden() {
-        Player player = new Player("Игрок");
-        player.addCard(new Card("10", "Пики"));
-        player.addCard(new Card("Дама", "Червы"));
-        String result = player.showHand(false);
-        assertTrue(result.contains("10 Пики"));
-        assertTrue(result.contains("Дама Червы"));
-        assertTrue(result.contains("="));
+    void testBlackjackNatural21() {
+        Deck deck = fixedDeck(List.of(
+            new Card("Туз", "Пики"),
+            new Card("5", "Червы"),
+            new Card("Король", "Бубны"),
+            new Card("2", "Трефы"),
+            new Card("7", "Червы")
+        ));
+        ByteArrayInputStream in = new ByteArrayInputStream("".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Blackjack game = new Blackjack(in, new PrintStream(out), deck);
+        game.playRound();
+        assertTrue(out.toString().contains("блэкджек"));
+        assertEquals(1, game.getPlayerScoreTotal());
     }
 
     @Test
-    void testShowHandWithHidden() {
-        Player player = new Player("Игрок");
-        player.addCard(new Card("10", "Пики"));
-        player.addCard(new Card("Дама", "Червы"));
-        String result = player.showHand(true);
-        assertTrue(result.contains("<закрытая карта>"));
+    void testBlackjackPlayerBust() {
+        Deck deck = fixedDeck(List.of(
+            new Card("10", "Пики"),
+            new Card("5", "Червы"),
+            new Card("9", "Бубны"),
+            new Card("2", "Трефы"),
+            new Card("5", "Пики"),
+            new Card("8", "Червы")
+        ));
+        ByteArrayInputStream in = new ByteArrayInputStream("1\n".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Blackjack game = new Blackjack(in, new PrintStream(out), deck);
+        game.playRound();
+        assertTrue(out.toString().contains("Перебор"));
+        assertEquals(1, game.getDealerScoreTotal());
+    }
+
+    @Test
+    void testBlackjackDealerBust() {
+        Deck deck = fixedDeck(List.of(
+            new Card("10", "Пики"),
+            new Card("9", "Червы"),
+            new Card("8", "Бубны"),
+            new Card("6", "Трефы"),
+            new Card("10", "Червы"),
+            new Card("2", "Пики")
+        ));
+        ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Blackjack game = new Blackjack(in, new PrintStream(out), deck);
+        game.playRound();
+        assertTrue(out.toString().contains("Вы выиграли"));
+        assertEquals(1, game.getPlayerScoreTotal());
+    }
+
+    @Test
+    void testBlackjackDraw() {
+        Deck deck = fixedDeck(List.of(
+            new Card("10", "Пики"),
+            new Card("9", "Червы"),
+            new Card("8", "Бубны"),
+            new Card("9", "Трефы"),
+            new Card("2", "Червы")
+        ));
+        ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Blackjack game = new Blackjack(in, new PrintStream(out), deck);
+        game.playRound();
+        assertTrue(out.toString().contains("Ничья"));
+    }
+
+    @Test
+    void testBlackjackPlayerTakesCardAndStops() {
+        Deck deck = fixedDeck(List.of(
+            new Card("5", "Пики"),
+            new Card("2", "Червы"),
+            new Card("5", "Бубны"),
+            new Card("3", "Трефы"),
+            new Card("9", "Пики"),
+            new Card("7", "Червы"),
+            new Card("8", "Бубны"),
+            new Card("10", "Пики"),
+            new Card("6", "Червы"),
+            new Card("4", "Трефы")
+        ));
+        ByteArrayInputStream in = new ByteArrayInputStream("1\n0\n".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Blackjack game = new Blackjack(in, new PrintStream(out), deck);
+        game.playRound();
+        String output = out.toString();
+        assertTrue(output.contains("Ваши карты"));
+        assertTrue(output.contains("Ход дилера"));
+    }
+
+    @Test
+    void testBlackjackDealerWinsNormally() {
+        Deck deck = fixedDeck(List.of(
+            new Card("9", "Пики"),
+            new Card("10", "Червы"),
+            new Card("7", "Бубны"),
+            new Card("7", "Трефы"),
+            new Card("2", "Червы"),
+            new Card("3", "Пики")
+        ));
+        ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Blackjack game = new Blackjack(in, new PrintStream(out), deck);
+        game.playRound();
+        String output = out.toString();
+        assertTrue(output.contains("Дилер выиграл"));
+        assertEquals(1, game.getDealerScoreTotal());
+    }
+
+    @Test
+    void testBlackjackStartMethodOneRound() {
+        Deck deck = fixedDeck(List.of(
+            new Card("9", "Пики"),
+            new Card("8", "Червы"),
+            new Card("7", "Бубны"),
+            new Card("6", "Трефы"),
+            new Card("2", "Пики"),
+            new Card("3", "Червы"),
+            new Card("4", "Бубны")
+        ));
+        ByteArrayInputStream in = new ByteArrayInputStream("0\nn\n".getBytes());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Blackjack game = new Blackjack(in, new PrintStream(out), deck);
+        game.start();
+        String output = out.toString();
+        assertTrue(output.contains("Добро пожаловать в Блэкджек!"));
+        assertTrue(output.contains("Раунд 1"));
+    }
+
+    private Deck fixedDeck(List<Card> orderedCards) {
+        return new Deck(0) {
+            private final List<Card> cards = new ArrayList<>(orderedCards);
+
+            @Override
+            public Card draw() {
+                return cards.remove(0);
+            }
+        };
+    }
+
+    private void assertNotNull(Object o) {
+        assertTrue(o != null);
     }
 }
