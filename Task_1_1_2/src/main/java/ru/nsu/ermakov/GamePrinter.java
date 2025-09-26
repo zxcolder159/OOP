@@ -1,63 +1,97 @@
 package ru.nsu.ermakov;
 
-import java.util.List;
-
 /**
- * Класс для вывода информации о ходе игры.
+ * Утилитный класс для вывода сообщений в консоль во время игры.
+ * Все методы статические, чтобы удобно было вызывать из любого места.
  */
-public class GamePrinter {
+public final class GamePrinter {
+
+    private GamePrinter() {
+        // утилитный класс
+    }
 
     /**
-     * Печатает стартовое сообщение.
+     * Печатает приветствие.
      */
-    public void printWelcome() {
+    public static void printWelcome() {
         System.out.println("Добро пожаловать в Блэкджек!");
+    }
+
+    /**
+     * Печатает итоговое сообщение об окончании игры и общий счёт.
+     *
+     * @param stats статистика игры
+     */
+    public static void printGoodbye(GameStats stats) {
+        System.out.printf("Игра окончена. Счёт %d:%d (Вы : Дилер)%n",
+                stats.getPlayerWins(), stats.getDealerWins());
+    }
+
+    /**
+     * Печатает заголовок раунда.
+     *
+     * @param round номер раунда
+     */
+    public static void printRoundStart(int round) {
+        System.out.println("\nРаунд " + round);
     }
 
     /**
      * Печатает карты игрока.
      *
-     * @param player игрок
+     * @param player    игрок
+     * @param hideFirst скрыть ли первую карту (обычно false для игрока)
      */
-    public void printPlayerHand(Player player) {
-        System.out.println("Ваши карты: " + player.getHand().toString(false));
+    public static void printPlayerHand(Player player, boolean hideFirst) {
+        System.out.println("Ваши карты: " + player.showHand(hideFirst));
     }
 
     /**
-     * Печатает карты дилера.
+     * Печатает стартовое состояние дилера после раздачи
+     * (вторая карта закрыта).
      *
-     * @param dealer    дилер
-     * @param hideFirst скрыть ли первую карту
+     * @param dealer дилер
      */
-    public void printDealerHand(Dealer dealer, boolean hideFirst) {
-        System.out.println("Карты дилера: " + dealer.getHand().toString(hideFirst));
+    public static void printDealerInitial(Dealer dealer) {
+        System.out.println("Дилер раздал карты.");
+        System.out.println("Карты дилера: " + dealer.showHand(true));
     }
 
     /**
-     * Печатает сообщение, когда игрок получает карту.
+     * Печатает вскрытие закрытой карты дилера и его текущую руку.
      *
-     * @param card карта
+     * @param dealer дилер
      */
-    public void printPlayerDraw(Card card) {
-        System.out.println("Вы открыли карту " + card);
+    public static void printDealerReveal(Dealer dealer) {
+        System.out.println("\nХод дилера.");
+        System.out.println("Карты дилера: " + dealer.showHand(false));
     }
 
     /**
-     * Печатает сообщение, когда дилер получает карту.
+     * Печатает карту, которую вытянул дилер, и его текущую руку.
      *
-     * @param card карта
+     * @param card   вытянутая карта
+     * @param dealer дилер
      */
-    public void printDealerDraw(Card card) {
-        System.out.println("Дилер открывает карту " + card);
+    public static void printDealerDraw(Card card, Dealer dealer) {
+        System.out.println("Дилер открывает карту: " + card);
+        System.out.println("Карты дилера: " + dealer.showHand(false));
+    }
+
+    /**
+     * Печатает сообщение о переборе у игрока.
+     */
+    public static void printPlayerBust() {
+        System.out.println("Перебор! Вы проиграли раунд.");
     }
 
     /**
      * Печатает результат раунда.
      *
-     * @param state состояние игры
+     * @param result результат (победа игрока, дилера или ничья)
      */
-    public void printResult(GameState state) {
-        switch (state) {
+    public static void printResult(GameResult result) {
+        switch (result) {
             case PLAYER_WIN:
                 System.out.println("Вы выиграли раунд!");
                 break;
@@ -68,27 +102,8 @@ public class GamePrinter {
                 System.out.println("Ничья!");
                 break;
             default:
-                // Обработка на случай новых состояний в будущем
+                // на случай будущих значений enum
                 break;
         }
-    }
-
-    /**
-     * Печатает текущий счёт.
-     *
-     * @param playerScore счёт игрока
-     * @param dealerScore счёт дилера
-     */
-    public void printScore(int playerScore, int dealerScore) {
-        System.out.printf("Счёт %d:%d (Вы : Дилер)%n", playerScore, dealerScore);
-    }
-
-    /**
-     * Печатает список карт (для отладки).
-     *
-     * @param cards список карт
-     */
-    public void printCards(List<Card> cards) {
-        System.out.println(cards);
     }
 }
