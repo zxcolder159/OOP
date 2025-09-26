@@ -3,7 +3,6 @@ package ru.nsu.ermakov;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class RoundTest {
