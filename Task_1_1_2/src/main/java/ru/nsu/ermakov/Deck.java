@@ -8,22 +8,33 @@ import java.util.List;
  * Класс, представляющий колоду карт.
  */
 public class Deck {
-    private final List<Card> cards = new ArrayList<>();
+    private final int numDecks;
+    private List<Card> cards;
 
     /**
-     * Создает одну или несколько колод по 52 карты.
+     * Создаёт одну или несколько колод из 52 карт.
      *
      * @param numDecks количество колод
      */
     public Deck(int numDecks) {
+        this.numDecks = numDecks;
+        this.cards = createDeck(numDecks);
+        shuffle();
+    }
+
+    /**
+     * Создание новой колоды.
+     */
+    private List<Card> createDeck(int numDecks) {
+        List<Card> newDeck = new ArrayList<>();
         for (int n = 0; n < numDecks; n++) {
             for (Suit suit : Suit.values()) {
                 for (Rank rank : Rank.values()) {
-                    cards.add(new Card(rank, suit));
+                    newDeck.add(new Card(rank, suit));
                 }
             }
         }
-        shuffle();
+        return newDeck;
     }
 
     /**
@@ -35,10 +46,25 @@ public class Deck {
 
     /**
      * Берёт верхнюю карту из колоды.
+     * Если карты закончились — создаёт новую колоду.
      *
      * @return карта
      */
     public Card draw() {
+        if (cards.isEmpty()) {
+            System.out.println("Колода закончилась! Создаётся новая колода...");
+            cards = createDeck(numDecks);
+            shuffle();
+        }
         return cards.remove(cards.size() - 1);
+    }
+
+    /**
+     * Возвращает количество оставшихся карт.
+     *
+     * @return размер колоды
+     */
+    public int size() {
+        return cards.size();
     }
 }
