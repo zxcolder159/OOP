@@ -2,21 +2,32 @@ package ru.nsu.ermakov;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HandTest {
     @Test
-    void testAddCardAndClear() {
+    void testAddAndClear() {
         Hand hand = new Hand();
-        Card card = new Card(Rank.ACE, Suit.SPADES);
-        hand.addCard(card);
-
-        assertFalse(hand.getCards().isEmpty());
+        hand.addCard(new Card(Rank.TEN, Suit.ПИКИ));
         assertEquals(1, hand.getCards().size());
-
         hand.clear();
-        assertTrue(hand.getCards().isEmpty());
+        assertEquals(0, hand.getCards().size());
+    }
+
+    @Test
+    void testScoreWithAceAdjustment() {
+        Hand hand = new Hand();
+        hand.addCard(new Card(Rank.ACE, Suit.БУБНЫ));
+        hand.addCard(new Card(Rank.KING, Suit.ТРЕФЫ));
+        assertEquals(21, hand.getScore());
+    }
+
+    @Test
+    void testToStringHideFirst() {
+        Hand hand = new Hand();
+        hand.addCard(new Card(Rank.TEN, Suit.ПИКИ));
+        hand.addCard(new Card(Rank.FIVE, Suit.БУБНЫ));
+        String str = hand.toString(true);
+        assertTrue(str.contains("<закрытая карта>"));
     }
 }
