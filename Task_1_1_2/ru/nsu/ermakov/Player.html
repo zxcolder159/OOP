@@ -73,10 +73,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">ru.nsu.ermakov.Player</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Direct Known Subclasses:</dt>
+<dd><code><a href="Dealer.html" title="class in ru.nsu.ermakov">Dealer</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Player</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Представляет игрока (или дилера) в игре Блэкджек.</div>
+<div class="block">Класс, представляющий игрока.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,7 +94,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">Player</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Создаёт игрока с заданным именем.</div>
+<div class="block">Создаёт игрока.</div>
 </div>
 </div>
 </section>
@@ -107,34 +111,39 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addCard(ru.nsu.ermakov.Card)" class="member-name-link">addCard</a><wbr>(<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&nbsp;card)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clearHand()" class="member-name-link">clearHand</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Добавляет карту в руку.</div>
+<div class="block">Очищает руку игрока.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clearHand()" class="member-name-link">clearHand</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCards()" class="member-name-link">getCards</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Очищает руку.</div>
+<div class="block">Возвращает карты игрока.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHand()" class="member-name-link">getHand</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Возвращает список карт игрока.</div>
+<div class="block">Имя игрока.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScore()" class="member-name-link">getScore</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Возвращает имя игрока.</div>
+<div class="block">Возвращает количество очков игрока.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScore()" class="member-name-link">getScore</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isBusted()" class="member-name-link">isBusted</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Подсчитывает сумму очков на руке игрока.</div>
+<div class="block">Проверяет, перебрал ли игрок.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showHand(boolean)" class="member-name-link">showHand</a><wbr>(boolean&nbsp;hideFirst)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Возвращает строковое представление руки игрока.</div>
+<div class="block">Рука игрока в виде строки.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#takeCard(ru.nsu.ermakov.Card)" class="member-name-link">takeCard</a><wbr>(<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&nbsp;card)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Добавляет карту в руку.</div>
 </div>
 </div>
 </div>
@@ -157,7 +166,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Player</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Player</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">Создаёт игрока с заданным именем.</div>
+<div class="block">Создаёт игрока.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>name</code> - имя игрока</dd>
@@ -173,9 +182,9 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="addCard(ru.nsu.ermakov.Card)">
-<h3>addCard</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addCard</span><wbr><span class="parameters">(<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&nbsp;card)</span></div>
+<section class="detail" id="takeCard(ru.nsu.ermakov.Card)">
+<h3>takeCard</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">takeCard</span><wbr><span class="parameters">(<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&nbsp;card)</span></div>
 <div class="block">Добавляет карту в руку.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -187,54 +196,45 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="clearHand()">
 <h3>clearHand</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clearHand</span>()</div>
-<div class="block">Очищает руку.</div>
+<div class="block">Очищает руку игрока.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getScore()">
 <h3>getScore</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getScore</span>()</div>
-<div class="block">Подсчитывает сумму очков на руке игрока.
- Тузы считаются как 11, но могут уменьшаться до 1,
- если сумма превышает 21.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>сумма очков</dd>
-</dl>
+<div class="block">Возвращает количество очков игрока.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="getHand()">
-<h3>getHand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&gt;</span>&nbsp;<span class="element-name">getHand</span>()</div>
-<div class="block">Возвращает список карт игрока.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>карты игрока</dd>
-</dl>
+<section class="detail" id="isBusted()">
+<h3>isBusted</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isBusted</span>()</div>
+<div class="block">Проверяет, перебрал ли игрок.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getCards()">
+<h3>getCards</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Card.html" title="class in ru.nsu.ermakov">Card</a>&gt;</span>&nbsp;<span class="element-name">getCards</span>()</div>
+<div class="block">Возвращает карты игрока.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getName()">
 <h3>getName</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getName</span>()</div>
-<div class="block">Возвращает имя игрока.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>имя игрока</dd>
-</dl>
+<div class="block">Имя игрока.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="showHand(boolean)">
 <h3>showHand</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">showHand</span><wbr><span class="parameters">(boolean&nbsp;hideFirst)</span></div>
-<div class="block">Возвращает строковое представление руки игрока.</div>
+<div class="block">Рука игрока в виде строки.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>hideFirst</code> - если true, первая карта скрыта</dd>
-<dt>Returns:</dt>
-<dd>строка с картами и очками</dd>
+<dd><code>hideFirst</code> - скрыть первую карту (для дилера)</dd>
 </dl>
 </section>
 </li>
