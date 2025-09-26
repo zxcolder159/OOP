@@ -7,10 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DealerTest {
     @Test
     void testCompareWithPlayer_PlayerWin() {
-        Dealer dealer = new Dealer("Дилер");
-        Player player = new Player("Игрок");
+        final Dealer dealer = new Dealer("Дилер");
+        final Player player = new Player("Игрок");
 
-        // У игрока больше очков
         dealer.takeCard(new Card(Rank.FIVE, Suit.БУБНЫ));
         player.takeCard(new Card(Rank.KING, Suit.ПИКИ));
 
