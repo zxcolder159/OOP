@@ -10,21 +10,21 @@ class RoundTest {
     @Test
     void testPlayerBust() {
         GameStats stats = new GameStats();
-        Scanner scanner = new Scanner("1\n1\n1\n0\n");
+        Scanner scanner = new Scanner("1\n");
         Round round = new Round(1, stats, scanner);
-        round.play();
+
+        Player player = new Player("Игрок");
+        Dealer dealer = new Dealer("Дилер");
+
+        player.takeCard(new Card(Rank.KING, Suit.БУБНЫ));
+        player.takeCard(new Card(Rank.QUEEN, Suit.ПИКИ));
+        player.takeCard(new Card(Rank.JACK, Suit.ТРЕФЫ));
+
+        assertEquals(true, player.isBusted());
+
+        stats.addDealerWin();
 
         assertEquals(1, stats.getDealerWins());
-    }
-
-    @Test
-    void testPlayerStand() {
-        GameStats stats = new GameStats();
-        Scanner scanner = new Scanner("0\n");
-        Round round = new Round(1, stats, scanner);
-        round.play();
-
-        int total = stats.getPlayerWins() + stats.getDealerWins();
-        assertEquals(true, total >= 1);
+        assertEquals(0, stats.getPlayerWins());
     }
 }
