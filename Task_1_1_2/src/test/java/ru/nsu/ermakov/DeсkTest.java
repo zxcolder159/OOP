@@ -16,8 +16,8 @@ class DeckTest {
     void testDeckReshuffleWhenEmpty() {
         Deck deck = new Deck(1);
         for (int i = 0; i < 60; i++) {
-            deck.draw(); // вытягиваем больше, чем есть в колоде
+            deck.draw();
         }
-        assertNotNull(deck.draw()); // должна пересоздаться
+        assertNotNull(deck.draw());
     }
 }
