@@ -1,75 +1,73 @@
 package ru.nsu.ermakov;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс, представляющий игрока (или дилера).
+ * Класс, представляющий игрока.
  */
 public class Player {
     private final String name;
-    private final List<Card> hand = new ArrayList<>();
+    private final Hand hand = new Hand();
 
+    /**
+     * Создаёт игрока.
+     *
+     * @param name имя игрока
+     */
     public Player(String name) {
         this.name = name;
     }
 
-    public void addCard(Card card) {
-        hand.add(card);
+    /**
+     * Добавляет карту в руку.
+     *
+     * @param card карта
+     */
+    public void takeCard(Card card) {
+        hand.addCard(card);
     }
 
+    /**
+     * Очищает руку игрока.
+     */
     public void clearHand() {
         hand.clear();
     }
 
     /**
-     * Подсчет суммы очков (тузы считаются как 11 или 1).
+     * Возвращает количество очков игрока.
      */
     public int getScore() {
-        int total = 0;
-        int aces = 0;
-        for (Card card : hand) {
-            total += card.getBaseValue();
-            if ("Туз".equals(card.getRank())) {
-                aces++;
-            }
-        }
-        while (total > 21 && aces > 0) {
-            total -= 10;
-            aces--;
-        }
-        return total;
+        return hand.getScore();
     }
 
-    public List<Card> getHand() {
-        return hand;
+    /**
+     * Проверяет, перебрал ли игрок.
+     */
+    public boolean isBusted() {
+        return getScore() > 21;
     }
 
+    /**
+     * Возвращает карты игрока.
+     */
+    public List<Card> getCards() {
+        return hand.getCards();
+    }
+
+    /**
+     * Имя игрока.
+     */
     public String getName() {
         return name;
     }
 
     /**
-     * Показать карты игрока.
+     * Рука игрока в виде строки.
      *
-     * @param hideFirst скрыть ли первую карту (для дилера)
+     * @param hideFirst скрыть первую карту (для дилера)
      */
     public String showHand(boolean hideFirst) {
-        StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < hand.size(); i++) {
-            if (i == 1 && hideFirst) {
-                sb.append("<закрытая карта>");
-            } else {
-                sb.append(hand.get(i).toString());
-            }
-            if (i < hand.size() - 1) {
-                sb.append(", ");
-            }
-        }
-        sb.append("]");
-        if (!hideFirst) {
-            sb.append(" = ").append(getScore());
-        }
-        return sb.toString();
+        return hand.toString(hideFirst);
     }
 }

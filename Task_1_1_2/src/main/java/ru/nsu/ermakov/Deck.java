@@ -8,35 +8,54 @@ import java.util.List;
  * Класс, представляющий колоду карт.
  */
 public class Deck {
-    private final List<Card> cards = new ArrayList<>();
-
-    private static final String[] SUITS = {"Пики", "Червы", "Бубны", "Трефы"};
-    private static final String[] RANKS = {
-            "2", "3", "4", "5", "6", "7", "8", "9", "10",
-            "Валет", "Дама", "Король", "Туз"
-    };
+    private final int numDecks;
+    private List<Card> cards;
 
     /**
-     * Создает одну или несколько колод из 52 карт.
+     * Создаёт одну или несколько колод по 52 карты.
+     *
+     * @param numDecks количество колод
      */
     public Deck(int numDecks) {
-        for (int n = 0; n < numDecks; n++) {
-            for (String suit : SUITS) {
-                for (String rank : RANKS) {
-                    cards.add(new Card(rank, suit));
-                }
-            }
-        }
+        this.numDecks = numDecks;
+        this.cards = createDeck(numDecks);
         shuffle();
     }
 
-    /** Перемешивает колоду. */
+    /**
+     * Создаёт колоду из указанного количества колод.
+     */
+    private List<Card> createDeck(int numDecks) {
+        List<Card> newDeck = new ArrayList<>();
+        for (int n = 0; n < numDecks; n++) {
+            for (Suit suit : Suit.values()) {
+                for (Rank rank : Rank.values()) {
+                    newDeck.add(new Card(rank, suit));
+                }
+            }
+        }
+        return newDeck;
+    }
+
+    /**
+     * Перемешивает колоду.
+     */
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
-    /** Берет верхнюю карту из колоды. */
+    /**
+     * Берёт верхнюю карту из колоды.
+     * Если колода пуста — создаётся новая и тасуется.
+     *
+     * @return карта
+     */
     public Card draw() {
+        if (cards.isEmpty()) {
+            System.out.println("Колода закончилась! Создаётся новая колода...");
+            cards = createDeck(numDecks);
+            shuffle();
+        }
         return cards.remove(cards.size() - 1);
     }
 }

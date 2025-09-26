@@ -4,16 +4,16 @@ package ru.nsu.ermakov;
  * Класс, представляющий карту в игре Блэкджек.
  */
 public class Card {
-    private final String suit;
-    private final String rank;
+    private final Rank rank;
+    private final Suit suit;
 
     /**
      * Конструктор карты.
      *
-     * @param rank номинал карты (2–10, Валет, Дама, Король, Туз)
-     * @param suit масть карты (Пики, Червы, Бубны, Трефы)
+     * @param rank номинал
+     * @param suit масть
      */
-    public Card(String rank, String suit) {
+    public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
     }
@@ -21,33 +21,26 @@ public class Card {
     /**
      * Возвращает номинал карты.
      */
-    public String getRank() {
+    public Rank getRank() {
         return rank;
     }
 
     /**
      * Возвращает масть карты.
      */
-    public String getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 
     /**
      * Возвращает базовое значение карты.
-     * Для туза всегда 11, коррекция до 1 выполняется в Player.getScore().
      */
     public int getBaseValue() {
-        if (rank.matches("\\d+")) {
-            return Integer.parseInt(rank);
-        } else if ("Туз".equals(rank)) {
-            return 11;
-        } else {
-            return 10;
-        }
+        return rank.getValue();
     }
 
     @Override
     public String toString() {
-        return rank + " " + suit;
+        return rank.getName() + " " + suit.getName();
     }
 }
