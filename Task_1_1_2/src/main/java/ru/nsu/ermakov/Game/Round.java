@@ -1,4 +1,10 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Game;
+
+import ru.nsu.ermakov.Enums.Command;
+import ru.nsu.ermakov.Enums.GameResult;
+import ru.nsu.ermakov.Kartishki.Deck;
+import ru.nsu.ermakov.Kartishki.InputHandler;
+import ru.nsu.ermakov.Kartishki.Player;
 
 import java.util.Scanner;
 

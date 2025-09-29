@@ -1,4 +1,6 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Kartishki;
+
+import ru.nsu.ermakov.Enums.Rank;
 
 import java.util.List;
 
@@ -12,11 +14,11 @@ public class ScoreCalculator {
      * @param cards список карт
      * @return сумма очков
      */
-    public static int calculate(List<Card> cards) {
+    public static int calculate(List<InputHandler.Card> cards) {
         int total = 0;
         int aces = 0;
 
-        for (Card card : cards) {
+        for (InputHandler.Card card : cards) {
             total += card.getBaseValue();
             if (card.getRank() == Rank.ACE) {
                 aces++;

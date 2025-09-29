@@ -1,4 +1,4 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Kartishki;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class Player {
      *
      * @param card карта
      */
-    public void takeCard(Card card) {
+    public void takeCard(InputHandler.Card card) {
         hand.addCard(card);
     }
 
@@ -51,7 +51,7 @@ public class Player {
     /**
      * Возвращает карты игрока.
      */
-    public List<Card> getCards() {
+    public List<InputHandler.Card> getCards() {
         return hand.getCards();
     }
 

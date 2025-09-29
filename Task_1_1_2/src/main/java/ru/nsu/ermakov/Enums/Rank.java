@@ -1,4 +1,4 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Enums;
 
 /**
  * Перечисление номиналов карт.

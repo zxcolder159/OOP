@@ -1,4 +1,8 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Game;
+
+import ru.nsu.ermakov.Enums.GameResult;
+import ru.nsu.ermakov.Kartishki.InputHandler;
+import ru.nsu.ermakov.Kartishki.Player;
 
 /**
  * Утилита для вывода сообщений на экран.
@@ -31,7 +35,7 @@ public class GamePrinter {
         System.out.println("Карты дилера: " + dealer.showHand(false));
     }
 
-    public static void printDealerDraw(Card card, Dealer dealer) {
+    public static void printDealerDraw(InputHandler.Card card, Dealer dealer) {
         System.out.println("Дилер открыл карту: " + card);
         System.out.println("Карты дилера: " + dealer.showHand(false));
     }

@@ -1,4 +1,6 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Game;
+
+import ru.nsu.ermakov.Kartishki.InputHandler;
 
 import java.util.Scanner;
 

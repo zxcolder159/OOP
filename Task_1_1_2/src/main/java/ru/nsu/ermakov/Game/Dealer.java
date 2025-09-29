@@ -1,4 +1,9 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Game;
+
+import ru.nsu.ermakov.Kartishki.Deck;
+import ru.nsu.ermakov.Enums.GameResult;
+import ru.nsu.ermakov.Kartishki.InputHandler;
+import ru.nsu.ermakov.Kartishki.Player;
 
 /**
  * Класс, представляющий дилера.
@@ -40,7 +45,7 @@ public class Dealer extends Player {
         GamePrinter.printDealerReveal(this);
 
         while (getScore() < 17) {
-            Card card = deck.draw();
+            InputHandler.Card card = deck.draw();
             takeCard(card);
             GamePrinter.printDealerDraw(card, this);
         }

@@ -1,20 +1,28 @@
 package ru.nsu.ermakov;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
 import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RoundTest {
     @Test
-    void testPlayOneRound() {
-        ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
-        Scanner scanner = new Scanner(in);
+    void testPlayerBust() {
         GameStats stats = new GameStats();
+        Scanner scanner = new Scanner("1\n");
         Round round = new Round(1, stats, scanner);
 
-        assertDoesNotThrow(round::play);
+        Player player = new Player("Игрок");
+        Dealer dealer = new Dealer("Дилер");
+
+        player.takeCard(new Card(Rank.KING, Suit.БУБНЫ));
+        player.takeCard(new Card(Rank.QUEEN, Suit.ПИКИ));
+        player.takeCard(new Card(Rank.JACK, Suit.ТРЕФЫ));
+
+        assertEquals(true, player.isBusted());
+
+        stats.addDealerWin();
+
+        assertEquals(1, stats.getDealerWins());
+        assertEquals(0, stats.getPlayerWins());
     }
 }

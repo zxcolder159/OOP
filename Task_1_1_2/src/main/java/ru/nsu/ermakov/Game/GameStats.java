@@ -1,4 +1,6 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Game;
+
+import ru.nsu.ermakov.Enums.GameResult;
 
 /**
  * Хранение статистики игры.
