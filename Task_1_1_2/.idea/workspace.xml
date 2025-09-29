@@ -4,47 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fe6eb88-ee65-4b90-9f83-472c0f2ca588" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Kartishki/InputHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/file-system.probe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/BlackjackApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Kartishki/BlackjackApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Card.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Enums/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Dealer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Game/Dealer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/GamePrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Game/GamePrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/GameResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Enums/GameResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/GameStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Game/GameStats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/InputHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Kartishki/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Rank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Enums/Rank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Game/Round.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/ScoreCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Kartishki/ScoreCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Suit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Enums/Suit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/CardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/DealerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/DealerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/DeskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/DeskTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GamePrinterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GamePrinterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameStatsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameStatsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/HandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/HandTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/InputHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/InputHandlerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/PlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/RoundTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/RoundTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/ScoreCalculatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/ScoreCalculatorTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="6fe6eb88-ee65-4b90-9f83-472c0f2ca588" name="Changes" comment="1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,7 +92,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#47 on Task__1__1__2",
+    "git-widget-placeholder": "Task__1__1__2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Java/OOP/Task_1_1_2",
     "project.structure.last.edited": "Modules",
