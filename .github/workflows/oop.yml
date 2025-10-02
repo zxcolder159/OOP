@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Task_1_1_2
+        working-directory: ./Task_1_1_3
     steps:
       - uses: actions/checkout@v3
 
@@ -46,7 +46,7 @@ jobs:
           branch: gh-pages
           clean: true
           folder: ./Task_1_1_2/build/docs/javadoc
-          target-folder: Task_1_1_2
+          target-folder: Task_1_1_3
 
   checkstyle:
     runs-on: ubuntu-latest
