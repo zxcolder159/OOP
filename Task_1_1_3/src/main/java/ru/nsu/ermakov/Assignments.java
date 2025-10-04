@@ -4,47 +4,50 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Utility class for parsing environment assignments of variables.
- *
- * <p>This class provides a method to parse variable assignments from a string,
- * creating a mapping of variable names to their integer values.</p>
+ * Утилита для разбора окружения переменных из строки вида
+ * {@code "x=1; y=-2; z = 0"}.
  */
 public final class Assignments {
 
+    private Assignments() {
+        // utility
+    }
+
     /**
-     * Parses a string of variable assignments into a map of variable names to values.
+     * Разобрать строку присваиваний в отображение.
      *
-     * <p>The input string should be in the format "var1 = value1; var2 = value2; ...".
-     * Whitespace around variable names and values will be trimmed.</p>
-     *
-     * @param s the input string containing assignments (e.g. "x = 10; y = 20")
-     * @return a map containing the variable names as keys and their integer values
-     * @throws IllegalArgumentException if the format is incorrect
+     * @param input строка формата {@code name=value; name=value; ...}
+     * @return отображение переменных
      */
-    public static Map<String, Integer> parseEnv(final String s) {
+    public static Map<String, Integer> parseEnv(final String input) {
         Map<String, Integer> env = new HashMap<>();
-
-        String[] assignments = s.split(";");
-
-        for (String assignment : assignments) {
-            String[] parts = assignment.split("=");
-
-            if (parts.length != 2) {
-                throw new IllegalArgumentException("Invalid assignment format: " + assignment);
-            }
-
-            String var = parts[0].trim();
-            int value;
-
-            try {
-                value = Integer.parseInt(parts[1].trim());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid number format: " + parts[1].trim());
-            }
-
-            env.put(var, value);
+        if (input == null) {
+            return env;
         }
-
+        String[] parts = input.split(";");
+        for (String raw : parts) {
+            String part = raw.trim();
+            if (part.isEmpty()) {
+                continue;
+            }
+            int eq = part.indexOf('=');
+            if (eq <= 0 || eq >= part.length() - 1) {
+                throw new IllegalArgumentException(
+                        "Bad assignment: '" + part + "'"
+                );
+            }
+            String name = part.substring(0, eq).trim();
+            String valueStr = part.substring(eq + 1).trim();
+            int value;
+            try {
+                value = Integer.parseInt(valueStr);
+            } catch (NumberFormatException ex) {
+                throw new IllegalArgumentException(
+                        "Bad integer: '" + valueStr + "'"
+                );
+            }
+            env.put(name, value);
+        }
         return env;
     }
 }

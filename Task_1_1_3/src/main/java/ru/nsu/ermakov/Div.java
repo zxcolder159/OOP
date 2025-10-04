@@ -3,66 +3,44 @@ package ru.nsu.ermakov;
 import java.util.Map;
 
 /**
- * Div node representing the division operation in an expression.
+ * Узел деления двух подвыражений.
+ * <p>Печатается в виде {@code (left/right)}.
  */
 public final class Div extends Expression {
 
-    /** Left operand of the division. */
     private final Expression left;
-
-    /** Right operand of the division. */
     private final Expression right;
 
     /**
-     * Constructs a Div node with the given operands.
+     * Создать частное.
      *
-     * @param left the left operand
-     * @param right the right operand
+     * @param left числитель
+     * @param right знаменатель
      */
     public Div(final Expression left, final Expression right) {
         this.left = left;
         this.right = right;
     }
 
-    /**
-     * Returns the symbolic derivative of the division.
-     *
-     * d(A / B) = (A' * B - A * B') / B^2
-     *
-     * @param var the variable name to differentiate with respect to
-     * @return a new {@link Div} representing the derivative
-     */
-    @Override
-    public Expression derivative(final String var) {
-        Expression leftDeriv = left.derivative(var);  // d(A)/dx
-        Expression rightDeriv = right.derivative(var);  // d(B)/dx
-        Expression numerator = new Sub(new Mul(leftDeriv, right), new Mul(left, rightDeriv));  // A' * B - A * B'
-        Expression denominator = new Mul(right, right);  // B * B
-        return new Div(numerator, denominator);  // (A' * B - A * B') / B^2
-    }
-
-    /**
-     * Evaluates the value of this division.
-     *
-     * @param env the environment mapping variable names to values
-     * @return the result of dividing the left operand by the right operand
-     * @throws ArithmeticException if division by zero occurs
-     */
     @Override
     public int eval(final Map<String, Integer> env) {
-        int leftValue = left.eval(env);
-        int rightValue = right.eval(env);
-        if (rightValue == 0) {
+        int denom = right.eval(env);
+        if (denom == 0) {
             throw new ArithmeticException("Division by zero");
         }
-        return leftValue / rightValue;
+        return left.eval(env) / denom;
     }
 
-    /**
-     * Returns the string representation of this division.
-     *
-     * @return the parenthesized string representation of the division
-     */
+    @Override
+    public Expression derivative(final String var) {
+        // (u/v)' = (u'v - uv') / v^2
+        Expression uPrimeV = new Mul(left.derivative(var), right);
+        Expression uVPrime = new Mul(left, right.derivative(var));
+        Expression numerator = new Sub(uPrimeV, uVPrime);
+        Expression denominator = new Mul(right, right);
+        return new Div(numerator, denominator);
+    }
+
     @Override
     public String print() {
         return "(" + left.print() + "/" + right.print() + ")";

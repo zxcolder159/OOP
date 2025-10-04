@@ -3,68 +3,50 @@ package ru.nsu.ermakov;
 import java.util.Map;
 
 /**
- * Variable node representing a variable in the expression.
+ * Узел-переменная в выражении.
  */
 public final class Variable extends Expression {
 
-    /** Name of the variable. */
+    /** Имя переменной. */
     private final String name;
 
     /**
-     * Constructs a Variable node with the given name.
+     * Создать переменную с указанным именем.
      *
-     * @param name the name of the variable (e.g., "x")
+     * @param name имя переменной (например, {@code "x"})
      */
     public Variable(final String name) {
         this.name = name;
     }
 
     /**
-     * Returns the variable's name.
+     * Имя переменной.
      *
-     * @return the name of the variable
+     * @return имя
      */
     public String getName() {
         return name;
     }
 
-    /**
-     * Returns the symbolic derivative of the variable.
-     *
-     * If the variable is the same as the given one, returns 1.
-     * Otherwise, returns 0.
-     *
-     * @param var the variable name to differentiate with respect to
-     * @return a new {@link Number} representing the derivative
-     */
-    @Override
-    public Expression derivative(final String var) {
-        if (this.name.equals(var)) {
-            return new Number(1);
-        }
-        return new Number(0);
-    }
-
-    /**
-     * Evaluates the value of this variable from the environment.
-     *
-     * @param env the environment mapping variable names to values
-     * @return the value of the variable from the environment
-     * @throws IllegalArgumentException if the variable is not found in the environment
-     */
     @Override
     public int eval(final Map<String, Integer> env) {
-        Integer value = env.get(name);
-        if (value == null) {
-            throw new IllegalArgumentException("Variable '" + name + "' is not defined in the environment.");
+        if (env == null || !env.containsKey(name)) {
+            throw new IllegalArgumentException(
+                    "Variable '" + name + "' is not defined"
+            );
         }
-        return value;
+        return env.get(name);
+    }
+
+    @Override
+    public Expression derivative(final String var) {
+        return name.equals(var) ? new Number(1) : new Number(0);
     }
 
     /**
-     * Returns the string representation of the variable.
+     * Строковое представление переменной.
      *
-     * @return the name of the variable
+     * @return имя переменной
      */
     @Override
     public String print() {

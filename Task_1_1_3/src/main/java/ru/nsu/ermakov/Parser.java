@@ -3,164 +3,178 @@ package ru.nsu.ermakov;
 import java.util.Map;
 
 /**
- * Parser to convert a string expression into an expression tree.
+ * Простой рекурсивный спускающийся парсер для выражений из целых чисел,
+ * переменных и операций {@code + - * /} с поддержкой скобок.
  */
 public final class Parser {
 
-    /** The input string to parse. */
-    private final String input;
-
-    /** Current position in the string. */
+    private final String s;
     private int pos;
 
-    /**
-     * Creates a new parser for the given input expression.
-     *
-     * @param input the expression to parse
-     */
-    public Parser(String input) {
-        this.input = input.replaceAll("\\s+", "");
+    private Parser(final String s) {
+        this.s = s;
         this.pos = 0;
     }
 
     /**
-     * Parses the entire expression.
+     * Разобрать строку в AST.
      *
-     * @return the parsed expression
+     * @param input входная строка
+     * @return корневой узел AST
      */
-    public static Expression parse(String input) {
-        Parser parser = new Parser(input);
-        return parser.parseExpr();
+    public static Expression parse(final String input) {
+        Parser p = new Parser(input == null ? "" : input);
+        Expression e = p.parseExpr();
+        p.skipWs();
+        if (!p.eof()) {
+            throw new IllegalArgumentException(
+                    "Unexpected trailing input at position " + p.pos
+            );
+        }
+        return e;
     }
 
-    /**
-     * Parses the expression starting from the current position.
-     *
-     * @return the parsed expression
-     */
     private Expression parseExpr() {
-        Expression left = parseTerm();
-
-        while (pos < input.length()) {
-            char op = peek();
-            if (op == '+' || op == '-') {  // если плюс или минус
-                next();  // съесть символ
-                Expression right = parseTerm();
-                if (op == '+') {
-                    left = new Add(left, right);
-                } else {
-                    left = new Sub(left, right);
-                }
-            } else {
-                break;
+        Expression term = parseTerm();
+        while (true) {
+            skipWs();
+            if (match('+')) {
+                Expression rhs = parseTerm();
+                term = new Add(term, rhs);
+                continue;
             }
+            if (match('-')) {
+                Expression rhs = parseTerm();
+                term = new Sub(term, rhs);
+                continue;
+            }
+            break;
         }
-        return left;
+        return term;
     }
 
-    /**
-     * Parses a term (multiplication/division).
-     *
-     * @return the parsed term
-     */
     private Expression parseTerm() {
-        Expression left = parseFactor();  // начинаем с "фактора" (число, переменная, скобки)
-
-        while (pos < input.length()) {
-            char op = peek();
-            if (op == '*' || op == '/') {  // если умножение или деление
-                next();  // съесть символ
-                Expression right = parseFactor();
-                if (op == '*') {
-                    left = new Mul(left, right);
-                } else {
-                    left = new Div(left, right);
-                }
-            } else {
-                break;
+        Expression factor = parseFactor();
+        while (true) {
+            skipWs();
+            if (match('*')) {
+                Expression rhs = parseFactor();
+                factor = new Mul(factor, rhs);
+                continue;
             }
+            if (match('/')) {
+                Expression rhs = parseFactor();
+                factor = new Div(factor, rhs);
+                continue;
+            }
+            break;
         }
-        return left;
+        return factor;
     }
 
-    /**
-     * Parses a factor (number, variable, or parentheses).
-     *
-     * @return the parsed factor
-     */
     private Expression parseFactor() {
-        if (peek() == '(') {
-            next();  // съесть '('
-            Expression expr = parseExpr();  // рекурсивный разбор выражения в скобках
-            expect(')');  // ожидаем ')'
-            return expr;
-        } else if (Character.isDigit(peek())) {
-            return parseNumber();  // парсим число
-        } else if (Character.isLetter(peek())) {
-            return parseVariable();  // парсим переменную
-        } else {
-            throw new IllegalArgumentException("Unexpected character: " + peek());
+        skipWs();
+        if (match('(')) {
+            Expression inside = parseExpr();
+            skipWs();
+            expect(')');
+            return inside;
+        }
+        if (peekIsDigit() || peekIsSignFollowedByDigit()) {
+            int value = parseInt();
+            return new Number(value);
+        }
+        if (peekIsLetter()) {
+            String name = parseName();
+            return new Variable(name);
+        }
+        throw new IllegalArgumentException(
+                "Unexpected token at position " + pos
+        );
+    }
+
+    private boolean peekIsDigit() {
+        return !eof() && Character.isDigit(s.charAt(pos));
+    }
+
+    private boolean peekIsLetter() {
+        return !eof() && Character.isLetter(s.charAt(pos));
+    }
+
+    private boolean peekIsSignFollowedByDigit() {
+        if (eof()) {
+            return false;
+        }
+        char c = s.charAt(pos);
+        if (c != '+' && c != '-') {
+            return false;
+        }
+        return (pos + 1) < s.length() && Character.isDigit(s.charAt(pos + 1));
+    }
+
+    private int parseInt() {
+        skipWs();
+        int sign = 1;
+        if (!eof() && (s.charAt(pos) == '+' || s.charAt(pos) == '-')) {
+            if (s.charAt(pos) == '-') {
+                sign = -1;
+            }
+            pos++;
+        }
+        int start = pos;
+        while (!eof() && Character.isDigit(s.charAt(pos))) {
+            pos++;
+        }
+        if (start == pos) {
+            throw new IllegalArgumentException(
+                    "Expected integer at position " + pos
+            );
+        }
+        int val = Integer.parseInt(s.substring(start, pos));
+        return sign * val;
+    }
+
+    private String parseName() {
+        skipWs();
+        int start = pos;
+        while (!eof() && (Character.isLetterOrDigit(s.charAt(pos))
+                || s.charAt(pos) == '_')) {
+            pos++;
+        }
+        if (start == pos) {
+            throw new IllegalArgumentException(
+                    "Expected name at position " + pos
+            );
+        }
+        return s.substring(start, pos);
+    }
+
+    private void skipWs() {
+        while (!eof() && Character.isWhitespace(s.charAt(pos))) {
+            pos++;
         }
     }
 
-    /**
-     * Parses a number.
-     *
-     * @return the parsed number
-     */
-    private Expression parseNumber() {
-        StringBuilder sb = new StringBuilder();
-        while (pos < input.length() && Character.isDigit(peek())) {
-            sb.append(next());  // собираем цифры
+    private boolean match(final char ch) {
+        skipWs();
+        if (!eof() && s.charAt(pos) == ch) {
+            pos++;
+            return true;
         }
-        return new Number(Integer.parseInt(sb.toString()));  // создаём Number
+        return false;
     }
 
-    /**
-     * Parses a variable.
-     *
-     * @return the parsed variable
-     */
-    private Expression parseVariable() {
-        StringBuilder sb = new StringBuilder();
-        while (pos < input.length() && (Character.isLetter(peek()) || Character.isDigit(peek()))) {
-            sb.append(next());  // собираем символы для переменной
+    private void expect(final char ch) {
+        skipWs();
+        if (eof() || s.charAt(pos) != ch) {
+            throw new IllegalArgumentException(
+                    "Expected '" + ch + "' at position " + pos
+            );
         }
-        return new Variable(sb.toString());  // создаём Variable
+        pos++;
     }
 
-    // ===================== Утилитарные методы =====================
-
-    /**
-     * Returns the current character without advancing the position.
-     *
-     * @return the current character
-     */
-    private char peek() {
-        if (pos >= input.length()) {
-            return '\0';  // конец строки
-        }
-        return input.charAt(pos);
-    }
-
-    /**
-     * Advances the position and returns the current character.
-     *
-     * @return the current character
-     */
-    private char next() {
-        return input.charAt(pos++);
-    }
-
-    /**
-     * Ensures that the next character is the expected one.
-     *
-     * @param expected the expected character
-     */
-    private void expect(char expected) {
-        if (peek() != expected) {
-            throw new IllegalArgumentException("Expected '" + expected + "' but found '" + peek() + "'");
-        }
-        next();  // съесть символ
+    private boolean eof() {
+        return pos >= s.length();
     }
 }

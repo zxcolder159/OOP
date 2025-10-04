@@ -3,51 +3,43 @@ package ru.nsu.ermakov;
 import java.util.Map;
 
 /**
- * Leaf AST node that represents an integer constant in a mathematical expression.
+ * Листовой узел AST, представляющий целочисленную константу.
  */
 public final class Number extends Expression {
 
-    /** Immutable integer value of this constant node. */
+    /** Значение константы. */
     private final int value;
 
     /**
-     * Creates a constant number node.
+     * Создать константу.
      *
-     * @param value integer value of the constant (may be negative, zero, or positive)
+     * @param value целочисленное значение
      */
     public Number(final int value) {
         this.value = value;
     }
 
     /**
-     * Returns the textual representation of this number without spaces.
+     * Получить значение константы.
      *
-     * @return string form, e.g. {@code "3"} or {@code "-12"}
+     * @return значение
      */
-    @Override
-    public String print() {
-        return Integer.toString(value);
+    public int getValue() {
+        return value;
     }
 
-    /**
-     * Evaluates this constant, ignoring the environment.
-     *
-     * @param env mapping of variable names to values (ignored for constants)
-     * @return the stored integer value
-     */
     @Override
     public int eval(final Map<String, Integer> env) {
         return value;
     }
 
-    /**
-     * Symbolic derivative of a constant is zero.
-     *
-     * @param var variable name (ignored)
-     * @return a new {@link Number} equal to zero
-     */
     @Override
     public Expression derivative(final String var) {
         return new Number(0);
+    }
+
+    @Override
+    public String print() {
+        return Integer.toString(value);
     }
 }
