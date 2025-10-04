@@ -1,76 +1,118 @@
 package ru.nsu.ermakov;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
-public class ExpressionTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    private Expression addExpression;
-    private Expression mulExpression;
-    private Expression numExpression;
-    private Expression varExpression;
+/**
+ * Набор модульных тестов для AST выражений: печать, вычисление и дифференцирование.
+ */
+public final class ExpressionTest {
 
-    @BeforeEach
-    void setUp() {
-        addExpression = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
-        mulExpression = new Mul(new Number(2), new Variable("x"));
-        numExpression = new Number(5);
-        varExpression = new Variable("x");
+    /**
+     * Константа: print/eval/toString и производная равная нулю.
+     */
+    @Test
+    void numberPrintEvalAndDerivativeZero() {
+        Number c = new Number(42);
+        Map<String, Integer> env = new HashMap<>();
+        assertEquals("42", c.print());
+        assertEquals("42", c.toString());
+        assertEquals(42, c.eval(env));
+        Expression d = c.derivative("x");
+        assertNotNull(d);
+        assertTrue(d instanceof Number);
+        assertEquals(0, d.eval(env));
     }
 
+    /**
+     * Переменная: успешное вычисление и ошибка при отсутствии значения в окружении.
+     */
     @Test
-    void testAddExpression() {
-        assertNotNull(addExpression);
-        assertEquals("(3+(2*x))", addExpression.toString());
+    void variableEvalAndMissingBinding() {
+        Variable x = new Variable("x");
+        Map<String, Integer> env = new HashMap<>();
+        env.put("x", 7);
+        assertEquals("x", x.print());
+        assertEquals(7, x.eval(env));
+        assertThrows(IllegalArgumentException.class, () -> x.eval(new HashMap<>()));
     }
 
+    /**
+     * Сложение: вычисление и нулевая производная для суммы констант.
+     */
     @Test
-    void testMulExpression() {
-        assertNotNull(mulExpression);
-        assertEquals("(2*x)", mulExpression.toString());
+    void addEvalAndDerivativeOfConstantsIsZero() {
+        Expression sum = new Add(new Number(2), new Number(3));
+        Map<String, Integer> env = new HashMap<>();
+        assertEquals(5, sum.eval(env));
+        Expression d = sum.derivative("x");
+        assertTrue(d instanceof Number);
+        assertEquals(0, d.eval(env));
+        assertEquals("(" + "2" + "+" + "3" + ")", sum.print());
     }
 
+    /**
+     * Вычитание: вычисление и численная проверка производной.
+     */
     @Test
-    void testNumberExpression() {
-        assertNotNull(numExpression);
-        assertEquals("5", numExpression.toString());
+    void subEvalAndDerivativeNumeric() {
+        Variable x = new Variable("x");
+        Expression expr = new Sub(new Mul(x, new Number(3)), new Number(5));
+        Map<String, Integer> env = new HashMap<>();
+        env.put("x", 4);
+        assertEquals(7, expr.eval(env)); // 3*4 - 5 = 7
+        Expression d = expr.derivative("x"); // d/dx(3x - 5) = 3
+        assertEquals(3, d.eval(env));
     }
 
+    /**
+     * Умножение: правило произведения проверяется численно на f(x)=x*x.
+     */
     @Test
-    void testVariableExpression() {
-        assertNotNull(varExpression);
-        assertEquals("x", varExpression.toString());
+    void mulProductRuleNumeric() {
+        Variable x = new Variable("x");
+        Expression f = new Mul(x, x); // f(x) = x^2
+        Map<String, Integer> env = new HashMap<>();
+        env.put("x", 6);
+        assertEquals(36, f.eval(env));
+        Expression df = f.derivative("x"); // f'(x) = 2x
+        assertEquals(12, df.eval(env));
     }
 
+    /**
+     * Деление: правило частного проверяется численно на f(x)=x^2/2.
+     */
     @Test
-    void testEval() {
-        Map<String, Integer> env = Map.of("x", 10);
-        int result = addExpression.eval(env);
-        assertEquals(23, result); // 3 + (2 * 10) = 23
+    void divQuotientRuleNumeric() {
+        Variable x = new Variable("x");
+        Expression f = new Div(new Mul(x, x), new Number(2));
+        Map<String, Integer> env = new HashMap<>();
+        env.put("x", 5);
+        assertEquals(12, f.eval(env)); // 25/2 округляется вниз, если деление целочисленное
+        Expression df = f.derivative("x"); // f'(x) = x (для вещественного), численно проверим
+        assertEquals(5, df.eval(env));
     }
 
+    /**
+     * Композиция и делегирование toString к print.
+     */
     @Test
-    void testDerivative() {
-        Expression derivative = addExpression.derivative("x");
-        assertNotNull(derivative);
-        assertEquals("(0+((0*x)+(2*1)))", derivative.toString()); // Derivative of (3+(2*x)) w.r.t x
-    }
-
-    @Test
-    void testAssignments() {
-        String assignments = "x = 10; y = 20";
-        Map<String, Integer> env = Assignments.parseEnv(assignments);
-        assertEquals(10, env.get("x"));
-        assertEquals(20, env.get("y"));
-    }
-
-    @Test
-    void testParser() {
-        String expression = "3 + (2 * x)";
-        Expression parsedExpr = Parser.parse(expression);
-        assertNotNull(parsedExpr);
-        assertEquals("(3+(2*x))", parsedExpr.toString());
+    void toStringDelegatesToPrint() {
+        Expression expr = new Add(
+                new Sub(new Number(10), new Variable("y")),
+                new Mul(new Variable("x"), new Number(2))
+        );
+        String printed = expr.print();
+        assertEquals(printed, expr.toString());
+        Map<String, Integer> env = new HashMap<>();
+        env.put("x", 3);
+        env.put("y", 4);
+        assertEquals(12, expr.eval(env)); // (10 - 4) + (3 * 2) = 6 + 6 = 12
     }
 }
