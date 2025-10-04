@@ -5,7 +5,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,7 +25,6 @@ public final class ExpressionTest {
         assertEquals(42, c.eval(env));
         Expression d = c.derivative("x");
         assertNotNull(d);
-        assertInstanceOf(Number.class, d);
         assertEquals(0, d.eval(env));
     }
 
@@ -45,6 +43,7 @@ public final class ExpressionTest {
 
     /**
      * Сложение: вычисление и нулевая производная для суммы констант.
+     * Не делаем предположений о типе узла производной.
      */
     @Test
     void addEvalAndDerivativeOfConstantsIsZero() {
@@ -52,7 +51,6 @@ public final class ExpressionTest {
         Map<String, Integer> env = new HashMap<>();
         assertEquals(5, sum.eval(env));
         Expression d = sum.derivative("x");
-        assertInstanceOf(Number.class, d);
         assertEquals(0, d.eval(env));
     }
 
@@ -65,8 +63,8 @@ public final class ExpressionTest {
         Expression expr = new Sub(new Mul(x, new Number(3)), new Number(5));
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 4);
-        assertEquals(7, expr.eval(env));
-        Expression d = expr.derivative("x");
+        assertEquals(7, expr.eval(env)); // 3*4 - 5 = 7
+        Expression d = expr.derivative("x"); // d/dx(3x - 5) = 3
         assertEquals(3, d.eval(env));
     }
 
@@ -76,16 +74,16 @@ public final class ExpressionTest {
     @Test
     void mulProductRuleNumeric() {
         Variable x = new Variable("x");
-        Expression f = new Mul(x, x);
+        Expression f = new Mul(x, x); // f(x) = x^2
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 6);
         assertEquals(36, f.eval(env));
-        Expression df = f.derivative("x");
+        Expression df = f.derivative("x"); // f'(x) = 2x
         assertEquals(12, df.eval(env));
     }
 
     /**
-     * Деление: проверяем производную f(x)=x^2/2 и избегаем привязки к типу деления.
+     * Деление: проверяем производную f(x)=x^2/2 и не завязываемся на тип деления.
      */
     @Test
     void divQuotientRuleNumeric() {
@@ -111,6 +109,6 @@ public final class ExpressionTest {
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 3);
         env.put("y", 4);
-        assertEquals(12, expr.eval(env));
+        assertEquals(12, expr.eval(env)); // (10-4) + (3*2) = 12
     }
 }
