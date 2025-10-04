@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * Узел деления двух подвыражений.
+ *
  * <p>Печатается в виде {@code (left/right)}.
  */
 public final class Div extends Expression {
@@ -13,7 +14,6 @@ public final class Div extends Expression {
 
     /**
      * Создать частное.
-     *
      * @param left числитель
      * @param right знаменатель
      */
@@ -34,9 +34,12 @@ public final class Div extends Expression {
     @Override
     public Expression derivative(final String var) {
         // (u/v)' = (u'v - uv') / v^2
-        Expression uPrimeV = new Mul(left.derivative(var), right);
-        Expression uVPrime = new Mul(left, right.derivative(var));
-        Expression numerator = new Sub(uPrimeV, uVPrime);
+        Expression leftPrimeTimesRight =
+                new Mul(left.derivative(var), right);
+        Expression leftTimesRightPrime =
+                new Mul(left, right.derivative(var));
+        Expression numerator =
+                new Sub(leftPrimeTimesRight, leftTimesRightPrime);
         Expression denominator = new Mul(right, right);
         return new Div(numerator, denominator);
     }

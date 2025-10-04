@@ -1,18 +1,16 @@
 package ru.nsu.ermakov;
 
-import java.util.Map;
-
 /**
  * Простой рекурсивный спускающийся парсер для выражений из целых чисел,
  * переменных и операций {@code + - * /} с поддержкой скобок.
  */
 public final class Parser {
 
-    private final String s;
+    private final String source;
     private int pos;
 
     private Parser(final String s) {
-        this.s = s;
+        this.source = s;
         this.pos = 0;
     }
 
@@ -39,13 +37,11 @@ public final class Parser {
         while (true) {
             skipWs();
             if (match('+')) {
-                Expression rhs = parseTerm();
-                term = new Add(term, rhs);
+                term = new Add(term, parseTerm());
                 continue;
             }
             if (match('-')) {
-                Expression rhs = parseTerm();
-                term = new Sub(term, rhs);
+                term = new Sub(term, parseTerm());
                 continue;
             }
             break;
@@ -58,13 +54,11 @@ public final class Parser {
         while (true) {
             skipWs();
             if (match('*')) {
-                Expression rhs = parseFactor();
-                factor = new Mul(factor, rhs);
+                factor = new Mul(factor, parseFactor());
                 continue;
             }
             if (match('/')) {
-                Expression rhs = parseFactor();
-                factor = new Div(factor, rhs);
+                factor = new Div(factor, parseFactor());
                 continue;
             }
             break;
@@ -94,35 +88,36 @@ public final class Parser {
     }
 
     private boolean peekIsDigit() {
-        return !eof() && Character.isDigit(s.charAt(pos));
+        return !eof() && Character.isDigit(source.charAt(pos));
     }
 
     private boolean peekIsLetter() {
-        return !eof() && Character.isLetter(s.charAt(pos));
+        return !eof() && Character.isLetter(source.charAt(pos));
     }
 
     private boolean peekIsSignFollowedByDigit() {
         if (eof()) {
             return false;
         }
-        char c = s.charAt(pos);
+        char c = source.charAt(pos);
         if (c != '+' && c != '-') {
             return false;
         }
-        return (pos + 1) < s.length() && Character.isDigit(s.charAt(pos + 1));
+        return (pos + 1) < source.length()
+                && Character.isDigit(source.charAt(pos + 1));
     }
 
     private int parseInt() {
         skipWs();
         int sign = 1;
-        if (!eof() && (s.charAt(pos) == '+' || s.charAt(pos) == '-')) {
-            if (s.charAt(pos) == '-') {
+        if (!eof() && (source.charAt(pos) == '+' || source.charAt(pos) == '-')) {
+            if (source.charAt(pos) == '-') {
                 sign = -1;
             }
             pos++;
         }
         int start = pos;
-        while (!eof() && Character.isDigit(s.charAt(pos))) {
+        while (!eof() && Character.isDigit(source.charAt(pos))) {
             pos++;
         }
         if (start == pos) {
@@ -130,15 +125,16 @@ public final class Parser {
                     "Expected integer at position " + pos
             );
         }
-        int val = Integer.parseInt(s.substring(start, pos));
+        int val = Integer.parseInt(source.substring(start, pos));
         return sign * val;
     }
 
     private String parseName() {
         skipWs();
         int start = pos;
-        while (!eof() && (Character.isLetterOrDigit(s.charAt(pos))
-                || s.charAt(pos) == '_')) {
+        while (!eof()
+                && (Character.isLetterOrDigit(source.charAt(pos))
+                || source.charAt(pos) == '_')) {
             pos++;
         }
         if (start == pos) {
@@ -146,18 +142,18 @@ public final class Parser {
                     "Expected name at position " + pos
             );
         }
-        return s.substring(start, pos);
+        return source.substring(start, pos);
     }
 
     private void skipWs() {
-        while (!eof() && Character.isWhitespace(s.charAt(pos))) {
+        while (!eof() && Character.isWhitespace(source.charAt(pos))) {
             pos++;
         }
     }
 
     private boolean match(final char ch) {
         skipWs();
-        if (!eof() && s.charAt(pos) == ch) {
+        if (!eof() && source.charAt(pos) == ch) {
             pos++;
             return true;
         }
@@ -166,7 +162,7 @@ public final class Parser {
 
     private void expect(final char ch) {
         skipWs();
-        if (eof() || s.charAt(pos) != ch) {
+        if (eof() || source.charAt(pos) != ch) {
             throw new IllegalArgumentException(
                     "Expected '" + ch + "' at position " + pos
             );
@@ -175,6 +171,6 @@ public final class Parser {
     }
 
     private boolean eof() {
-        return pos >= s.length();
+        return pos >= source.length();
     }
 }

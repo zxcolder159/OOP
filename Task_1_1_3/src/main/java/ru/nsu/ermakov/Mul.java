@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * Узел умножения двух подвыражений.
+ *
  * <p>Печатается в виде {@code (left*right)}.
  */
 public final class Mul extends Expression {
@@ -13,7 +14,6 @@ public final class Mul extends Expression {
 
     /**
      * Создать произведение.
-     *
      * @param left левый множитель
      * @param right правый множитель
      */
@@ -30,9 +30,11 @@ public final class Mul extends Expression {
     @Override
     public Expression derivative(final String var) {
         // (uv)' = u'v + uv'
-        Expression uPrimeV = new Mul(left.derivative(var), right);
-        Expression uVPrime = new Mul(left, right.derivative(var));
-        return new Add(uPrimeV, uVPrime);
+        Expression leftPrimeTimesRight =
+                new Mul(left.derivative(var), right);
+        Expression leftTimesRightPrime =
+                new Mul(left, right.derivative(var));
+        return new Add(leftPrimeTimesRight, leftTimesRightPrime);
     }
 
     @Override

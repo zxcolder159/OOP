@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * Узел суммирования двух подвыражений.
+ *
  * <p>Печатается в виде {@code (left+right)}.
  */
 public final class Add extends Expression {
@@ -13,7 +14,6 @@ public final class Add extends Expression {
 
     /**
      * Создать сумму.
-     *
      * @param left левый операнд
      * @param right правый операнд
      */
