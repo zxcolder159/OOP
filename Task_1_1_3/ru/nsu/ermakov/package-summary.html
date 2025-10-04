@@ -68,19 +68,20 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="Add.html" title="class in ru.nsu.ermakov">Add</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Add node representing the addition operation in an expression.</div>
+<div class="block">Узел суммирования двух подвыражений.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Assignments.html" title="class in ru.nsu.ermakov">Assignments</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Utility class for parsing environment assignments of variables.</div>
+<div class="block">Утилита для разбора окружения переменных из строки вида
+ <code>"x=1; y=-2; z = 0"</code>.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="Div.html" title="class in ru.nsu.ermakov">Div</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Div node representing the division operation in an expression.</div>
+<div class="block">Узел деления двух подвыражений.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Base abstract node of an expression AST.</div>
+<div class="block">Базовый класс для всех AST-узлов арифметических выражений.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="Main.html" title="class in ru.nsu.ermakov">Main</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
@@ -88,15 +89,16 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Mul.html" title="class in ru.nsu.ermakov">Mul</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Mul node representing the multiplication operation in an expression.</div>
+<div class="block">Узел умножения двух подвыражений.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="Number.html" title="class in ru.nsu.ermakov">Number</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Leaf AST node that represents an integer constant in a mathematical expression.</div>
+<div class="block">Листовой узел AST, представляющий целочисленную константу.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Parser.html" title="class in ru.nsu.ermakov">Parser</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Parser to convert a string expression into an expression tree.</div>
+<div class="block">Простой рекурсивный спускающийся парсер для выражений из целых чисел,
+ переменных и операций <code>+ - * /</code> с поддержкой скобок.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="Sub.html" title="class in ru.nsu.ermakov">Sub</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
@@ -104,7 +106,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Variable.html" title="class in ru.nsu.ermakov">Variable</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Variable node representing a variable in the expression.</div>
+<div class="block">Узел-переменная в выражении.</div>
 </div>
 </div>
 </div>

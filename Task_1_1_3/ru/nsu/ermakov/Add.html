@@ -78,7 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Add</span>
 <span class="extends-implements">extends <a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></span></div>
-<div class="block">Add node representing the addition operation in an expression.</div>
+<div class="block">Узел суммирования двух подвыражений.
+ <p>Печатается в виде <code>(left+right)</code>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,7 +94,7 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ermakov.Expression,ru.nsu.ermakov.Expression)" class="member-name-link">Add</a><wbr>(<a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a>&nbsp;left,
  <a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a>&nbsp;right)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructs an Add node with the given operands.</div>
+<div class="block">Создать сумму.</div>
 </div>
 </div>
 </section>
@@ -112,17 +113,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#derivative(java.lang.String)" class="member-name-link">derivative</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the symbolic derivative of the addition.</div>
+<div class="block">Построить символическую производную по переменной <code>var</code>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#eval(java.util.Map)" class="member-name-link">eval</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;env)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Evaluates the value of this addition.</div>
+<div class="block">Вычислить значение выражения в окружении переменных.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#print()" class="member-name-link">print</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the string representation of this addition.</div>
+<div class="block">Получить строковое представление выражения.</div>
 </div>
 </div>
 </div>
@@ -149,11 +150,11 @@ loadScripts(document, 'script');</script>
 <h3>Add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Add</span><wbr><span class="parameters">(<a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a>&nbsp;left,
  <a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a>&nbsp;right)</span></div>
-<div class="block">Constructs an Add node with the given operands.</div>
+<div class="block">Создать сумму.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>left</code> - the left operand</dd>
-<dd><code>right</code> - the right operand</dd>
+<dd><code>left</code> - левый операнд</dd>
+<dd><code>right</code> - правый операнд</dd>
 </dl>
 </section>
 </li>
@@ -166,34 +167,34 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="derivative(java.lang.String)">
-<h3>derivative</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></span>&nbsp;<span class="element-name">derivative</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</span></div>
-<div class="block">Returns the symbolic derivative of the addition.
-
- d(A + B) = d(A) + d(B)</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Expression.html#derivative(java.lang.String)">derivative</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>var</code> - the variable name to differentiate with respect to</dd>
-<dt>Returns:</dt>
-<dd>a new <a href="Add.html" title="class in ru.nsu.ermakov"><code>Add</code></a> representing the derivative</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="eval(java.util.Map)">
 <h3>eval</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">eval</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;env)</span></div>
-<div class="block">Evaluates the value of this addition.</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Expression.html#eval(java.util.Map)">Expression</a></code></span></div>
+<div class="block">Вычислить значение выражения в окружении переменных.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Expression.html#eval(java.util.Map)">eval</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>env</code> - the environment mapping variable names to values</dd>
+<dd><code>env</code> - отображение имя переменной → значение</dd>
 <dt>Returns:</dt>
-<dd>the sum of the values of the left and right operands</dd>
+<dd>целочисленный результат вычисления</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="derivative(java.lang.String)">
+<h3>derivative</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></span>&nbsp;<span class="element-name">derivative</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Expression.html#derivative(java.lang.String)">Expression</a></code></span></div>
+<div class="block">Построить символическую производную по переменной <code>var</code>.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="Expression.html#derivative(java.lang.String)">derivative</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>var</code> - имя переменной, по которой берётся производная</dd>
+<dt>Returns:</dt>
+<dd>новый AST — производная исходного выражения</dd>
 </dl>
 </section>
 </li>
@@ -201,12 +202,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="print()">
 <h3>print</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">print</span>()</div>
-<div class="block">Returns the string representation of this addition.</div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Expression.html#print()">Expression</a></code></span></div>
+<div class="block">Получить строковое представление выражения.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Expression.html#print()">print</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></code></dd>
 <dt>Returns:</dt>
-<dd>the parenthesized string representation of the addition</dd>
+<dd>строка, описывающая выражение</dd>
 </dl>
 </section>
 </li>

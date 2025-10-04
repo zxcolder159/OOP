@@ -80,9 +80,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Expression</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Base abstract node of an expression AST.
- All concrete nodes (Number, Variable, Add, Sub, Mul, Div) must implement
- printable form, evaluation, and symbolic differentiation.</div>
+<div class="block">Базовый класс для всех AST-узлов арифметических выражений.
+ <p>Поддерживает вычисление, печать и символическое дифференцирование.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -113,18 +112,17 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#derivative(java.lang.String)" class="member-name-link">derivative</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Builds a new expression that is the symbolic derivative of this expression
- with respect to the given variable name.</div>
+<div class="block">Построить символическую производную по переменной <code>var</code>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#eval(java.util.Map)" class="member-name-link">eval</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;env)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Evaluates this expression under the given environment.</div>
+<div class="block">Вычислить значение выражения в окружении переменных.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#print()" class="member-name-link">print</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns the fully parenthesized textual representation.</div>
+<div class="block">Получить строковое представление выражения.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -161,34 +159,28 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="derivative(java.lang.String)">
-<h3>derivative</h3>
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></span>&nbsp;<span class="element-name">derivative</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</span></div>
-<div class="block">Builds a new expression that is the symbolic derivative of this expression
- with respect to the given variable name.
-
- <p>Implementations must not mutate this object; return a new tree.</p></div>
+<section class="detail" id="eval(java.util.Map)">
+<h3>eval</h3>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">eval</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;env)</span></div>
+<div class="block">Вычислить значение выражения в окружении переменных.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>var</code> - variable name (e.g., "x")</dd>
+<dd><code>env</code> - отображение имя переменной → значение</dd>
 <dt>Returns:</dt>
-<dd>new expression representing the derivative</dd>
+<dd>целочисленный результат вычисления</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="eval(java.util.Map)">
-<h3>eval</h3>
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">eval</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;env)</span></div>
-<div class="block">Evaluates this expression under the given environment.</div>
+<section class="detail" id="derivative(java.lang.String)">
+<h3>derivative</h3>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="Expression.html" title="class in ru.nsu.ermakov">Expression</a></span>&nbsp;<span class="element-name">derivative</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</span></div>
+<div class="block">Построить символическую производную по переменной <code>var</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>env</code> - mapping from variable names to integer values</dd>
+<dd><code>var</code> - имя переменной, по которой берётся производная</dd>
 <dt>Returns:</dt>
-<dd>integer result of evaluation</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if a required variable is missing</dd>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ArithmeticException.html" title="class or interface in java.lang" class="external-link">ArithmeticException</a></code> - if an illegal arithmetic operation occurs (e.g., division by zero)</dd>
+<dd>новый AST — производная исходного выражения</dd>
 </dl>
 </section>
 </li>
@@ -196,10 +188,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="print()">
 <h3>print</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">print</span>()</div>
-<div class="block">Returns the fully parenthesized textual representation.</div>
+<div class="block">Получить строковое представление выражения.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>string form with no extra spaces</dd>
+<dd>строка, описывающая выражение</dd>
 </dl>
 </section>
 </li>
