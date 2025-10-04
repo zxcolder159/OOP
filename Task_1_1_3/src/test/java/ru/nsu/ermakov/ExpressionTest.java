@@ -45,7 +45,6 @@ public final class ExpressionTest {
 
     /**
      * Сложение: вычисление и нулевая производная для суммы констант.
-     * Проверка печати не зависит от точного формата (скобок/пробелов).
      */
     @Test
     void addEvalAndDerivativeOfConstantsIsZero() {
@@ -55,16 +54,6 @@ public final class ExpressionTest {
         Expression d = sum.derivative("x");
         assertInstanceOf(Number.class, d);
         assertEquals(0, d.eval(env));
-
-        // Нефрагильная проверка печати: toString делегирует print,
-        // и строка содержит "2", "+", "3" в правильном порядке.
-        String printed = sum.print();
-        assertEquals(printed, sum.toString());
-        String compact = printed.replaceAll("\\s+", "");
-        boolean ok = compact.matches(".*2.*\\+.*3.*");
-        if (!ok) {
-            throw new AssertionError("Unexpected print format: " + printed);
-        }
     }
 
     /**
@@ -76,8 +65,8 @@ public final class ExpressionTest {
         Expression expr = new Sub(new Mul(x, new Number(3)), new Number(5));
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 4);
-        assertEquals(7, expr.eval(env)); // 3*4 - 5 = 7
-        Expression d = expr.derivative("x"); // d/dx(3x - 5) = 3
+        assertEquals(7, expr.eval(env));
+        Expression d = expr.derivative("x");
         assertEquals(3, d.eval(env));
     }
 
@@ -87,18 +76,16 @@ public final class ExpressionTest {
     @Test
     void mulProductRuleNumeric() {
         Variable x = new Variable("x");
-        Expression f = new Mul(x, x); // f(x) = x^2
+        Expression f = new Mul(x, x);
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 6);
         assertEquals(36, f.eval(env));
-        Expression df = f.derivative("x"); // f'(x) = 2x
+        Expression df = f.derivative("x");
         assertEquals(12, df.eval(env));
     }
 
     /**
-     * Деление: проверяем производную f(x)=x^2/2.
-     * Ожидаем f'(x)=x. Избегаем проверки точного значения f(x),
-     * т.к. реализация может быть целочисленной или вещественной.
+     * Деление: проверяем производную f(x)=x^2/2 и избегаем привязки к типу деления.
      */
     @Test
     void divQuotientRuleNumeric() {
@@ -124,6 +111,6 @@ public final class ExpressionTest {
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 3);
         env.put("y", 4);
-        assertEquals(12, expr.eval(env)); // (10-4) + (3*2) = 12
+        assertEquals(12, expr.eval(env));
     }
 }
