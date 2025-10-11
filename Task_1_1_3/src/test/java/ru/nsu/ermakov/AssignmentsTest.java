@@ -15,7 +15,13 @@ public final class AssignmentsTest {
      */
     @Test
     void parsesValidEnv() {
-        Map<String, Integer> env = Assignments.parseEnv("x = 10; y=-2;  z = 0");
+        // Создаем экземпляр Assignments
+        Assignments assignmentsParser = new Assignments();
+
+        // Разбираем строку
+        Map<String, Integer> env = assignmentsParser.parseEnv("x = 10; y=-2;  z = 0");
+
+        // Проверяем результаты
         assertEquals(3, env.size());
         assertEquals(10, env.get("x").intValue());
         assertEquals(-2, env.get("y").intValue());
@@ -27,11 +33,15 @@ public final class AssignmentsTest {
      */
     @Test
     void rejectsInvalidNumbers() {
+        // Создаем экземпляр Assignments
+        Assignments assignmentsParser = new Assignments();
+
+        // Проверяем выбрасывание исключения для разных ошибок
         assertThrows(IllegalArgumentException.class,
-                () -> Assignments.parseEnv("x=10; y=oops"));
+                () -> assignmentsParser.parseEnv("x=10; y=oops"));
         assertThrows(IllegalArgumentException.class,
-                () -> Assignments.parseEnv("a=1; b=1.5"));
+                () -> assignmentsParser.parseEnv("a=1; b=1.5"));
         assertThrows(IllegalArgumentException.class,
-                () -> Assignments.parseEnv("k=--1"));
+                () -> assignmentsParser.parseEnv("k=--1"));
     }
 }
