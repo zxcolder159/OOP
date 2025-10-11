@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * Негативные сценарии для парсера.
- */
 public final class ParserErrorTest {
 
     /**
@@ -15,6 +12,9 @@ public final class ParserErrorTest {
      */
     @Test
     void rejectsTrailingInput() {
-        assertThrows(IllegalArgumentException.class, () -> Parser.parse("1 2"));
+        // Создаем экземпляр парсера
+        Parser parser = new Parser("1 2");
+        // Проверяем, что при вызове парсинга будет выброшено исключение IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> parser.parse("1 2"));
     }
 }

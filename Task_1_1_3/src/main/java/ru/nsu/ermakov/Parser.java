@@ -6,10 +6,11 @@ package ru.nsu.ermakov;
  */
 public final class Parser {
 
-    private final String source;
+    private String source;
     private int pos;
 
-    private Parser(final String s) {
+    // Конструктор без статического метода
+    public Parser(final String s) {
         this.source = s;
         this.pos = 0;
     }
@@ -20,13 +21,14 @@ public final class Parser {
      * @param input входная строка
      * @return корневой узел AST
      */
-    public static Expression parse(final String input) {
-        Parser p = new Parser(input == null ? "" : input);
-        Expression e = p.parseExpr();
-        p.skipWs();
-        if (!p.eof()) {
+    public Expression parse(final String input) {
+        this.source = input == null ? "" : input;
+        this.pos = 0;
+        Expression e = parseExpr();
+        skipWs();
+        if (!eof()) {
             throw new IllegalArgumentException(
-                    "Unexpected trailing input at position " + p.pos
+                    "Unexpected trailing input at position " + pos
             );
         }
         return e;

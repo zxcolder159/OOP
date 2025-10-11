@@ -9,17 +9,8 @@ import java.util.Map;
  */
 public final class Assignments {
 
-    private Assignments() {
-        // utility
-    }
-
-    /**
-     * Разобрать строку присваиваний в отображение.
-     *
-     * @param input строка формата {@code name=value; name=value; ...}
-     * @return отображение переменных
-     */
-    public static Map<String, Integer> parseEnv(final String input) {
+    // Убираем статический метод и делаем обычный метод экземпляра
+    public Map<String, Integer> parseEnv(final String input) {
         Map<String, Integer> env = new HashMap<>();
         if (input == null) {
             return env;
