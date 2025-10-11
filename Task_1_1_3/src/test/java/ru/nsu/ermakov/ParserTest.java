@@ -68,4 +68,22 @@ public final class ParserTest {
         // Проверяем, что значение производной при x=3 равно 6
         assertEquals(6, d.eval(env));
     }
+
+    /**
+     * Проверка работы с отрицательными числами: -2 + 3 * 4 = 10, ( -2 + 3 ) * 4 = 4.
+     */
+    @Test
+    void negativeNumbers() {
+        // Создаем экземпляр Parser с выражением
+        Parser parser1 = new Parser("-2+3*4");
+        // Парсим выражение
+        Expression e1 = parser1.parse("-2+3*4");
+        assertEquals(10, e1.eval(new HashMap<>()));
+
+        // Создаем второй экземпляр Parser с другим выражением
+        Parser parser2 = new Parser("(-2+3)*4");
+        // Парсим выражение
+        Expression e2 = parser2.parse("(-2+3)*4");
+        assertEquals(4, e2.eval(new HashMap<>()));
+    }
 }
