@@ -106,7 +106,7 @@ public final class ExpressionTest {
                 new Sub(new ru.nsu.ermakov.Arifmetic.Number(10), new Variable("y")),
                 new Mul(new Variable("x"), new Number(2))
         );
-        String printed = expr.print();
+        String printed = expr.toString();
         assertEquals(printed, expr.toString());
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 3);
