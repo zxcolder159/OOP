@@ -1,6 +1,7 @@
 package ru.nsu.ermakov;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.ermakov.Parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

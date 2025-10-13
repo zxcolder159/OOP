@@ -2,6 +2,8 @@ package ru.nsu.ermakov;
 
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.nsu.ermakov.Parser.Assignments;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

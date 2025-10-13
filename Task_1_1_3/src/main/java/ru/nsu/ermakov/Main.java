@@ -1,5 +1,9 @@
 package ru.nsu.ermakov;
 
+import ru.nsu.ermakov.Arifmetic.Expression;
+import ru.nsu.ermakov.Parser.Assignments;
+import ru.nsu.ermakov.Parser.Parser;
+
 import java.util.Map;
 import java.util.Scanner;
 
@@ -34,7 +38,7 @@ public class Main {
 
             // Вычисляем производную
             Expression derivative = parsedExpr.derivative("x");
-            System.out.println("Derivative (w.r.t x): " + derivative.print());
+            System.out.println("Derivative (w.r.t x): " + derivative.toString());
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

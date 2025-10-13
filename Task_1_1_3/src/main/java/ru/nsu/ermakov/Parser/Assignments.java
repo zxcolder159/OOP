@@ -1,4 +1,4 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Parser;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Arifmetic;
 
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public abstract class Expression {
      *
      * @return строка, описывающая выражение
      */
-    public abstract String print();
+    protected abstract String print();
 
     @Override
     public final String toString() {

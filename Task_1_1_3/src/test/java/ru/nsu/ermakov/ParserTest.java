@@ -3,6 +3,9 @@ package ru.nsu.ermakov;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.nsu.ermakov.Arifmetic.Expression;
+import ru.nsu.ermakov.Parser.Parser;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

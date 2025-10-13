@@ -1,4 +1,4 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Arifmetic;
 
 import java.util.Map;
 

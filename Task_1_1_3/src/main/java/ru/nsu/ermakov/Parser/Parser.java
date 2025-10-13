@@ -1,4 +1,7 @@
-package ru.nsu.ermakov;
+package ru.nsu.ermakov.Parser;
+
+import ru.nsu.ermakov.Arifmetic.*;
+import ru.nsu.ermakov.Arifmetic.Number;
 
 /**
  * Простой рекурсивный спускающийся парсер для выражений из целых чисел,

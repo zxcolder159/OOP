@@ -3,6 +3,9 @@ package ru.nsu.ermakov;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.nsu.ermakov.Arifmetic.*;
+import ru.nsu.ermakov.Arifmetic.Number;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,7 +20,7 @@ public final class ExpressionTest {
      */
     @Test
     void numberPrintEvalAndDerivativeZero() {
-        Number c = new Number(42);
+        ru.nsu.ermakov.Arifmetic.Number c = new ru.nsu.ermakov.Arifmetic.Number(42);
         Map<String, Integer> env = new HashMap<>();
         assertEquals("42", c.print());
         assertEquals("42", c.toString());
@@ -46,7 +49,7 @@ public final class ExpressionTest {
      */
     @Test
     void addEvalAndDerivativeOfConstantsIsZero() {
-        Expression sum = new Add(new Number(2), new Number(3));
+        Expression sum = new Add(new ru.nsu.ermakov.Arifmetic.Number(2), new ru.nsu.ermakov.Arifmetic.Number(3));
         Map<String, Integer> env = new HashMap<>();
         assertEquals(5, sum.eval(env));
         Expression d = sum.derivative("x");
@@ -59,7 +62,7 @@ public final class ExpressionTest {
     @Test
     void subEvalAndDerivativeNumeric() {
         Variable x = new Variable("x");
-        Expression expr = new Sub(new Mul(x, new Number(3)), new Number(5));
+        Expression expr = new Sub(new Mul(x, new ru.nsu.ermakov.Arifmetic.Number(3)), new ru.nsu.ermakov.Arifmetic.Number(5));
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 4);
         assertEquals(7, expr.eval(env)); // 3*4 - 5 = 7
@@ -87,7 +90,7 @@ public final class ExpressionTest {
     @Test
     void divQuotientRuleNumeric() {
         Variable x = new Variable("x");
-        Expression f = new Div(new Mul(x, x), new Number(2));
+        Expression f = new Div(new Mul(x, x), new ru.nsu.ermakov.Arifmetic.Number(2));
         Map<String, Integer> env = new HashMap<>();
         env.put("x", 5);
         Expression df = f.derivative("x");
@@ -100,7 +103,7 @@ public final class ExpressionTest {
     @Test
     void toStringDelegatesToPrint() {
         Expression expr = new Add(
-                new Sub(new Number(10), new Variable("y")),
+                new Sub(new ru.nsu.ermakov.Arifmetic.Number(10), new Variable("y")),
                 new Mul(new Variable("x"), new Number(2))
         );
         String printed = expr.print();
