@@ -1,0 +1,458 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06__Changes_1.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06__Changes_1.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06__Changes_1.xml	(revision 056c04a2f5a2b22c10c0bfca0db0cd7d528e643f)
++++ /dev/null	(revision 056c04a2f5a2b22c10c0bfca0db0cd7d528e643f)
+@@ -1,14 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1" date="1758190003564" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 18.09.2025 17:06 [Changes]" />
+-  <binary>
+-    <option name="BEFORE_PATH" value="../Task_1_1_1/.gradle/file-system.probe" />
+-    <option name="AFTER_PATH" value="../Task_1_1_1/.gradle/file-system.probe" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/file-system.probe" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" value="../Task_1_1_1/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+-    <option name="AFTER_PATH" value="../Task_1_1_1/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/buildOutputCleanup.lock" />
+-  </binary>
+-</changelist>
+\ No newline at end of file
+Index: src/test/java/ru/nsu/ermakov/GameTest.java
+===================================================================
+diff --git a/src/test/java/ru/nsu/ermakov/GameTest.java b/src/test/java/ru/nsu/ermakov/GameTest.java
+deleted file mode 100644
+--- a/src/test/java/ru/nsu/ermakov/GameTest.java	(revision 133532c12b0d200e5aa55b43a01eccbac2538c1f)
++++ /dev/null	(revision 133532c12b0d200e5aa55b43a01eccbac2538c1f)
+@@ -1,116 +0,0 @@
+-package ru.nsu.ermakov;
+-
+-import org.junit.jupiter.api.Test;
+-
+-import static org.junit.jupiter.api.Assertions.*;
+-/**
+- * Юнит-тесты для классов Card, Deck и Player.
+- * Покрытие >80% методов.
+- */
+-class GameTest {
+-
+-    // ---------- Card ----------
+-    @Test
+-    void testNumberCardValue() {
+-        Card card = new Card("7", "Пики");
+-        assertEquals(7, card.getBaseValue());
+-    }
+-
+-    @Test
+-    void testFaceCardValue() {
+-        Card card = new Card("Король", "Червы");
+-        assertEquals(10, card.getBaseValue());
+-    }
+-
+-    @Test
+-    void testAceCardValue() {
+-        Card card = new Card("Туз", "Бубны");
+-        assertEquals(11, card.getBaseValue());
+-    }
+-
+-    @Test
+-    void testCardToString() {
+-        Card card = new Card("Дама", "Трефы");
+-        assertEquals("Дама Трефы", card.toString());
+-    }
+-
+-    // ---------- Deck ----------
+-    @Test
+-    void testDeckSizeSingle() {
+-        Deck deck = new Deck(1);
+-        for (int i = 0; i < 52; i++) {
+-            assertNotNull(deck.draw());
+-        }
+-    }
+-
+-    @Test
+-    void testDeckSizeMultiple() {
+-        Deck deck = new Deck(2);
+-        for (int i = 0; i < 104; i++) {
+-            assertNotNull(deck.draw());
+-        }
+-    }
+-
+-    @Test
+-    void testShuffle() {
+-        Deck deck = new Deck(1);
+-        deck.shuffle();
+-        assertNotNull(deck.draw()); // хотя бы карта есть после shuffle
+-    }
+-
+-    // ---------- Player ----------
+-    @Test
+-    void testAddAndClearHand() {
+-        Player player = new Player("Игрок");
+-        player.addCard(new Card("10", "Пики"));
+-        assertEquals(10, player.getScore());
+-        player.clearHand();
+-        assertEquals(0, player.getScore());
+-    }
+-
+-    @Test
+-    void testScoreWithAceAs11() {
+-        Player player = new Player("Игрок");
+-        player.addCard(new Card("Туз", "Пики"));
+-        player.addCard(new Card("9", "Червы"));
+-        assertEquals(20, player.getScore());
+-    }
+-
+-    @Test
+-    void testScoreWithAceAs1() {
+-        Player player = new Player("Игрок");
+-        player.addCard(new Card("Туз", "Пики"));
+-        player.addCard(new Card("9", "Червы"));
+-        player.addCard(new Card("5", "Бубны"));
+-        assertEquals(15, player.getScore()); // туз = 1
+-    }
+-
+-    @Test
+-    void testMultipleAces() {
+-        Player player = new Player("Игрок");
+-        player.addCard(new Card("Туз", "Пики"));
+-        player.addCard(new Card("Туз", "Червы"));
+-        player.addCard(new Card("9", "Бубны"));
+-        assertEquals(21, player.getScore());
+-    }
+-
+-    @Test
+-    void testShowHandWithoutHidden() {
+-        Player player = new Player("Игрок");
+-        player.addCard(new Card("10", "Пики"));
+-        player.addCard(new Card("Дама", "Червы"));
+-        String result = player.showHand(false);
+-        assertTrue(result.contains("10 Пики"));
+-        assertTrue(result.contains("Дама Червы"));
+-        assertTrue(result.contains("="));
+-    }
+-
+-    @Test
+-    void testShowHandWithHidden() {
+-        Player player = new Player("Игрок");
+-        player.addCard(new Card("10", "Пики"));
+-        player.addCard(new Card("Дама", "Червы"));
+-        String result = player.showHand(true);
+-        assertTrue(result.contains("<закрытая карта>"));
+-    }
+-}
+Index: src/main/java/ru/nsu/ermakov/Blackjack.java
+===================================================================
+diff --git a/src/main/java/ru/nsu/ermakov/Blackjack.java b/src/main/java/ru/nsu/ermakov/Blackjack.java
+deleted file mode 100644
+--- a/src/main/java/ru/nsu/ermakov/Blackjack.java	(revision 133532c12b0d200e5aa55b43a01eccbac2538c1f)
++++ /dev/null	(revision 133532c12b0d200e5aa55b43a01eccbac2538c1f)
+@@ -1,102 +0,0 @@
+-package ru.nsu.ermakov;
+-
+-import java.util.Scanner;
+-
+-/**
+- * Консольная игра Блэкджек.
+- */
+-public class Blackjack {
+-    private final Deck deck = new Deck(1);
+-    private final Player player = new Player("Игрок");
+-    private final Player dealer = new Player("Дилер");
+-    private int scorePlayer = 0;
+-    private int scoreDealer = 0;
+-    private final Scanner scanner = new Scanner(System.in);
+-
+-    public void start() {
+-        System.out.println("Добро пожаловать в Блэкджек!");
+-        int round = 1;
+-        while (true) {
+-            System.out.println("\nРаунд " + round);
+-            playRound();
+-            System.out.printf("Счёт %d:%d (Вы : Дилер)%n", scorePlayer, scoreDealer);
+-            System.out.print("Играть ещё раунд? (y/n): ");
+-            if (!scanner.next().equalsIgnoreCase("y")) {
+-                break;
+-            }
+-            round++;
+-        }
+-    }
+-
+-    private void playRound() {
+-        player.clearHand();
+-        dealer.clearHand();
+-
+-        // Раздача
+-        player.addCard(deck.draw());
+-        dealer.addCard(deck.draw());
+-        player.addCard(deck.draw());
+-        dealer.addCard(deck.draw());
+-
+-        System.out.println("Дилер раздал карты");
+-        System.out.println("Ваши карты: " + player.showHand(false));
+-        System.out.println("Карты дилера: " + dealer.showHand(true));
+-
+-        // Проверка на блэкджек
+-        if (player.getScore() == 21) {
+-            System.out.println("У вас блэкджек! 🎉");
+-            scorePlayer++;
+-            return;
+-        }
+-
+-        // Ход игрока
+-        while (true) {
+-            System.out.println("\nВаш ход");
+-            System.out.print("Введите '1', чтобы взять карту, и '0', чтобы остановиться: ");
+-            int choice = scanner.nextInt();
+-            if (choice == 1) {
+-                Card card = deck.draw();
+-                player.addCard(card);
+-                System.out.println("Вы открыли карту " + card);
+-                System.out.println("Ваши карты: " + player.showHand(false));
+-                if (player.getScore() > 21) {
+-                    System.out.println("Перебор! Вы проиграли раунд.");
+-                    scoreDealer++;
+-                    return;
+-                }
+-            } else {
+-                break;
+-            }
+-        }
+-
+-        // Ход дилера
+-        System.out.println("\nХод дилера");
+-        System.out.println("Дилер открывает закрытую карту: " + dealer.getHand().get(1));
+-        System.out.println("Карты дилера: " + dealer.showHand(false));
+-
+-        while (dealer.getScore() < 17) {
+-            Card card = deck.draw();
+-            dealer.addCard(card);
+-            System.out.println("Дилер открывает карту " + card);
+-            System.out.println("Карты дилера: " + dealer.showHand(false));
+-        }
+-
+-        // Определение победителя
+-        int p = player.getScore();
+-        int d = dealer.getScore();
+-
+-        if (d > 21 || p > d) {
+-            System.out.println("Вы выиграли раунд!");
+-            scorePlayer++;
+-        } else if (p == d) {
+-            System.out.println("Ничья!");
+-        } else {
+-            System.out.println("Дилер выиграл раунд!");
+-            scoreDealer++;
+-        }
+-    }
+-
+-    public static void main(String[] args) {
+-        new Blackjack().start();
+-    }
+-}
+Index: src/main/java/ru/nsu/ermakov/Hand.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/nsu/ermakov/Hand.java b/src/main/java/ru/nsu/ermakov/Hand.java
+new file mode 100644
+--- /dev/null	(date 1758874163374)
++++ b/src/main/java/ru/nsu/ermakov/Hand.java	(date 1758874163374)
+@@ -0,0 +1,63 @@
++package ru.nsu.ermakov;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Класс, представляющий руку игрока.
++ */
++public class Hand {
++    private final List<Card> cards = new ArrayList<>();
++
++    /**
++     * Добавляет карту.
++     */
++    public void addCard(Card card) {
++        cards.add(card);
++    }
++
++    /**
++     * Очищает руку.
++     */
++    public void clear() {
++        cards.clear();
++    }
++
++    /**
++     * Возвращает список карт.
++     */
++    public List<Card> getCards() {
++        return cards;
++    }
++
++    /**
++     * Подсчёт очков с учётом тузов.
++     */
++    public int getScore() {
++        return ScoreCalculator.calculate(cards);
++    }
++
++    /**
++     * Представление руки в виде строки.
++     *
++     * @param hideFirst скрыть первую карту (для дилера)
++     */
++    public String toString(boolean hideFirst) {
++        StringBuilder sb = new StringBuilder("[");
++        for (int i = 0; i < cards.size(); i++) {
++            if (i == 1 && hideFirst) {
++                sb.append("<закрытая карта>");
++            } else {
++                sb.append(cards.get(i));
++            }
++            if (i < cards.size() - 1) {
++                sb.append(", ");
++            }
++        }
++        sb.append("]");
++        if (!hideFirst) {
++            sb.append(" = ").append(getScore());
++        }
++        return sb.toString();
++    }
++}
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"6fe6eb88-ee65-4b90-9f83-472c0f2ca588\" name=\"Changes\" comment=\"1\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Blackjack.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Blackjack.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Card.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Card.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Deck.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Deck.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Player.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Player.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameTest.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"Task_1_1_1\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"Task_1_1_1\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"Task_1_1_1\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n                <item name=\"build\" type=\"c8890929:TasksNode$1\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$/..\" value=\"Task_1_1_1\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;zxcolder159&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/zxcolder159/OOP.git&quot;,\r\n    &quot;accountId&quot;: &quot;cdc1c4fe-a2c9-42b5-b359-5fdc53ed475d&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;customColor&quot;: &quot;&quot;,\r\n  &quot;associatedIndex&quot;: 1\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"32Pvopk7wdY7EpKStdW5WEVj7n0\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Gradle.GameTest.executor\": \"Run\",\r\n    \"Gradle.Task_1_1_1 [build].executor\": \"Run\",\r\n    \"Gradle.Task_1_1_1 [clean].executor\": \"Run\",\r\n    \"Gradle.Task_1_1_2 [:ru.nsu.ermakov.Blackjack.main()].executor\": \"Run\",\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"git-widget-placeholder\": \"Task__1__1__2\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Java/OOP/Task_1_1_2\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"Application.Blackjack\">\r\n    <configuration name=\"Blackjack\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"ru.nsu.ermakov.Blackjack\" />\r\n      <module name=\"Task_1_1_1.main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"ru.nsu.ermakov.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"GameTest\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\"\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\":test\" />\r\n            <option value=\"--tests\" />\r\n            <option value=\"&quot;ru.nsu.ermakov.GameTest&quot;\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <RunAsTest>true</RunAsTest>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Task_1_1_1 [build]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"build\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <RunAsTest>false</RunAsTest>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Task_1_1_1 [clean]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"clean\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <RunAsTest>false</RunAsTest>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Gradle.Task_1_1_1 [build]\" />\r\n        <item itemvalue=\"Gradle.Task_1_1_1 [clean]\" />\r\n        <item itemvalue=\"Gradle.GameTest\" />\r\n        <item itemvalue=\"Application.Blackjack\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"6fe6eb88-ee65-4b90-9f83-472c0f2ca588\" name=\"Changes\" comment=\"\" />\r\n      <created>1757335199885</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1757335199885</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"исправил ошибку в HeapSortTest\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1757335613897</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1757335613897</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"исправил ошибку в HeapSortTest\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1757341774373</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1757341774373</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"1\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758190029001</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758190029001</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"1\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1758191108885</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1758191108885</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"исправил ошибку в HeapSortTest\" />\r\n    <MESSAGE value=\"1\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"1\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 056c04a2f5a2b22c10c0bfca0db0cd7d528e643f)
++++ b/.idea/workspace.xml	(date 1758875236324)
+@@ -5,12 +5,18 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="6fe6eb88-ee65-4b90-9f83-472c0f2ca588" name="Changes" comment="1">
++      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Hand.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/buildOutputCleanup.lock" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/file-system.probe" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06__Changes_1.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Blackjack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Blackjack.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Card.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Deck.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Player.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameTest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Blackjack.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Card.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Deck.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/ermakov/Player.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/ermakov/GameTest.java" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -33,16 +39,16 @@
+             <expand>
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+-                <item name="Task_1_1_1" type="f1a62948:ProjectNode" />
++                <item name="Task_1_1_2" type="f1a62948:ProjectNode" />
+               </path>
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+-                <item name="Task_1_1_1" type="f1a62948:ProjectNode" />
++                <item name="Task_1_1_2" type="f1a62948:ProjectNode" />
+                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+               </path>
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+-                <item name="Task_1_1_1" type="f1a62948:ProjectNode" />
++                <item name="Task_1_1_2" type="f1a62948:ProjectNode" />
+                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                 <item name="build" type="c8890929:TasksNode$1" />
+               </path>
+@@ -91,14 +97,17 @@
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "Application.Blackjack.executor": "Run",
++    "Gradle.Build Task_1_1_2.executor": "Run",
+     "Gradle.GameTest.executor": "Run",
+     "Gradle.Task_1_1_1 [build].executor": "Run",
+     "Gradle.Task_1_1_1 [clean].executor": "Run",
+     "Gradle.Task_1_1_2 [:ru.nsu.ermakov.Blackjack.main()].executor": "Run",
++    "Gradle.Task_1_1_2 [:ru.nsu.ermakov.BlackjackApp.main()].executor": "Run",
+     "ModuleVcsDetector.initialDetectionPerformed": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "Task__1__1__2",
++    "git-widget-placeholder": "#45 on Task__1__1__2",
+     "kotlin-language-version-configured": "true",
+     "last_opened_file_path": "C:/Java/OOP/Task_1_1_2",
+     "project.structure.last.edited": "Modules",
+@@ -106,10 +115,22 @@
+     "project.structure.side.proportion": "0.0"
+   }
+ }]]></component>
+-  <component name="RunManager" selected="Application.Blackjack">
++  <component name="RunManager" selected="Gradle.Task_1_1_1 [clean]">
+     <configuration name="Blackjack" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="ru.nsu.ermakov.Blackjack" />
+-      <module name="Task_1_1_1.main" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="ru.nsu.ermakov.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="BlackjackApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="ru.nsu.ermakov.BlackjackApp" />
++      <module name="Task_1_1_2.main" />
+       <extension name="coverage">
+         <pattern>
+           <option name="PATTERN" value="ru.nsu.ermakov.*" />
+@@ -190,10 +211,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Gradle.Task_1_1_1 [build]" />
+         <item itemvalue="Gradle.Task_1_1_1 [clean]" />
+-        <item itemvalue="Gradle.GameTest" />
++        <item itemvalue="Application.BlackjackApp" />
++        <item itemvalue="Gradle.Task_1_1_1 [build]" />
+         <item itemvalue="Application.Blackjack" />
++        <item itemvalue="Gradle.GameTest" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -237,7 +259,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1758191108885</updated>
+     </task>
+-    <option name="localTasksCounter" value="5" />
++    <task id="LOCAL-00005" summary="1">
++      <option name="closed" value="true" />
++      <created>1758199957523</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1758199957523</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_18_09_2025_17_06_[Changes]1/shelved.patch
+deleted file mode 100644
