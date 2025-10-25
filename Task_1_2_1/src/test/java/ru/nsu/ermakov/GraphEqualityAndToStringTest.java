@@ -5,11 +5,8 @@ import ru.nsu.ermakov.graph.impl.AdjacencyMatrixGraph;
 import ru.nsu.ermakov.graph.impl.IncidenceMatrixGraph;
 import ru.nsu.ermakov.graph.core.TopologicalSorter;
 import ru.nsu.ermakov.graph.core.Graph;
-
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
