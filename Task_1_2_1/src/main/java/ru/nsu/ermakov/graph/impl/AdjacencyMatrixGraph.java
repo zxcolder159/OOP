@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * Реализация графа через матрицу смежности.
- * matrix[i][j] == true  <=> есть ребро
+ * matrix[i][j] == true  значит есть ребро
  * vertices[i] -> vertices[j].
  */
 public class AdjacencyMatrixGraph extends AbstractGraph {
