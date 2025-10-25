@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ermakov"},{"l":"ru.nsu.ermakov.graph.core"},{"l":"ru.nsu.ermakov.graph.impl"}];updateSearchResults();
