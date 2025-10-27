@@ -39,7 +39,6 @@ public final class GraphFileLoader {
             throw new IOException("Bad format in line 1: expected n m");
         }
         int n = Integer.parseInt(headerTokenizer.nextToken());
-        int m = Integer.parseInt(headerTokenizer.nextToken());
 
         // ---- line 2: list of vertices ----
         StringTokenizer verticesTokenizer = new StringTokenizer(lines.get(1));
@@ -56,6 +55,7 @@ public final class GraphFileLoader {
             graph.addVertex(v);
         }
 
+        int m = Integer.parseInt(headerTokenizer.nextToken());
         // ---- next m lines: edges ----
         if (lines.size() < 2 + m) {
             throw new IOException("Bad format: not enough edge lines");
