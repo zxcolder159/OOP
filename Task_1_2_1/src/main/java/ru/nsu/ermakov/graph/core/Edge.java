@@ -63,7 +63,6 @@ public final class Edge implements Comparable<Edge> {
     /**
      * Возвращает хэш-код ребра.
      * Хэш-код вычисляется на основе полей from и to.
-     * @return хэш-код ребра
      */
     @Override
     public int hashCode() {

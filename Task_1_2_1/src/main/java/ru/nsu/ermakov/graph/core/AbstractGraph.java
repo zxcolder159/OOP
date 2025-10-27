@@ -59,18 +59,18 @@ public abstract class AbstractGraph implements Graph {
         TreeSet<Integer> sortedVertices = new TreeSet<>(getVertices());
         TreeSet<Edge> sortedEdges = new TreeSet<>(edgesAsSet());
 
-        StringJoiner vJoiner = new StringJoiner(", ", "[", "]");
-        for (Integer v : sortedVertices) {
-            vJoiner.add(String.valueOf(v));
-        }
-
         StringJoiner eJoiner = new StringJoiner(", ", "[", "]");
         for (Edge e : sortedEdges) {
             eJoiner.add(e.toString());
         }
 
-        return "Graph{vertices=" + vJoiner.toString()
-                + ", edges=" + eJoiner.toString()
-                + "}";
+        StringJoiner vJoiner = new StringJoiner(", ", "[", "]");
+        for (Integer v : sortedVertices) {
+            vJoiner.add(String.valueOf(v));
+        }
+
+
+
+        return "Graph{vertices=" + vJoiner.toString() + ", edges=" + eJoiner.toString() + "}";
     }
 }
