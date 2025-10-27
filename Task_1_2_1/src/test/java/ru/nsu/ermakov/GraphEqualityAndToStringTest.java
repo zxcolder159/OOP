@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class GraphEqualityAndToStringTest {
 
     /**
-     * Заполняет переданный граф одинаковыми данными:
+     * Заполняет переданный граф одинаковыми данными.
      */
     private Graph createSampleGraph(Graph graph) {
         graph.addVertex(10);
@@ -29,7 +29,7 @@ public class GraphEqualityAndToStringTest {
     }
 
     /**
-     * Проверяет, что три разных реализации графа
+     * Проверяет, что три разных реализации графа.
      */
     @Test
     public void testDifferentImplementationsAreEqual() {
@@ -48,7 +48,7 @@ public class GraphEqualityAndToStringTest {
     }
 
     /**
-     * Проверяет, что если изменить структуру одного графа
+     * Проверяет, что если изменить структуру одного графа.
      */
     @Test
     public void testGraphsNotEqualAfterModification() {
@@ -62,7 +62,7 @@ public class GraphEqualityAndToStringTest {
     }
 
     /**
-     * Проверяет, что метод toString() возвращает стабильное,
+     * Проверяет, что метод toString() возвращает стабильное.
      */
     @Test
     public void testToStringIsDeterministicAndReadable() {
@@ -76,7 +76,7 @@ public class GraphEqualityAndToStringTest {
     }
 
     /**
-     * Проверяет, что топологическая сортировка
+     * Проверяет, что топологическая сортировка.
      */
     @Test
     public void testTopologicalSorterOnSampleGraph() {

@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Набор модульных тестов для реализации графа через список смежности.
- * <p>
  */
 public class AdjacencyListGraphTest {
 
@@ -38,7 +37,7 @@ public class AdjacencyListGraphTest {
     }
 
     /**
-     * Проверяет операции с вершинами:
+     * Проверяет операции с вершинами.
      */
     @Test
     public void testAddAndHasVertex() {
@@ -54,7 +53,7 @@ public class AdjacencyListGraphTest {
     }
 
     /**
-     * Проверяет, что удаление вершины:
+     * Проверяет, что удаление вершины.
      */
     @Test
     public void testRemoveVertexAlsoRemovesIncidentEdges() {
@@ -89,7 +88,7 @@ public class AdjacencyListGraphTest {
     }
 
     /**
-     * Проверяет метод getNeighbors():
+     * Проверяет метод getNeighbors().
      */
     @Test
     public void testGetNeighbors() {
@@ -103,7 +102,7 @@ public class AdjacencyListGraphTest {
     }
 
     /**
-     * Проверяет корректность счётчиков количества вершин и рёбер:
+     * Проверяет корректность счётчиков количества вершин и рёбер.
      */
     @Test
     public void testCounts() {
@@ -118,9 +117,7 @@ public class AdjacencyListGraphTest {
     }
 
     /**
-     * Проверяет метод clear():
-     * после вызова не остаётся ни вершин, ни рёбер,
-     * а множество вершин становится пустым.
+     * Проверяет метод clear().
      */
     @Test
     public void testClear() {
@@ -155,7 +152,7 @@ public class AdjacencyListGraphTest {
     }
 
     /**
-     * Проверяет, что топологическая сортировка на графе с циклом
+     * Проверяет, что топологическая сортировка на графе с циклом.
      */
     @Test
     public void testTopologicalSortDetectsCycle() {

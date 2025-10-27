@@ -52,7 +52,7 @@ public class IncidenceMatrixGraphTest {
     }
 
     /**
-     * Проверяет, что удаление вершины:
+     * Проверяет, что удаление вершины.
      */
     @Test
     public void testRemoveVertexCleansEdges() {
@@ -67,7 +67,7 @@ public class IncidenceMatrixGraphTest {
     }
 
     /**
-     * Проверяет добавление и удаление рёбер:
+     * Проверяет добавление и удаление рёбер.
      */
     @Test
     public void testAddAndRemoveEdge() {
@@ -85,7 +85,7 @@ public class IncidenceMatrixGraphTest {
     }
 
     /**
-     * Проверяет корректность метода getNeighbors():
+     * Проверяет корректность метода getNeighbors().
      */
     @Test
     public void testGetNeighbors() {
@@ -100,9 +100,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Проверяет корректность счётчиков вершин и рёбер до и после модификаций.
-     * <p>
-     * После добавления ребра рёбер становится больше.
-     * После удаления вершины общее число вершин уменьшается.
      */
     @Test
     public void testCounts() {
@@ -117,9 +114,7 @@ public class IncidenceMatrixGraphTest {
     }
 
     /**
-     * Проверяет метод clear():
-     * после очистки не остаётся вершин, рёбер
-     * и множество вершин становится пустым.
+     * Проверяет метод clear().
      */
     @Test
     public void testClear() {
@@ -131,7 +126,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Проверяет загрузку графа из файла фиксированного формата.
-     * @throws IOException если не удалось создать или заполнить временный файл
      */
     @Test
     public void testLoadFromFile() throws IOException {
@@ -152,9 +146,7 @@ public class IncidenceMatrixGraphTest {
     }
 
     /**
-     * Проверяет, что при наличии цикла граф некорректен
-     * для топологической сортировки и алгоритм бросает
-     * IllegalStateException.
+     * Проверяет, что при наличии цикла граф некорректен.
      */
     @Test
     public void testTopologicalSortCycle() {

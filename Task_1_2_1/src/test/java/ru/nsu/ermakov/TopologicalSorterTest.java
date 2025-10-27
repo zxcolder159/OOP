@@ -17,10 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TopologicalSorterTest {
 
     /**
-     * Проверяет, что топологическая сортировка на ацикличном графе
-     * возвращает порядок, в котором вершина 1 идёт раньше вершин 2 и 3.
-     * Конкретный порядок [1,2,3] или [1,3,2] не фиксируем,
-     * важно только относительное положение.
+     * Проверяет, что топологическая сортировка на ацикличном графе.
      */
     @Test
     public void testTopologicalOrderIsValid() {
@@ -50,8 +47,7 @@ public class TopologicalSorterTest {
     }
 
     /**
-     * Проверяет, что при наличии цикла (10 -> 20 -> 10)
-     * топологическая сортировка выбрасывает IllegalStateException.
+     * Проверяет, что при наличии цикла (10 -> 20 -> 10).
      */
     @Test
     public void testCycleThrowsException() {
