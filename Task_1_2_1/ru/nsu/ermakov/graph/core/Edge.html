@@ -117,8 +117,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#compareTo(ru.nsu.ermakov.graph.core.Edge)" class="member-name-link">compareTo</a><wbr>(<a href="Edge.html" title="class in ru.nsu.ermakov.graph.core">Edge</a>&nbsp;other)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Сравнивает два ребра лексикографически: сначала по полю from,
- затем по полю to.</div>
+<div class="block">Сравнивает два ребра лексикографически: сначала по полю from.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</code></div>
@@ -183,10 +182,6 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>getFrom</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getFrom</span>()</div>
 <div class="block">Возвращает начальную вершину ребра.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>номер вершины-источника.</dd>
-</dl>
 </section>
 </li>
 <li>
@@ -194,24 +189,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>getTo</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getTo</span>()</div>
 <div class="block">Возвращает конечную вершину ребра.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>номер вершины-приёмника.</dd>
-</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="compareTo(ru.nsu.ermakov.graph.core.Edge)">
 <h3>compareTo</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">compareTo</span><wbr><span class="parameters">(<a href="Edge.html" title="class in ru.nsu.ermakov.graph.core">Edge</a>&nbsp;other)</span></div>
-<div class="block">Сравнивает два ребра лексикографически: сначала по полю from,
- затем по полю to.</div>
+<div class="block">Сравнивает два ребра лексикографически: сначала по полю from.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html#compareTo(T)" title="class or interface in java.lang" class="external-link">compareTo</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="Edge.html" title="class in ru.nsu.ermakov.graph.core">Edge</a>&gt;</code></dd>
-<dt>Returns:</dt>
-<dd>отрицательное число, ноль или положительное число,
-     если это ребро меньше, равно или больше другого</dd>
 </dl>
 </section>
 </li>
@@ -224,8 +211,6 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
-<dt>Returns:</dt>
-<dd>true, если ребро эквивалентно, иначе false</dd>
 </dl>
 </section>
 </li>
@@ -251,8 +236,6 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
-<dt>Returns:</dt>
-<dd>строка с направлением ребра</dd>
 </dl>
 </section>
 </li>
