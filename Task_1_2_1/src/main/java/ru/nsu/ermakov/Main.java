@@ -5,19 +5,24 @@ import ru.nsu.ermakov.graph.core.TopologicalSorter;
 import ru.nsu.ermakov.graph.impl.AdjacencyListGraph;
 import ru.nsu.ermakov.graph.impl.AdjacencyMatrixGraph;
 import ru.nsu.ermakov.graph.impl.IncidenceMatrixGraph;
-
 import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * Пример использования графов и топологической сортировки.
+ * Пример использования различных реализаций графа и алгоритма топологической сортировки.
  */
 public final class Main {
 
+    /**
+     * Приватный конструктор утилитного класса.
+     */
     private Main() {
         // utility
     }
 
+    /**
+     * Точка входа в демонстрационную программу.
+     */
     public static void main(String[] args) throws Exception {
         // 1. Создаём граф на списке смежности
         Graph g1 = new AdjacencyListGraph();
@@ -41,12 +46,12 @@ public final class Main {
         // 3. Сравним графы по структуре
         System.out.println("g1 equals g2? " + g1.equals(g2));
 
-        // 4. Попробуем ту же загрузку, но в матрицу инцидентности
+        // 4. Загрузим тот же файл в матрицу инцидентности
         Graph g3 = new IncidenceMatrixGraph();
         g3.loadFromFile(Paths.get("graph.txt"));
         System.out.println("g3 = " + g3);
 
-        // 5. Проверим, что топосорт тоже работает на g3
+        // 5. Проверим топологическую сортировку и для g3
         System.out.println("toposort(g3) = " + TopologicalSorter.topologicalSort(g3));
     }
 }

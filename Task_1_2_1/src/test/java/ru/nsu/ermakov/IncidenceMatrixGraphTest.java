@@ -37,7 +37,7 @@ public class IncidenceMatrixGraphTest {
     }
 
     /**
-     * Проверяет корректность добавления вершин:
+     * Проверяет корректность добавления вершин.
      */
     @Test
     public void testHasVertexAndDuplicateAdd() {
