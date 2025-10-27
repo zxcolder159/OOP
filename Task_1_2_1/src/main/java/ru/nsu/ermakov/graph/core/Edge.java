@@ -21,7 +21,6 @@ public final class Edge implements Comparable<Edge> {
 
     /**
      * Возвращает начальную вершину ребра.
-     * @return номер вершины-источника.
      */
     public int getFrom() {
         return from;
@@ -29,17 +28,13 @@ public final class Edge implements Comparable<Edge> {
 
     /**
      * Возвращает конечную вершину ребра.
-     * @return номер вершины-приёмника.
      */
     public int getTo() {
         return to;
     }
 
     /**
-     * Сравнивает два ребра лексикографически: сначала по полю from,
-     * затем по полю to.
-     * @return отрицательное число, ноль или положительное число,
-     *     если это ребро меньше, равно или больше другого
+     * Сравнивает два ребра лексикографически: сначала по полю from.
      */
     @Override
     public int compareTo(Edge other) {
@@ -52,7 +47,6 @@ public final class Edge implements Comparable<Edge> {
     /**
      * Проверяет равенство двух рёбер.
      * Два ребра равны, если совпадают оба конца (from и to).
-     * @return true, если ребро эквивалентно, иначе false
      */
     @Override
     public boolean equals(Object other) {
@@ -78,7 +72,6 @@ public final class Edge implements Comparable<Edge> {
 
     /**
      * Возвращает строковое представление ребра в формате "from->to".
-     * @return строка с направлением ребра
      */
     @Override
     public String toString() {
