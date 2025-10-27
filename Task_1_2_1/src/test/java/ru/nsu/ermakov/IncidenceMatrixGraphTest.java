@@ -17,14 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Набор модульных тестов для реализации графа через матрицу инцидентности.
- * <p>
- * Проверяются:
- * <ul>
- *   <li>операции с вершинами и рёбрами,</li>
- *   <li>удаление вершин и очистка графа,</li>
- *   <li>загрузка из файла фиксированного формата,</li>
- *   <li>корректность топологической сортировки и обработка цикла.</li>
- * </ul>
  */
 public class IncidenceMatrixGraphTest {
 
@@ -32,8 +24,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Инициализирует новый граф перед каждым тестом.
-     * <p>
-     * Граф получает вершины 10, 20, 30 и рёбра 10->20 и 10->30.
      */
     @BeforeEach
     public void setUp() {
@@ -48,11 +38,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Проверяет корректность добавления вершин:
-     * <ul>
-     *   <li>существующие вершины распознаются методом hasVertex(),</li>
-     *   <li>новая вершина (40) успешно добавляется,</li>
-     *   <li>повторное добавление той же вершины возвращает false.</li>
-     * </ul>
      */
     @Test
     public void testHasVertexAndDuplicateAdd() {
@@ -68,11 +53,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Проверяет, что удаление вершины:
-     * <ul>
-     *   <li>удаляет саму вершину,</li>
-     *   <li>удаляет все рёбра, которые вели в неё или выходили из неё,</li>
-     *   <li>не затрагивает оставшиеся рёбра.</li>
-     * </ul>
      */
     @Test
     public void testRemoveVertexCleansEdges() {
@@ -88,11 +68,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Проверяет добавление и удаление рёбер:
-     * <ul>
-     *   <li>новое ребро 20->30 можно добавить,</li>
-     *   <li>существующее ребро 10->20 можно удалить,</li>
-     *   <li>повторное удаление того же ребра возвращает false.</li>
-     * </ul>
      */
     @Test
     public void testAddAndRemoveEdge() {
@@ -111,10 +86,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Проверяет корректность метода getNeighbors():
-     * <ul>
-     *   <li>для вершины 10 соседи должны быть {20, 30},</li>
-     *   <li>вызов для несуществующей вершины выбрасывает IllegalArgumentException.</li>
-     * </ul>
      */
     @Test
     public void testGetNeighbors() {
@@ -160,18 +131,6 @@ public class IncidenceMatrixGraphTest {
 
     /**
      * Проверяет загрузку графа из файла фиксированного формата.
-     * <p>
-     * Формат файла:
-     * <pre>
-     * n m
-     * v1 v2 ... vN
-     * from1 to1
-     * from2 to2
-     * ...
-     * </pre>
-     * После загрузки сравниваются вершины, рёбра,
-     * а также корректность топологической сортировки.
-     *
      * @throws IOException если не удалось создать или заполнить временный файл
      */
     @Test

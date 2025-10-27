@@ -18,10 +18,6 @@ public class GraphEqualityAndToStringTest {
 
     /**
      * Заполняет переданный граф одинаковыми данными:
-     * вершины 10, 20, 30 и рёбра 10->20 и 10->30.
-     *
-     * @param graph граф, который нужно заполнить
-     * @return тот же граф, для удобства чейнинга
      */
     private Graph createSampleGraph(Graph graph) {
         graph.addVertex(10);
@@ -34,9 +30,6 @@ public class GraphEqualityAndToStringTest {
 
     /**
      * Проверяет, что три разных реализации графа
-     * (список смежности, матрица смежности, матрица инцидентности)
-     * считаются равными по equals(), если у них одинаковые вершины и рёбра.
-     * Также проверяется, что hashCode совпадает.
      */
     @Test
     public void testDifferentImplementationsAreEqual() {
@@ -56,8 +49,6 @@ public class GraphEqualityAndToStringTest {
 
     /**
      * Проверяет, что если изменить структуру одного графа
-     * (например, добавить лишнюю вершину),
-     * то equals() перестаёт считать два графа равными.
      */
     @Test
     public void testGraphsNotEqualAfterModification() {
@@ -72,9 +63,6 @@ public class GraphEqualityAndToStringTest {
 
     /**
      * Проверяет, что метод toString() возвращает стабильное,
-     * отсортированное и человекочитаемое строковое представление графа.
-     * Ожидается, что порядок вершин и рёбер будет детерминирован
-     * (используются TreeSet внутри реализаций).
      */
     @Test
     public void testToStringIsDeterministicAndReadable() {
@@ -89,8 +77,6 @@ public class GraphEqualityAndToStringTest {
 
     /**
      * Проверяет, что топологическая сортировка
-     * возвращает порядок вершин, в котором вершина 10
-     * идёт раньше 20 и 30, поскольку рёбра направлены из 10.
      */
     @Test
     public void testTopologicalSorterOnSampleGraph() {

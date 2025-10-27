@@ -141,17 +141,6 @@ public class AdjacencyMatrixGraphTest {
 
     /**
      * Проверяет загрузку графа из файла фиксированного формата.
-     * Формат:
-     * n m
-     * v1 v2 ... vN
-     * from1 to1
-     * from2 to2
-     * ...
-     *
-     * После загрузки сверяются вершины, рёбра и допустимость
-     * топологической сортировки.
-     *
-     * @throws IOException если не удалось создать или прочитать временный файл
      */
     @Test
     public void testLoadFromFile() throws IOException {

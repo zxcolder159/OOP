@@ -18,8 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Набор модульных тестов для реализации графа через список смежности.
  * <p>
- * Проверяются операции с вершинами и рёбрами, очистка, загрузка из файла
- * и корректность топологической сортировки.
  */
 public class AdjacencyListGraphTest {
 
@@ -27,8 +25,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Создаёт новый граф перед каждым тестом.
-     * <p>
-     * Граф содержит вершины 1, 2, 3 и дуги 1->2 и 1->3.
      */
     @BeforeEach
     public void setUp() {
@@ -43,11 +39,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Проверяет операции с вершинами:
-     * <ul>
-     *   <li>существующие вершины корректно определяются через hasVertex(),</li>
-     *   <li>новая вершина успешно добавляется,</li>
-     *   <li>повторное добавление той же вершины возвращает false.</li>
-     * </ul>
      */
     @Test
     public void testAddAndHasVertex() {
@@ -64,11 +55,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Проверяет, что удаление вершины:
-     * <ul>
-     *   <li>убирает саму вершину,</li>
-     *   <li>удаляет все рёбра, инцидентные этой вершине,</li>
-     *   <li>не трогает остальные рёбра графа.</li>
-     * </ul>
      */
     @Test
     public void testRemoveVertexAlsoRemovesIncidentEdges() {
@@ -85,13 +71,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Проверяет добавление и удаление рёбер.
-     * <p>
-     * Проверяем:
-     * <ul>
-     *   <li>новое ребро 2->3 можно добавить,</li>
-     *   <li>существующее ребро 1->2 можно удалить,</li>
-     *   <li>повторное удаление того же ребра возвращает false.</li>
-     * </ul>
      */
     @Test
     public void testAddAndRemoveEdge() {
@@ -111,11 +90,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Проверяет метод getNeighbors():
-     * <ul>
-     *   <li>для вершины 1 соседи должны быть {2, 3},</li>
-     *   <li>вызов getNeighbors() для несуществующей вершины
-     *   приводит к IllegalArgumentException.</li>
-     * </ul>
      */
     @Test
     public void testGetNeighbors() {
@@ -130,11 +104,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Проверяет корректность счётчиков количества вершин и рёбер:
-     * <ul>
-     *   <li>до модификаций,</li>
-     *   <li>после добавления нового ребра,</li>
-     *   <li>после удаления вершины.</li>
-     * </ul>
      */
     @Test
     public void testCounts() {
@@ -163,24 +132,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Проверяет загрузку графа из временного файла фиксированного формата.
-     * <p>
-     * Формат файла:
-     * <pre>
-     * n m
-     * v1 v2 ... vN
-     * from1 to1
-     * from2 to2
-     * ...
-     * </pre>
-     *
-     * После загрузки проверяется:
-     * <ul>
-     *   <li>корректно ли считаны вершины,</li>
-     *   <li>корректно ли считаны рёбра,</li>
-     *   <li>топологическая сортировка даёт ожидаемый порядок.</li>
-     * </ul>
-     *
-     * @throws IOException если не удалось создать или записать временный файл
      */
     @Test
     public void testLoadFromFile() throws IOException {
@@ -205,9 +156,6 @@ public class AdjacencyListGraphTest {
 
     /**
      * Проверяет, что топологическая сортировка на графе с циклом
-     * выбрасывает IllegalStateException.
-     * <p>
-     * Мы создаём цикл вида 1->2->1.
      */
     @Test
     public void testTopologicalSortDetectsCycle() {
