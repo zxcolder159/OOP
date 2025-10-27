@@ -38,7 +38,9 @@ public final class Edge implements Comparable<Edge> {
         }
         return Integer.compare(to, other.to);
     }
-
+    /**
+     * проверка равенства.
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -50,12 +52,16 @@ public final class Edge implements Comparable<Edge> {
         Edge e = (Edge) other;
         return from == e.from && to == e.to;
     }
-
+    /**
+     * hashCode.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(from, to);
     }
-
+    /**
+     * приобразование в строку.
+     */
     @Override
     public String toString() {
         return from + "->" + to;
