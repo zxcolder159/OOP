@@ -16,12 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Тесты для реализации графа через матрицу смежности.
+ * Набор тестов для реализации графа через матрицу смежности.
+ * Проверяются операции с вершинами, рёбрами, чтением из файла и
+ * корректность топологической сортировки.
  */
 public class AdjacencyMatrixGraphTest {
 
     private Graph graph;
 
+    /**
+     * Создаёт новый граф на матрице смежности перед каждым тестом и
+     * инициализирует вершины 1, 2, 3 и рёбра 1->2 и 1->3.
+     */
     @BeforeEach
     public void setUp() {
         graph = new AdjacencyMatrixGraph();
@@ -33,12 +39,21 @@ public class AdjacencyMatrixGraphTest {
         graph.addEdge(1, 3);
     }
 
+    /**
+     * Проверяет, что повторное добавление той же вершины возвращает false,
+     * а первая вставка фиксируется успешно.
+     */
     @Test
     public void testAddVertexTwice() {
         assertTrue(graph.hasVertex(1));
         assertFalse(graph.addVertex(1));
     }
 
+    /**
+     * Проверяет корректное удаление вершины: сама вершина пропадает,
+     * и все инцидентные ей рёбра тоже удаляются. Остальные рёбра
+     * графа должны остаться неизменными.
+     */
     @Test
     public void testRemoveVertexRebuildsMatrix() {
         assertTrue(graph.hasVertex(2));
@@ -54,6 +69,13 @@ public class AdjacencyMatrixGraphTest {
         assertTrue(graph.hasEdge(1, 3));
     }
 
+    /**
+     * Проверяет добавление и удаление рёбер.
+     * В частности, что:
+     * - новое ребро можно добавить;
+     * - существующее ребро можно удалить;
+     * - повторное удаление отдаёт false.
+     */
     @Test
     public void testAddAndRemoveEdge() {
         assertTrue(graph.hasEdge(1, 2));
@@ -69,15 +91,28 @@ public class AdjacencyMatrixGraphTest {
         assertFalse(graph.removeEdge(1, 2));
     }
 
+    /**
+     * Проверяет метод получения соседей вершины.
+     * Ожидается, что у вершины 1 соседи {2, 3}.
+     * Также проверяется, что запрос соседей у отсутствующей вершины
+     * приводит к IllegalArgumentException.
+     */
     @Test
     public void testGetNeighbors() {
         Set<Integer> neigh = graph.getNeighbors(1);
         assertEquals(Set.of(2, 3), neigh);
 
-        assertThrows(IllegalArgumentException.class,
-                () -> graph.getNeighbors(999));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> graph.getNeighbors(999)
+        );
     }
 
+    /**
+     * Проверяет корректность подсчёта количества вершин и рёбер,
+     * а также то, что эти счётчики обновляются после добавления ребра
+     * и удаления вершины.
+     */
     @Test
     public void testCountsAfterOps() {
         assertEquals(3, graph.getVertexCount());
@@ -90,6 +125,12 @@ public class AdjacencyMatrixGraphTest {
         assertEquals(2, graph.getVertexCount());
     }
 
+    /**
+     * Проверяет очистку графа методом clear():
+     * - все вершины исчезают,
+     * - все рёбра исчезают,
+     * - множества вершин становятся пустыми.
+     */
     @Test
     public void testClear() {
         graph.clear();
@@ -98,34 +139,48 @@ public class AdjacencyMatrixGraphTest {
         assertTrue(graph.getVertices().isEmpty());
     }
 
+    /**
+     * Проверяет загрузку графа из файла фиксированного формата.
+     * Формат:
+     * n m
+     * v1 v2 ... vN
+     * from1 to1
+     * from2 to2
+     * ...
+     *
+     * После загрузки сверяются вершины, рёбра и допустимость
+     * топологической сортировки.
+     *
+     * @throws IOException если не удалось создать или прочитать временный файл
+     */
     @Test
     public void testLoadFromFile() throws IOException {
         Path tmp = Files.createTempFile("graph", ".txt");
-        Files.writeString(tmp,
-                "4 3\n" +
-                        "1 2 3 4\n" +
-                        "1 2\n" +
-                        "1 3\n" +
-                        "3 4\n"
-        );
+        Files.writeString(tmp, "4 3\n" + "1 2 3 4\n" + "1 2\n" + "1 3\n" + "3 4\n");
 
-        Graph g = new AdjacencyMatrixGraph();
-        g.loadFromFile(tmp);
+        Graph loaded = new AdjacencyMatrixGraph();
+        loaded.loadFromFile(tmp);
 
-        assertEquals(Set.of(1, 2, 3, 4), g.getVertices());
-        assertTrue(g.hasEdge(1, 2));
-        assertTrue(g.hasEdge(1, 3));
-        assertTrue(g.hasEdge(3, 4));
-        assertFalse(g.hasEdge(2, 1));
+        assertEquals(Set.of(1, 2, 3, 4), loaded.getVertices());
+        assertTrue(loaded.hasEdge(1, 2));
+        assertTrue(loaded.hasEdge(1, 3));
+        assertTrue(loaded.hasEdge(3, 4));
+        assertFalse(loaded.hasEdge(2, 1));
 
-        List<Integer> order = TopologicalSorter.topologicalSort(g);
+        List<Integer> order = TopologicalSorter.topologicalSort(loaded);
         assertEquals(4, order.size());
     }
 
+    /**
+     * Проверяет, что топологическая сортировка падает с исключением
+     * на графе, содержащем цикл.
+     */
     @Test
     public void testTopologicalSortCycle() {
         graph.addEdge(2, 1);
-        assertThrows(IllegalStateException.class,
-                () -> TopologicalSorter.topologicalSort(graph));
+        assertThrows(
+                IllegalStateException.class,
+                () -> TopologicalSorter.topologicalSort(graph)
+        );
     }
 }

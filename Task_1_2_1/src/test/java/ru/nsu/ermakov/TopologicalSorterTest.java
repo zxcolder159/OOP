@@ -8,12 +8,20 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Тесты для TopologicalSorter (алгоритм Канна).
+ * Проверяется корректность топологического порядка и обработка циклов.
  */
 public class TopologicalSorterTest {
 
+    /**
+     * Проверяет, что топологическая сортировка на ацикличном графе
+     * возвращает порядок, в котором вершина 1 идёт раньше вершин 2 и 3.
+     * Конкретный порядок [1,2,3] или [1,3,2] не фиксируем,
+     * важно только относительное положение.
+     */
     @Test
     public void testTopologicalOrderIsValid() {
         Graph g = new AdjacencyListGraph();
@@ -25,20 +33,26 @@ public class TopologicalSorterTest {
         g.addEdge(1, 3);
 
         List<Integer> order = TopologicalSorter.topologicalSort(g);
-        // 1 должен идти раньше 2 и 3
-        int idx1 = order.indexOf(1);
-        int idx2 = order.indexOf(2);
-        int idx3 = order.indexOf(3);
 
+        final int idx1 = order.indexOf(1);
+        final int idx2 = order.indexOf(2);
+        final int idx3 = order.indexOf(3);
+
+        // размер должен быть ровно 3
         assertEquals(3, order.size());
-        // проверяем относительный порядок
-        // (не проверяем что именно [1,2,3], допускаем [1,3,2])
+
+        // за пределами диапазона должен быть IndexOutOfBoundsException
         assertThrows(IndexOutOfBoundsException.class, () -> order.get(3));
-        // гарантии порядка:
-        assertEquals(true, idx1 < idx2);
-        assertEquals(true, idx1 < idx3);
+
+        // гарантии относительного порядка: 1 идёт до 2 и до 3
+        assertTrue(idx1 < idx2);
+        assertTrue(idx1 < idx3);
     }
 
+    /**
+     * Проверяет, что при наличии цикла (10 -> 20 -> 10)
+     * топологическая сортировка выбрасывает IllegalStateException.
+     */
     @Test
     public void testCycleThrowsException() {
         Graph g = new AdjacencyMatrixGraph();
@@ -48,7 +62,9 @@ public class TopologicalSorterTest {
         g.addEdge(10, 20);
         g.addEdge(20, 10); // цикл
 
-        assertThrows(IllegalStateException.class,
-                () -> TopologicalSorter.topologicalSort(g));
+        assertThrows(
+                IllegalStateException.class,
+                () -> TopologicalSorter.topologicalSort(g)
+        );
     }
 }
