@@ -117,23 +117,33 @@ implements <a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">G
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.ermakov.graph.core">Edge</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edgesAsSet()" class="member-name-link">edgesAsSet</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Построить множество всех рёбер (как отсортированное множество).</div>
+<div class="block">Строит множество всех рёбер графа как отсортированное множество.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Сравнивает графы по множеству вершин и множеству рёбер.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEdgeCount()" class="member-name-link">getEdgeCount</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает количество рёбер в графе.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVertexCount()" class="member-name-link">getVertexCount</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает количество вершин в графе.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Вычисляет хэш-код графа по отсортированным вершинам и рёбрам.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает строковое представление графа в детерминированном виде.</div>
+</div>
 </div>
 </div>
 </div>
@@ -172,11 +182,10 @@ implements <a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">G
 <section class="detail" id="getVertexCount()">
 <h3>getVertexCount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getVertexCount</span>()</div>
+<div class="block">Возвращает количество вершин в графе.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#getVertexCount()">getVertexCount</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">Graph</a></code></dd>
-<dt>Returns:</dt>
-<dd>количество вершин.</dd>
 </dl>
 </section>
 </li>
@@ -184,11 +193,10 @@ implements <a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">G
 <section class="detail" id="getEdgeCount()">
 <h3>getEdgeCount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getEdgeCount</span>()</div>
+<div class="block">Возвращает количество рёбер в графе.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Graph.html#getEdgeCount()">getEdgeCount</a></code>&nbsp;in interface&nbsp;<code><a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">Graph</a></code></dd>
-<dt>Returns:</dt>
-<dd>количество рёбер.</dd>
 </dl>
 </section>
 </li>
@@ -196,13 +204,14 @@ implements <a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">G
 <section class="detail" id="edgesAsSet()">
 <h3>edgesAsSet</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Edge.html" title="class in ru.nsu.ermakov.graph.core">Edge</a>&gt;</span>&nbsp;<span class="element-name">edgesAsSet</span>()</div>
-<div class="block">Построить множество всех рёбер (как отсортированное множество).</div>
+<div class="block">Строит множество всех рёбер графа как отсортированное множество.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</span></div>
+<div class="block">Сравнивает графы по множеству вершин и множеству рёбер.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -213,6 +222,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">G
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
+<div class="block">Вычисляет хэш-код графа по отсортированным вершинам и рёбрам.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -223,6 +233,7 @@ implements <a href="Graph.html" title="interface in ru.nsu.ermakov.graph.core">G
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
+<div class="block">Возвращает строковое представление графа в детерминированном виде.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
