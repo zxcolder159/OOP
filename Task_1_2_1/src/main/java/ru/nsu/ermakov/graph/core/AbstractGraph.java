@@ -10,18 +10,24 @@ import java.util.TreeSet;
  */
 public abstract class AbstractGraph implements Graph {
 
+    /**
+     * Возвращает количество вершин в графе.
+     */
     @Override
     public int getVertexCount() {
         return getVertices().size();
     }
 
+    /**
+     * Возвращает количество рёбер в графе.
+     */
     @Override
     public int getEdgeCount() {
         return edgesAsSet().size();
     }
 
     /**
-     * Построить множество всех рёбер (как отсортированное множество).
+     * Строит множество всех рёбер графа как отсортированное множество.
      */
     protected Set<Edge> edgesAsSet() {
         Set<Edge> result = new TreeSet<>();
@@ -33,6 +39,9 @@ public abstract class AbstractGraph implements Graph {
         return result;
     }
 
+    /**
+     * Сравнивает графы по множеству вершин и множеству рёбер.
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -47,6 +56,9 @@ public abstract class AbstractGraph implements Graph {
                 && edgesAsSet().equals(g.edgesAsSet());
     }
 
+    /**
+     * Вычисляет хэш-код графа по отсортированным вершинам и рёбрам.
+     */
     @Override
     public int hashCode() {
         TreeSet<Integer> sortedVertices = new TreeSet<>(getVertices());
@@ -54,23 +66,28 @@ public abstract class AbstractGraph implements Graph {
         return Objects.hash(sortedVertices, sortedEdges);
     }
 
+    /**
+     * Возвращает строковое представление графа в детерминированном виде.
+     */
     @Override
     public String toString() {
         TreeSet<Integer> sortedVertices = new TreeSet<>(getVertices());
         TreeSet<Edge> sortedEdges = new TreeSet<>(edgesAsSet());
 
-        StringJoiner eJoiner = new StringJoiner(", ", "[", "]");
+        StringJoiner edgeJoiner = new StringJoiner(", ", "[", "]");
         for (Edge e : sortedEdges) {
-            eJoiner.add(e.toString());
+            edgeJoiner.add(e.toString());
         }
 
-        StringJoiner vJoiner = new StringJoiner(", ", "[", "]");
+        StringJoiner vertexJoiner = new StringJoiner(", ", "[", "]");
         for (Integer v : sortedVertices) {
-            vJoiner.add(String.valueOf(v));
+            vertexJoiner.add(String.valueOf(v));
         }
 
-
-
-        return "Graph{vertices=" + vJoiner.toString() + ", edges=" + eJoiner.toString() + "}";
+        return "Graph{vertices="
+                + vertexJoiner.toString()
+                + ", edges="
+                + edgeJoiner.toString()
+                + "}";
     }
 }

@@ -2,6 +2,7 @@ package ru.nsu.ermakov.graph.impl;
 
 import ru.nsu.ermakov.graph.core.AbstractGraph;
 import ru.nsu.ermakov.graph.core.GraphFileLoader;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,8 +14,7 @@ import java.util.Set;
 
 /**
  * Реализация графа через матрицу смежности.
- * matrix[i][j] == true  значит есть ребро
- * vertices[i] -> vertices[j].
+ * matrix[i][j] == true значит есть ребро vertices[i] -> vertices[j].
  */
 public class AdjacencyMatrixGraph extends AbstractGraph {
 
@@ -22,6 +22,9 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     private final Map<Integer, Integer> indexOf = new HashMap<>();
     private boolean[][] matrix = new boolean[0][0];
 
+    /**
+     * Добавляет вершину в граф.
+     */
     @Override
     public boolean addVertex(int v) {
         if (indexOf.containsKey(v)) {
@@ -41,6 +44,9 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
         return true;
     }
 
+    /**
+     * Удаляет вершину из графа вместе со всеми инцидентными рёбрами.
+     */
     @Override
     public boolean removeVertex(int v) {
         Integer idxObj = indexOf.get(v);
@@ -52,18 +58,18 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
         int newSize = oldSize - 1;
 
         boolean[][] newMatrix = new boolean[newSize][newSize];
-        for (int iOld = 0, iNew = 0; iOld < oldSize; iOld++) {
-            if (iOld == idx) {
+        for (int oldRow = 0, newRow = 0; oldRow < oldSize; oldRow++) {
+            if (oldRow == idx) {
                 continue;
             }
-            for (int jOld = 0, jNew = 0; jOld < oldSize; jOld++) {
-                if (jOld == idx) {
+            for (int oldCol = 0, newCol = 0; oldCol < oldSize; oldCol++) {
+                if (oldCol == idx) {
                     continue;
                 }
-                newMatrix[iNew][jNew] = matrix[iOld][jOld];
-                jNew++;
+                newMatrix[newRow][newCol] = matrix[oldRow][oldCol];
+                newCol++;
             }
-            iNew++;
+            newRow++;
         }
 
         vertices.remove(idx);
@@ -76,61 +82,76 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
         return true;
     }
 
+    /**
+     * Проверяет, существует ли вершина в графе.
+     */
     @Override
     public boolean hasVertex(int v) {
         return indexOf.containsKey(v);
     }
 
+    /**
+     * Добавляет ориентированное ребро (from -> to).
+     */
     @Override
     public boolean addEdge(int from, int to) {
-        Integer iObj = indexOf.get(from);
-        Integer jObj = indexOf.get(to);
-        if (iObj == null || jObj == null) {
+        Integer fromIdxObj = indexOf.get(from);
+        Integer toIdxObj = indexOf.get(to);
+        if (fromIdxObj == null || toIdxObj == null) {
             throw new IllegalArgumentException(
                     "Both vertices must exist before adding an edge"
             );
         }
 
-        int i = iObj;
-        int j = jObj;
+        int fromIdx = fromIdxObj;
+        int toIdx = toIdxObj;
 
-        if (matrix[i][j]) {
+        if (matrix[fromIdx][toIdx]) {
             return false;
         }
-        matrix[i][j] = true;
+        matrix[fromIdx][toIdx] = true;
         return true;
     }
 
+    /**
+     * Удаляет ориентированное ребро (from -> to), если оно существует.
+     */
     @Override
     public boolean removeEdge(int from, int to) {
-        Integer iObj = indexOf.get(from);
-        Integer jObj = indexOf.get(to);
-        if (iObj == null || jObj == null) {
+        Integer fromIdxObj = indexOf.get(from);
+        Integer toIdxObj = indexOf.get(to);
+        if (fromIdxObj == null || toIdxObj == null) {
             return false;
         }
 
-        int i = iObj;
-        int j = jObj;
+        int fromIdx = fromIdxObj;
+        int toIdx = toIdxObj;
 
-        if (!matrix[i][j]) {
+        if (!matrix[fromIdx][toIdx]) {
             return false;
         }
-        matrix[i][j] = false;
+        matrix[fromIdx][toIdx] = false;
         return true;
     }
 
+    /**
+     * Проверяет существование ориентированного ребра (from -> to).
+     */
     @Override
     public boolean hasEdge(int from, int to) {
-        Integer iObj = indexOf.get(from);
-        Integer jObj = indexOf.get(to);
-        if (iObj == null || jObj == null) {
+        Integer fromIdxObj = indexOf.get(from);
+        Integer toIdxObj = indexOf.get(to);
+        if (fromIdxObj == null || toIdxObj == null) {
             return false;
         }
-        int i = iObj;
-        int j = jObj;
-        return matrix[i][j];
+        int fromIdx = fromIdxObj;
+        int toIdx = toIdxObj;
+        return matrix[fromIdx][toIdx];
     }
 
+    /**
+     * Возвращает множество всех вершин графа.
+     */
     @Override
     public Set<Integer> getVertices() {
         return Collections.unmodifiableSet(
@@ -138,24 +159,30 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
         );
     }
 
+    /**
+     * Возвращает множество соседей вершины v (куда есть дуги из v).
+     */
     @Override
     public Set<Integer> getNeighbors(int v) {
-        Integer iObj = indexOf.get(v);
-        if (iObj == null) {
+        Integer rowIdxObj = indexOf.get(v);
+        if (rowIdxObj == null) {
             throw new IllegalArgumentException(
                     "Vertex " + v + " does not exist"
             );
         }
-        int i = iObj;
+        int rowIdx = rowIdxObj;
         LinkedHashSet<Integer> neigh = new LinkedHashSet<>();
-        for (int j = 0; j < vertices.size(); j++) {
-            if (matrix[i][j]) {
-                neigh.add(vertices.get(j));
+        for (int col = 0; col < vertices.size(); col++) {
+            if (matrix[rowIdx][col]) {
+                neigh.add(vertices.get(col));
             }
         }
         return Collections.unmodifiableSet(neigh);
     }
 
+    /**
+     * Полностью очищает граф.
+     */
     @Override
     public void clear() {
         vertices.clear();
@@ -163,6 +190,9 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
         matrix = new boolean[0][0];
     }
 
+    /**
+     * Загружает граф из файла фиксированного формата.
+     */
     @Override
     public void loadFromFile(Path path) throws IOException {
         GraphFileLoader.load(this, path);

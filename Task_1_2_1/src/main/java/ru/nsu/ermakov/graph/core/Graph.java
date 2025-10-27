@@ -49,12 +49,12 @@ public interface Graph {
     Set<Integer> getNeighbors(int v);
 
     /**
-     * @return количество вершин.
+     * Возвращает количество вершин.
      */
     int getVertexCount();
 
     /**
-     * @return количество рёбер.
+     * Возвращает количество рёбер.
      */
     int getEdgeCount();
 
