@@ -4,8 +4,10 @@ import java.util.Objects;
 
 /**
  * Неизменяемое ориентированное ребро (from -> to).
+ * Хранит начало и конец дуги в виде целых чисел.
  */
 public final class Edge implements Comparable<Edge> {
+
     private final int from;
     private final int to;
 
@@ -18,19 +20,27 @@ public final class Edge implements Comparable<Edge> {
     }
 
     /**
-     * @return начало ребра.
+     * Возвращает начальную вершину ребра.
+     * @return номер вершины-источника.
      */
     public int getFrom() {
         return from;
     }
 
     /**
-     * @return конец ребра.
+     * Возвращает конечную вершину ребра.
+     * @return номер вершины-приёмника.
      */
     public int getTo() {
         return to;
     }
 
+    /**
+     * Сравнивает два ребра лексикографически: сначала по полю from,
+     * затем по полю to.
+     * @return отрицательное число, ноль или положительное число,
+     *     если это ребро меньше, равно или больше другого
+     */
     @Override
     public int compareTo(Edge other) {
         if (from != other.from) {
@@ -38,8 +48,11 @@ public final class Edge implements Comparable<Edge> {
         }
         return Integer.compare(to, other.to);
     }
+
     /**
-     * проверка равенства.
+     * Проверяет равенство двух рёбер.
+     * Два ребра равны, если совпадают оба конца (from и to).
+     * @return true, если ребро эквивалентно, иначе false
      */
     @Override
     public boolean equals(Object other) {
@@ -52,15 +65,20 @@ public final class Edge implements Comparable<Edge> {
         Edge e = (Edge) other;
         return from == e.from && to == e.to;
     }
+
     /**
-     * hashCode.
+     * Возвращает хэш-код ребра.
+     * Хэш-код вычисляется на основе полей from и to.
+     * @return хэш-код ребра
      */
     @Override
     public int hashCode() {
         return Objects.hash(from, to);
     }
+
     /**
-     * приобразование в строку.
+     * Возвращает строковое представление ребра в формате "from->to".
+     * @return строка с направлением ребра
      */
     @Override
     public String toString() {
