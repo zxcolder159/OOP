@@ -15,9 +15,6 @@ public interface Graph {
 
     /**
      * Удаляет вершину с данным id (и все инцидентные рёбра).
-     *
-     * @param v id вершины
-     * @return true, если вершина существовала и была удалена
      */
     boolean removeVertex(int v);
 

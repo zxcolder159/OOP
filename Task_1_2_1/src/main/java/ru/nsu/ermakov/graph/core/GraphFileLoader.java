@@ -26,9 +26,6 @@ public final class GraphFileLoader {
 
     /**
      * Считать данные из файла и заполнить указанный graph.
-     * @param graph граф, в который грузим
-     * @param path путь к файлу
-     * @throws IOException при ошибке чтения или формата
      */
     public static void load(Graph graph, Path path) throws IOException {
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);

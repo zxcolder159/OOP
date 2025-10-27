@@ -18,9 +18,6 @@ public final class TopologicalSorter {
 
     /**
      * Выполнить топологическую сортировку.
-     * @param graph ориентированный ацикличный граф
-     * @return порядок вершин в топологическом смысле
-     * @throws IllegalStateException если граф содержит цикл
      */
     public static List<Integer> topologicalSort(Graph graph) {
         // Подсчёт входящих степеней.
