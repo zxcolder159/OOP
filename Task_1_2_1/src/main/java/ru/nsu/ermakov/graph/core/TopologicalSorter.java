@@ -8,7 +8,6 @@ import java.util.PriorityQueue;
 
 /**
  * Топологическая сортировка (алгоритм Канна).
- *
  * Если есть цикл, бросает IllegalStateException.
  */
 public final class TopologicalSorter {
@@ -19,7 +18,6 @@ public final class TopologicalSorter {
 
     /**
      * Выполнить топологическую сортировку.
-     *
      * @param graph ориентированный ацикличный граф
      * @return порядок вершин в топологическом смысле
      * @throws IllegalStateException если граф содержит цикл

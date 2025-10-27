@@ -7,11 +7,6 @@ import java.util.TreeSet;
 
 /**
  * Базовый класс с общей логикой для всех реализаций графа.
- *
- * Даёт:
- * - equals()/hashCode() сравнивающие по множествам вершин и рёбер;
- * - toString();
- * - getVertexCount()/getEdgeCount().
  */
 public abstract class AbstractGraph implements Graph {
 
@@ -27,9 +22,6 @@ public abstract class AbstractGraph implements Graph {
 
     /**
      * Построить множество всех рёбер (как отсортированное множество).
-     * Используется в equals(), hashCode(), toString().
-     *
-     * @return множество рёбер
      */
     protected Set<Edge> edgesAsSet() {
         Set<Edge> result = new TreeSet<>();

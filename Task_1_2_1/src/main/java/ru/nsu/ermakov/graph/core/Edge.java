@@ -11,9 +11,6 @@ public final class Edge implements Comparable<Edge> {
 
     /**
      * Создаёт ребро (from -> to).
-     *
-     * @param from начало
-     * @param to конец
      */
     public Edge(int from, int to) {
         this.from = from;

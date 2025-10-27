@@ -9,7 +9,6 @@ import java.util.StringTokenizer;
 
 /**
  * Утилита чтения графа из файла фиксированного формата.
- *
  * Формат файла:
  * 1) Первая строка: n m
  *    (число вершин и число рёбер)
@@ -17,7 +16,6 @@ import java.util.StringTokenizer;
  *    (id всех вершин)
  * 3) Далее m строк вида: a b
  *    (ребро a -> b)
- *
  * Перед загрузкой вызывается graph.clear().
  */
 public final class GraphFileLoader {
@@ -28,7 +26,6 @@ public final class GraphFileLoader {
 
     /**
      * Считать данные из файла и заполнить указанный graph.
-     *
      * @param graph граф, в который грузим
      * @param path путь к файлу
      * @throws IOException при ошибке чтения или формата
