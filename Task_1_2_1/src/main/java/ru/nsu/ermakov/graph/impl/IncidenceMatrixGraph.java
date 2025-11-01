@@ -250,9 +250,7 @@ public class IncidenceMatrixGraph extends AbstractGraph {
     }
     @Override
     public void sort() {
-        if (edges != null) {
-            Arrays.sort(edges, Comparator.comparingDouble(Edge::getWeight));
-        }
+        Collections.sort(vertices);
     }
 
 }

@@ -199,7 +199,8 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     }
     @Override
     public void sort() {
-        // Not applicable for matrix representation; edges are implicit.
+        // Если у нас есть список вершин — просто сортируем его.
+        Collections.sort(vertices);
     }
 
 }

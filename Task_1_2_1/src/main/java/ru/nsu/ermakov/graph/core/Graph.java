@@ -68,9 +68,9 @@ public interface Graph {
      */
     void loadFromFile(Path path) throws IOException;
     /**
-     * Sorts all edges in the graph in ascending order by their weight.
-     * Implementations should ensure that the underlying data structure
-     * reflects the new order if applicable.
+     * Sorts all vertices in ascending order of their identifiers.
+     * Implementations that use adjacency representations should
+     * reorder internal data structures accordingly.
      */
     void sort();
 }

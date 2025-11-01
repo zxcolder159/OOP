@@ -100,8 +100,8 @@ public class AdjacencyListGraph extends AbstractGraph {
     }
     @Override
     public void sort() {
-        for (List<Edge> edges : adjacencyList.values()) {
-            edges.sort(Comparator.comparingDouble(Edge::getWeight));
-        }
+        // Сортируем Map по ключам (id вершин)
+        Map<Integer, Set<Integer>> sorted = new TreeMap<>(adj);
+        adj = new LinkedHashMap<>(sorted);
     }
 }
