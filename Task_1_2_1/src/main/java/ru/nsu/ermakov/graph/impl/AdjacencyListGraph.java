@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Реализация графа через список смежности.
@@ -99,9 +100,11 @@ public class AdjacencyListGraph extends AbstractGraph {
         GraphFileLoader.load(this, path);
     }
     @Override
-    public void sort() {
-        // Сортируем Map по ключам (id вершин)
+    public void sortVertices() {
         Map<Integer, Set<Integer>> sorted = new TreeMap<>(adj);
-        adj = new LinkedHashMap<>(sorted);
+        adj.clear();
+        for (Map.Entry<Integer, Set<Integer>> entry : sorted.entrySet()) {
+            adj.put(entry.getKey(), entry.getValue());
+        }
     }
 }
