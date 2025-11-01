@@ -100,7 +100,7 @@ public class AdjacencyListGraph extends AbstractGraph {
         GraphFileLoader.load(this, path);
     }
     @Override
-    public void sortVertices() {
+    public void sort() {
         Map<Integer, Set<Integer>> sorted = new TreeMap<>(adj);
         adj.clear();
         for (Map.Entry<Integer, Set<Integer>> entry : sorted.entrySet()) {
