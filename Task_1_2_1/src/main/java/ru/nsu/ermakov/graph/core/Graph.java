@@ -67,4 +67,10 @@ public interface Graph {
      * Загрузить граф из файла фиксированного формата.
      */
     void loadFromFile(Path path) throws IOException;
+    /**
+     * Sorts all edges in the graph in ascending order by their weight.
+     * Implementations should ensure that the underlying data structure
+     * reflects the new order if applicable.
+     */
+    void sort();
 }

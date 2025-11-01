@@ -98,4 +98,10 @@ public class AdjacencyListGraph extends AbstractGraph {
     public void loadFromFile(Path path) throws IOException {
         GraphFileLoader.load(this, path);
     }
+    @Override
+    public void sort() {
+        for (List<Edge> edges : adjacencyList.values()) {
+            edges.sort(Comparator.comparingDouble(Edge::getWeight));
+        }
+    }
 }

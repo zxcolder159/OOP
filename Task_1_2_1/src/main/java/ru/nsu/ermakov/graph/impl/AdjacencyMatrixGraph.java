@@ -197,4 +197,9 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     public void loadFromFile(Path path) throws IOException {
         GraphFileLoader.load(this, path);
     }
+    @Override
+    public void sort() {
+        // Not applicable for matrix representation; edges are implicit.
+    }
+
 }
