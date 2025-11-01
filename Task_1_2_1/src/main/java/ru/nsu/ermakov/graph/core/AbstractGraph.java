@@ -90,6 +90,7 @@ public abstract class AbstractGraph implements Graph {
                 + edgeJoiner.toString()
                 + "}";
     }
+
     @Override
     public void sort() {
     }

@@ -248,6 +248,7 @@ public class IncidenceMatrixGraph extends AbstractGraph {
     public void loadFromFile(Path path) throws IOException {
         GraphFileLoader.load(this, path);
     }
+
     @Override
     public void sort() {
         Collections.sort(vertices);

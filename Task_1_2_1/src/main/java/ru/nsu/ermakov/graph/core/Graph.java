@@ -67,6 +67,7 @@ public interface Graph {
      * Загрузить граф из файла фиксированного формата.
      */
     void loadFromFile(Path path) throws IOException;
+
     /**
      * Sorts all vertices in ascending order of their identifiers.
      * Implementations that use adjacency representations should

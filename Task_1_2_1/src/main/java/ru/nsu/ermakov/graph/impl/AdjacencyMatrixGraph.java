@@ -2,7 +2,6 @@ package ru.nsu.ermakov.graph.impl;
 
 import ru.nsu.ermakov.graph.core.AbstractGraph;
 import ru.nsu.ermakov.graph.core.GraphFileLoader;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -197,6 +196,7 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     public void loadFromFile(Path path) throws IOException {
         GraphFileLoader.load(this, path);
     }
+
     @Override
     public void sort() {
         // Если у нас есть список вершин — просто сортируем его.

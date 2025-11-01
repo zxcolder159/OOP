@@ -99,6 +99,7 @@ public class AdjacencyListGraph extends AbstractGraph {
     public void loadFromFile(Path path) throws IOException {
         GraphFileLoader.load(this, path);
     }
+
     @Override
     public void sort() {
         Map<Integer, Set<Integer>> sorted = new TreeMap<>(adj);
