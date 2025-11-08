@@ -35,12 +35,14 @@ public final class Main {
 
         System.out.println("g1 = " + g1);
 
-        List<Integer> order = TopologicalSorter.topologicalSort(g1);
+        // Используем объект TopologicalSorter для сортировки
+        TopologicalSorter sorter = new TopologicalSorter();
+        List<Integer> order = sorter.topologicalSort(g1);
         System.out.println("toposort(g1) = " + order);
 
         // 2. Загружаем граф из файла в другую реализацию (матрица смежности)
         Graph g2 = new AdjacencyMatrixGraph();
-        g2.loadFromFile(Paths.get("graph.txt"));
+        g2.loadFromFile(Paths.get("graph.txt"));  // Убедитесь, что файл graph.txt существует
         System.out.println("g2 = " + g2);
 
         // 3. Сравним графы по структуре
@@ -48,10 +50,11 @@ public final class Main {
 
         // 4. Загрузим тот же файл в матрицу инцидентности
         Graph g3 = new IncidenceMatrixGraph();
-        g3.loadFromFile(Paths.get("graph.txt"));
+        g3.loadFromFile(Paths.get("graph.txt"));  // Убедитесь, что файл graph.txt существует
         System.out.println("g3 = " + g3);
 
         // 5. Проверим топологическую сортировку и для g3
-        System.out.println("toposort(g3) = " + TopologicalSorter.topologicalSort(g3));
+        List<Integer> orderG3 = sorter.topologicalSort(g3);
+        System.out.println("toposort(g3) = " + orderG3);
     }
 }

@@ -92,6 +92,5 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public void sort() {
-    }
+    List<Integer> topologicalSort(TopologicalSortStrategy strategy);
 }
