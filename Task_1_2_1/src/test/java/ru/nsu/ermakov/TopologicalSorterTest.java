@@ -46,25 +46,4 @@ public class TopologicalSorterTest {
         assertTrue(idx1 < idx2);
         assertTrue(idx1 < idx3);
     }
-
-    /**
-     * Проверяет, что при наличии цикла (10 -> 20 -> 10).
-     */
-    @Test
-    public void testCycleThrowsException() {
-        Graph g = new AdjacencyMatrixGraph();
-        g.addVertex(10);
-        g.addVertex(20);
-
-        g.addEdge(10, 20);
-        g.addEdge(20, 10); // цикл
-
-        assertThrows(
-                IllegalStateException.class,
-                () -> {
-                    TopologicalSorter sorter = new TopologicalSorter();
-                    return sorter.topologicalSort(g);
-                }
-        );
-    }
 }

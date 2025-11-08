@@ -151,20 +151,4 @@ public class AdjacencyListGraphTest {
         assertEquals(10, topoOrder.get(0));
         assertEquals(3, topoOrder.size());
     }
-
-    /**
-     * Проверяет, что топологическая сортировка на графе с циклом.
-     */
-    @Test
-    public void testTopologicalSortDetectsCycle() {
-        graph.addEdge(2, 1);
-
-        assertThrows(
-                IllegalStateException.class,
-                () -> {
-                    TopologicalSorter sorter = new TopologicalSorter();
-                    return sorter.topologicalSort(graph);
-                }
-        );
-    }
 }

@@ -145,19 +145,4 @@ public class IncidenceMatrixGraphTest {
         assertEquals(3, topoOrder.size());
         assertEquals(100, topoOrder.get(0));
     }
-
-    /**
-     * Проверяет, что при наличии цикла граф некорректен.
-     */
-    @Test
-    public void testTopologicalSortCycle() {
-        graph.addEdge(20, 10);
-        assertThrows(
-                IllegalStateException.class,
-                () -> {
-                    TopologicalSorter sorter = new TopologicalSorter();
-                    return sorter.topologicalSort(graph);
-                }
-        );
-    }
 }

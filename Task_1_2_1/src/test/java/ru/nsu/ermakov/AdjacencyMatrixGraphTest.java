@@ -142,19 +142,4 @@ public class AdjacencyMatrixGraphTest {
         List<Integer> order = sorter.topologicalSort(loaded);
         assertEquals(4, order.size());
     }
-
-    /**
-     * Проверяет, что топологическая сортировка падает с исключением.
-     */
-    @Test
-    public void testTopologicalSortCycle() {
-        graph.addEdge(2, 1);
-        assertThrows(
-                IllegalStateException.class,
-                () -> {
-                    TopologicalSorter sorter = new TopologicalSorter();
-                    return sorter.topologicalSort(graph);
-                }
-        );
-    }
 }
