@@ -2,6 +2,7 @@ package ru.nsu.ermakov.graph.impl;
 
 import ru.nsu.ermakov.graph.core.AbstractGraph;
 import ru.nsu.ermakov.graph.core.GraphFileLoader;
+import ru.nsu.ermakov.graph.core.TopologicalSortStrategy;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collections;
