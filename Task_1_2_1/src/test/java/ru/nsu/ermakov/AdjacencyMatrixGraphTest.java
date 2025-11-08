@@ -151,7 +151,10 @@ public class AdjacencyMatrixGraphTest {
         graph.addEdge(2, 1);
         assertThrows(
                 IllegalStateException.class,
-                () -> TopologicalSorter.topologicalSort(graph)
+                () -> {
+                    TopologicalSorter sorter = new TopologicalSorter();
+                    return sorter.topologicalSort(graph);
+                }
         );
     }
 }

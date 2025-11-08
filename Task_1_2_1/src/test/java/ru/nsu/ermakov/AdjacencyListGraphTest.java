@@ -161,7 +161,10 @@ public class AdjacencyListGraphTest {
 
         assertThrows(
                 IllegalStateException.class,
-                () -> TopologicalSorter.topologicalSort(graph)
+                () -> {
+                    TopologicalSorter sorter = new TopologicalSorter();
+                    return sorter.topologicalSort(graph);
+                }
         );
     }
 }

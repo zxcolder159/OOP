@@ -61,7 +61,10 @@ public class TopologicalSorterTest {
 
         assertThrows(
                 IllegalStateException.class,
-                () -> TopologicalSorter.topologicalSort(g)
+                () -> {
+                    TopologicalSorter sorter = new TopologicalSorter();
+                    return sorter.topologicalSort(g);
+                }
         );
     }
 }

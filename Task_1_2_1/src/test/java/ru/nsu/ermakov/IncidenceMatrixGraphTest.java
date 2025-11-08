@@ -154,7 +154,10 @@ public class IncidenceMatrixGraphTest {
         graph.addEdge(20, 10);
         assertThrows(
                 IllegalStateException.class,
-                () -> TopologicalSorter.topologicalSort(graph)
+                () -> {
+                    TopologicalSorter sorter = new TopologicalSorter();
+                    return sorter.topologicalSort(graph);
+                }
         );
     }
 }
