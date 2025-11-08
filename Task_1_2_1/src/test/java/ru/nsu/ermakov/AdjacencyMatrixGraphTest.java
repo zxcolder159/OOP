@@ -138,7 +138,8 @@ public class AdjacencyMatrixGraphTest {
         assertTrue(loaded.hasEdge(3, 4));
         assertFalse(loaded.hasEdge(2, 1));
 
-        List<Integer> order = TopologicalSorter.topologicalSort(loaded);
+        TopologicalSorter sorter = new TopologicalSorter();
+        List<Integer> order = sorter.topologicalSort(loaded);
         assertEquals(4, order.size());
     }
 

@@ -81,7 +81,8 @@ public class GraphEqualityAndToStringTest {
     @Test
     public void testTopologicalSorterOnSampleGraph() {
         Graph graph = createSampleGraph(new AdjacencyListGraph());
-        List<Integer> topo = TopologicalSorter.topologicalSort(graph);
+        TopologicalSorter sorter = new TopologicalSorter();
+        List<Integer> topo = sorter.topologicalSort(graph);
 
         // в корректном топопорядке 10 обязан быть до 20 и 30
         int idx10 = topo.indexOf(10);

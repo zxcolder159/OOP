@@ -29,7 +29,8 @@ public class TopologicalSorterTest {
         g.addEdge(1, 2);
         g.addEdge(1, 3);
 
-        List<Integer> order = TopologicalSorter.topologicalSort(g);
+        TopologicalSorter sorter = new TopologicalSorter();
+        List<Integer> order = sorter.topologicalSort(g);
 
         final int idx1 = order.indexOf(1);
         final int idx2 = order.indexOf(2);

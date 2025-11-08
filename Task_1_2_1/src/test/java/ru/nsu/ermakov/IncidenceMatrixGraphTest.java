@@ -140,7 +140,8 @@ public class IncidenceMatrixGraphTest {
         assertTrue(loadedGraph.hasEdge(100, 300));
         assertFalse(loadedGraph.hasEdge(200, 100));
 
-        List<Integer> topoOrder = TopologicalSorter.topologicalSort(loadedGraph);
+        TopologicalSorter sorter = new TopologicalSorter();
+        List<Integer> topoOrder = sorter.topologicalSort(loadedGraph);
         assertEquals(3, topoOrder.size());
         assertEquals(100, topoOrder.get(0));
     }
