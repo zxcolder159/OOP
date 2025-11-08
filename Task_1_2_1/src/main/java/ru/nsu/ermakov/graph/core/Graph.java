@@ -2,6 +2,7 @@ package ru.nsu.ermakov.graph.core;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -73,5 +74,5 @@ public interface Graph {
      * Implementations that use adjacency representations should
      * reorder internal data structures accordingly.
      */
-    void sort();
+    List<Integer> topologicalSort(TopologicalSortStrategy strategy);
 }

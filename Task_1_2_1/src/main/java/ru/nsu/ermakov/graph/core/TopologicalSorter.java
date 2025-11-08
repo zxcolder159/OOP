@@ -10,17 +10,9 @@ import java.util.PriorityQueue;
  * Топологическая сортировка (алгоритм Канна).
  * Если есть цикл, бросает IllegalStateException.
  */
-public final class TopologicalSorter {
-
-    private TopologicalSorter() {
-        // utility class
-    }
-
-    /**
-     * Выполнить топологическую сортировку.
-     */
-    public static List<Integer> topologicalSort(Graph graph) {
-        // Подсчёт входящих степеней.
+public final class TopologicalSorter implements TopologicalSortStrategy {
+    @Override
+    public List<Integer> topologicalSort(Graph graph) {
         Map<Integer, Integer> indegree = new HashMap<>();
         for (Integer v : graph.getVertices()) {
             indegree.put(v, 0);
@@ -31,35 +23,29 @@ public final class TopologicalSorter {
             }
         }
 
-        // Приоритетная очередь для детерминированности:
-        // всегда берём вершину с минимальным id среди доступных.
         PriorityQueue<Integer> queue = new PriorityQueue<>();
-        for (Map.Entry<Integer, Integer> e : indegree.entrySet()) {
-            if (e.getValue() == 0) {
-                queue.add(e.getKey());
+        for (Map.Entry<Integer, Integer> entry : indegree.entrySet()) {
+            if (entry.getValue() == 0) {
+                queue.offer(entry.getKey());
             }
         }
 
-        List<Integer> order = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         while (!queue.isEmpty()) {
-            Integer v = queue.poll();
-            order.add(v);
-
-            for (Integer to : graph.getNeighbors(v)) {
-                int newIn = indegree.get(to) - 1;
-                indegree.put(to, newIn);
-                if (newIn == 0) {
-                    queue.add(to);
+            Integer vertex = queue.poll();
+            result.add(vertex);
+            for (Integer neighbor : graph.getNeighbors(vertex)) {
+                indegree.put(neighbor, indegree.get(neighbor) - 1);
+                if (indegree.get(neighbor) == 0) {
+                    queue.offer(neighbor);
                 }
             }
         }
 
-        if (order.size() != graph.getVertexCount()) {
-            throw new IllegalStateException(
-                    "Graph has a cycle, topological sort is impossible"
-            );
+        if (result.size() != graph.getVertices().size()) {
+            throw new IllegalStateException("Граф содержит цикл");
         }
-
-        return order;
+        return result;
     }
 }
+

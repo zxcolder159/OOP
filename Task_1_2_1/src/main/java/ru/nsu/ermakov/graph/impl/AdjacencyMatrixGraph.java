@@ -198,30 +198,7 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public void sort() {
-        // Получаем список вершин в топологическом порядке
-        List<Integer> sortedOrder = TopologicalSorter.topologicalSort(this);
-
-        // Получаем количество вершин в графе
-        int numVertices = this.getVerticesCount(); // Метод для получения количества вершин
-        int numEdges = this.getEdgesCount(); // Метод для получения количества рёбер
-
-        // Исходная матрица смежности
-        boolean[][] oldAdjacencyMatrix = this.matrix;
-        boolean[][] newAdjacencyMatrix = new boolean[numVertices][numVertices]; // Новая матрица смежности
-
-        // Переставляем строки матрицы смежности в соответствии с топологическим порядком
-        for (int i = 0; i < numVertices; i++) {
-            int vertex = sortedOrder.get(i);  // Вершина из отсортированного списка
-
-            // Копируем строку из старой матрицы в новую, используя индекс топологически отсортированной вершины
-            for (int j = 0; j < numVertices; j++) {
-                newAdjacencyMatrix[i][j] = oldAdjacencyMatrix[indexOf.get(vertex)][j]; // Переставляем строку
-            }
-        }
-
-        // Обновляем матрицу смежности
-        this.matrix = newAdjacencyMatrix;
+    public List<Integer> topologicalSort(TopologicalSortStrategy strategy) {
+        return strategy.topologicalSort(this);
     }
-
 }

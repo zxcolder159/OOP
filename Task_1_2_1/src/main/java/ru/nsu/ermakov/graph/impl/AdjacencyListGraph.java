@@ -101,22 +101,7 @@ public class AdjacencyListGraph extends AbstractGraph {
     }
 
     @Override
-    public void sort() {
-        // Получаем список вершин в топологическом порядке
-        List<Integer> sortedOrder = TopologicalSorter.topologicalSort(this);
-
-        // Создаём новый список смежности для сортированных вершин
-        Map<Integer, Set<Integer>> newAdj = new LinkedHashMap<>();
-
-        // Переставляем вершины в новом порядке
-        for (int vertex : sortedOrder) {
-            // Для каждой вершины добавляем её соседей в новом порядке
-            Set<Integer> neighbors = adj.get(vertex);
-            newAdj.put(vertex, neighbors);
-        }
-
-        // Обновляем список смежности
-        adj.clear();
-        adj.putAll(newAdj);
+    public List<Integer> topologicalSort(TopologicalSortStrategy strategy) {
+        return strategy.topologicalSort(this);
     }
 }

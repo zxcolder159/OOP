@@ -250,29 +250,7 @@ public class IncidenceMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public void sort() {
-        // Получаем список вершин в топологическом порядке
-        List<Integer> sortedOrder = TopologicalSorter.topologicalSort(this);
-
-        // Получаем количество вершин и рёбер в графе
-        int numVertices = this.getVerticesCount(); // Метод для получения количества вершин
-        int numEdges = this.getEdgesCount(); // Метод для получения количества рёбер
-
-        // Получаем исходную матрицу инцидентности
-        int[][] oldIncidenceMatrix = this.incMatrix;
-        int[][] newIncidenceMatrix = new int[numVertices][numEdges]; // Новая матрица инцидентности
-
-        // Переставляем строки матрицы инцидентности в соответствии с топологическим порядком
-        for (int i = 0; i < numVertices; i++) {
-            int vertex = sortedOrder.get(i);  // Вершина из отсортированного списка
-
-            // Копируем строку из старой матрицы в новую, используя индекс топологически отсортированной вершины
-            for (int j = 0; j < numEdges; j++) {
-                newIncidenceMatrix[i][j] = oldIncidenceMatrix[indexOf.get(vertex)][j]; // Переставляем строку
-            }
-        }
-
-        // Обновляем матрицу инцидентности
-        this.incMatrix = newIncidenceMatrix;
+    public List<Integer> topologicalSort(TopologicalSortStrategy strategy) {
+        return strategy.topologicalSort(this);
     }
 }
