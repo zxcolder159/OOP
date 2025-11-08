@@ -1,5 +1,6 @@
 package ru.nsu.ermakov.graph.core;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
@@ -92,5 +93,5 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    List<Integer> topologicalSort(TopologicalSortStrategy strategy);
+    public List<Integer> topologicalSort(TopologicalSortStrategy strategy);
 }
