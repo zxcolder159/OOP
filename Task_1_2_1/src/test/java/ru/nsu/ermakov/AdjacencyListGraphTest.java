@@ -146,7 +146,7 @@ public class AdjacencyListGraphTest {
         assertEquals(2, loadedGraph.getEdgeCount());
 
         TopologicalSorter sorter = new TopologicalSorter();
-        List<Integer> order = sorter.topologicalSort(loaded);
+        List<Integer> order = sorter.topologicalSort(graph);
 
         assertEquals(10, topoOrder.get(0));
         assertEquals(3, topoOrder.size());
