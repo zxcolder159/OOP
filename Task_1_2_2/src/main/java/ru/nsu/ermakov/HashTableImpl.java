@@ -7,7 +7,11 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * Конкретная реализация HashTable<K,V>.
+ * Конкретная реализация {@link HashTable} с использованием separate chaining
+ * (массив бакетов + связные списки для разрешения коллизий).
+ *
+ * @param <K> тип ключа
+ * @param <V> тип значения
  */
 public class HashTableImpl<K, V> implements HashTable<K, V> {
 
@@ -20,6 +24,17 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
     private int threshold;
     private int modCount;
 
+    /**
+     * Создаёт новую хеш-таблицу с заданной начальной ёмкостью и
+     * коэффициентом загрузки.
+     *
+     * @param initialCapacity начальный размер внутреннего массива (будет округлён
+     *                        до ближайшей степени двойки, не меньшей initialCapacity)
+     * @param loadFactor      коэффициент загрузки, при превышении которого
+     *                        будет происходить расширение таблицы
+     * @throws IllegalArgumentException если initialCapacity ≤ 0
+     *                                  или loadFactor ≤ 0
+     */
     @SuppressWarnings("unchecked")
     public HashTableImpl(int initialCapacity, float loadFactor) {
         if (initialCapacity <= 0) {
@@ -31,7 +46,7 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
 
         int cap = 1;
         while (cap < initialCapacity) {
-            cap <<= 1;
+            cap <<= 1; // делаем степень двойки
         }
 
         this.table = (HashNode<K, V>[]) new HashNode[cap];
@@ -41,19 +56,35 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
         this.modCount = 0;
     }
 
+    /**
+     * Создаёт новую хеш-таблицу с параметрами по умолчанию.
+     * Начальная ёмкость — 16, коэффициент загрузки — 0.75.
+     */
     public HashTableImpl() {
         this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
 
-    // ===== Вспомогательные методы =====
+    // ===== пакетные методы для итератора =====
 
+    /**
+     * Возвращает счётчик модификаций, используемый для fail-fast итератора.
+     *
+     * @return текущее значение modCount
+     */
     int getModCount() {
         return modCount;
     }
 
+    /**
+     * Возвращает массив бакетов. Используется итератором.
+     *
+     * @return массив бакетов
+     */
     HashNode<K, V>[] getBuckets() {
         return table;
     }
+
+    // ===== вспомогательные методы =====
 
     private int index(Object key) {
         int h = (key == null) ? 0 : key.hashCode();
@@ -97,19 +128,27 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
         return h & (capacity - 1);
     }
 
-    // ===== Реализация интерфейса HashTable =====
+    // ===== реализация интерфейса HashTable =====
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    // 2. Добавление (k,v)
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public V put(K key, V value) {
         if (size + 1 > threshold) {
@@ -121,8 +160,8 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
             if (Objects.equals(e.key, key)) {
                 V old = e.value;
                 e.value = value;
-                modCount++;
-                return old; // обновили
+                modCount++; // считаем это модификацией для fail-fast
+                return old;
             }
         }
 
@@ -133,7 +172,9 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
         return null;
     }
 
-    // 3. Удаление по ключу
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public V remove(Object key) {
         int idx = index(key);
@@ -157,14 +198,18 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
         return null;
     }
 
-    // 4. Поиск значения по ключу
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public V get(Object key) {
         HashNode<K, V> e = getNode(key);
         return (e == null) ? null : e.value;
     }
 
-    // 5. Обновление значения по ключу
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public V update(K key, V newValue) {
         HashNode<K, V> e = getNode(key);
@@ -177,32 +222,44 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
         return old;
     }
 
-    // 6. Проверка наличия ключа
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean containsKey(Object key) {
         return getNode(key) != null;
     }
 
-    // 7. Итератор (fail-fast)
+    /**
+     * Возвращает fail-fast итератор по парам (ключ, значение).
+     *
+     * @return итератор по элементам таблицы
+     */
     @Override
     public Iterator<Map.Entry<K, V>> iterator() {
         return new HashTableIterator<>(this);
     }
 
-    // 8. Сравнение на равенство с другой хеш-таблицей
+    /**
+     * Сравнивает эту таблицу с другой на равенство по содержимому.
+     *
+     * @param o объект для сравнения
+     * @return {@code true}, если обе таблицы содержат одинаковые пары (ключ, значение)
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof HashTable<?, ?> other)) return false;
+        if (!(o instanceof HashTableImpl<?, ?> other)) return false;
 
-        if (this.size() != other.size()) return false;
+        if (this.size != other.size) {
+            return false;
+        }
 
-        // пробегаем по своим элементам и сравниваем с другой таблицей
         for (Map.Entry<K, V> entry : this) {
-            Object key = entry.getKey();
-            Object value = entry.getValue();
+            K key = entry.getKey();
+            V value = entry.getValue();
 
-            Object otherValue = ((HashTable<?, ?>) other).get(key);
+            Object otherValue = other.get(key);
             if (!Objects.equals(value, otherValue)) {
                 return false;
             }
@@ -210,7 +267,26 @@ public class HashTableImpl<K, V> implements HashTable<K, V> {
         return true;
     }
 
-    // 9. Вывод в строку
+    /**
+     * Вычисляет хеш-код таблицы как сумму хеш-кодов её элементов.
+     *
+     * @return хеш-код таблицы
+     */
+    @Override
+    public int hashCode() {
+        int h = 0;
+        for (Map.Entry<K, V> entry : this) {
+            h += Objects.hashCode(entry.getKey()) ^ Objects.hashCode(entry.getValue());
+        }
+        return h;
+    }
+
+    /**
+     * Возвращает строковое представление таблицы в формате
+     * {@code {key1=value1, key2=value2, ...}}.
+     *
+     * @return строковое представление таблицы
+     */
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "{", "}");
