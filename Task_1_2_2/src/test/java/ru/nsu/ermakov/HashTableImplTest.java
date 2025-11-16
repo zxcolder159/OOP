@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,9 +23,9 @@ public class HashTableImplTest {
         assertTrue(table.isEmpty());
         assertEquals(0, table.size());
 
-        assertNull(table.put("one", 1));
-        assertNull(table.put("two", 2));
-        assertNull(table.put("three", 3));
+        assertEquals(null, table.put("one", 1));
+        assertEquals(null, table.put("two", 2));
+        assertEquals(null, table.put("three", 3));
 
         assertEquals(3, table.size());
         assertFalse(table.isEmpty());
@@ -34,14 +33,14 @@ public class HashTableImplTest {
         assertEquals(1, table.get("one"));
         assertEquals(2, table.get("two"));
         assertEquals(3, table.get("three"));
-        assertNull(table.get("four"));
+        assertEquals(null, table.get("four"));
     }
 
     @Test
     void testPutOverrideExistingValue() {
         HashTable<String, Integer> table = new HashTableImpl<>();
 
-        assertNull(table.put("key", 1));
+        assertEquals(null, table.put("key", 1));
         Integer old = table.put("key", 2);
 
         assertEquals(1, old);
@@ -77,7 +76,7 @@ public class HashTableImplTest {
         table.put("y", 6);
 
         assertEquals(5, table.remove("x"));
-        assertNull(table.remove("x")); // второй раз уже ничего нет
+        assertEquals(null, table.remove("x")); // второй раз уже ничего нет
 
         assertFalse(table.containsKey("x"));
         assertTrue(table.containsKey("y"));
