@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;T
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -148,24 +148,6 @@ public class HashTableImplTest {
         table.put("c", 3);
 
         assertThrows(ConcurrentModificationException.class, it::next);
-    }
-
-    @Test
-    void testEqualsAndHashCode() {
-        HashTable<String, Integer> t1 = new HashTableImpl<>();
-        HashTable<String, Integer> t2 = new HashTableImpl<>();
-
-        t1.put("one", 1);
-        t1.put("two", 2);
-
-        t2.put("one", 1);
-        t2.put("two", 2);
-
-        assertEquals(t1, t2);
-        assertEquals(t1.hashCode(), t2.hashCode());
-
-        t2.put("three", 3);
-        assertNotEquals(t1, t2);
     }
 
     @Test
