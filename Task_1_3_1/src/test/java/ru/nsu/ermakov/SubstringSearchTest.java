@@ -3,13 +3,16 @@ package ru.nsu.ermakov;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * Тесты для класса SubstringSearch.
  */
 public class SubstringSearchTest {
 
+    /**
+     * Тест на нахождение подстроки в тексте.
+     */
     @Test
     public void testFindSubstringInText() {
         String text = "This is a simple test string for testing.";
@@ -23,12 +26,16 @@ public class SubstringSearchTest {
         SubstringSearch.findSubstringInText(text, pattern, 0);
 
         // Проверяем, что вывод был корректным
-        assertTrue(outContent.toString().contains("Найдено на позиции: 17"), "Подстрока должна быть найдена на позиции 17.");
+        assertTrue(outContent.toString().contains("Найдено на позиции: 17"),
+            "Подстрока должна быть найдена на позиции 17.");
 
         // Восстанавливаем стандартный вывод
         System.setOut(System.out);
     }
 
+    /**
+     * Тест, когда подстрока не найдена.
+     */
     @Test
     public void testNoSubstringFound() {
         String text = "This is a simple string.";
