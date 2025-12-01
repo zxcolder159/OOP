@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты для класса FileGenerator.
@@ -15,6 +14,9 @@ public class FileGeneratorTest {
 
     private static final String TEST_FILE = "testGeneratedFile.txt";
 
+    /**
+     * Удаление тестового файла после каждого теста.
+     */
     @AfterEach
     public void tearDown() {
         // Удаление тестового файла после каждого теста
@@ -24,6 +26,9 @@ public class FileGeneratorTest {
         }
     }
 
+    /**
+     * Тест генерации файла с 10 строками.
+     */
     @Test
     public void testGenerateFile() throws IOException {
         // Генерация файла с 10 строками
