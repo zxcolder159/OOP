@@ -6,16 +6,21 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * Тесты для класса FileGenerator.
+ *
+ * Этот класс содержит тесты для проверки корректности работы класса FileGenerator.
+ * Тесты включают проверку успешного создания файла и наличие в нем строки с подстрокой "искомуя".
  */
 public class FileGeneratorTest {
 
     private static final String TEST_FILE = "testGeneratedFile.txt";
 
     /**
-     * Удаление тестового файла после каждого теста.
+     * Метод, который выполняется после каждого теста.
+     * Удаляет тестовый файл, если он был создан.
      */
     @AfterEach
     public void tearDown() {
@@ -27,7 +32,11 @@ public class FileGeneratorTest {
     }
 
     /**
-     * Тест генерации файла с 10 строками.
+     * Тестирует метод генерации файла.
+     * Генерирует файл с 10 строками и проверяет его создание,
+     * а также наличие хотя бы одной строки с подстрокой "искомуя".
+     *
+     * @throws IOException Если происходит ошибка при чтении файла.
      */
     @Test
     public void testGenerateFile() throws IOException {
@@ -35,7 +44,7 @@ public class FileGeneratorTest {
         FileGenerator.generateFile(TEST_FILE, 10);
 
         File file = new File(TEST_FILE);
-        assertTrue(file.exists(), "Файл должен быть создан.");
+        Assertions.assertTrue(file.exists(), "Файл должен быть создан.");
 
         // Проверим, что в файле есть хотя бы одна строка с подстрокой "искомуя"
         boolean foundSubstring = false;
@@ -49,6 +58,6 @@ public class FileGeneratorTest {
             }
         }
 
-        assertTrue(foundSubstring, "Файл должен содержать подстроку 'искомуя'.");
+        Assertions.assertTrue(foundSubstring, "Файл должен содержать подстроку 'искомуя'.");
     }
 }
