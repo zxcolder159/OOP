@@ -3,7 +3,9 @@ package ru.nsu.ermakov;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Тесты для класса SubstringSearch.
@@ -11,7 +13,8 @@ import java.io.PrintStream;
 public class SubstringSearchTest {
 
     /**
-     * Тест на нахождение подстроки в тексте.
+     * Тест для метода поиска подстроки в тексте.
+     * Этот метод проверяет, что подстрока "test" найдена в строке на правильной позиции.
      */
     @Test
     public void testFindSubstringInText() {
@@ -26,7 +29,7 @@ public class SubstringSearchTest {
         SubstringSearch.findSubstringInText(text, pattern, 0);
 
         // Проверяем, что вывод был корректным
-        assertTrue(outContent.toString().contains("Найдено на позиции: 17"),
+        assertTrue(outContent.toString().contains("Найдено на позиции: 17"), 
             "Подстрока должна быть найдена на позиции 17.");
 
         // Восстанавливаем стандартный вывод
@@ -34,7 +37,9 @@ public class SubstringSearchTest {
     }
 
     /**
-     * Тест, когда подстрока не найдена.
+     * Тест для метода поиска подстроки, когда подстрока не найдена.
+     * Этот метод проверяет, что при отсутствии подстроки в тексте
+     * не будет сделан вывод в консоль.
      */
     @Test
     public void testNoSubstringFound() {
@@ -49,7 +54,8 @@ public class SubstringSearchTest {
         SubstringSearch.findSubstringInText(text, pattern, 0);
 
         // Проверяем, что ничего не выводится (если подстрока не найдена)
-        assertEquals("", outContent.toString(), "Не должно быть найдено вхождений подстроки.");
+        assertEquals("", outContent.toString(), 
+            "Не должно быть найдено вхождений подстроки.");
 
         // Восстанавливаем стандартный вывод
         System.setOut(System.out);
