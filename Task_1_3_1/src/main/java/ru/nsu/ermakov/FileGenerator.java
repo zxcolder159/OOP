@@ -1,3 +1,5 @@
+package ru.nsu.ermakov;
+
 import java.io.FileWriter;
 import java.io.IOException;
 

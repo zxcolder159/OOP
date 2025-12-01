@@ -1,3 +1,5 @@
+package ru.nsu.ermakov;
+
 import java.io.IOException;
 
 /**
@@ -10,6 +12,9 @@ public class Main {
      */
     public static void main(String[] args) {
         // Имя файла и подстрока для поиска
+        String text = "This is a simple test string for testing.";
+        String pattern = "test";
+        SubstringSearch.findSubstringInText(text, pattern, 0);
         String fileName = "largeFile.txt";
         String pattern = "искомуя";
 
