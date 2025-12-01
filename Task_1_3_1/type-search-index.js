@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ermakov","l":"FileGenerator"},{"p":"ru.nsu.ermakov","l":"FileReader"},{"p":"ru.nsu.ermakov","l":"Main"},{"p":"ru.nsu.ermakov","l":"SubstringSearch"}];updateSearchResults();
