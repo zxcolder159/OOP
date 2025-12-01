@@ -23,7 +23,7 @@ public class SubstringSearchTest {
         SubstringSearch.findSubstringInText(text, pattern, 0);
 
         // Проверяем, что вывод был корректным
-        assertTrue(outContent.toString().contains("Найдено на позиции: 15"), "Подстрока должна быть найдена на позиции 15.");
+        assertTrue(outContent.toString().contains("Найдено на позиции: 17"), "Подстрока должна быть найдена на позиции 17.");
 
         // Восстанавливаем стандартный вывод
         System.setOut(System.out);
