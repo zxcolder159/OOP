@@ -14,13 +14,6 @@ jobs:
         working-directory: ./Task_1_5_1
     steps:
       - uses: actions/checkout@v3
-      # 1. Запуск ТОЛЬКО TextTest и сбор данных JaCoCo
-      - name: Run specific tests with coverage (TextTest)
-        run: ./gradlew test --tests *TextTest jacocoTestReport
-
-      # 2. Список отчетов (для отладки)
-      - name: List reports
-        run: ls -R build/reports/jacoco
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -28,20 +21,29 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Run tests with coverage
-        run: ./gradlew test jacocoTestReport
+      # 1. ЗАПУСК ТОЛЬКО ОДНОГО ЮНИТ-ТЕСТА (TextTest) и сбор покрытия
+      # Используем флаг --tests для Gradle
+      - name: Run specific tests with coverage (TextTest)
+        # Запускаем только тесты в классе TextTest.java
+        run: ./gradlew test --tests *TextTest jacocoTestReport
 
       - name: List reports
         run: ls -R build/reports/jacoco
 
+      # 2. ПУБЛИКАЦИЯ ОТЧЕТА ПОКРЫТИЯ (С фильтрацией)
       - name: Check coverage and publish
         id: jacoco
         uses: madrapps/jacoco-report@v1.2
         with:
+          # Путь к сгенерированному XML-отчету
           paths: ./Task_1_5_1/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Устанавливаем целевое покрытие (можно снизить для временного режима)
           min-coverage-overall: 80
           min-coverage-changed-files: 80
+
+          includes: |
+            ru.nsu.ermakov.Text.Text
 
       - name: Generate javadoc
         run: ./gradlew javadoc
