@@ -56,7 +56,6 @@ public class Table implements Element {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Table table = (Table) o;
-        // Сравниваем все три списка
         return Objects.equals(alignments, table.alignments) &&
                 Objects.equals(header, table.header) &&
                 Objects.equals(rows, table.rows);
