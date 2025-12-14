@@ -14,6 +14,13 @@ jobs:
         working-directory: ./Task_1_5_1
     steps:
       - uses: actions/checkout@v3
+      # 1. Запуск ТОЛЬКО TextTest и сбор данных JaCoCo
+      - name: Run specific tests with coverage (TextTest)
+        run: ./gradlew test --tests *TextTest jacocoTestReport
+
+      # 2. Список отчетов (для отладки)
+      - name: List reports
+        run: ls -R build/reports/jacoco
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
