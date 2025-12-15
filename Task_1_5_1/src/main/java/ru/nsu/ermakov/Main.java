@@ -6,31 +6,48 @@ import ru.nsu.ermakov.Text.BoldText;
 import ru.nsu.ermakov.Text.Text;
 
 import javax.print.attribute.standard.PrinterMakeAndModel;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 public class Main {
     public static void main(String [] args) {
-        Element title = new Heading.Builder().lvl(1).value(new Text("Проверка работы Марк Даун генератора")).build();
-        Element test = new BoldText("ЖИРНЫЙ ТЕКСТ");
-        Element task1 = new Task.Builder().status(true).value(new Text("Написать МаркДаун самому")).build();
-        Element task2 = new Task.Builder().status(false).value(new Text ("Апнуть 8к в доте")).build();
-        Element taskList = new MarkDownList.Builder().addItem(task1).addItem(task2).build();
-        String code = "public static void main(String[] args) {\\n    System.out.println(\\\"Максим Масолыгин красавчик!\\\");\\n} ";
-        Element codeblock = new CodeBlock.Builder().language("Java").value(code).build();
-        List<Element> tableHeader = Arrays.asList(new Text("Имя"), new Text("Статус"));
-        List<Alignment> alignments = Arrays.asList(Alignment.LEFT, Alignment.CENTER);
-        List<Element> row1Data = Arrays.asList(new Text("Максим Вылегжанин"), new Text("лох"));
-        List<Element> row2Data = Arrays.asList(new Text("Максим Масолыгин"), new Text("красавчик"));
-        Element table = new Table.Builder().withHeaderAndAlignments(tableHeader, alignments)
-                .addRow(row1Data).addRow(row2Data).build();
-        Document finalDocument = new Document.Builder()
-                .addElement(title)
-                .addElement(test)
-                .addElement(taskList)
-                .addElement(codeblock)
-                .addElement(table)
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите ФИО\n");
+        String FIO = scanner.nextLine();
+        Heading title = new Heading.Builder().lvl(1).value(new BoldText(FIO)).build();
+        System.out.println("Введите ИНФОРМАЦИЮ О СЕБЕ(email, номер телефона в одну строчку)\n");
+        String info = scanner.nextLine();
+        BoldText infoMD = new BoldText(info);
+        System.out.println("Введите количество своих достижений и затем построчно каждое из них\n");
+        int cnt = scanner.nextInt();
+        ArrayList<Element> achivments = new ArrayList<>();
+        scanner.nextLine();
+        MarkDownList.Builder builder = new MarkDownList.Builder();
+
+        for(int i = 0; i < cnt; i++) {
+            builder.addItem(new Text(scanner.nextLine()));
+        }
+        MarkDownList zxc = builder.build();
+        Document document = new Document.Builder().addElement(title)
+                .addElement(infoMD)
+                .addElement(zxc)
                 .build();
-        System.out.println(finalDocument.toMarkDown());
+        File newFile = new File("C:\\Java\\OOP\\Task_1_5_1\\src\\main\\java\\ru\\nsu\\ermakov\\vizit.MD");
+        try {
+            boolean created = newFile.createNewFile();
+            try (FileWriter writer = new FileWriter(newFile)) {
+                String markdownContent = document.toMarkDown();
+                writer.write(markdownContent);
+            }
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println(document.toMarkDown());
+        scanner.close();
     }
 }
