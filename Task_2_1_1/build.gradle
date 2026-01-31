@@ -16,9 +16,8 @@ dependencies {
 }
 
 test {
-    filter {
-        setFailOnNoMatchingTests(false)
-    }
+    useJUnitPlatform()
+
 }
 
 jacocoTestReport {
