@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.ermakov","l":"IsPrime"},{"p":"ru.nsu.ermakov.Checkers","l":"ParallelChecker"},{"p":"ru.nsu.ermakov.Checkers","l":"SimpleChecker"},{"p":"ru.nsu.ermakov.Checkers","l":"ThreadChecker"}];updateSearchResults();

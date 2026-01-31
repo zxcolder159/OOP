@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ermakov"},{"l":"ru.nsu.ermakov.Checkers"}];updateSearchResults();
