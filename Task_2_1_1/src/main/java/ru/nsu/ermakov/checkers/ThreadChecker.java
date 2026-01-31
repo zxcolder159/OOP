@@ -1,4 +1,4 @@
-package ru.nsu.ermakov.Checkers;
+package ru.nsu.ermakov.checkers;
 
 import ru.nsu.ermakov.IsPrime;
 import java.util.ArrayList;
