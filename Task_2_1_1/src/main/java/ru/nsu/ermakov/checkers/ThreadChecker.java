@@ -4,10 +4,10 @@ import ru.nsu.ermakov.IsPrime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ThreadChecker {
-   public static void main (String[] args) throws InterruptedException {
+    private static volatile boolean foundComposite = false;
+    public static void main (String[] args) throws InterruptedException {
        int size = 1_500_000;
        long[] numbers = new long[size];
        Arrays.fill(numbers, 1000000007L);
@@ -18,7 +18,7 @@ public class ThreadChecker {
        }
    }
    public static void runTest(long[] Array, int numThreads) throws InterruptedException {
-       AtomicBoolean foundComposite = new AtomicBoolean(false);
+       foundComposite = false;
        List<Thread> threads = new ArrayList<>();
        int chunkSize = Array.length / numThreads;
        long startTime = System.currentTimeMillis();
@@ -27,9 +27,10 @@ public class ThreadChecker {
            int endIdx = (i == numThreads - 1) ? Array.length : (i+1) * chunkSize;
            Thread t = new Thread(() -> {
                for(int j = startIdx; j < endIdx; j++) {
-                   if (foundComposite.get()) return;
+                   if (foundComposite) return;
                    if(!IsPrime.isPrime(Array[j])) {
-                       foundComposite.set(true);
+                       foundComposite = true;
+                       return;
                    }
                }
            });
