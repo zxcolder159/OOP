@@ -17,10 +17,18 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    exclude '**/Main.class'
 }
 
 jacocoTestReport {
     dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.getFiles().collect {
+            fileTree(dir: it, include: '**/*.class').matching {
+                exclude '**/Main.class'  // Исключаем Main
+            }
+        }))
+    }
     reports {
         xml.required = true
         html.required = true
