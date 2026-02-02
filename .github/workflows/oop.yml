@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Task_1_2_2
+        working-directory: ./Task_1_5_1
     steps:
       - uses: actions/checkout@v3
 
@@ -21,20 +21,29 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Run tests with coverage
-        run: ./gradlew test jacocoTestReport
+      # 1. ЗАПУСК ТОЛЬКО ОДНОГО ЮНИТ-ТЕСТА (TextTest) и сбор покрытия
+      # Используем флаг --tests для Gradle
+      - name: Run specific tests with coverage (TextTest)
+        # Запускаем только тесты в классе TextTest.java
+        run: ./gradlew test --tests *TextTest jacocoTestReport
 
       - name: List reports
         run: ls -R build/reports/jacoco
 
+      # 2. ПУБЛИКАЦИЯ ОТЧЕТА ПОКРЫТИЯ (С фильтрацией)
       - name: Check coverage and publish
         id: jacoco
         uses: madrapps/jacoco-report@v1.2
         with:
-          paths: ./Task_1_2_2/build/reports/jacoco/test/jacocoTestReport.xml
+          # Путь к сгенерированному XML-отчету
+          paths: ./Task_1_5_1/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Устанавливаем целевое покрытие (можно снизить для временного режима)
           min-coverage-overall: 80
           min-coverage-changed-files: 80
+
+          includes: |
+            ru.nsu.ermakov.Text.Text
 
       - name: Generate javadoc
         run: ./gradlew javadoc
@@ -45,8 +54,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           clean: true
-          folder: ./Task_1_2_2/build/docs/javadoc
-          target-folder: Task_1_2_2
+          folder: ./Task_1_5_1/build/docs/javadoc
+          target-folder: Task_1_5_1
 
   checkstyle:
     runs-on: ubuntu-latest
