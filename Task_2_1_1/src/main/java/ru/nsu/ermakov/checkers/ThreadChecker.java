@@ -24,7 +24,7 @@ public class ThreadChecker {
             int endIdx = (i == numThreads - 1) ? array.length : (i + 1) * chunkSize;
             Thread t = new Thread(() -> {
                 for (int j = startIdx; j < endIdx; j++) {
-                    if (foundComposite){
+                    if (foundComposite) {
                         return;
                     }
                     if (!IsPrime.isPrime(array[j])) {
