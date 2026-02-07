@@ -1,0 +1,20 @@
+{
+  "bakers": [
+    {
+      "cookingSpeed": 2000
+    },
+    {
+      "cookingSpeed": 3500
+    }
+  ],
+  "couriers": [
+    {
+      "boxSize": 2,
+      "deliveryTime": 6000
+    },
+    {
+      "boxSize": 5,
+      "deliveryTime": 9000
+    }
+  ]
+}

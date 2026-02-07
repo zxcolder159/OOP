@@ -1,0 +1,9 @@
+{
+  "pizzerias": [
+    {
+      "name": "ZXCpizza",
+      "staffConfig": "StuffBase.json",
+      "warehouseConfig": "WarehouseConfig"
+    }
+  ]
+}
