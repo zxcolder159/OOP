@@ -10,13 +10,15 @@ public class SimpleChecker {
     /**
      * Проверка без многопоточности.
      */
-    public void runTest(long[] Array) {
+    public void runTest(long[] array) {
         long startTime = System.currentTimeMillis();
-        int size = Array.length;
-        for (long x : Array){
-            if (!IsPrime.isPrime(x)) break;
-
+        int size = array.length;
+        for (long x : array) {
+            if (!IsPrime.isPrime(x)) {
+                break;
+            }
         }
-        System.out.println("Время выполнения для однопоточного решения:" + (System.currentTimeMillis() - startTime));
+        System.out.println("Время выполнения для однопоточного решения:"
+                + (System.currentTimeMillis() - startTime));
     }
 }

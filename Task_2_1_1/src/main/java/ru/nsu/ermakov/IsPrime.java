@@ -5,7 +5,7 @@ package ru.nsu.ermakov;
  */
 public class IsPrime {
     /**
-     * статистический метод для проверки на простату.
+     * Статистический метод для проверки на простату.
      */
     public static boolean isPrime(long n) {
         if (n <= 1) {
