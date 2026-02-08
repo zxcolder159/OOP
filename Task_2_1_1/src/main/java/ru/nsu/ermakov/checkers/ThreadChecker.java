@@ -14,7 +14,7 @@ public class ThreadChecker {
     /**
      * runTest.
      */
-    public void runTest(long[] array, int numThreads) throws InterruptedException {
+    public boolean runTest(long[] array, int numThreads) throws InterruptedException {
         foundComposite = false;
         List<Thread> threads = new ArrayList<>();
         int chunkSize = array.length / numThreads;
@@ -42,5 +42,6 @@ public class ThreadChecker {
         long duration = System.currentTimeMillis() - startTime;
         System.out.println("Результат: " +  numThreads +
                 " сридов выполнил задачу за " + duration + "мс");
+        return !foundComposite;
     }
 }
