@@ -2,7 +2,7 @@
   "pizzerias": [
     {
       "name": "ZXCpizza",
-      "staffConfig": "StuffBase.json",
+      "staffConfigPath": "StuffBase.json",
       "warehouseConfig": "WarehouseConfig"
     }
   ]
