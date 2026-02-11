@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ermakov.configs"},{"l":"ru.nsu.ermakov.pizzeria"},{"l":"ru.nsu.ermakov.products"},{"l":"ru.nsu.ermakov.staff"},{"l":"ru.nsu.ermakov.warehouse"}];updateSearchResults();
