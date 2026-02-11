@@ -9,35 +9,30 @@ import java.util.LinkedList;
  */
 public class Baker implements Runnable {
 
-    private int cookingSpeed;
     private final LinkedList<Product> cookingItems;
+    private String name;
     private Warehouse warehouse;
     /**
      * Конструктор.
      */
-    public Baker (int cookingSpeed, Warehouse warehouse) {
-        setCookingSpeed(cookingSpeed);
+    public Baker(String name, Warehouse warehouse) {
+        this.name = name;
         cookingItems = new LinkedList<>();
         this.warehouse = warehouse;
     }
-
     /**
-     * Геттер скорости.
+     * Геттер имени.
      */
-    public int getCookingSpeed() {
-        return cookingSpeed;
+    public String getName(){
+        return name;
     }
 
     /**
-     * Сеттер скорости.
+     * Геттер имени.
      */
-    public void setCookingSpeed(int cookingSpeed) {
-        if(cookingSpeed <= 0) {
-            throw new IllegalArgumentException("Скорость готовки должна быть больше нуля");
-        }
-        this.cookingSpeed = cookingSpeed;
+    public void setName(String name){
+        this.name = name;
     }
-
     /**
      * Геттер размера очереди.
      */
@@ -66,23 +61,24 @@ public class Baker implements Runnable {
     public void run () {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                Product pizza = null;
+                Product product = null;
 
                 synchronized (cookingItems) {
                     // Если работы нет — повар спит и не тратит ресурсы CPU
                     while (cookingItems.isEmpty()) {
                         cookingItems.wait();
                     }
-                    pizza = cookingItems.remove(0);
+                    product = cookingItems.remove(0);
                 }
 
 
-                Thread.sleep(cookingSpeed);
-                warehouse.addProduct(pizza);
-                System.out.println("Пекарь приготовил пиццу ID: " + pizza.getId());
+                Thread.sleep(product.getCookingTime());
+                warehouse.addProduct(product);
+                System.out.println("Пекарь " + name + " приготовил заказ №" + product.getOrderId()
+                + " тип товара по ID" + product.getId());
             }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.out.println("Пекарь " + name + " закончил смену и уходит домой.");
         }
     }
 }

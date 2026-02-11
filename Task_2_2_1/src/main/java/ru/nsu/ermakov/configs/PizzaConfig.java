@@ -13,7 +13,7 @@ public class PizzaConfig {
      * Вложенный класс, где только скорость готовки.
      */
     public static class BakerData {
-        public int cookingSpeed;
+        public String name;
     }
 
     /**
@@ -21,7 +21,6 @@ public class PizzaConfig {
      */
     public static class CourierData {
         public int boxSize;
-        public int deliveryTime;
     }
 
 }

@@ -2,14 +2,14 @@ package ru.nsu.ermakov.products;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Pizza implements Product {
+public class CocaCola implements Product {
     private final int id;
     private int orderId;
-    private final int cookingTime = 2000;
+    private final long cookingTime = 0;
     /**
      * Конструктор как трек у Бабангиды.
      */
-    public Pizza(@JsonProperty("id") int id) {
+    public CocaCola(@JsonProperty("id") int id) {
         this.id = id;
     }
 
@@ -26,8 +26,9 @@ public class Pizza implements Product {
      */
     @Override
     public int getSize () {
-        return 2;
+        return 1;
     }
+
     /**
      * Геттер времени готовки.
      */
@@ -35,7 +36,6 @@ public class Pizza implements Product {
     public long getCookingTime() {
         return cookingTime;
     }
-
     /**
      * Геттер id заказа.
      */
@@ -55,6 +55,6 @@ public class Pizza implements Product {
      */
     @Override
     public Product clone() {
-        return new Pizza(id);
+        return new CocaCola(id);
     }
 }

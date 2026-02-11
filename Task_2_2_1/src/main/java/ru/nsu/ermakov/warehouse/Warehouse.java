@@ -46,7 +46,8 @@ public class Warehouse {
                 wait();
             }
             catch (InterruptedException e) {
-                System.out.println("Ошибка wait");
+                Thread.currentThread().interrupt();
+                return new ArrayList<>();
             }
         }
         ArrayList<Product> toDeliver = new ArrayList<>();

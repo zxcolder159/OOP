@@ -5,24 +5,24 @@ import ru.nsu.ermakov.warehouse.Warehouse;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.CountDownLatch;
 /**
  * Курьер из пиццерии.
  */
 public class Courier implements Runnable{
     private int boxSize;
-
+    private final CountDownLatch latch;
     private final Warehouse warehouse;
     private List<Product> productsOnCourier;
-    private volatile int deliveryTime;
     /**
      * Конструктор.
      */
-    public Courier (int boxSize, int deliveryTime, Warehouse warehouse) {
+    public Courier (int boxSize, Warehouse warehouse, CountDownLatch latch) {
         setBoxSize(boxSize);
         productsOnCourier = new ArrayList<>();
-        this.deliveryTime = deliveryTime;
         this.warehouse = warehouse;
+        this.latch = latch;
     }
 
     /**
@@ -42,13 +42,6 @@ public class Courier implements Runnable{
         this.boxSize = boxSize;
     }
 
-    /**
-     * Сеттер времени доставки курьера в зависимости от заказа.
-     */
-
-    public void setDeliveryTime (int time) {
-        deliveryTime = time;
-    }
 
     /**
      * Логика доставки продукта.
@@ -59,12 +52,15 @@ public class Courier implements Runnable{
             while (!Thread.currentThread().isInterrupted()) {
                 productsOnCourier = warehouse.takeProduct(boxSize);
                 System.out.println("Курьез взял заказ, количество" + productsOnCourier.size());
-                Thread.sleep(deliveryTime);
+                Thread.sleep(ThreadLocalRandom.current().nextLong(1000, 5001));
+                for (int i = 0; i < productsOnCourier.size(); i++) {
+                    latch.countDown();
+                }
                 productsOnCourier.clear();
                 System.out.println("Курьер доставил заказы и возвращается");
             }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.out.println("Курьер закончил смену и уходит домой.");
         }
     }
 }

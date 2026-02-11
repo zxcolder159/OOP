@@ -1,8 +1,13 @@
 package ru.nsu.ermakov.configs;
 
+import ru.nsu.ermakov.products.Product;
+
+import java.util.List;
+
 public class OrderConfig {
     public int orderSpawnRate;
     public int totalOrders;
+    public List<Product> productsList;
 
     /**
      * Конструктор, как трек у Бабангиды.
@@ -16,3 +21,4 @@ public class OrderConfig {
         this.totalOrders = totalOrders;
     }
 }
+

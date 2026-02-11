@@ -16,10 +16,6 @@ public class ConfigReader {
         return mapper.readValue(new File(path), OrderConfig.class);
     }
 
-    public PizzeriaInstanceConfig readPizzeriaInstanceConfig(String path) throws IOException {
-        return mapper.readValue(new File(path), PizzeriaInstanceConfig.class);
-    }
-
     public WarehouseConfig readWarehouseConfig(String path) throws IOException {
         return mapper.readValue(new File(path), WarehouseConfig.class);
     }

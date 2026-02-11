@@ -1,20 +1,18 @@
 {
   "bakers": [
     {
-      "cookingSpeed": 2000
+      "name": "Максим Шпала"
     },
     {
-      "cookingSpeed": 3500
+      "name": "Вова Дедлайн"
     }
   ],
   "couriers": [
     {
-      "boxSize": 2,
-      "deliveryTime": 6000
+      "boxSize": 2
     },
     {
-      "boxSize": 5,
-      "deliveryTime": 9000
+      "boxSize": 5
     }
   ]
 }

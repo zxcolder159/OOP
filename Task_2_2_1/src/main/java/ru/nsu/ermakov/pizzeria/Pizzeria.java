@@ -8,6 +8,7 @@ import ru.nsu.ermakov.warehouse.Warehouse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class Pizzeria {
     private final List<Baker> bakers;
@@ -18,16 +19,16 @@ public class Pizzeria {
     /**
      * Конструктор, как трек у Бабангиды.
      */
-    public Pizzeria (PizzaConfig pizzaConfig, Warehouse warehouse) {
+    public Pizzeria (PizzaConfig pizzaConfig, Warehouse warehouse, CountDownLatch latch) {
         this.warehouse = warehouse;
         this.bakers = new ArrayList<>();
         this.couriers = new ArrayList<>();
         for(PizzaConfig.BakerData bakerData : pizzaConfig.bakers) {
-            this.bakers.add(new Baker(bakerData.cookingSpeed, warehouse));
+            this.bakers.add(new Baker(bakerData.name, warehouse));
         }
 
         for(PizzaConfig.CourierData courierData : pizzaConfig.couriers) {
-            this.couriers.add(new Courier(courierData.boxSize, courierData.deliveryTime, warehouse));
+            this.couriers.add(new Courier(courierData.boxSize, warehouse, latch));
         }
         for(Baker baker : bakers) {
             Thread temp = new Thread(baker);
