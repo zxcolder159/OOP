@@ -1,0 +1,9 @@
+{
+  "orderSpawnRate": 5,
+  "totalOrders": 10,
+  "productsList": [
+    { "type": "pizza", "id": 1 },
+    { "type": "burger", "id": 2 },
+    { "type": "cola", "id": 3 }
+  ]
+}
