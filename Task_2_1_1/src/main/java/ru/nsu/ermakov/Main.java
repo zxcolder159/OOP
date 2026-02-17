@@ -12,21 +12,36 @@ public class Main {
     /**
      * Main.
      */
-    public static void main (String[] args) throws InterruptedException {
-        int size = 1_500_000;
-        long[] numbers = new long[size];
-        Arrays.fill(numbers, 1000000007L);
-        int[] threadCounts = {2, 4, 8, 16};
-        SimpleChecker simpleChecker = new SimpleChecker();
-        simpleChecker.runTest(numbers);
+    public static void main(String[] args) throws InterruptedException {
+        Thread workerThread = new Thread(() -> {
+            try {
+                System.out.println("[Worker]: Начало выполнения длительной операции (5000 мс)...");
+                Thread.sleep(5000);
+                System.out.println("[Worker]: Операция успешно завершена.");
+            } catch (InterruptedException e) {
+                System.err.println("[Worker]: Выполнение прервано во время сна.");
+                Thread.currentThread().interrupt();
+            }
+        });
 
-        for (int count : threadCounts) {
-            System.out.println(">>> Запуск на " + count + " сридах...");
-            ThreadChecker threadChecker = new ThreadChecker();
-            threadChecker.runTest(numbers, count);
-        }
+        Thread monitorThread = new Thread(() -> {
+            System.out.println("[Monitor]: Ожидание завершения Worker-потока...");
+            try {
+                workerThread.join();
+                System.out.println("[Monitor]: Worker-поток завершил работу. Мониторинг окончен.");
+            } catch (InterruptedException e) {
+                System.err.println("[Monitor]: Ошибка: поток был прерван во время ожидания (join).");
+                System.err.println("[Monitor]: Стек вызовов: " + e.toString());
+                Thread.currentThread().interrupt();
+            }
+        });
 
-        ParallelChecker parallelChecker = new ParallelChecker();
-        parallelChecker.runTest(numbers);
+        workerThread.start();
+        monitorThread.start();
+
+        Thread.sleep(1000);
+
+        System.out.println("\n[Main]: Инициация прерывания Monitor-потока...");
+        monitorThread.interrupt();
     }
 }
