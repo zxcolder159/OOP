@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'application'
+    // Версия 0.1.0 ОБЯЗАТЕЛЬНА для Gradle 8+
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'ru.nsu.ermakov'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'ru.nsu.ermakov.Main'
+}
+
+javafx {
+    version = "21"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
