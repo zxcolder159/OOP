@@ -7,7 +7,7 @@ public class Field {
     public final int width;
     public final int height;
 
-    Cell[][] field;
+    public Cell[][] field;
 
     /**
      * Конструктор, как трек бабангиды.

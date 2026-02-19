@@ -13,7 +13,7 @@ repositories {
 }
 
 application {
-    mainClass = 'ru.nsu.ermakov.Main'
+    mainClass = 'ru.nsu.ermakov.SnakeApplication'
 }
 
 javafx {
