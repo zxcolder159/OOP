@@ -47,3 +47,4 @@ tasks.withType(JavaExec).configureEach {
 tasks.withType(Javadoc).configureEach {
     options.encoding = 'UTF-8'
     options.addIntOption('release', 21)
+}
