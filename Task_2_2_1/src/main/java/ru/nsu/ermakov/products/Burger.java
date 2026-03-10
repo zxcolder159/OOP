@@ -2,7 +2,7 @@ package ru.nsu.ermakov.products;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Burger implements Product {
+public class Burger implements Food {
     private final int id;
     private int orderId;
     private final long cookingTime = 1000;

@@ -2,10 +2,10 @@ package ru.nsu.ermakov.products;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CocaCola implements Product {
+public class CocaCola implements Drink {
     private final int id;
     private int orderId;
-    private final long cookingTime = 0;
+    private final long processingTime = 0;
     /**
      * Конструктор как трек у Бабангиды.
      */
@@ -33,8 +33,8 @@ public class CocaCola implements Product {
      * Геттер времени готовки.
      */
     @Override
-    public long getCookingTime() {
-        return cookingTime;
+    public long getProcessingTime() {
+        return processingTime;
     }
     /**
      * Геттер id заказа.

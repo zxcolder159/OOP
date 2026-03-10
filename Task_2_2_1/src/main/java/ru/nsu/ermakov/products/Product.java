@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "type" // Поле в JSON, по которому определим класс
+        property = "type" // Оставляем один дискриминатор
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Pizza.class, name = "pizza"),
@@ -26,10 +26,6 @@ public interface Product {
      * Геттер id.
      */
     public int getId();
-    /**
-     * Геттер времени готовки.
-     */
-    public long getCookingTime();
 
     /**
      * Геттер id.

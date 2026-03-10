@@ -1,5 +1,6 @@
 package ru.nsu.ermakov.staff;
 
+import ru.nsu.ermakov.products.Food;
 import ru.nsu.ermakov.products.Product;
 import ru.nsu.ermakov.warehouse.Warehouse;
 import java.util.LinkedList;
@@ -9,9 +10,9 @@ import java.util.LinkedList;
  */
 public class Baker implements Runnable {
 
-    private final LinkedList<Product> cookingItems;
+    private final LinkedList<Food> cookingItems;
     private String name;
-    private Warehouse warehouse;
+    private final Warehouse warehouse;
     /**
      * Конструктор.
      */
@@ -46,9 +47,9 @@ public class Baker implements Runnable {
     /**
      * Добавить продукт в список продуктов для готовки.
      */
-    public void addProductToBaker(Product product) {
+    public void addProductToBaker(Food food) {
         synchronized (cookingItems) {
-            cookingItems.add(product);
+            cookingItems.add(food);
             cookingItems.notifyAll();
         }
     }
@@ -61,21 +62,20 @@ public class Baker implements Runnable {
     public void run () {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                Product product = null;
+                Food food = null;
 
                 synchronized (cookingItems) {
-                    // Если работы нет — повар спит и не тратит ресурсы CPU
                     while (cookingItems.isEmpty()) {
                         cookingItems.wait();
                     }
-                    product = cookingItems.remove(0);
+                    food = cookingItems.remove(0);
                 }
 
 
-                Thread.sleep(product.getCookingTime());
-                warehouse.addProduct(product);
-                System.out.println("Пекарь " + name + " приготовил заказ №" + product.getOrderId()
-                + " тип товара по ID" + product.getId());
+                Thread.sleep(food.getCookingTime());
+                warehouse.addProduct(food);
+                System.out.println("Пекарь " + name + " приготовил заказ №" + food.getOrderId()
+                + " тип товара по ID" + food.getId());
             }
         } catch (InterruptedException e) {
             System.out.println("Пекарь " + name + " закончил смену и уходит домой.");
