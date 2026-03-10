@@ -38,7 +38,12 @@ tasks.withType(Test).configureEach {
 tasks.withType(JavaExec).configureEach {
     jvmArgs += ['--enable-preview']
 }
-tasks.withType(Javadoc) {
-    options.addStringOption('-enable-preview', null)
-    options.addStringOption('-source', '21')
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (JavaVersion.current().isJava11Compatible()) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+
+    options.release = 21
 }
