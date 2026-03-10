@@ -38,3 +38,7 @@ tasks.withType(Test).configureEach {
 tasks.withType(JavaExec).configureEach {
     jvmArgs += ['--enable-preview']
 }
+tasks.withType(Javadoc) {
+    options.addStringOption('-enable-preview', null)
+    options.addStringOption('-source', '17')
+}
