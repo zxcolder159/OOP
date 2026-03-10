@@ -40,5 +40,5 @@ tasks.withType(JavaExec).configureEach {
 }
 tasks.withType(Javadoc) {
     options.addStringOption('-enable-preview', null)
-    options.addStringOption('-source', '17')
+    options.addStringOption('-source', '21')
 }
