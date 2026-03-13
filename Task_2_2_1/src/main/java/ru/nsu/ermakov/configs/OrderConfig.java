@@ -1,9 +1,11 @@
 package ru.nsu.ermakov.configs;
 
 import ru.nsu.ermakov.products.Product;
-
 import java.util.List;
 
+/**
+ * Config.
+ */
 public class OrderConfig {
     public int orderSpawnRate;
     public int totalOrders;

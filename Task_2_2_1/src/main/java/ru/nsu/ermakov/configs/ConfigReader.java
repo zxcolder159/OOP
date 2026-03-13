@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Config.
+ */
 public class ConfigReader {
     private final ObjectMapper mapper = new ObjectMapper();
 

@@ -2,6 +2,9 @@ package ru.nsu.ermakov.products;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Кока кола.
+ */
 public class CocaCola implements Drink {
     private final int id;
     private int orderId;

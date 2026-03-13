@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+
+/**
+ * Пиццерия.
+ */
 public class Pizzeria {
     private final List<Baker> bakers;
     private final List<Courier> couriers;

@@ -2,6 +2,9 @@ package ru.nsu.ermakov.products;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Американские бургеры.
+ */
 public class Burger implements Food {
     private final int id;
     private int orderId;

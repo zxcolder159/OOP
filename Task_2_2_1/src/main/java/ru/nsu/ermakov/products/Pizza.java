@@ -2,6 +2,9 @@ package ru.nsu.ermakov.products;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Класс пиццы.
+ */
 public class Pizza implements Food {
     private final int id;
     private int orderId;

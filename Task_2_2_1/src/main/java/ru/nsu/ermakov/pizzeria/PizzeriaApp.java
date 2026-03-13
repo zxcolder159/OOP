@@ -9,6 +9,9 @@ import ru.nsu.ermakov.warehouse.Warehouse;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Класс запускающий пиццерию.
+ */
 public class PizzeriaApp {
     static void main() {
         ConfigReader reader = new ConfigReader();
