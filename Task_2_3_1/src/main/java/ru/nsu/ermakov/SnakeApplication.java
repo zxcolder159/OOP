@@ -16,7 +16,7 @@ public class SnakeApplication extends Application {
     private static final int WIDTH = 20;
     private static final int HEIGHT = 15;
     private Cell[][] field = new Cell[20][15];
-
+	private boolean canChangeDirection = true;
 
     private Game game;
     public void initialGame() {
@@ -49,10 +49,32 @@ public class SnakeApplication extends Application {
 
             Snake snake = game.getSnake();
             switch (event.getCode()) {
-                case UP -> snake.setDirection(Direction.UP);
-                case DOWN -> snake.setDirection(Direction.DOWN);
-                case LEFT -> snake.setDirection(Direction.LEFT);
-                case RIGHT -> snake.setDirection(Direction.RIGHT);
+	            case UP -> {
+		            if (snake.getDirection() != Direction.DOWN && canChangeDirection) {
+			            snake.setDirection(Direction.UP);
+						canChangeDirection = false;
+		            }
+	            }
+
+	            case DOWN -> {
+					if (snake.getDirection() != Direction.UP && canChangeDirection) {
+						snake.setDirection(Direction.DOWN);
+						canChangeDirection = false;
+					}
+
+	            }
+                case LEFT -> {
+	                if(snake.getDirection() != Direction.RIGHT && canChangeDirection) {
+		                snake.setDirection(Direction.LEFT);
+						canChangeDirection = false;
+	                }
+                }
+                case RIGHT -> {
+	                if(snake.getDirection() != Direction.LEFT && canChangeDirection) {
+		                snake.setDirection(Direction.RIGHT);
+						canChangeDirection = false;
+	                }
+                }
             }
         });
 
@@ -65,7 +87,7 @@ public class SnakeApplication extends Application {
             @Override
             public void handle(long now) {
 
-                if (now - lastUpdate >= 150_000_000) {
+                if (now - lastUpdate >= 100_000_000) {
 
 
                     game.step();
@@ -74,6 +96,7 @@ public class SnakeApplication extends Application {
                     draw(gc);
 
                     lastUpdate = now;
+					canChangeDirection = true;
                 }
             }
         };

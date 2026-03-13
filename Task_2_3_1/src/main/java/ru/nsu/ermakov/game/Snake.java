@@ -16,6 +16,8 @@ public class Snake {
      */
     public Snake(Point startPoint) {
         body.add(startPoint);
+		body.add(new Point(startPoint.x()-1, startPoint.y()));
+	    body.add(new Point(startPoint.x()-2, startPoint.y()));
         direction = Direction.UP;
     }
 
