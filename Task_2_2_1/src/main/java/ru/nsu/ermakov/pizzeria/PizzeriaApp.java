@@ -4,20 +4,19 @@ import ru.nsu.ermakov.configs.ConfigReader;
 import ru.nsu.ermakov.configs.OrderConfig;
 import ru.nsu.ermakov.configs.PizzaConfig;
 import ru.nsu.ermakov.configs.WarehouseConfig;
-import ru.nsu.ermakov.products.Pizza;
 import ru.nsu.ermakov.products.Product;
 import ru.nsu.ermakov.warehouse.Warehouse;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PizzeriaApp {
-    public static void main (String[] args) {
+    static void main() {
         ConfigReader reader = new ConfigReader();
         try {
             OrderConfig orderConfig = reader.readOrderConfig("src/main/resources/OrderConfig.json");
             PizzaConfig pizzaConfig = reader.readPizzaConfig("src/main/resources/StuffBase.json");
-            WarehouseConfig warehouseConfig = reader.readWarehouseConfig("src/main/resources/WarehouseConfig.json");
+            WarehouseConfig warehouseConfig = reader
+                .readWarehouseConfig("src/main/resources/WarehouseConfig.json");
             CountDownLatch latch = new CountDownLatch(orderConfig.totalOrders);
             Warehouse warehouse = new Warehouse(warehouseConfig.storageSize);
             Pizzeria pizzeria = new Pizzeria(pizzaConfig, warehouse, latch);
@@ -32,8 +31,7 @@ public class PizzeriaApp {
             latch.await();
             pizzeria.stopPizzeria();
             System.out.println("Пиццерия закрыта.");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

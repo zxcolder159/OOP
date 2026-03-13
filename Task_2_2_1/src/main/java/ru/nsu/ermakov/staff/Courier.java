@@ -2,23 +2,24 @@ package ru.nsu.ermakov.staff;
 
 import ru.nsu.ermakov.products.Product;
 import ru.nsu.ermakov.warehouse.Warehouse;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.CountDownLatch;
+
 /**
  * Курьер из пиццерии.
  */
-public class Courier implements Runnable{
+public class Courier implements Runnable {
     private int boxSize;
     private final CountDownLatch latch;
     private final Warehouse warehouse;
     private List<Product> productsOnCourier;
+
     /**
      * Конструктор.
      */
-    public Courier (int boxSize, Warehouse warehouse, CountDownLatch latch) {
+    public Courier(int boxSize, Warehouse warehouse, CountDownLatch latch) {
         setBoxSize(boxSize);
         productsOnCourier = new ArrayList<>();
         this.warehouse = warehouse;
@@ -35,9 +36,10 @@ public class Courier implements Runnable{
     /**
      * Сеттер размера короба.
      */
-    public void setBoxSize (int boxSize) {
-        if(boxSize <= 0) {
-            throw new IllegalArgumentException("Размер короба должен вмещать как минимум одну пиццу.");
+    public void setBoxSize(int boxSize) {
+        if (boxSize <= 0) {
+            throw new IllegalArgumentException("Размер короба должен"
+                + " вмещать как минимум одну пиццу.");
         }
         this.boxSize = boxSize;
     }
@@ -47,7 +49,7 @@ public class Courier implements Runnable{
      * Логика доставки продукта.
      */
     @Override
-    public void run () {
+    public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 productsOnCourier = warehouse.takeProduct(boxSize);

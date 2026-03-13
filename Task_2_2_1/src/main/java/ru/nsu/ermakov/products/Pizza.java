@@ -6,6 +6,7 @@ public class Pizza implements Food {
     private final int id;
     private int orderId;
     private final int cookingTime = 2000;
+
     /**
      * Конструктор как трек у Бабангиды.
      */
@@ -25,9 +26,10 @@ public class Pizza implements Food {
      * Геттер размера.
      */
     @Override
-    public int getSize () {
+    public int getSize() {
         return 2;
     }
+
     /**
      * Геттер времени готовки.
      */
@@ -43,6 +45,7 @@ public class Pizza implements Food {
     public int getOrderId() {
         return orderId;
     }
+
     /**
      * Сеттер id заказа.
      */
@@ -50,6 +53,7 @@ public class Pizza implements Food {
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
+
     /**
      * Клонирование объекта.
      */

@@ -5,5 +5,5 @@ public interface Drink extends Product {
     /**
      * Геттер времени подготовки.
      */
-    public long getProcessingTime();
+    long getProcessingTime();
 }

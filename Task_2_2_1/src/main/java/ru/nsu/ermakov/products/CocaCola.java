@@ -6,6 +6,7 @@ public class CocaCola implements Drink {
     private final int id;
     private int orderId;
     private final long processingTime = 0;
+
     /**
      * Конструктор как трек у Бабангиды.
      */
@@ -25,7 +26,7 @@ public class CocaCola implements Drink {
      * Геттер размера.
      */
     @Override
-    public int getSize () {
+    public int getSize() {
         return 1;
     }
 
@@ -36,6 +37,7 @@ public class CocaCola implements Drink {
     public long getProcessingTime() {
         return processingTime;
     }
+
     /**
      * Геттер id заказа.
      */
@@ -43,6 +45,7 @@ public class CocaCola implements Drink {
     public int getOrderId() {
         return orderId;
     }
+
     /**
      * Сеттер id заказа.
      */
@@ -50,6 +53,7 @@ public class CocaCola implements Drink {
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
+
     /**
      * Клонирование объекта.
      */

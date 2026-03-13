@@ -4,5 +4,5 @@ public interface Food extends Product {
     /**
      * Геттер времени готовки.
      */
-    public long getCookingTime();
+    long getCookingTime();
 }

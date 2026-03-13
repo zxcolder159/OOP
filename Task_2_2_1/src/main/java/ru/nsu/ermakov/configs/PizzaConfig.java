@@ -9,6 +9,7 @@ public class PizzaConfig {
     public List<BakerData> bakers;
     public List<CourierData> couriers;
     public List<BaristaData> baristas;
+
     /**
      * Вложенный класс, где имя.
      */
@@ -22,6 +23,7 @@ public class PizzaConfig {
     public static class CourierData {
         public int boxSize;
     }
+
     /**
      * Вложенный класс, где имя.
      */

@@ -1,7 +1,6 @@
 package ru.nsu.ermakov.staff;
 
 import ru.nsu.ermakov.products.Food;
-import ru.nsu.ermakov.products.Product;
 import ru.nsu.ermakov.warehouse.Warehouse;
 import java.util.LinkedList;
 
@@ -13,6 +12,7 @@ public class Baker implements Runnable {
     private final LinkedList<Food> cookingItems;
     private String name;
     private final Warehouse warehouse;
+
     /**
      * Конструктор.
      */
@@ -21,19 +21,21 @@ public class Baker implements Runnable {
         cookingItems = new LinkedList<>();
         this.warehouse = warehouse;
     }
+
     /**
      * Геттер имени.
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     /**
      * Геттер имени.
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
+
     /**
      * Геттер размера очереди.
      */
@@ -59,7 +61,7 @@ public class Baker implements Runnable {
      * Логика готовки продукта.
      */
     @Override
-    public void run () {
+    public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 Food food = null;
@@ -68,14 +70,14 @@ public class Baker implements Runnable {
                     while (cookingItems.isEmpty()) {
                         cookingItems.wait();
                     }
-                    food = cookingItems.remove(0);
+                    food = cookingItems.removeFirst();
                 }
 
 
                 Thread.sleep(food.getCookingTime());
                 warehouse.addProduct(food);
                 System.out.println("Пекарь " + name + " приготовил заказ №" + food.getOrderId()
-                + " тип товара по ID" + food.getId());
+                    + " тип товара по ID" + food.getId());
             }
         } catch (InterruptedException e) {
             System.out.println("Пекарь " + name + " закончил смену и уходит домой.");

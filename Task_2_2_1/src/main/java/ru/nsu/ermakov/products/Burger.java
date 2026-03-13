@@ -6,10 +6,11 @@ public class Burger implements Food {
     private final int id;
     private int orderId;
     private final long cookingTime = 1000;
+
     /**
      * Конструктор как трек у Бабангиды.
      */
-    public Burger (@JsonProperty("id") int id) {
+    public Burger(@JsonProperty("id") int id) {
         this.id = id;
     }
 
@@ -25,7 +26,7 @@ public class Burger implements Food {
      * Геттер размера.
      */
     @Override
-    public int getSize () {
+    public int getSize() {
         return 1;
     }
 
@@ -36,6 +37,7 @@ public class Burger implements Food {
     public long getCookingTime() {
         return cookingTime;
     }
+
     /**
      * Геттер id заказа.
      */
@@ -43,6 +45,7 @@ public class Burger implements Food {
     public int getOrderId() {
         return orderId;
     }
+
     /**
      * Сеттер id заказа.
      */
@@ -50,6 +53,7 @@ public class Burger implements Food {
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
+
     /**
      * Клонирование объекта.
      */

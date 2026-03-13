@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * Интерфейс для продуктов.
- * В лабе есть только 1 вид пиццы, но этот интерфейс добавит расширяемость кода, и вообще в стилистике ООП.
+ * В лабе только 1 вид пиццы, но интерфейс добавит расширяемость кода, и вообще в стилистике ООП.
  */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -13,30 +13,33 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         property = "type" // Оставляем один дискриминатор
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Pizza.class, name = "pizza"),
-        @JsonSubTypes.Type(value = Burger.class, name = "burger"),
-        @JsonSubTypes.Type(value = CocaCola.class, name = "cola")
+    @JsonSubTypes.Type(value = Pizza.class, name = "pizza"),
+    @JsonSubTypes.Type(value = Burger.class, name = "burger"),
+    @JsonSubTypes.Type(value = CocaCola.class, name = "cola")
 })
 public interface Product {
     /**
      * Геттер размера.
      */
-    public int getSize();
-    /**
-     * Геттер id.
-     */
-    public int getId();
+    int getSize();
 
     /**
      * Геттер id.
      */
-    public int getOrderId();
+    int getId();
+
+    /**
+     * Геттер id.
+     */
+    int getOrderId();
+
     /**
      * Геттер времени готовки.
      */
-    public void setOrderId(int orderId);
+    void setOrderId(int orderId);
+
     /**
      * Клонирование объекта.
      */
-    public Product clone();
+    Product clone();
 }

@@ -2,9 +2,7 @@ package ru.nsu.ermakov.staff;
 
 
 import ru.nsu.ermakov.products.Drink;
-import ru.nsu.ermakov.products.Food;
 import ru.nsu.ermakov.warehouse.Warehouse;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,16 +23,17 @@ public class Barista implements Runnable {
     /**
      * Геттер имени.
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     /**
      * Геттер имени.
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
+
     /**
      * Геттер размера очереди.
      */
@@ -54,11 +53,12 @@ public class Barista implements Runnable {
             drinkingItems.notifyAll();
         }
     }
+
     /**
      * Логика готовки продукта.
      */
     @Override
-    public void run () {
+    public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 Drink drink = null;
@@ -67,7 +67,7 @@ public class Barista implements Runnable {
                     while (drinkingItems.isEmpty()) {
                         drinkingItems.wait();
                     }
-                    drink = drinkingItems.remove(0);
+                    drink = drinkingItems.removeFirst();
                 }
 
 

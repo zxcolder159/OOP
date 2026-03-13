@@ -3,7 +3,6 @@ package ru.nsu.ermakov.warehouse;
 import ru.nsu.ermakov.products.Product;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Класс склада для пиццы.
@@ -12,10 +11,11 @@ public class Warehouse {
     public final int storageSize;
     private final LinkedList<Product> storage;
     private int countOfProducts;
+
     /**
      * Конструктор.
      */
-    public Warehouse (int storageSize) {
+    public Warehouse(int storageSize) {
         this.storageSize = storageSize;
         storage = new LinkedList<>();
         countOfProducts = 0;
@@ -40,12 +40,11 @@ public class Warehouse {
     /**
      * Забрать максимальное количество продуктов с помощью курьера.
      */
-    public synchronized ArrayList<Product> takeProduct (int maxSize) {
-        while(storage.isEmpty()) {
+    public synchronized ArrayList<Product> takeProduct(int maxSize) {
+        while (storage.isEmpty()) {
             try {
                 wait();
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return new ArrayList<>();
             }

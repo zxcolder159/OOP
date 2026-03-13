@@ -13,6 +13,7 @@ public class OrderConfig {
      * Конструктор, как трек у Бабангиды.
      */
     public OrderConfig() {}
+
     /**
      * Конструктор, как трек у Бабангиды.
      */

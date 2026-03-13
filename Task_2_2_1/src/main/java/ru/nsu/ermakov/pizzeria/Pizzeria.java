@@ -8,7 +8,6 @@ import ru.nsu.ermakov.staff.Baker;
 import ru.nsu.ermakov.staff.Barista;
 import ru.nsu.ermakov.staff.Courier;
 import ru.nsu.ermakov.warehouse.Warehouse;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -17,39 +16,39 @@ public class Pizzeria {
     private final List<Baker> bakers;
     private final List<Courier> couriers;
     private final List<Barista> baristas;
-    private Warehouse warehouse;
+    private final Warehouse warehouse;
     List<Thread> threads = new ArrayList<>();
 
     /**
      * Конструктор, как трек у Бабангиды.
      */
-    public Pizzeria (PizzaConfig pizzaConfig, Warehouse warehouse, CountDownLatch latch) {
+    public Pizzeria(PizzaConfig pizzaConfig, Warehouse warehouse, CountDownLatch latch) {
         this.warehouse = warehouse;
         this.bakers = new ArrayList<>();
         this.couriers = new ArrayList<>();
         this.baristas = new ArrayList<>();
-        for(PizzaConfig.BakerData bakerData : pizzaConfig.bakers) {
+        for (PizzaConfig.BakerData bakerData : pizzaConfig.bakers) {
             this.bakers.add(new Baker(bakerData.name, warehouse));
         }
 
-        for(PizzaConfig.BaristaData baristaData : pizzaConfig.baristas) {
+        for (PizzaConfig.BaristaData baristaData : pizzaConfig.baristas) {
             this.baristas.add(new Barista(baristaData.name, warehouse));
         }
 
-        for(PizzaConfig.CourierData courierData : pizzaConfig.couriers) {
+        for (PizzaConfig.CourierData courierData : pizzaConfig.couriers) {
             this.couriers.add(new Courier(courierData.boxSize, warehouse, latch));
         }
-        for(Baker baker : bakers) {
+        for (Baker baker : bakers) {
             Thread temp = new Thread(baker);
             threads.add(temp);
             temp.start();
         }
-        for(Courier courier : couriers) {
+        for (Courier courier : couriers) {
             Thread temp = new Thread(courier);
             threads.add(temp);
             temp.start();
         }
-        for(Barista barista : baristas) {
+        for (Barista barista : baristas) {
             Thread temp = new Thread(barista);
             threads.add(temp);
             temp.start();
@@ -94,11 +93,12 @@ public class Pizzeria {
             default -> System.out.println("Непонятно, что это за продукт: " + product);
         }
     }
+
     /**
      * Останавливает работу пиццерии.
      */
-    public void stopPizzeria () {
-        for(Thread thread : threads) {
+    public void stopPizzeria() {
+        for (Thread thread : threads) {
             thread.interrupt();
         }
     }
