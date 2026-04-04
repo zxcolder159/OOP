@@ -60,15 +60,15 @@ public class Barista implements Runnable {
                 try {
                     Thread.sleep(drink.getProcessingTime());
                     warehouse.addProduct(drink);
-                    System.out.println(
-                        STR."Халдей \{name} приготовил заказ №\{drink.getOrderId()} тип товара по ID\{drink.getId()}");
+                    System.out.println("Халдей " + name + " приготовил заказ №" + drink.getOrderId()
+                            + " тип товара по ID" + drink.getId());
                 } catch (InterruptedException e) {
-                    System.out.println(STR."Халдей \{name} закончил смену и уходит домой.");
+                    System.out.println("Халдей " + name + " закончил смену и уходит домой.");
                     break;
                 }
             }
         } catch (InterruptedException e) {
-            System.out.println(STR."Халдей \{name} закончил смену и уходит домой.");
+            System.out.println("Халдей " + name + " закончил смену и уходит домой.");
         }
     }
 }
