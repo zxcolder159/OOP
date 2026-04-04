@@ -2,14 +2,25 @@ package ru.nsu.ermakov.atomicqueue;
 
 import java.util.ArrayDeque;
 
+/**
+ * Потокобезопасная очередь на основе ArrayDeque.
+ * * @param <T> тип элементов в очереди
+ */
 public class AtomicQueue<T> {
 	private final ArrayDeque<T> deque = new ArrayDeque<>();
 	private final int capacity;
 
+	/**
+	 * Создает очередь с максимальной вместимостью (Integer.MAX_VALUE).
+	 */
 	public AtomicQueue() {
 		this(Integer.MAX_VALUE);
 	}
 
+	/**
+	 * Создает очередь с заданной вместимостью.
+	 * * @param capacity максимальная вместимость очереди
+	 */
 	public AtomicQueue(int capacity) {
 		this.capacity = capacity;
 	}
