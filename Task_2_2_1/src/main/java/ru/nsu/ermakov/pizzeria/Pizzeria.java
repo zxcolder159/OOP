@@ -75,7 +75,12 @@ public class Pizzeria {
                     }
                 }
                 if (bestBaker != null) {
-                    bestBaker.addProductToBaker(food);
+                    try {
+                        bestBaker.addProductToBaker(food);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        System.out.println("Добавление заказа было прервано");
+                    }
                 } else {
                     System.out.println("В пиццерии нет поваров!");
                 }
@@ -89,7 +94,12 @@ public class Pizzeria {
                     }
                 }
                 if (bestBarista != null) {
-                    bestBarista.addProductToBarista(drink);
+                    try {
+                        bestBarista.addProductToBarista(drink);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        System.out.println("Добавление заказа было прервано");
+                    }
                 } else {
                     System.out.println("В пиццерии нет барист!");
                 }

@@ -1,15 +1,15 @@
 package ru.nsu.ermakov.staff;
 
+import ru.nsu.ermakov.atomicqueue.AtomicQueue;
 import ru.nsu.ermakov.products.Food;
 import ru.nsu.ermakov.warehouse.Warehouse;
-import java.util.LinkedList;
 
 /**
  * Пекарь из пицеррии.
  */
 public class Baker implements Runnable {
 
-    private final LinkedList<Food> cookingItems;
+    private final AtomicQueue<Food> cookingItems;
     private String name;
     private final Warehouse warehouse;
 
@@ -18,7 +18,7 @@ public class Baker implements Runnable {
      */
     public Baker(String name, Warehouse warehouse) {
         this.name = name;
-        cookingItems = new LinkedList<>();
+        cookingItems = new AtomicQueue<>();
         this.warehouse = warehouse;
     }
 
@@ -40,20 +40,14 @@ public class Baker implements Runnable {
      * Геттер размера очереди.
      */
     public int getOrderSize() {
-        synchronized (cookingItems) {
-            return cookingItems.size();
-        }
-
+        return cookingItems.size();
     }
 
     /**
      * Добавить продукт в список продуктов для готовки.
      */
-    public void addProductToBaker(Food food) {
-        synchronized (cookingItems) {
-            cookingItems.add(food);
-            cookingItems.notifyAll();
-        }
+    public void addProductToBaker(Food food) throws InterruptedException {
+        cookingItems.add(food);
     }
 
 
@@ -64,20 +58,18 @@ public class Baker implements Runnable {
     public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                Food food = null;
+                Food food = cookingItems.poll();
 
-                synchronized (cookingItems) {
-                    while (cookingItems.isEmpty()) {
-                        cookingItems.wait();
-                    }
-                    food = cookingItems.removeFirst();
+
+                try {
+                    Thread.sleep(food.getCookingTime());
+                    warehouse.addProduct(food);
+                    System.out.println("Пекарь " + name + " приготовил заказ №" + food.getOrderId()
+                        + " тип товара по ID" + food.getId());
+                } catch (InterruptedException e) {
+                    System.out.println("Пекарь " + name + " закончил смену и уходит домой.");
+                    break;
                 }
-
-
-                Thread.sleep(food.getCookingTime());
-                warehouse.addProduct(food);
-                System.out.println("Пекарь " + name + " приготовил заказ №" + food.getOrderId()
-                    + " тип товара по ID" + food.getId());
             }
         } catch (InterruptedException e) {
             System.out.println("Пекарь " + name + " закончил смену и уходит домой.");

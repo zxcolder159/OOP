@@ -1,15 +1,15 @@
 package ru.nsu.ermakov.warehouse;
 
+import ru.nsu.ermakov.atomicqueue.AtomicQueue;
 import ru.nsu.ermakov.products.Product;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * Класс склада для пиццы.
  */
 public class Warehouse {
     public final int storageSize;
-    private final LinkedList<Product> storage;
+    private final AtomicQueue<Product> storage;
     private int countOfProducts;
 
     /**
@@ -17,48 +17,54 @@ public class Warehouse {
      */
     public Warehouse(int storageSize) {
         this.storageSize = storageSize;
-        storage = new LinkedList<>();
+        storage = new AtomicQueue<>(storageSize);
         countOfProducts = 0;
     }
 
     /**
      * Добавить продукт в хранилище.
      */
-    public synchronized void addProduct(Product product) {
+    public void addProduct(Product product) throws InterruptedException {
         while (countOfProducts + product.getSize() > storageSize) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                return;
-            }
+            Thread.sleep(100); // Простой等待 пока освободится место
         }
         storage.add(product);
         countOfProducts += product.getSize();
-        notifyAll();
     }
 
     /**
      * Забрать максимальное количество продуктов с помощью курьера.
      */
-    public synchronized ArrayList<Product> takeProduct(int maxSize) {
-        while (storage.isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return new ArrayList<>();
-            }
-        }
+    public ArrayList<Product> takeProduct(int maxSize) throws InterruptedException {
         ArrayList<Product> toDeliver = new ArrayList<>();
         int currentBagSize = 0;
 
-        while (!storage.isEmpty() && (currentBagSize + storage.peek().getSize() <= maxSize)) {
-            Product p = storage.remove();
-            countOfProducts -= p.getSize();
-            currentBagSize += p.getSize();
-            toDeliver.add(p);
+        // Берем первый продукт
+        Product first = storage.poll();
+        if (first != null && first.getSize() <= maxSize) {
+            toDeliver.add(first);
+            countOfProducts -= first.getSize();
+            currentBagSize += first.getSize();
+        } else if (first != null) {
+            // Возвращаем обратно если не помещается
+            storage.add(first);
         }
-        notifyAll();
+
+        // Берем остальные продукты
+        while (currentBagSize > 0) {
+            Product next = storage.peek();
+            if (next != null && currentBagSize + next.getSize() <= maxSize) {
+                Product p = storage.poll();
+                if (p != null) {
+                    toDeliver.add(p);
+                    countOfProducts -= p.getSize();
+                    currentBagSize += p.getSize();
+                }
+            } else {
+                break;
+            }
+        }
+
         return toDeliver;
     }
 

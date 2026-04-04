@@ -1,23 +1,22 @@
 package ru.nsu.ermakov.staff;
 
-
+import ru.nsu.ermakov.atomicqueue.AtomicQueue;
 import ru.nsu.ermakov.products.Drink;
 import ru.nsu.ermakov.warehouse.Warehouse;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Халдей, разносящий напитки.
  */
 public class Barista implements Runnable {
-    private final List<Drink> drinkingItems;
+    private final AtomicQueue<Drink> drinkingItems;
     private String name;
     private final Warehouse warehouse;
 
     public Barista(String name, Warehouse warehouse) {
         this.name = name;
         this.warehouse = warehouse;
-        drinkingItems = new LinkedList<>();
+        drinkingItems = new AtomicQueue<>();
     }
 
     /**
@@ -38,20 +37,14 @@ public class Barista implements Runnable {
      * Геттер размера очереди.
      */
     public int getOrderSize() {
-        synchronized (drinkingItems) {
-            return drinkingItems.size();
-        }
-
+        return drinkingItems.size();
     }
 
     /**
      * Добавить продукт в список продуктов для готовки.
      */
-    public void addProductToBarista(Drink drink) {
-        synchronized (drinkingItems) {
-            drinkingItems.add(drink);
-            drinkingItems.notifyAll();
-        }
+    public void addProductToBarista(Drink drink) throws InterruptedException {
+        drinkingItems.add(drink);
     }
 
     /**
@@ -61,23 +54,21 @@ public class Barista implements Runnable {
     public void run() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                Drink drink = null;
+                Drink drink = drinkingItems.poll();
 
-                synchronized (drinkingItems) {
-                    while (drinkingItems.isEmpty()) {
-                        drinkingItems.wait();
-                    }
-                    drink = drinkingItems.removeFirst();
+
+                try {
+                    Thread.sleep(drink.getProcessingTime());
+                    warehouse.addProduct(drink);
+                    System.out.println(
+                        STR."Халдей \{name} приготовил заказ №\{drink.getOrderId()} тип товара по ID\{drink.getId()}");
+                } catch (InterruptedException e) {
+                    System.out.println(STR."Халдей \{name} закончил смену и уходит домой.");
+                    break;
                 }
-
-
-                Thread.sleep(drink.getProcessingTime());
-                warehouse.addProduct(drink);
-                System.out.println("Халдей " + name + " приготовил заказ №" + drink.getOrderId()
-                        + " тип товара по ID" + drink.getId());
             }
         } catch (InterruptedException e) {
-            System.out.println("Халдей " + name + " закончил смену и уходит домой.");
+            System.out.println(STR."Халдей \{name} закончил смену и уходит домой.");
         }
     }
 }
