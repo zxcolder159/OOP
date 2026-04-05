@@ -2,7 +2,9 @@ package ru.nsu.ermakov.configs;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Тестовый класс для проверки конфигурации склада.
@@ -17,7 +19,6 @@ class WarehouseConfigTest {
     @DisplayName("Создание WarehouseConfig по умолчанию")
     void testDefaultConstructor() {
         WarehouseConfig config = new WarehouseConfig();
-        
         assertNotNull(config);
         assertEquals(0, config.storageSize);
     }
@@ -29,7 +30,6 @@ class WarehouseConfigTest {
     @DisplayName("Создание WarehouseConfig с параметром")
     void testParameterizedConstructor() {
         WarehouseConfig config = new WarehouseConfig(100);
-        
         assertNotNull(config);
         assertEquals(100, config.storageSize);
     }
@@ -41,10 +41,8 @@ class WarehouseConfigTest {
     @DisplayName("Установка и получение storageSize")
     void testStorageSizeSetterGetter() {
         WarehouseConfig config = new WarehouseConfig();
-        
         config.storageSize = 50;
         assertEquals(50, config.storageSize);
-        
         config.storageSize = 200;
         assertEquals(200, config.storageSize);
     }
@@ -58,7 +56,6 @@ class WarehouseConfigTest {
         WarehouseConfig config1 = new WarehouseConfig(10);
         WarehouseConfig config2 = new WarehouseConfig(50);
         WarehouseConfig config3 = new WarehouseConfig(1000);
-        
         assertEquals(10, config1.storageSize);
         assertEquals(50, config2.storageSize);
         assertEquals(1000, config3.storageSize);
@@ -71,7 +68,6 @@ class WarehouseConfigTest {
     @DisplayName("Нулевое значение storageSize")
     void testZeroStorageSize() {
         WarehouseConfig config = new WarehouseConfig(0);
-        
         assertEquals(0, config.storageSize);
     }
 
@@ -82,7 +78,6 @@ class WarehouseConfigTest {
     @DisplayName("Отрицательное значение storageSize")
     void testNegativeStorageSize() {
         WarehouseConfig config = new WarehouseConfig(-10);
-        
         assertEquals(-10, config.storageSize);
     }
 
@@ -93,7 +88,6 @@ class WarehouseConfigTest {
     @DisplayName("Максимальное значение storageSize")
     void testMaxStorageSize() {
         WarehouseConfig config = new WarehouseConfig(Integer.MAX_VALUE);
-        
         assertEquals(Integer.MAX_VALUE, config.storageSize);
     }
 
@@ -104,12 +98,9 @@ class WarehouseConfigTest {
     @DisplayName("Изменение storageSize после создания")
     void testModifyStorageSizeAfterCreation() {
         WarehouseConfig config = new WarehouseConfig(100);
-        
         assertEquals(100, config.storageSize);
-        
         config.storageSize = 150;
         assertEquals(150, config.storageSize);
-        
         config.storageSize = 0;
         assertEquals(0, config.storageSize);
     }

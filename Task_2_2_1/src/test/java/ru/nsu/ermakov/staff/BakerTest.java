@@ -6,10 +6,25 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import ru.nsu.ermakov.products.Food;
 import ru.nsu.ermakov.warehouse.Warehouse;
+import ru.nsu.ermakov.atomicqueue.AtomicQueue;
+import java.lang.reflect.Field;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.after;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Тестовый класс для проверки функциональности пекаря.
@@ -59,12 +74,11 @@ class BakerTest {
     /**
      * Вспомогательный метод для проверки пустоты очереди готовки.
      */
-    private boolean isCookingItemsEmpty(Baker b) {
+    private boolean isCookingItemsEmpty(Baker baker) {
         try {
-            java.lang.reflect.Field field = Baker.class.getDeclaredField("cookingItems");
+            Field field = Baker.class.getDeclaredField("cookingItems");
             field.setAccessible(true);
-            ru.nsu.ermakov.atomicqueue.AtomicQueue<Food> queue = 
-                (ru.nsu.ermakov.atomicqueue.AtomicQueue<Food>) field.get(b);
+            AtomicQueue<Food> queue = (AtomicQueue<Food>) field.get(baker);
             return queue.isEmpty();
         } catch (Exception e) {
             return false;
@@ -187,16 +201,16 @@ class BakerTest {
      */
     @Test
     void testConcurrentAddProducts() throws InterruptedException {
-        final int NUM_THREADS = 5;
-        final int PRODUCTS_PER_THREAD = 10;
-        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
-        java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(NUM_THREADS);
+        final int numThreads = 5;
+        final int productsPerThread = 10;
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+        CountDownLatch latch = new CountDownLatch(numThreads);
 
-        for (int i = 0; i < NUM_THREADS; i++) {
+        for (int i = 0; i < numThreads; i++) {
             final int threadId = i;
             executor.submit(() -> {
                 try {
-                    for (int j = 0; j < PRODUCTS_PER_THREAD; j++) {
+                    for (int j = 0; j < productsPerThread; j++) {
                         Food mockFood = mock(Food.class);
                         doReturn(threadId * 100 + j).when(mockFood).getId();
                         doReturn(10L).when(mockFood).getCookingTime();
@@ -212,8 +226,8 @@ class BakerTest {
             });
         }
 
-        latch.await(5, java.util.concurrent.TimeUnit.SECONDS);
-        assertEquals(NUM_THREADS * PRODUCTS_PER_THREAD, baker.getOrderSize());
+        latch.await(5, TimeUnit.SECONDS);
+        assertEquals(numThreads * productsPerThread, baker.getOrderSize());
 
         executor.shutdown();
     }
@@ -226,7 +240,7 @@ class BakerTest {
         baker.addProductToBaker(food);
         baker.addProductToBaker(anotherFood);
 
-        java.util.concurrent.BlockingQueue<Food> processedOrder = new java.util.concurrent.LinkedBlockingQueue<>();
+        LinkedBlockingQueue<Food> processedOrder = new LinkedBlockingQueue<>();
 
         doAnswer(invocation -> {
             processedOrder.add(invocation.getArgument(0));
