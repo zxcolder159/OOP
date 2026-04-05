@@ -58,7 +58,7 @@ tasks.withType(Javadoc).configureEach {
 
 checkstyle {
     toolVersion = '10.12.4'
-    configFile = file("${rootDir}/google_checks.xml")
+    configFile = file("${rootDir}/.github/google_checks.xml")
     maxWarnings = 0
     maxErrors = 0
 }
