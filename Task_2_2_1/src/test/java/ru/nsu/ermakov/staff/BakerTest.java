@@ -75,6 +75,7 @@ class BakerTest {
     /**
      * Вспомогательный метод для проверки пустоты очереди готовки.
      */
+    @SuppressWarnings("unchecked")
     private boolean isCookingItemsEmpty(Baker baker) {
         try {
             Field field = Baker.class.getDeclaredField("cookingItems");
