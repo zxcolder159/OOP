@@ -11,11 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import ru.nsu.ermakov.atomicqueue.AtomicQueue;
 import ru.nsu.ermakov.products.Food;
 import ru.nsu.ermakov.warehouse.Warehouse;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
