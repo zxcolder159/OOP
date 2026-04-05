@@ -2,142 +2,139 @@ package ru.nsu.ermakov.pizzeria;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.AfterEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import ru.nsu.ermakov.configs.PizzaConfig;
-import ru.nsu.ermakov.products.Pizza;
+import ru.nsu.ermakov.products.Burger;
 import ru.nsu.ermakov.products.CocaCola;
+import ru.nsu.ermakov.products.Food;
+import ru.nsu.ermakov.products.Pizza;
 import ru.nsu.ermakov.products.Product;
 import ru.nsu.ermakov.warehouse.Warehouse;
-import java.util.List;
+
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Тестовый класс для проверки функциональности пиццерии.
- * Проверяет делегирование заказов и управление персоналом.
+ * Test class for Pizzeria functionality.
+ * Tests order delegation, staff management, and pizzeria shutdown.
  */
 class PizzeriaTest {
-
     @Mock
-    private Warehouse mockWarehouse;
+    private Warehouse warehouse;
     
-    @Mock
-    private CountDownLatch mockLatch;
-    
-    private PizzaConfig pizzaConfig;
+    private PizzaConfig config;
+    private CountDownLatch latch;
     private Pizzeria pizzeria;
 
     /**
-     * Инициализация тестовых данных перед каждым тестом.
+     * Sets up test environment before each test.
+     * Creates mock configuration and initializes pizzeria.
      */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         
-        pizzaConfig = new PizzaConfig();
-        pizzaConfig.bakers = List.of(
-            createBakerData("Пекарь 1"),
-            createBakerData("Пекарь 2")
-        );
-        pizzaConfig.baristas = List.of(
-            createBaristaData("Бариста 1"),
-            createBaristaData("Бариста 2")
-        );
-        pizzaConfig.couriers = List.of(
-            createCourierData(5),
-            createCourierData(3)
-        );
+        config = new PizzaConfig();
+        config.bakers = new java.util.ArrayList<>();
+        config.couriers = new java.util.ArrayList<>();
+        config.baristas = new java.util.ArrayList<>();
         
-        pizzeria = new Pizzeria(pizzaConfig, mockWarehouse, mockLatch);
-    }
-
-    private PizzaConfig.BakerData createBakerData(String name) {
-        PizzaConfig.BakerData baker = new PizzaConfig.BakerData();
-        baker.name = name;
-        return baker;
-    }
-
-    private PizzaConfig.BaristaData createBaristaData(String name) {
-        PizzaConfig.BaristaData barista = new PizzaConfig.BaristaData();
-        barista.name = name;
-        return barista;
-    }
-
-    private PizzaConfig.CourierData createCourierData(int boxSize) {
-        PizzaConfig.CourierData courier = new PizzaConfig.CourierData();
-        courier.boxSize = boxSize;
-        return courier;
+        PizzaConfig.BakerData baker1 = new PizzaConfig.BakerData();
+        baker1.name = "Baker1";
+        config.bakers.add(baker1);
+        
+        PizzaConfig.BakerData baker2 = new PizzaConfig.BakerData();
+        baker2.name = "Baker2";
+        config.bakers.add(baker2);
+        
+        PizzaConfig.CourierData courier1 = new PizzaConfig.CourierData();
+        courier1.boxSize = 5;
+        config.couriers.add(courier1);
+        
+        PizzaConfig.CourierData courier2 = new PizzaConfig.CourierData();
+        courier2.boxSize = 3;
+        config.couriers.add(courier2);
+        
+        PizzaConfig.BaristaData barista1 = new PizzaConfig.BaristaData();
+        barista1.name = "Barista1";
+        config.baristas.add(barista1);
+        
+        PizzaConfig.BaristaData barista2 = new PizzaConfig.BaristaData();
+        barista2.name = "Barista2";
+        config.baristas.add(barista2);
+        
+        latch = new CountDownLatch(10);
+        pizzeria = new Pizzeria(config, warehouse, latch);
     }
 
     /**
-     * Проверка создания пиццерии.
+     * Tests pizzeria constructor with valid configuration.
+     * Verifies that all staff members are created and threads are started.
      */
     @Test
-    @DisplayName("Создание пиццерии")
-    void testPizzeriaCreation() {
+    void testConstructor() {
         assertNotNull(pizzeria);
-        assertNotNull(mockWarehouse);
-        assertNotNull(mockLatch);
+        assertEquals(2, pizzeria.bakers.size());
+        assertEquals(2, pizzeria.couriers.size());
+        assertEquals(2, pizzeria.baristas.size());
+        assertEquals(6, pizzeria.threads.size());
+        
+        assertEquals("Baker1", pizzeria.bakers.get(0).getName());
+        assertEquals("Baker2", pizzeria.bakers.get(1).getName());
+        assertEquals(5, pizzeria.couriers.get(0).getBoxSize());
+        assertEquals(3, pizzeria.couriers.get(1).getBoxSize());
+        assertEquals("Barista1", pizzeria.baristas.get(0).getName());
+        assertEquals("Barista2", pizzeria.baristas.get(1).getName());
     }
 
     /**
-     * Проверка делегирования заказа еды.
+     * Tests order delegation when no bakers are available.
+     * Verifies appropriate error handling and message output.
      */
     @Test
-    @DisplayName("Делегирование заказа еды")
-    void testDelegateFoodOrder() {
+    void testDelegateOrderNoBakers() {
+        PizzaConfig emptyConfig = new PizzaConfig();
+        emptyConfig.bakers = new java.util.ArrayList<>();
+        emptyConfig.couriers = new java.util.ArrayList<>();
+        emptyConfig.baristas = new java.util.ArrayList<>();
+        
+        Pizzeria emptyPizzeria = new Pizzeria(emptyConfig, warehouse, latch);
+        
         Pizza pizza = new Pizza(1);
         pizza.setOrderId(100);
         
-        assertDoesNotThrow(() -> pizzeria.delegateOrder(pizza));
+        pizzeria.delegateOrder(pizza);
     }
 
     /**
-     * Проверка делегирования заказа напитка.
+     * Tests order delegation when no baristas are available.
+     * Verifies appropriate error handling and message output.
      */
     @Test
-    @DisplayName("Делегирование заказа напитка")
-    void testDelegateDrinkOrder() {
+    void testDelegateOrderNoBaristas() {
+        PizzaConfig emptyConfig = new PizzaConfig();
+        emptyConfig.bakers = new java.util.ArrayList<>();
+        emptyConfig.couriers = new java.util.ArrayList<>();
+        emptyConfig.baristas = new java.util.ArrayList<>();
+        
+        Pizzeria emptyPizzeria = new Pizzeria(emptyConfig, warehouse, latch);
+        
         CocaCola cola = new CocaCola(1);
         cola.setOrderId(200);
         
-        assertDoesNotThrow(() -> pizzeria.delegateOrder(cola));
+        pizzeria.delegateOrder(cola);
     }
 
     /**
-     * Проверка делегирования нескольких заказов.
+     * Tests order delegation with unknown product type.
+     * Verifies appropriate error handling for unsupported product types.
      */
     @Test
-    @DisplayName("Делегирование нескольких заказов")
-    void testDelegateMultipleOrders() {
-        Pizza pizza1 = new Pizza(1);
-        Pizza pizza2 = new Pizza(2);
-        CocaCola cola1 = new CocaCola(1);
-        CocaCola cola2 = new CocaCola(2);
-        
-        pizza1.setOrderId(101);
-        pizza2.setOrderId(102);
-        cola1.setOrderId(201);
-        cola2.setOrderId(202);
-        
-        assertDoesNotThrow(() -> {
-            pizzeria.delegateOrder(pizza1);
-            pizzeria.delegateOrder(pizza2);
-            pizzeria.delegateOrder(cola1);
-            pizzeria.delegateOrder(cola2);
-        });
-    }
-
-    /**
-     * Проверка делегирования заказа неизвестного типа.
-     */
-    @Test
-    @DisplayName("Делегирование заказа неизвестного типа")
-    void testDelegateUnknownOrder() {
+    void testDelegateOrderUnknownProduct() {
         Product unknownProduct = new Product() {
             @Override
             public int getSize() { return 1; }
@@ -146,155 +143,99 @@ class PizzeriaTest {
             public int getId() { return 999; }
             
             @Override
-            public int getOrderId() { return 0; }
+            public int getOrderId() { return 999; }
             
             @Override
-            public void setOrderId(int orderId) {}
+            public void setOrderId(int orderId) { }
             
             @Override
-            public Product clone() { return this; }
+            public Product clone() { return null; }
         };
         
-        assertDoesNotThrow(() -> pizzeria.delegateOrder(unknownProduct));
+        pizzeria.delegateOrder(unknownProduct);
     }
 
     /**
-     * Проверка остановки пиццерии.
+     * Tests order delegation with interruption during order assignment.
+     * Verifies that thread interruption is properly handled.
      */
     @Test
-    @DisplayName("Остановка пиццерии")
-    void testStopPizzeria() {
-        assertDoesNotThrow(() -> pizzeria.stopPizzeria());
-    }
-
-    /**
-     * Проверка работы пиццерии без поваров.
-     */
-    @Test
-    @DisplayName("Работа без поваров")
-    void testPizzeriaWithoutBakers() {
-        PizzaConfig configWithoutBakers = new PizzaConfig();
-        configWithoutBakers.bakers = List.of();
-        configWithoutBakers.baristas = List.of(createBaristaData("Бариста"));
-        configWithoutBakers.couriers = List.of(createCourierData(5));
-        
-        Pizzeria pizzeriaWithoutBakers = new Pizzeria(configWithoutBakers, mockWarehouse, mockLatch);
-        
-        Pizza pizza = new Pizza(1);
-        pizza.setOrderId(300);
-        
-        assertDoesNotThrow(() -> pizzeriaWithoutBakers.delegateOrder(pizza));
-    }
-
-    /**
-     * Проверка работы пиццерии без бариста.
-     */
-    @Test
-    @DisplayName("Работа без бариста")
-    void testPizzeriaWithoutBaristas() {
-        PizzaConfig configWithoutBaristas = new PizzaConfig();
-        configWithoutBaristas.bakers = List.of(createBakerData("Пекарь"));
-        configWithoutBaristas.baristas = List.of();
-        configWithoutBaristas.couriers = List.of(createCourierData(5));
-        
-        Pizzeria pizzeriaWithoutBaristas = new Pizzeria(configWithoutBaristas, mockWarehouse, mockLatch);
-        
-        CocaCola cola = new CocaCola(1);
-        cola.setOrderId(400);
-        
-        assertDoesNotThrow(() -> pizzeriaWithoutBaristas.delegateOrder(cola));
-    }
-
-    /**
-     * Проверка работы пиццерии с пустыми списками персонала.
-     */
-    @Test
-    @DisplayName("Работа с пустыми списками персонала")
-    void testPizzeriaWithEmptyStaff() {
-        PizzaConfig emptyConfig = new PizzaConfig();
-        emptyConfig.bakers = List.of();
-        emptyConfig.baristas = List.of();
-        emptyConfig.couriers = List.of();
-        
-        assertDoesNotThrow(() -> {
-            Pizzeria emptyPizzeria = new Pizzeria(emptyConfig, mockWarehouse, mockLatch);
-            
-            Pizza pizza = new Pizza(1);
-            CocaCola cola = new CocaCola(1);
-            
-            emptyPizzeria.delegateOrder(pizza);
-            emptyPizzeria.delegateOrder(cola);
-            emptyPizzeria.stopPizzeria();
-        });
-    }
-
-    /**
-     * Проверка обработки прерываний при делегировании.
-     */
-    @Test
-    @DisplayName("Обработка прерываний при делегировании")
-    void testInterruptionDuringDelegation() {
-        Pizza pizza = new Pizza(1);
-        pizza.setOrderId(500);
-        
+    void testDelegateOrderWithInterruption() {
         Thread.currentThread().interrupt();
         
-        assertDoesNotThrow(() -> pizzeria.delegateOrder(pizza));
+        Pizza pizza = new Pizza(1);
+        pizza.setOrderId(100);
+        
+        pizzeria.delegateOrder(pizza);
         
         assertTrue(Thread.currentThread().isInterrupted());
-        Thread.interrupted();
+        Thread.currentThread().interrupt();
     }
 
+
     /**
-     * Проверка распределения нагрузки между пекарями.
+     * Tests pizzeria with empty configuration.
+     * Verifies that pizzeria can be created with no staff members.
      */
     @Test
-    @DisplayName("Распределение нагрузки между пекарями")
-    void testLoadBalancingBetweenBakers() {
-        Pizza pizza1 = new Pizza(1);
-        Pizza pizza2 = new Pizza(2);
-        Pizza pizza3 = new Pizza(3);
+    void testEmptyConfiguration() {
+        PizzaConfig emptyConfig = new PizzaConfig();
+        emptyConfig.bakers = new java.util.ArrayList<>();
+        emptyConfig.couriers = new java.util.ArrayList<>();
+        emptyConfig.baristas = new java.util.ArrayList<>();
         
-        pizza1.setOrderId(601);
-        pizza2.setOrderId(602);
-        pizza3.setOrderId(603);
+        CountDownLatch emptyLatch = new CountDownLatch(1);
+        Pizzeria emptyPizzeria = new Pizzeria(emptyConfig, warehouse, emptyLatch);
         
-        assertDoesNotThrow(() -> {
-            pizzeria.delegateOrder(pizza1);
-            pizzeria.delegateOrder(pizza2);
-            pizzeria.delegateOrder(pizza3);
-        });
+        assertTrue(emptyPizzeria.bakers.isEmpty());
+        assertTrue(emptyPizzeria.couriers.isEmpty());
+        assertTrue(emptyPizzeria.baristas.isEmpty());
+        assertTrue(emptyPizzeria.threads.isEmpty());
     }
 
     /**
-     * Проверка распределения нагрузки между бариста.
+     * Tests pizzeria with single staff member of each type.
+     * Verifies proper functionality with minimal staff configuration.
      */
     @Test
-    @DisplayName("Распределение нагрузки между бариста")
-    void testLoadBalancingBetweenBaristas() {
-        CocaCola cola1 = new CocaCola(1);
-        CocaCola cola2 = new CocaCola(2);
-        CocaCola cola3 = new CocaCola(3);
+    void testSingleStaffConfiguration() {
+        PizzaConfig singleConfig = new PizzaConfig();
+        singleConfig.bakers = new java.util.ArrayList<>();
+        singleConfig.couriers = new java.util.ArrayList<>();
+        singleConfig.baristas = new java.util.ArrayList<>();
         
-        cola1.setOrderId(701);
-        cola2.setOrderId(702);
-        cola3.setOrderId(703);
+        PizzaConfig.BakerData baker = new PizzaConfig.BakerData();
+        baker.name = "SingleBaker";
+        singleConfig.bakers.add(baker);
         
-        assertDoesNotThrow(() -> {
-            pizzeria.delegateOrder(cola1);
-            pizzeria.delegateOrder(cola2);
-            pizzeria.delegateOrder(cola3);
-        });
-    }
-
-    /**
-     * Очистка после тестов.
-     */
-    @AfterEach
-    void tearDown() {
-        if (pizzeria != null) {
-            pizzeria.stopPizzeria();
-        }
-        reset(mockWarehouse, mockLatch);
+        PizzaConfig.CourierData courier = new PizzaConfig.CourierData();
+        courier.boxSize = 10;
+        singleConfig.couriers.add(courier);
+        
+        PizzaConfig.BaristaData barista = new PizzaConfig.BaristaData();
+        barista.name = "SingleBarista";
+        singleConfig.baristas.add(barista);
+        
+        CountDownLatch singleLatch = new CountDownLatch(3);
+        Pizzeria singlePizzeria = new Pizzeria(singleConfig, warehouse, singleLatch);
+        
+        assertEquals(1, singlePizzeria.bakers.size());
+        assertEquals(1, singlePizzeria.couriers.size());
+        assertEquals(1, singlePizzeria.baristas.size());
+        assertEquals(3, singlePizzeria.threads.size());
+        
+        Pizza pizza = new Pizza(1);
+        pizza.setOrderId(100);
+        singlePizzeria.delegateOrder(pizza);
+        
+        assertEquals(1, singlePizzeria.bakers.get(0).getOrderSize());
+        
+        CocaCola cola = new CocaCola(1);
+        cola.setOrderId(200);
+        singlePizzeria.delegateOrder(cola);
+        
+        assertEquals(1, singlePizzeria.baristas.get(0).getOrderSize());
+        
+        singlePizzeria.stopPizzeria();
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
  * Халдей, разносящий напитки.
  */
 public class Barista implements Runnable {
-    private final AtomicQueue<Drink> drinkingItems;
+    final AtomicQueue<Drink> drinkingItems;
     private String name;
     private final Warehouse warehouse;
 

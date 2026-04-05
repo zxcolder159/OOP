@@ -1,184 +1,237 @@
 package ru.nsu.ermakov.products;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
+import ru.nsu.ermakov.products.Burger;
+import ru.nsu.ermakov.products.CocaCola;
+import ru.nsu.ermakov.products.Pizza;
+import ru.nsu.ermakov.products.Product;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Тестовый класс для проверки иерархии продуктов.
- * Проверяет базовый интерфейс Product и его реализацию.
- */
 class ProductTest {
 
-    /**
-     * Проверка интерфейса Product через реализацию Pizza.
-     */
     @Test
-    @DisplayName("Проверка интерфейса Product через Pizza")
-    void testProductInterfaceThroughPizza() {
+    void testPizza() {
         Pizza pizza = new Pizza(1);
         
         assertEquals(1, pizza.getId());
         assertEquals(2, pizza.getSize());
+        assertEquals(2000, pizza.getCookingTime());
         assertEquals(0, pizza.getOrderId());
         
-        pizza.setOrderId(100);
-        assertEquals(100, pizza.getOrderId());
+        pizza.setOrderId(10);
+        assertEquals(10, pizza.getOrderId());
         
-        Product cloned = pizza.clone();
-        assertNotNull(cloned);
-        assertInstanceOf(Pizza.class, cloned);
-        assertEquals(pizza.getId(), cloned.getId());
-        assertEquals(pizza.getSize(), cloned.getSize());
+        Product clonedPizza = pizza.clone();
+        assertNotSame(pizza, clonedPizza);
+        assertEquals(pizza.getId(), clonedPizza.getId());
+        assertEquals(pizza.getSize(), clonedPizza.getSize());
+        assertEquals(pizza.getCookingTime(), ((Pizza) clonedPizza).getCookingTime());
+        assertEquals(0, clonedPizza.getOrderId());
     }
 
-    /**
-     * Проверка интерфейса Product через реализацию Burger.
-     */
     @Test
-    @DisplayName("Проверка интерфейса Product через Burger")
-    void testProductInterfaceThroughBurger() {
+    void testPizzaWithJsonConstructor() {
+        Pizza pizza = new Pizza(5);
+        
+        assertEquals(5, pizza.getId());
+        assertEquals(2, pizza.getSize());
+        assertEquals(2000, pizza.getCookingTime());
+    }
+
+    @Test
+    void testBurger() {
         Burger burger = new Burger(2);
         
         assertEquals(2, burger.getId());
         assertEquals(1, burger.getSize());
+        assertEquals(1000, burger.getCookingTime());
         assertEquals(0, burger.getOrderId());
         
-        burger.setOrderId(200);
-        assertEquals(200, burger.getOrderId());
+        burger.setOrderId(20);
+        assertEquals(20, burger.getOrderId());
         
-        Product cloned = burger.clone();
-        assertNotNull(cloned);
-        assertInstanceOf(Burger.class, cloned);
-        assertEquals(burger.getId(), cloned.getId());
-        assertEquals(burger.getSize(), cloned.getSize());
+        Product clonedBurger = burger.clone();
+        assertNotSame(burger, clonedBurger);
+        assertEquals(burger.getId(), clonedBurger.getId());
+        assertEquals(burger.getSize(), clonedBurger.getSize());
+        assertEquals(burger.getCookingTime(), ((Burger) clonedBurger).getCookingTime());
+        assertEquals(0, clonedBurger.getOrderId());
     }
 
-    /**
-     * Проверка интерфейса Product через реализацию CocaCola.
-     */
     @Test
-    @DisplayName("Проверка интерфейса Product через CocaCola")
-    void testProductInterfaceThroughCocaCola() {
+    void testBurgerWithJsonConstructor() {
+        Burger burger = new Burger(10);
+        
+        assertEquals(10, burger.getId());
+        assertEquals(1, burger.getSize());
+        assertEquals(1000, burger.getCookingTime());
+    }
+
+    @Test
+    void testCocaCola() {
         CocaCola cola = new CocaCola(3);
         
         assertEquals(3, cola.getId());
         assertEquals(1, cola.getSize());
+        assertEquals(0, cola.getProcessingTime());
         assertEquals(0, cola.getOrderId());
         
-        cola.setOrderId(300);
-        assertEquals(300, cola.getOrderId());
-        
-        Product cloned = cola.clone();
-        assertNotNull(cloned);
-        assertInstanceOf(CocaCola.class, cloned);
-        assertEquals(cola.getId(), cloned.getId());
-        assertEquals(cola.getSize(), cloned.getSize());
-    }
-
-    /**
-     * Проверка различных продуктов на равенство по ID.
-     */
-    @Test
-    @DisplayName("Проверка различных продуктов на равенство по ID")
-    void testDifferentProductsWithSameId() {
-        Pizza pizza = new Pizza(1);
-        Burger burger = new Burger(1);
-        CocaCola cola = new CocaCola(1);
-        
-        assertEquals(pizza.getId(), burger.getId());
-        assertEquals(burger.getId(), cola.getId());
-        
-        assertNotEquals(pizza.getSize(), burger.getSize());
-        assertEquals(burger.getSize(), cola.getSize());
-    }
-
-    /**
-     * Проверка клонирования продуктов.
-     */
-    @Test
-    @DisplayName("Проверка клонирования продуктов")
-    void testProductCloning() {
-        Pizza pizza = new Pizza(10);
-        pizza.setOrderId(1000);
-        
-        Product clonedPizza = pizza.clone();
-        assertEquals(pizza.getId(), clonedPizza.getId());
-        assertEquals(pizza.getSize(), clonedPizza.getSize());
-        assertNotSame(pizza, clonedPizza);
-        
-        Burger burger = new Burger(20);
-        burger.setOrderId(2000);
-        
-        Product clonedBurger = burger.clone();
-        assertEquals(burger.getId(), clonedBurger.getId());
-        assertEquals(burger.getSize(), clonedBurger.getSize());
-        assertNotSame(burger, clonedBurger);
-        
-        CocaCola cola = new CocaCola(30);
-        cola.setOrderId(3000);
+        cola.setOrderId(30);
+        assertEquals(30, cola.getOrderId());
         
         Product clonedCola = cola.clone();
+        assertNotSame(cola, clonedCola);
         assertEquals(cola.getId(), clonedCola.getId());
         assertEquals(cola.getSize(), clonedCola.getSize());
-        assertNotSame(cola, clonedCola);
+        assertEquals(cola.getProcessingTime(), ((CocaCola) clonedCola).getProcessingTime());
+        assertEquals(0, clonedCola.getOrderId());
     }
 
-    /**
-     * Проверка полиморфного поведения продуктов.
-     */
     @Test
-    @DisplayName("Проверка полиморфного поведения продуктов")
-    void testPolymorphicBehavior() {
-        Product pizza = new Pizza(1);
-        Product burger = new Burger(2);
-        Product cola = new CocaCola(3);
+    void testCocaColaWithJsonConstructor() {
+        CocaCola cola = new CocaCola(15);
         
+        assertEquals(15, cola.getId());
+        assertEquals(1, cola.getSize());
+        assertEquals(0, cola.getProcessingTime());
+    }
+
+    @Test
+    void testProductInterfaces() {
+        Pizza pizza = new Pizza(1);
+        Burger burger = new Burger(2);
+        CocaCola cola = new CocaCola(3);
+
         assertTrue(pizza instanceof Food);
+        assertTrue(pizza instanceof Product);
+        
         assertTrue(burger instanceof Food);
+        assertTrue(burger instanceof Product);
+        
         assertTrue(cola instanceof Drink);
-        
-        assertInstanceOf(Food.class, pizza);
-        assertInstanceOf(Food.class, burger);
-        assertInstanceOf(Drink.class, cola);
+        assertTrue(cola instanceof Product);
     }
 
-    /**
-     * Проверка установки orderId для разных продуктов.
-     */
     @Test
-    @DisplayName("Проверка установки orderId для разных продуктов")
-    void testOrderIdSetting() {
-        Product[] products = {
-            new Pizza(1),
-            new Burger(2),
-            new CocaCola(3)
-        };
+    void testProductEquality() {
+        Pizza pizza1 = new Pizza(1);
+        Pizza pizza2 = new Pizza(1);
+        Pizza pizza3 = new Pizza(2);
         
-        int[] orderIds = {100, 200, 300};
+        assertEquals(pizza1.getId(), pizza2.getId());
+        assertNotEquals(pizza1.getId(), pizza3.getId());
         
-        for (int i = 0; i < products.length; i++) {
-            products[i].setOrderId(orderIds[i]);
-            assertEquals(orderIds[i], products[i].getOrderId());
-        }
+        pizza1.setOrderId(10);
+        pizza2.setOrderId(10);
+        
+        assertEquals(pizza1.getOrderId(), pizza2.getOrderId());
+        assertEquals(pizza1.getSize(), pizza2.getSize());
+        assertEquals(pizza1.getCookingTime(), pizza2.getCookingTime());
     }
 
-    /**
-     * Проверка неизменности ID после клонирования.
-     */
     @Test
-    @DisplayName("Проверка неизменности ID после клонирования")
-    void testIdImmutabilityAfterClone() {
-        Pizza originalPizza = new Pizza(42);
+    void testProductCloneIndependence() {
+        Pizza originalPizza = new Pizza(1);
+        originalPizza.setOrderId(100);
+        
         Product clonedPizza = originalPizza.clone();
         
-        assertEquals(42, originalPizza.getId());
-        assertEquals(42, clonedPizza.getId());
+        assertNotSame(originalPizza, clonedPizza);
+        assertEquals(originalPizza.getId(), clonedPizza.getId());
         
-        clonedPizza.setOrderId(999);
-        assertEquals(42, originalPizza.getId());
-        assertEquals(42, clonedPizza.getId());
-        assertEquals(0, originalPizza.getOrderId());
-        assertEquals(999, clonedPizza.getOrderId());
+        clonedPizza.setOrderId(200);
+        assertEquals(100, originalPizza.getOrderId());
+        assertEquals(200, clonedPizza.getOrderId());
+    }
+
+    @Test
+    void testProductSizeDifferences() {
+        Pizza pizza = new Pizza(1);
+        Burger burger = new Burger(2);
+        CocaCola cola = new CocaCola(3);
+        
+        assertEquals(2, pizza.getSize());
+        assertEquals(1, burger.getSize());
+        assertEquals(1, cola.getSize());
+    }
+
+    @Test
+    void testProductTimeDifferences() {
+        Pizza pizza = new Pizza(1);
+        Burger burger = new Burger(2);
+        CocaCola cola = new CocaCola(3);
+        
+        assertEquals(2000, pizza.getCookingTime());
+        assertEquals(1000, burger.getCookingTime());
+        assertEquals(0, cola.getProcessingTime());
+    }
+
+    @Test
+    void testProductOrderIdInitialState() {
+        Pizza pizza = new Pizza(1);
+        Burger burger = new Burger(2);
+        CocaCola cola = new CocaCola(3);
+        
+        assertEquals(0, pizza.getOrderId());
+        assertEquals(0, burger.getOrderId());
+        assertEquals(0, cola.getOrderId());
+    }
+
+    @Test
+    void testProductOrderIdUpdate() {
+        Pizza pizza = new Pizza(1);
+        Burger burger = new Burger(2);
+        CocaCola cola = new CocaCola(3);
+        
+        pizza.setOrderId(50);
+        burger.setOrderId(60);
+        cola.setOrderId(70);
+        
+        assertEquals(50, pizza.getOrderId());
+        assertEquals(60, burger.getOrderId());
+        assertEquals(70, cola.getOrderId());
+    }
+
+    @Test
+    void testProductMultipleClones() {
+        Pizza original = new Pizza(5);
+        original.setOrderId(25);
+        
+        Product clone1 = original.clone();
+        Product clone2 = original.clone();
+        
+        assertNotSame(original, clone1);
+        assertNotSame(original, clone2);
+        assertNotSame(clone1, clone2);
+        
+        assertEquals(original.getId(), clone1.getId());
+        assertEquals(original.getId(), clone2.getId());
+        
+        clone1.setOrderId(100);
+        clone2.setOrderId(200);
+        
+        assertEquals(25, original.getOrderId());
+        assertEquals(100, clone1.getOrderId());
+        assertEquals(200, clone2.getOrderId());
+    }
+
+    @Test
+    void testProductConsistentClone() {
+        Pizza pizza = new Pizza(10);
+        Burger burger = new Burger(20);
+        CocaCola cola = new CocaCola(30);
+        
+        Product pizzaClone = pizza.clone();
+        Product burgerClone = burger.clone();
+        Product colaClone = cola.clone();
+        
+        assertTrue(pizzaClone instanceof Pizza);
+        assertTrue(burgerClone instanceof Burger);
+        assertTrue(colaClone instanceof CocaCola);
+        
+        assertEquals(pizza.getSize(), pizzaClone.getSize());
+        assertEquals(burger.getSize(), burgerClone.getSize());
+        assertEquals(cola.getSize(), colaClone.getSize());
     }
 }

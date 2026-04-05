@@ -9,7 +9,7 @@ import ru.nsu.ermakov.warehouse.Warehouse;
  */
 public class Baker implements Runnable {
 
-    private final AtomicQueue<Food> cookingItems;
+    final AtomicQueue<Food> cookingItems;
     private String name;
     private final Warehouse warehouse;
 

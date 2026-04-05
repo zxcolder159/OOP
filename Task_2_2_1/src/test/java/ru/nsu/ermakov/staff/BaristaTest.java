@@ -2,263 +2,285 @@ package ru.nsu.ermakov.staff;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.AfterEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import ru.nsu.ermakov.products.CocaCola;
+import ru.nsu.ermakov.products.Drink;
 import ru.nsu.ermakov.warehouse.Warehouse;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/**
- * Тестовый класс для проверки функциональности бариста.
- * Проверяет работу бариста с напитками и складом.
- */
 class BaristaTest {
-
     @Mock
-    private Warehouse mockWarehouse;
-    
-    private Barista barista;
-    private static final String BARISTA_NAME = "Тестовый бариста";
+    private Warehouse warehouse;
+    @Mock
+    private Drink drink;
+    @Mock
+    private Drink anotherDrink;
 
-    /**
-     * Инициализация тестовых данных перед каждым тестом.
-     */
+    private Barista barista;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        barista = new Barista(BARISTA_NAME, mockWarehouse);
+        barista = new Barista("TestBarista", warehouse);
+
+        when(drink.getId()).thenReturn(1);
+        when(drink.getProcessingTime()).thenReturn(100L);
+        when(drink.getOrderId()).thenReturn(1);
+        when(drink.getSize()).thenReturn(1);
+
+        when(anotherDrink.getId()).thenReturn(2);
+        when(anotherDrink.getProcessingTime()).thenReturn(200L);
+        when(anotherDrink.getOrderId()).thenReturn(2);
+        when(anotherDrink.getSize()).thenReturn(1);
     }
 
-    /**
-     * Проверка создания бариста.
-     */
     @Test
-    @DisplayName("Создание бариста")
-    void testBaristaCreation() {
-        assertEquals(BARISTA_NAME, barista.getName());
+    void testConstructor() {
+        assertEquals("TestBarista", barista.getName());
         assertEquals(0, barista.getOrderSize());
-        assertNotNull(mockWarehouse);
+        assertNotNull(barista.drinkingItems);
+        assertTrue(barista.drinkingItems.isEmpty());
     }
 
-    /**
-     * Проверка получения имени бариста.
-     */
     @Test
-    @DisplayName("Получение имени бариста")
     void testGetName() {
-        assertEquals(BARISTA_NAME, barista.getName());
+        assertEquals("TestBarista", barista.getName());
     }
 
-    /**
-     * Проверка установки имени бариста.
-     */
     @Test
-    @DisplayName("Установка имени бариста")
     void testSetName() {
-        String newName = "Новое имя бариста";
-        barista.setName(newName);
-        assertEquals(newName, barista.getName());
+        barista.setName("NewName");
+        assertEquals("NewName", barista.getName());
     }
 
-    /**
-     * Проверка получения размера очереди заказов.
-     */
     @Test
-    @DisplayName("Получение размера очереди заказов")
     void testGetOrderSize() throws InterruptedException {
         assertEquals(0, barista.getOrderSize());
-        
-        CocaCola cola1 = new CocaCola(1);
-        CocaCola cola2 = new CocaCola(2);
-        
-        barista.addProductToBarista(cola1);
+
+        barista.addProductToBarista(drink);
         assertEquals(1, barista.getOrderSize());
-        
-        barista.addProductToBarista(cola2);
+
+        barista.addProductToBarista(anotherDrink);
         assertEquals(2, barista.getOrderSize());
     }
 
-    /**
-     * Проверка добавления продукта в очередь бариста.
-     */
     @Test
-    @DisplayName("Добавление продукта в очередь бариста")
     void testAddProductToBarista() throws InterruptedException {
-        CocaCola cola = new CocaCola(1);
         assertEquals(0, barista.getOrderSize());
-        
-        barista.addProductToBarista(cola);
+
+        barista.addProductToBarista(drink);
         assertEquals(1, barista.getOrderSize());
+
+        barista.addProductToBarista(anotherDrink);
+        assertEquals(2, barista.getOrderSize());
     }
 
-    /**
-     * Проверка работы бариста в отдельном потоке.
-     */
     @Test
-    @DisplayName("Работа бариста в потоке")
-    void testBaristaRun() throws InterruptedException {
-        CocaCola cola = new CocaCola(1);
-        cola.setOrderId(300);
-        
-        barista.addProductToBarista(cola);
-        
+    void testRunWithSingleProduct() throws InterruptedException {
+        barista.addProductToBarista(drink);
+
         Thread baristaThread = new Thread(barista);
         baristaThread.start();
-        
-        Thread.sleep(500);
-        
-        verify(mockWarehouse, times(1)).addProduct(cola);
-        
+
+        Thread.sleep(150);
+
+        verify(warehouse, after(1000)).addProduct(drink);
         baristaThread.interrupt();
         baristaThread.join(1000);
     }
 
-    /**
-     * Проверка обработки нескольких заказов.
-     */
     @Test
-    @DisplayName("Обработка нескольких заказов")
-    void testMultipleOrders() throws InterruptedException {
-        CocaCola cola1 = new CocaCola(1);
-        CocaCola cola2 = new CocaCola(2);
-        CocaCola cola3 = new CocaCola(3);
-        
-        cola1.setOrderId(301);
-        cola2.setOrderId(302);
-        cola3.setOrderId(303);
-        
-        barista.addProductToBarista(cola1);
-        barista.addProductToBarista(cola2);
-        barista.addProductToBarista(cola3);
-        
-        assertEquals(3, barista.getOrderSize());
-        
+    void testRunWithInterruptedException() throws InterruptedException {
+        barista.addProductToBarista(drink);
+
         Thread baristaThread = new Thread(barista);
         baristaThread.start();
-        
-        Thread.sleep(1000);
-        
-        verify(mockWarehouse, times(3)).addProduct(any(CocaCola.class));
-        
+
+        Thread.sleep(50);
+        baristaThread.interrupt();
+        baristaThread.join(1000);
+
+        verify(warehouse, never()).addProduct(drink);
+    }
+
+    @Test
+    void testRunWithInterruptedExceptionDuringProcessing() throws InterruptedException {
+        barista.addProductToBarista(drink);
+
+        Thread baristaThread = new Thread(barista);
+        baristaThread.start();
+
+        Thread.sleep(50);
+        baristaThread.interrupt();
+        baristaThread.join(1000);
+
+        verify(warehouse, never()).addProduct(drink);
+    }
+
+    @Test
+    void testRunContinuesAfterInterruption() throws InterruptedException {
+        barista.addProductToBarista(drink);
+
+        Thread baristaThread = new Thread(barista);
+        baristaThread.start();
+
+        Thread.sleep(150);
+        verify(warehouse, after(1000)).addProduct(drink);
+
         baristaThread.interrupt();
         baristaThread.join(1000);
     }
 
-    /**
-     * Проверка прерывания работы бариста.
-     */
     @Test
-    @DisplayName("Прерывание работы бариста")
-    void testBaristaInterruption() throws InterruptedException {
-        CocaCola cola = new CocaCola(1);
-        cola.setOrderId(304);
-        
-        barista.addProductToBarista(cola);
-        
+    void testRunWithNoProducts() throws InterruptedException {
         Thread baristaThread = new Thread(barista);
         baristaThread.start();
-        
-        Thread.sleep(100);
-        baristaThread.interrupt();
-        baristaThread.join(1000);
-        
-        assertTrue(baristaThread.isInterrupted() || !baristaThread.isAlive());
-    }
 
-    /**
-     * Проверка работы бариста с пустой очередью.
-     */
-    @Test
-    @DisplayName("Работа с пустой очередью")
-    void testBaristaWithEmptyQueue() throws InterruptedException {
-        Thread baristaThread = new Thread(barista);
-        baristaThread.start();
-        
         Thread.sleep(100);
         assertTrue(baristaThread.isAlive());
-        
+
         baristaThread.interrupt();
         baristaThread.join(1000);
-        
-        assertEquals(0, barista.getOrderSize());
-        verify(mockWarehouse, never()).addProduct(any());
     }
 
-    /**
-     * Проверка добавления null продукта.
-     */
     @Test
-    @DisplayName("Добавление null продукта")
-    void testAddNullProduct() throws InterruptedException {
-        assertEquals(0, barista.getOrderSize());
-        
-        barista.addProductToBarista(null);
+    void testConcurrentAddProducts() throws InterruptedException {
+        final int NUM_THREADS = 5;
+        final int PRODUCTS_PER_THREAD = 10;
+        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
+        java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(NUM_THREADS);
+
+        for (int i = 0; i < NUM_THREADS; i++) {
+            final int threadId = i;
+            executor.submit(() -> {
+                try {
+                    for (int j = 0; j < PRODUCTS_PER_THREAD; j++) {
+                        Drink mockDrink = mock(Drink.class);
+                        doReturn(threadId * 100 + j).when(mockDrink).getId();
+                        doReturn(10L).when(mockDrink).getProcessingTime();
+                        doReturn(threadId * 100 + j).when(mockDrink).getOrderId();
+                        doReturn(1).when(mockDrink).getSize();
+                        barista.addProductToBarista(mockDrink);
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+
+        latch.await(5, java.util.concurrent.TimeUnit.SECONDS);
+        assertEquals(NUM_THREADS * PRODUCTS_PER_THREAD, barista.getOrderSize());
+
+        executor.shutdown();
+    }
+
+    @Test
+    void testBaristaProcessesProductsInOrder() throws InterruptedException {
+        barista.addProductToBarista(drink);
+        barista.addProductToBarista(anotherDrink);
+
+        java.util.concurrent.BlockingQueue<Drink> processedOrder = new java.util.concurrent.LinkedBlockingQueue<>();
+
+        doAnswer(invocation -> {
+            processedOrder.add(invocation.getArgument(0));
+            return null;
+        }).when(warehouse).addProduct(any(Drink.class));
+
+        Thread baristaThread = new Thread(barista);
+        baristaThread.start();
+
+        Thread.sleep(400);
+        baristaThread.interrupt();
+        baristaThread.join(1000);
+
+        assertEquals(2, processedOrder.size());
+        assertEquals(drink, processedOrder.poll());
+        assertEquals(anotherDrink, processedOrder.poll());
+    }
+
+    @Test
+    void testSetNameAffectsToString() {
+        String originalName = barista.getName();
+        barista.setName("NewBaristaName");
+        assertEquals("NewBaristaName", barista.getName());
+        assertNotEquals(originalName, barista.getName());
+    }
+
+    @Test
+    void testOrderSizeAfterProcessing() throws InterruptedException {
+        barista.addProductToBarista(drink);
         assertEquals(1, barista.getOrderSize());
+
+        Thread baristaThread = new Thread(barista);
+        baristaThread.start();
+
+        Thread.sleep(150);
+        assertEquals(0, barista.getOrderSize());
+
+        baristaThread.interrupt();
+        baristaThread.join(1000);
     }
 
-    /**
-     * Проверка одновременной работы нескольких бариста.
-     */
     @Test
-    @DisplayName("Одновременная работа нескольких бариста")
-    void testMultipleBaristas() throws InterruptedException {
-        Barista barista2 = new Barista("Бариста 2", mockWarehouse);
-        
-        CocaCola cola1 = new CocaCola(1);
-        CocaCola cola2 = new CocaCola(2);
-        
-        cola1.setOrderId(401);
-        cola2.setOrderId(402);
-        
-        barista.addProductToBarista(cola1);
-        barista2.addProductToBarista(cola2);
-        
+    void testRunWithZeroProcessingTime() throws InterruptedException {
+        doReturn(0L).when(drink).getProcessingTime();
+        barista.addProductToBarista(drink);
+
+        Thread baristaThread = new Thread(barista);
+        baristaThread.start();
+
+        Thread.sleep(50);
+        verify(warehouse, after(1000)).addProduct(drink);
+
+        baristaThread.interrupt();
+        baristaThread.join(1000);
+    }
+
+    @Test
+    void testRunWithLongProcessingTime() throws InterruptedException {
+        doReturn(500L).when(drink).getProcessingTime();
+        barista.addProductToBarista(drink);
+
+        Thread baristaThread = new Thread(barista);
+        baristaThread.start();
+
+        Thread.sleep(100);
+        assertEquals(0, barista.getOrderSize());
+        verify(warehouse, never()).addProduct(drink);
+
+        Thread.sleep(500);
+        verify(warehouse, after(1000)).addProduct(drink);
+
+        baristaThread.interrupt();
+        baristaThread.join(1000);
+    }
+
+    @Test
+    void testMultipleBaristasWithSameWarehouse() throws InterruptedException {
+        Barista barista2 = new Barista("Barista2", warehouse);
+
+        barista.addProductToBarista(drink);
+        barista2.addProductToBarista(anotherDrink);
+
         Thread thread1 = new Thread(barista);
         Thread thread2 = new Thread(barista2);
-        
+
         thread1.start();
         thread2.start();
-        
-        Thread.sleep(500);
-        
-        verify(mockWarehouse, atLeast(1)).addProduct(any(CocaCola.class));
-        
+
+        Thread.sleep(300);
+
+        verify(warehouse, after(1000)).addProduct(drink);
+        verify(warehouse, after(1000)).addProduct(anotherDrink);
+
         thread1.interrupt();
         thread2.interrupt();
         thread1.join(1000);
         thread2.join(1000);
-    }
-
-    /**
-     * Проверка быстрой обработки напитков (нулевое время).
-     */
-    @Test
-    @DisplayName("Быстрая обработка напитков")
-    void testFastProcessing() throws InterruptedException {
-        CocaCola cola = new CocaCola(1);
-        cola.setOrderId(500);
-        
-        barista.addProductToBarista(cola);
-        
-        Thread baristaThread = new Thread(barista);
-        baristaThread.start();
-        
-        Thread.sleep(100);
-        
-        verify(mockWarehouse, times(1)).addProduct(cola);
-        
-        baristaThread.interrupt();
-        baristaThread.join(1000);
-    }
-
-    /**
-     * Очистка после тестов.
-     */
-    @AfterEach
-    void tearDown() {
-        reset(mockWarehouse);
     }
 }

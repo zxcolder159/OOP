@@ -17,9 +17,9 @@ import java.util.concurrent.CountDownLatch;
  * Пиццерия.
  */
 public class Pizzeria {
-    private final List<Baker> bakers;
-    private final List<Courier> couriers;
-    private final List<Barista> baristas;
+    final List<Baker> bakers;
+    final List<Courier> couriers;
+    final List<Barista> baristas;
     private final Warehouse warehouse;
     List<Thread> threads = new ArrayList<>();
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Warehouse {
     public final int storageSize;
-    private final AtomicQueue<Product> storage;
+    final AtomicQueue<Product> storage;
     private int countOfProducts;
 
     /**

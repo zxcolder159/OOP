@@ -14,7 +14,7 @@ public class Courier implements Runnable {
     private int boxSize;
     private final CountDownLatch latch;
     private final Warehouse warehouse;
-    private List<Product> productsOnCourier;
+    List<Product> productsOnCourier;
 
     /**
      * Конструктор.
