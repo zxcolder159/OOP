@@ -37,11 +37,14 @@ jacocoTestReport {
     }
 }
 tasks.withType(JavaCompile).configureEach {
-    options.compilerArgs += ['--enable-preview']
+    options.compilerArgs += ['--enable-preview', '--release', '21']
 }
 
 tasks.withType(Test).configureEach {
     jvmArgs += ['--enable-preview']
+    doFirst {
+        jvmArgs = ['--enable-preview']
+    }
 }
 
 tasks.withType(JavaExec).configureEach {
