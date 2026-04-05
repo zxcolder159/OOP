@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'checkstyle'
 }
 
 group = 'ru.nsu.ermakov'
@@ -49,4 +50,19 @@ tasks.withType(JavaExec).configureEach {
 tasks.withType(Javadoc).configureEach {
     options.encoding = 'UTF-8'
     options.addStringOption('-release', '21')
+}
+
+checkstyle {
+    toolVersion = '10.12.4'
+    configFile = file("${rootDir}/google_checks.xml")
+    maxWarnings = 0
+    maxErrors = 0
+}
+
+checkstyleMain {
+    source = sourceSets.main.allSource
+}
+
+checkstyleTest {
+    source = sourceSets.test.allSource
 }

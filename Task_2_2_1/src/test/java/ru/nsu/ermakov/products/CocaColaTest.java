@@ -2,7 +2,9 @@ package ru.nsu.ermakov.products;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * Тестовый класс для проверки функциональности Coca-Cola.
@@ -128,13 +130,10 @@ class CocaColaTest {
     @DisplayName("Неизменность полей Coca-Cola")
     void testCocaColaImmutability() {
         CocaCola cola = new CocaCola(42);
-        
+        final long initialProcessingTime = cola.getProcessingTime();
         int initialId = cola.getId();
         int initialSize = cola.getSize();
-        long initialProcessingTime = cola.getProcessingTime();
-        
         cola.setOrderId(777);
-        
         assertEquals(initialId, cola.getId());
         assertEquals(initialSize, cola.getSize());
         assertEquals(initialProcessingTime, cola.getProcessingTime());

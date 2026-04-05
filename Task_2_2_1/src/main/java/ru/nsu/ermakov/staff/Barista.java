@@ -13,6 +13,12 @@ public class Barista implements Runnable {
     private String name;
     private final Warehouse warehouse;
 
+    /**
+     * Конструктор баристы.
+     *
+     * @param name имя баристы
+     * @param warehouse склад для готовых продуктов
+     */
     public Barista(String name, Warehouse warehouse) {
         this.name = name;
         this.warehouse = warehouse;

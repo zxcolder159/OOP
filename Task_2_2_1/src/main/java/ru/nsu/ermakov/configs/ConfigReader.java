@@ -1,7 +1,6 @@
 package ru.nsu.ermakov.configs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 

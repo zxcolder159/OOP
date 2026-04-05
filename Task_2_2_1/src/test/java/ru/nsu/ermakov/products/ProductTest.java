@@ -1,7 +1,10 @@
 package ru.nsu.ermakov.products;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ProductTest {
 
@@ -95,15 +98,12 @@ class ProductTest {
     @Test
     void testProductInterfaces() {
         Pizza pizza = new Pizza(1);
-        Burger burger = new Burger(2);
-        CocaCola cola = new CocaCola(3);
-
         assertTrue(pizza instanceof Food);
         assertTrue(pizza instanceof Product);
-        
+        Burger burger = new Burger(2);
         assertTrue(burger instanceof Food);
         assertTrue(burger instanceof Product);
-        
+        CocaCola cola = new CocaCola(3);
         assertTrue(cola instanceof Drink);
         assertTrue(cola instanceof Product);
     }

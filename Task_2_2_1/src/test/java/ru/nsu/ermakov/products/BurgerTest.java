@@ -2,7 +2,9 @@ package ru.nsu.ermakov.products;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * Тестовый класс для проверки функциональности бургера.
@@ -128,13 +130,10 @@ class BurgerTest {
     @DisplayName("Неизменность полей бургера")
     void testBurgerImmutability() {
         Burger burger = new Burger(42);
-        
+        final long initialCookingTime = burger.getCookingTime();
         int initialId = burger.getId();
         int initialSize = burger.getSize();
-        long initialCookingTime = burger.getCookingTime();
-        
         burger.setOrderId(777);
-        
         assertEquals(initialId, burger.getId());
         assertEquals(initialSize, burger.getSize());
         assertEquals(initialCookingTime, burger.getCookingTime());

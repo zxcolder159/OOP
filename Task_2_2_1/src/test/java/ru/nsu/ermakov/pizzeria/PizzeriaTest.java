@@ -121,15 +121,28 @@ class PizzeriaTest {
     void testDelegateOrderUnknownProduct() {
         Product unknownProduct = new Product() {
             @Override
-            public int getSize() { return 1; }
+            public int getSize() {
+                return 1;
+            }
+
             @Override
-            public int getId() { return 999; }
+            public int getId() {
+                return 999;
+            }
+
             @Override
-            public int getOrderId() { return 999; }
+            public int getOrderId() {
+                return 999;
+            }
+
             @Override
-            public void setOrderId(int orderId) { }
+            public void setOrderId(int orderId) {
+            }
+
             @Override
-            public Product clone() { return null; }
+            public Product clone() {
+                return null;
+            }
         };
         pizzeria.delegateOrder(unknownProduct);
     }

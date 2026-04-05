@@ -8,8 +8,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class AtomicQueueTest {
     private AtomicQueue<String> queue;
@@ -169,18 +173,18 @@ class AtomicQueueTest {
 
     @Test
     void testConcurrentOperations() throws InterruptedException {
-        final int NUM_THREADS = 10;
-        final int OPERATIONS_PER_THREAD = 100;
-        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
-        CountDownLatch latch = new CountDownLatch(NUM_THREADS);
+        final int numThreads = 10;
+        final int operationsPerThread = 100;
+        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+        CountDownLatch latch = new CountDownLatch(numThreads);
         AtomicInteger totalAdded = new AtomicInteger(0);
         AtomicInteger totalRemoved = new AtomicInteger(0);
 
-        for (int i = 0; i < NUM_THREADS; i++) {
+        for (int i = 0; i < numThreads; i++) {
             final int threadId = i;
             executor.submit(() -> {
                 try {
-                    for (int j = 0; j < OPERATIONS_PER_THREAD; j++) {
+                    for (int j = 0; j < operationsPerThread; j++) {
                         if (j % 2 == 0) {
                             queue.add("thread-" + threadId + "-item-" + j);
                             totalAdded.incrementAndGet();
@@ -248,12 +252,12 @@ class AtomicQueueTest {
 
     @Test
     void testMultipleNotifyAll() throws InterruptedException {
-        final int WAITING_THREADS = 5;
-        ExecutorService executor = Executors.newFixedThreadPool(WAITING_THREADS);
-        CountDownLatch startLatch = new CountDownLatch(WAITING_THREADS);
-        CountDownLatch completeLatch = new CountDownLatch(WAITING_THREADS);
+        final int waitingThreads = 5;
+        ExecutorService executor = Executors.newFixedThreadPool(waitingThreads);
+        CountDownLatch startLatch = new CountDownLatch(waitingThreads);
+        CountDownLatch completeLatch = new CountDownLatch(waitingThreads);
 
-        for (int i = 0; i < WAITING_THREADS; i++) {
+        for (int i = 0; i < waitingThreads; i++) {
             executor.submit(() -> {
                 try {
                     startLatch.countDown();

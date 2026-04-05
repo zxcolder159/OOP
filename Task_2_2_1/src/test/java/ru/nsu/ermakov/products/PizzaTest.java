@@ -2,7 +2,9 @@ package ru.nsu.ermakov.products;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * Тестовый класс для проверки функциональности пиццы.
@@ -127,14 +129,11 @@ class PizzaTest {
     @Test
     @DisplayName("Неизменность полей пиццы")
     void testPizzaImmutability() {
-        Pizza pizza = new Pizza(42);
-        
+        Pizza pizza = new Pizza(1);
+        final long initialCookingTime = pizza.getCookingTime();
         int initialId = pizza.getId();
         int initialSize = pizza.getSize();
-        long initialCookingTime = pizza.getCookingTime();
-        
         pizza.setOrderId(777);
-        
         assertEquals(initialId, pizza.getId());
         assertEquals(initialSize, pizza.getSize());
         assertEquals(initialCookingTime, pizza.getCookingTime());

@@ -2,7 +2,10 @@ package ru.nsu.ermakov.configs;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 
 /**
@@ -76,27 +79,20 @@ class PizzaConfigTest {
     @Test
     @DisplayName("Заполненная конфигурация")
     void testFilledConfig() {
-        PizzaConfig config = new PizzaConfig();
-        
         PizzaConfig.BakerData baker1 = new PizzaConfig.BakerData();
         baker1.name = "Пекарь 1";
-        
         PizzaConfig.BakerData baker2 = new PizzaConfig.BakerData();
         baker2.name = "Пекарь 2";
-        
         PizzaConfig.BaristaData barista1 = new PizzaConfig.BaristaData();
         barista1.name = "Бариста 1";
-        
         PizzaConfig.CourierData courier1 = new PizzaConfig.CourierData();
         courier1.boxSize = 5;
-        
         PizzaConfig.CourierData courier2 = new PizzaConfig.CourierData();
         courier2.boxSize = 3;
-        
+        PizzaConfig config = new PizzaConfig();
         config.bakers = List.of(baker1, baker2);
         config.baristas = List.of(barista1);
         config.couriers = List.of(courier1, courier2);
-        
         assertEquals(2, config.bakers.size());
         assertEquals(1, config.baristas.size());
         assertEquals(2, config.couriers.size());
