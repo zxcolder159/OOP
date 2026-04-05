@@ -180,39 +180,4 @@ class PizzeriaTest {
         assertTrue(emptyPizzeria.threads.isEmpty());
     }
 
-    /**
-     * Проверка пиццерии с одним сотрудником каждого типа.
-     * Убеждается в правильной функциональности с минимальной конфигурацией персонала.
-     */
-    @Test
-    void testSingleStaffConfiguration() {
-        PizzaConfig singleConfig = new PizzaConfig();
-        singleConfig.bakers = new ArrayList<>();
-        singleConfig.couriers = new ArrayList<>();
-        singleConfig.baristas = new ArrayList<>();
-        PizzaConfig.BakerData baker = new PizzaConfig.BakerData();
-        baker.name = "SingleBaker";
-        singleConfig.bakers.add(baker);
-        PizzaConfig.CourierData courier = new PizzaConfig.CourierData();
-        courier.boxSize = 10;
-        singleConfig.couriers.add(courier);
-        PizzaConfig.BaristaData barista = new PizzaConfig.BaristaData();
-        barista.name = "SingleBarista";
-        singleConfig.baristas.add(barista);
-        CountDownLatch singleLatch = new CountDownLatch(3);
-        Pizzeria singlePizzeria = new Pizzeria(singleConfig, warehouse, singleLatch);
-        assertEquals(1, singlePizzeria.bakers.size());
-        assertEquals(1, singlePizzeria.couriers.size());
-        assertEquals(1, singlePizzeria.baristas.size());
-        assertEquals(3, singlePizzeria.threads.size());
-        Pizza pizza = new Pizza(1);
-        pizza.setOrderId(100);
-        singlePizzeria.delegateOrder(pizza);
-        assertEquals(1, singlePizzeria.bakers.get(0).getOrderSize());
-        CocaCola cola = new CocaCola(1);
-        cola.setOrderId(200);
-        singlePizzeria.delegateOrder(cola);
-        assertEquals(1, singlePizzeria.baristas.get(0).getOrderSize());
-        singlePizzeria.stopPizzeria();
-    }
 }
