@@ -1,11 +1,6 @@
 package ru.nsu.ermakov.products;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.ermakov.products.Burger;
-import ru.nsu.ermakov.products.CocaCola;
-import ru.nsu.ermakov.products.Pizza;
-import ru.nsu.ermakov.products.Product;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {

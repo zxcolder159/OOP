@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 import ru.nsu.ermakov.products.Pizza;
 import ru.nsu.ermakov.products.Product;
-
 import java.util.ArrayList;
 
 /**
@@ -18,6 +17,10 @@ class WarehouseTest {
     private Warehouse warehouse;
     private Pizza testPizza;
 
+    /**
+     * Инициализация тестовых данных перед каждым тестом.
+     * Создает склад и тестовую пиццу.
+     */
     @BeforeEach
     void setUp() {
         warehouse = new Warehouse(10);

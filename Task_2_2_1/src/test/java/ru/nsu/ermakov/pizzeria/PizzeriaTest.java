@@ -5,22 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import ru.nsu.ermakov.configs.PizzaConfig;
-import ru.nsu.ermakov.products.Burger;
 import ru.nsu.ermakov.products.CocaCola;
-import ru.nsu.ermakov.products.Food;
 import ru.nsu.ermakov.products.Pizza;
 import ru.nsu.ermakov.products.Product;
 import ru.nsu.ermakov.warehouse.Warehouse;
-
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 /**
- * Test class for Pizzeria functionality.
- * Tests order delegation, staff management, and pizzeria shutdown.
+ * Тестовый класс для проверки функциональности пиццерии.
+ * Проверяет делегирование заказов, управление персоналом и остановку пиццерии.
  */
 class PizzeriaTest {
     @Mock
@@ -31,8 +25,8 @@ class PizzeriaTest {
     private Pizzeria pizzeria;
 
     /**
-     * Sets up test environment before each test.
-     * Creates mock configuration and initializes pizzeria.
+     * Инициализация тестовых данных перед каждым тестом.
+     * Создает мок конфигурации и инициализирует пиццерию.
      */
     @BeforeEach
     void setUp() {
@@ -72,8 +66,8 @@ class PizzeriaTest {
     }
 
     /**
-     * Tests pizzeria constructor with valid configuration.
-     * Verifies that all staff members are created and threads are started.
+     * Проверка конструктора пиццерии с валидной конфигурацией.
+     * Убеждается что весь персонал создан и потоки запущены.
      */
     @Test
     void testConstructor() {
@@ -92,8 +86,8 @@ class PizzeriaTest {
     }
 
     /**
-     * Tests order delegation when no bakers are available.
-     * Verifies appropriate error handling and message output.
+     * Проверка делегирования заказа когда нет доступных пекарей.
+     * Убеждается в правильной обработке ошибок и выводе сообщений.
      */
     @Test
     void testDelegateOrderNoBakers() {
@@ -111,8 +105,8 @@ class PizzeriaTest {
     }
 
     /**
-     * Tests order delegation when no baristas are available.
-     * Verifies appropriate error handling and message output.
+     * Проверка делегирования заказа когда нет доступных бариста.
+     * Убеждается в правильной обработке ошибок и выводе сообщений.
      */
     @Test
     void testDelegateOrderNoBaristas() {
@@ -130,8 +124,8 @@ class PizzeriaTest {
     }
 
     /**
-     * Tests order delegation with unknown product type.
-     * Verifies appropriate error handling for unsupported product types.
+     * Проверка делегирования заказа с неизвестным типом продукта.
+     * Убеждается в правильной обработке ошибок для неподдерживаемых типов продуктов.
      */
     @Test
     void testDelegateOrderUnknownProduct() {
@@ -156,8 +150,8 @@ class PizzeriaTest {
     }
 
     /**
-     * Tests order delegation with interruption during order assignment.
-     * Verifies that thread interruption is properly handled.
+     * Проверка делегирования заказа с прерыванием во время назначения.
+     * Убеждается что прерывание потока обрабатывается правильно.
      */
     @Test
     void testDelegateOrderWithInterruption() {
@@ -174,8 +168,8 @@ class PizzeriaTest {
 
 
     /**
-     * Tests pizzeria with empty configuration.
-     * Verifies that pizzeria can be created with no staff members.
+     * Проверка пиццерии с пустой конфигурацией.
+     * Убеждается что пиццерия может быть создана без персонала.
      */
     @Test
     void testEmptyConfiguration() {
@@ -194,8 +188,8 @@ class PizzeriaTest {
     }
 
     /**
-     * Tests pizzeria with single staff member of each type.
-     * Verifies proper functionality with minimal staff configuration.
+     * Проверка пиццерии с одним сотрудником каждого типа.
+     * Убеждается в правильной функциональности с минимальной конфигурацией персонала.
      */
     @Test
     void testSingleStaffConfiguration() {

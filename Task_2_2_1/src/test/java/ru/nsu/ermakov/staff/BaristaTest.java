@@ -11,6 +11,10 @@ import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Тестовый класс для проверки функциональности бариста.
+ * Проверяет создание баристы, управление заказами и обработку напитков.
+ */
 class BaristaTest {
     @Mock
     private Warehouse warehouse;
@@ -21,6 +25,10 @@ class BaristaTest {
 
     private Barista barista;
 
+    /**
+     * Инициализация тестовых данных перед каждым тестом.
+     * Создает моки склада, напитков и экземпляр баристы.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -37,6 +45,9 @@ class BaristaTest {
         when(anotherDrink.getSize()).thenReturn(1);
     }
 
+    /**
+     * Проверка конструктора баристы.
+     */
     @Test
     void testConstructor() {
         assertEquals("TestBarista", barista.getName());
@@ -45,17 +56,26 @@ class BaristaTest {
         assertTrue(barista.drinkingItems.isEmpty());
     }
 
+    /**
+     * Проверка получения имени баристы.
+     */
     @Test
     void testGetName() {
         assertEquals("TestBarista", barista.getName());
     }
 
+    /**
+     * Проверка установки имени баристы.
+     */
     @Test
     void testSetName() {
         barista.setName("NewName");
         assertEquals("NewName", barista.getName());
     }
 
+    /**
+     * Проверка получения размера заказа.
+     */
     @Test
     void testGetOrderSize() throws InterruptedException {
         assertEquals(0, barista.getOrderSize());
@@ -67,6 +87,9 @@ class BaristaTest {
         assertEquals(2, barista.getOrderSize());
     }
 
+    /**
+     * Проверка добавления продукта баристе.
+     */
     @Test
     void testAddProductToBarista() throws InterruptedException {
         assertEquals(0, barista.getOrderSize());
@@ -78,6 +101,9 @@ class BaristaTest {
         assertEquals(2, barista.getOrderSize());
     }
 
+    /**
+     * Проверка работы баристы с одним продуктом.
+     */
     @Test
     void testRunWithSingleProduct() throws InterruptedException {
         barista.addProductToBarista(drink);
@@ -92,6 +118,9 @@ class BaristaTest {
         baristaThread.join(1000);
     }
 
+    /**
+     * Проверка обработки прерывания во время работы.
+     */
     @Test
     void testRunWithInterruptedException() throws InterruptedException {
         barista.addProductToBarista(drink);
@@ -106,6 +135,9 @@ class BaristaTest {
         verify(warehouse, never()).addProduct(drink);
     }
 
+    /**
+     * Проверка обработки прерывания во время обработки продукта.
+     */
     @Test
     void testRunWithInterruptedExceptionDuringProcessing() throws InterruptedException {
         barista.addProductToBarista(drink);
@@ -120,6 +152,9 @@ class BaristaTest {
         verify(warehouse, never()).addProduct(drink);
     }
 
+    /**
+     * Проверка продолжения работы после прерывания.
+     */
     @Test
     void testRunContinuesAfterInterruption() throws InterruptedException {
         barista.addProductToBarista(drink);
@@ -134,6 +169,9 @@ class BaristaTest {
         baristaThread.join(1000);
     }
 
+    /**
+     * Проверка работы баристы без продуктов.
+     */
     @Test
     void testRunWithNoProducts() throws InterruptedException {
         Thread baristaThread = new Thread(barista);
@@ -146,6 +184,9 @@ class BaristaTest {
         baristaThread.join(1000);
     }
 
+    /**
+     * Проверка параллельного добавления продуктов.
+     */
     @Test
     void testConcurrentAddProducts() throws InterruptedException {
         final int NUM_THREADS = 5;
@@ -179,6 +220,9 @@ class BaristaTest {
         executor.shutdown();
     }
 
+    /**
+     * Проверка обработки продуктов в порядке очереди.
+     */
     @Test
     void testBaristaProcessesProductsInOrder() throws InterruptedException {
         barista.addProductToBarista(drink);
@@ -203,6 +247,9 @@ class BaristaTest {
         assertEquals(anotherDrink, processedOrder.poll());
     }
 
+    /**
+     * Проверка влияния изменения имени на строковое представление.
+     */
     @Test
     void testSetNameAffectsToString() {
         String originalName = barista.getName();
@@ -211,6 +258,9 @@ class BaristaTest {
         assertNotEquals(originalName, barista.getName());
     }
 
+    /**
+     * Проверка размера заказа после обработки.
+     */
     @Test
     void testOrderSizeAfterProcessing() throws InterruptedException {
         barista.addProductToBarista(drink);
@@ -226,6 +276,9 @@ class BaristaTest {
         baristaThread.join(1000);
     }
 
+    /**
+     * Проверка работы с нулевым временем обработки.
+     */
     @Test
     void testRunWithZeroProcessingTime() throws InterruptedException {
         doReturn(0L).when(drink).getProcessingTime();
@@ -241,6 +294,9 @@ class BaristaTest {
         baristaThread.join(1000);
     }
 
+    /**
+     * Проверка работы с долгим временем обработки.
+     */
     @Test
     void testRunWithLongProcessingTime() throws InterruptedException {
         doReturn(500L).when(drink).getProcessingTime();
@@ -260,6 +316,9 @@ class BaristaTest {
         baristaThread.join(1000);
     }
 
+    /**
+     * Проверка работы нескольких барист с одним складом.
+     */
     @Test
     void testMultipleBaristasWithSameWarehouse() throws InterruptedException {
         Barista barista2 = new Barista("Barista2", warehouse);

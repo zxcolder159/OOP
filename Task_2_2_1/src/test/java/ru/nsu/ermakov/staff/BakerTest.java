@@ -11,6 +11,10 @@ import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Тестовый класс для проверки функциональности пекаря.
+ * Проверяет создание пекаря, управление заказами и обработку еды.
+ */
 class BakerTest {
     @Mock
     private Warehouse warehouse;
@@ -21,6 +25,10 @@ class BakerTest {
 
     private Baker baker;
 
+    /**
+     * Инициализация тестовых данных перед каждым тестом.
+     * Создает моки склада, еды и экземпляр пекаря.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -37,6 +45,9 @@ class BakerTest {
         when(anotherFood.getSize()).thenReturn(1);
     }
 
+    /**
+     * Проверка конструктора пекаря.
+     */
     @Test
     void testConstructor() {
         assertEquals("TestBaker", baker.getName());
@@ -45,6 +56,9 @@ class BakerTest {
         assertTrue(baker.cookingItems.isEmpty());
     }
 
+    /**
+     * Вспомогательный метод для проверки пустоты очереди готовки.
+     */
     private boolean isCookingItemsEmpty(Baker b) {
         try {
             java.lang.reflect.Field field = Baker.class.getDeclaredField("cookingItems");
@@ -57,17 +71,26 @@ class BakerTest {
         }
     }
 
+    /**
+     * Проверка получения имени пекаря.
+     */
     @Test
     void testGetName() {
         assertEquals("TestBaker", baker.getName());
     }
 
+    /**
+     * Проверка установки имени пекаря.
+     */
     @Test
     void testSetName() {
         baker.setName("NewName");
         assertEquals("NewName", baker.getName());
     }
 
+    /**
+     * Проверка получения размера заказа.
+     */
     @Test
     void testGetOrderSize() throws InterruptedException {
         assertEquals(0, baker.getOrderSize());
@@ -79,6 +102,9 @@ class BakerTest {
         assertEquals(2, baker.getOrderSize());
     }
 
+    /**
+     * Проверка добавления продукта пекарю.
+     */
     @Test
     void testAddProductToBaker() throws InterruptedException {
         assertEquals(0, baker.getOrderSize());
@@ -90,6 +116,9 @@ class BakerTest {
         assertEquals(2, baker.getOrderSize());
     }
 
+    /**
+     * Проверка обработки прерывания во время работы.
+     */
     @Test
     void testRunWithInterruptedException() throws InterruptedException {
         baker.addProductToBaker(food);
@@ -104,6 +133,9 @@ class BakerTest {
         verify(warehouse, never()).addProduct(food);
     }
 
+    /**
+     * Проверка обработки прерывания во время готовки.
+     */
     @Test
     void testRunWithInterruptedExceptionDuringCooking() throws InterruptedException {
         baker.addProductToBaker(food);
@@ -118,6 +150,9 @@ class BakerTest {
         verify(warehouse, never()).addProduct(food);
     }
 
+    /**
+     * Проверка продолжения работы после прерывания.
+     */
     @Test
     void testRunContinuesAfterInterruption() throws InterruptedException {
         baker.addProductToBaker(food);
@@ -132,6 +167,9 @@ class BakerTest {
         bakerThread.join(1000);
     }
 
+    /**
+     * Проверка работы пекаря без продуктов.
+     */
     @Test
     void testRunWithNoProducts() throws InterruptedException {
         Thread bakerThread = new Thread(baker);
@@ -144,6 +182,9 @@ class BakerTest {
         bakerThread.join(1000);
     }
 
+    /**
+     * Проверка параллельного добавления продуктов.
+     */
     @Test
     void testConcurrentAddProducts() throws InterruptedException {
         final int NUM_THREADS = 5;
@@ -177,6 +218,9 @@ class BakerTest {
         executor.shutdown();
     }
 
+    /**
+     * Проверка обработки продуктов в порядке очереди.
+     */
     @Test
     void testBakerProcessesProductsInOrder() throws InterruptedException {
         baker.addProductToBaker(food);
@@ -201,6 +245,9 @@ class BakerTest {
         assertEquals(anotherFood, processedOrder.poll());
     }
 
+    /**
+     * Проверка влияния изменения имени на строковое представление.
+     */
     @Test
     void testSetNameAffectsToString() {
         String originalName = baker.getName();
@@ -209,6 +256,9 @@ class BakerTest {
         assertNotEquals(originalName, baker.getName());
     }
 
+    /**
+     * Проверка размера заказа после обработки.
+     */
     @Test
     void testOrderSizeAfterProcessing() throws InterruptedException {
         baker.addProductToBaker(food);
