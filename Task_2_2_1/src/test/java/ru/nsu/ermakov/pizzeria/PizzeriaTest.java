@@ -1,16 +1,19 @@
 package ru.nsu.ermakov.pizzeria;
 
+import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import ru.nsu.ermakov.configs.PizzaConfig;
 import ru.nsu.ermakov.products.CocaCola;
 import ru.nsu.ermakov.products.Pizza;
 import ru.nsu.ermakov.products.Product;
 import ru.nsu.ermakov.warehouse.Warehouse;
-import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
