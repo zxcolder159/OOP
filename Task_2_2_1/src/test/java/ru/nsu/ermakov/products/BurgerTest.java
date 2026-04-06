@@ -68,24 +68,6 @@ class BurgerTest {
     }
 
     /**
-     * Проверка клонирования бургера.
-     */
-    @Test
-    @DisplayName("Клонирование бургера")
-    void testBurgerClone() {
-        Burger original = new Burger(99);
-        original.setOrderId(999);
-        
-        Burger cloned = (Burger) original.clone();
-        
-        assertNotSame(original, cloned);
-        assertEquals(original.getId(), cloned.getId());
-        assertEquals(original.getSize(), cloned.getSize());
-        assertEquals(original.getCookingTime(), cloned.getCookingTime());
-        assertEquals(0, cloned.getOrderId());
-    }
-
-    /**
      * Проверка реализации интерфейса Food.
      */
     @Test

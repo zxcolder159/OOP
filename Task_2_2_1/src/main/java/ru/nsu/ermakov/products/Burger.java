@@ -57,11 +57,4 @@ public class Burger implements Food {
         this.orderId = orderId;
     }
 
-    /**
-     * Клонирование объекта.
-     */
-    @Override
-    public Product clone() {
-        return new Burger(id);
-    }
 }
