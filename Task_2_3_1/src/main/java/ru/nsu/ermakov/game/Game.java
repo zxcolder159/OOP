@@ -1,17 +1,28 @@
 package ru.nsu.ermakov.game;
 
+import ru.nsu.ermakov.model.GameState;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
     Field field;
     Snake snake;
     boolean isGameOver = false;
+    boolean isPaused = false;
+    int score = 0;
+    private long moveIntervalNanos = 100_000_000L;
+    private Direction lastMoveDirection = Direction.UP;
+    private static final int INITIAL_SNAKE_SIZE = 3;
     /**
-     * Конструктор, как трек бабангиды.
+     * Конструктор игры.
      *
-     * @param field
+     * @param field игровое поле
+     * @param point начальная позиция змейки
      */
     public Game (Cell[][] field, Point point) {
         this.field = new Field(field.length, field[0].length);
-        this.snake = new Snake(point); // <--- Кстати, тут лучше добавить this для порядка
+        this.snake = new Snake(point);
         for(int i = 0; i < field.length; i++) {
             System.arraycopy(field[i], 0, this.field.field[i], 0, field[0].length);
         }
@@ -22,9 +33,10 @@ public class Game {
      * Метод делающий шаг.
      */
     public void step() {
-        if(isGameOver) {
+        if(isGameOver || isPaused) {
             return;
         }
+        lastMoveDirection = snake.getDirection();
         MoveResult moveResult = snake.move(field);
         if(moveResult == MoveResult.DIED) {
             isGameOver = true;
@@ -32,11 +44,68 @@ public class Game {
         if(moveResult == MoveResult.ATE_FOOD) {
             field.field[snake.body.getFirst().x()][snake.body.getFirst().y()] = Cell.EMPTY;
             spawnFood();
+            score++;
+            increaseSpeed(2_000_000L);
         }
     }
 
     /**
-     * Проверяет можно ли заспавнить еду по рандомным координатом, и спаунит если можно.
+     * Переключить состояние паузы.
+     */
+    public void togglePause() {
+        if (!isGameOver) {
+            isPaused = !isPaused;
+        }
+    }
+
+    /**
+     * Проверить, находится ли игра на паузе.
+     */
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    /**
+     * Получить текущий счет (размер змеи - начальный размер).
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Получить интервал между шагами змейки в наносекундах.
+     */
+    public long getMoveIntervalNanos() {
+        return moveIntervalNanos;
+    }
+
+    /**
+     * Установить интервал между шагами змейки.
+     * Меньше значение = быстрее змейка.
+     *
+     * @param intervalNanos интервал в наносекундах
+     */
+    public void setMoveIntervalNanos(long intervalNanos) {
+        if (intervalNanos > 0) {
+            this.moveIntervalNanos = intervalNanos;
+        }
+    }
+
+    /**
+     * Увеличить скорость змейки (уменьшить интервал).
+     *
+     * @param deltaNanos на сколько уменьшить интервал
+     */
+    public void increaseSpeed(long deltaNanos) {
+        long newInterval = moveIntervalNanos - deltaNanos;
+        if (newInterval < 50_000_000L) {
+            newInterval = 50_000_000L;
+        }
+        moveIntervalNanos = newInterval;
+    }
+
+    /**
+     * Спавнит еду на случайной пустой клетке.
      */
     private void spawnFood () {
 
@@ -50,7 +119,7 @@ public class Game {
     }
 
     /**
-     * Получаем рандомное значение на поле.
+     * Возвращает случайные координаты на поле.
      */
     private Point getRandomCord () {
         int randomNumberX = (int) (Math.random() * field.width);
@@ -59,21 +128,33 @@ public class Game {
     }
 
     /**
-     * Геттер, состояния игры.
+     * Метод для изменения направления змейки с валидацией.
+     *
+     * @param direction новое направление
+     * @return true если направление изменено, false если изменение отклонено
+     */
+    public boolean changeSnakeDirection(Direction direction) {
+        return snake.changeDirection(direction);
+    }
+
+    /**
+     * Возвращает текущее состояние игры для отображения.
+     *
+     * @return объект GameState с копией данных
+     */
+    public GameState getState() {
+        List<Point> bodyCopy = new ArrayList<>(snake.getBody());
+        Cell[][] fieldCopy = new Cell[field.width][field.height];
+        for (int i = 0; i < field.width; i++) {
+            System.arraycopy(field.field[i], 0, fieldCopy[i], 0, field.height);
+        }
+        return new GameState(bodyCopy, lastMoveDirection, fieldCopy, isGameOver, field.width, field.height, isPaused, score);
+    }
+
+    /**
+     * Проверяет, закончена ли игра.
      */
     public boolean isGameOver() {
         return isGameOver;
-    }
-    /**
-     * Геттер, змеи.
-     */
-    public Snake getSnake() {
-        return snake;
-    }
-    /**
-     * Геттер, поля.
-     */
-    public Field getField() {
-        return field;
     }
 }

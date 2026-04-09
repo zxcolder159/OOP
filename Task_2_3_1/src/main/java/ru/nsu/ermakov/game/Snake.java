@@ -10,9 +10,9 @@ public class Snake {
     Direction direction;
 
     /**
-     * Конструктор, как трек бабангиды.
+     * Конструктор змейки.
      *
-     * @param startPoint
+     * @param startPoint начальная позиция головы змейки
      */
     public Snake(Point startPoint) {
         body.add(startPoint);
@@ -22,25 +22,26 @@ public class Snake {
     }
 
     /**
-     * Изменить направление.
+     * Изменить направление с валидацией (нельзя двигаться в противоположную сторону).
      *
-     * @param direction
-     *
+     * @param direction новое направление
+     * @return true если направление изменено, false если изменение отклонено
      */
-    void changeDirection(Direction direction) {
+    public boolean changeDirection(Direction direction) {
         if(this.direction == Direction.UP && direction == Direction.DOWN) {
-            return;
+            return false;
         }
         if(this.direction == Direction.DOWN && direction == Direction.UP) {
-            return;
+            return false;
         }
         if(this.direction == Direction.LEFT && direction == Direction.RIGHT) {
-            return;
+            return false;
         }
         if(this.direction == Direction.RIGHT && direction == Direction.LEFT) {
-            return;
+            return false;
         }
         this.direction = direction;
+        return true;
     }
 
     /**
@@ -50,7 +51,6 @@ public class Snake {
         int newX, newY;
         newX = body.getFirst().x();
         newY = body.getFirst().y();
-        //Свитч, как учил Хаверко(мастер снюса).
         switch (direction) {
             case UP :
                 newY -= 1;
@@ -83,20 +83,16 @@ public class Snake {
     }
 
     /**
-     * Геттер тела змеи.
+     * Возвращает тело змейки.
      */
     public LinkedList<Point> getBody() {
         return body;
     }
 
     /**
-     * Геттер направления.
+     * Возвращает направление движения змейки.
      */
     public Direction getDirection() {
         return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 }

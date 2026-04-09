@@ -10,11 +10,10 @@ public class Field {
     public Cell[][] field;
 
     /**
-     * Конструктор, как трек бабангиды.
+     * Конструктор поля.
      *
-     * @param width
-     *
-     * @param height
+     * @param width ширина поля
+     * @param height высота поля
      */
     public Field(int width, int height) {
         this.width = width;
@@ -24,7 +23,7 @@ public class Field {
     }
 
     /**
-     * Геттер ширины.
+     * Возвращает ширину поля.
      */
     public int getWidth() {
         return width;
@@ -32,7 +31,7 @@ public class Field {
 
 
     /**
-     * Геттер высоты.
+     * Возвращает высоту поля.
      */
     public int getHeight() {
         return height;
