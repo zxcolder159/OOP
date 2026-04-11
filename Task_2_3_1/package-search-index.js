@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.ermakov"},{"l":"ru.nsu.ermakov.controller"},{"l":"ru.nsu.ermakov.game"},{"l":"ru.nsu.ermakov.gui"},{"l":"ru.nsu.ermakov.model"},{"l":"ru.nsu.ermakov.view"}];updateSearchResults();
