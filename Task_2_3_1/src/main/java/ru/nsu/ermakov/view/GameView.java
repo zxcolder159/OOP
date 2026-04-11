@@ -5,15 +5,16 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import ru.nsu.ermakov.game.Cell;
-import ru.nsu.ermakov.game.Direction;
-import ru.nsu.ermakov.game.Point;
 import ru.nsu.ermakov.gui.Assets;
+import ru.nsu.ermakov.model.Cell;
+import ru.nsu.ermakov.model.Direction;
+import ru.nsu.ermakov.model.GameObserver;
 import ru.nsu.ermakov.model.GameState;
+import ru.nsu.ermakov.model.Point;
 
 import java.util.List;
 
-public class GameView {
+public class GameView implements GameObserver {
     private final GraphicsContext gc;
     private final int cellSize;
 
@@ -22,6 +23,11 @@ public class GameView {
         this.cellSize = cellSize;
         gc.setImageSmoothing(false);
     }
+
+	@Override
+	public void update(GameState state) {
+		render(state);
+	}
 
     public void render(GameState state) {
         int width = state.getWidth();

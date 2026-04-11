@@ -1,6 +1,12 @@
 package ru.nsu.ermakov.game;
 
+import ru.nsu.ermakov.model.Cell;
+import ru.nsu.ermakov.model.Direction;
+import ru.nsu.ermakov.model.Field;
+import ru.nsu.ermakov.model.GameObserver;
 import ru.nsu.ermakov.model.GameState;
+import ru.nsu.ermakov.model.MoveResult;
+import ru.nsu.ermakov.model.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +20,8 @@ public class Game {
     private long moveIntervalNanos = 100_000_000L;
     private Direction lastMoveDirection = Direction.UP;
     private static final int INITIAL_SNAKE_SIZE = 3;
+
+	private final List<GameObserver> observers = new ArrayList<>();
     /**
      * Конструктор игры.
      *
@@ -27,35 +35,6 @@ public class Game {
             System.arraycopy(field[i], 0, this.field.field[i], 0, field[0].length);
         }
         spawnFood();
-    }
-
-    /**
-     * Метод делающий шаг.
-     */
-    public void step() {
-        if(isGameOver || isPaused) {
-            return;
-        }
-        lastMoveDirection = snake.getDirection();
-        MoveResult moveResult = snake.move(field);
-        if(moveResult == MoveResult.DIED) {
-            isGameOver = true;
-        }
-        if(moveResult == MoveResult.ATE_FOOD) {
-            field.field[snake.body.getFirst().x()][snake.body.getFirst().y()] = Cell.EMPTY;
-            spawnFood();
-            score++;
-            increaseSpeed(2_000_000L);
-        }
-    }
-
-    /**
-     * Переключить состояние паузы.
-     */
-    public void togglePause() {
-        if (!isGameOver) {
-            isPaused = !isPaused;
-        }
     }
 
     /**
@@ -157,4 +136,47 @@ public class Game {
     public boolean isGameOver() {
         return isGameOver;
     }
+
+	public void addObserver(GameObserver observer) {
+		observers.add(observer);
+	}
+
+	public void removeObserver(GameObserver observer) {
+		observers.remove(observer);
+	}
+
+	private void notifyObservers() {
+		GameState state = getState();
+		for (GameObserver observer : observers) {
+			observer.update(state);
+		}
+	}
+
+	public void step() {
+		if(isGameOver || isPaused) {
+			return;
+		}
+		lastMoveDirection = snake.getDirection();
+		MoveResult moveResult = snake.move(field);
+
+		if(moveResult == MoveResult.DIED) {
+			isGameOver = true;
+		}
+		if(moveResult == MoveResult.ATE_FOOD) {
+			field.field[snake.body.getFirst().x()][snake.body.getFirst().y()] = Cell.EMPTY;
+			spawnFood();
+			score++;
+			increaseSpeed(2_000_000L);
+		}
+
+		notifyObservers();
+	}
+
+	public void togglePause() {
+		if (!isGameOver) {
+			isPaused = !isPaused;
+
+			notifyObservers();
+		}
+	}
 }

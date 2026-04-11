@@ -1,9 +1,5 @@
 package ru.nsu.ermakov.model;
 
-import ru.nsu.ermakov.game.Cell;
-import ru.nsu.ermakov.game.Direction;
-import ru.nsu.ermakov.game.Point;
-
 import java.util.List;
 
 public class GameState {

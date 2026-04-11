@@ -1,4 +1,4 @@
-package ru.nsu.ermakov.game;
+package ru.nsu.ermakov.model;
 
 /**
  * Все возможные ячейки поля.

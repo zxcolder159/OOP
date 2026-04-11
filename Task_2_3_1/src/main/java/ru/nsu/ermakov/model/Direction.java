@@ -1,4 +1,4 @@
-package ru.nsu.ermakov.game;
+package ru.nsu.ermakov.model;
 
 /**
  * Перечесление всех возможных направлений змеи.

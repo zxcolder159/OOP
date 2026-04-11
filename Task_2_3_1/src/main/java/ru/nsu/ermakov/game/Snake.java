@@ -1,5 +1,11 @@
 package ru.nsu.ermakov.game;
 
+import ru.nsu.ermakov.model.Cell;
+import ru.nsu.ermakov.model.Direction;
+import ru.nsu.ermakov.model.Field;
+import ru.nsu.ermakov.model.MoveResult;
+import ru.nsu.ermakov.model.Point;
+
 import java.util.LinkedList;
 
 /**

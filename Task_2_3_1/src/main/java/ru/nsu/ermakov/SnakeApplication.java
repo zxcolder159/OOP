@@ -7,10 +7,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import ru.nsu.ermakov.controller.GameController;
-import ru.nsu.ermakov.game.Cell;
 import ru.nsu.ermakov.game.Game;
-import ru.nsu.ermakov.game.Point;
 import ru.nsu.ermakov.gui.Assets;
+import ru.nsu.ermakov.model.Cell;
+import ru.nsu.ermakov.model.Point;
 import ru.nsu.ermakov.view.GameView;
 
 public class SnakeApplication extends Application {
@@ -22,27 +22,35 @@ public class SnakeApplication extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        Assets.load();
+	@Override
+	public void start(Stage primaryStage) {
+		Assets.load();
 
-        Game game = createGame();
+		Game game = createGame();
 
-        Canvas canvas = new Canvas(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+		Canvas canvas = new Canvas(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        StackPane root = new StackPane(canvas);
-        Scene scene = new Scene(root);
+		StackPane root = new StackPane(canvas);
+		Scene scene = new Scene(root);
 
-        GameView view = new GameView(gc, CELL_SIZE);
-        GameController controller = new GameController(game, view, scene);
+		GameView view = new GameView(gc, CELL_SIZE);
 
-        primaryStage.setTitle("Змейка");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+		// ДОБАВЛЕНО: Подписываем view на изменения game
+		game.addObserver(view);
 
-        controller.startGameLoop();
-    }
+		// ИЗМЕНЕНО: Контроллеру больше не нужен view
+		GameController controller = new GameController(game, scene);
+
+		primaryStage.setTitle("Змейка");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+
+		// ДОБАВЛЕНО: Вызываем начальную отрисовку
+		view.update(game.getState());
+
+		controller.startGameLoop();
+	}
 
     private Game createGame() {
         Cell[][] field = new Cell[WIDTH][HEIGHT];

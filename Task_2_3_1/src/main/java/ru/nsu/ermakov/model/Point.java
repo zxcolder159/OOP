@@ -1,4 +1,4 @@
-package ru.nsu.ermakov.game;
+package ru.nsu.ermakov.model;
 
 /**
  * Запись, которая хранит координаты точки.
