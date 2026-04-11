@@ -1,8 +1,11 @@
+# This is a basic workflow to help you get started with Actions
+
 name: CI
 
+# Controls when the workflow will run
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ]  
   workflow_dispatch:
 
 jobs:
@@ -14,18 +17,18 @@ jobs:
         working-directory: ./Task_2_3_1
     steps:
       - uses: actions/checkout@v3
-
+      
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+    
+      - name: Execute Gradle build
+        run: ./gradlew build
 
-      - name: Run tests with coverage
-        run: ./gradlew test jacocoTestReport
-
-      - name: List reports
-        run: ls -R build/reports/jacoco
+      - name: Generate Jacoco report
+        run: ./gradlew jacocoTestReport
 
       - name: Check coverage and publish
         id: jacoco
