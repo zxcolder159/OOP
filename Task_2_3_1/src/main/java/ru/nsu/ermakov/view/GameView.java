@@ -141,16 +141,20 @@ public class GameView implements GameObserver {
     }
 
     private Direction getCornerDirection(Direction d1, Direction d2) {
-        if ((d1 == Direction.UP && d2 == Direction.RIGHT) || (d2 == Direction.UP && d1 == Direction.RIGHT)) {
+        if ((d1 == Direction.UP && d2 == Direction.RIGHT)
+                || (d2 == Direction.UP && d1 == Direction.RIGHT)) {
             return Direction.RIGHT;
         }
-        if ((d1 == Direction.RIGHT && d2 == Direction.DOWN) || (d2 == Direction.RIGHT && d1 == Direction.DOWN)) {
+        if ((d1 == Direction.RIGHT && d2 == Direction.DOWN)
+                || (d2 == Direction.RIGHT && d1 == Direction.DOWN)) {
             return Direction.DOWN;
         }
-        if ((d1 == Direction.DOWN && d2 == Direction.LEFT) || (d2 == Direction.DOWN && d1 == Direction.LEFT)) {
+        if ((d1 == Direction.DOWN && d2 == Direction.LEFT)
+                || (d2 == Direction.DOWN && d1 == Direction.LEFT)) {
             return Direction.LEFT;
         }
-        if ((d1 == Direction.LEFT && d2 == Direction.UP) || (d2 == Direction.LEFT && d1 == Direction.UP)) {
+        if ((d1 == Direction.LEFT && d2 == Direction.UP)
+                || (d2 == Direction.LEFT && d1 == Direction.UP)) {
             return Direction.UP;
         }
         return Direction.RIGHT;

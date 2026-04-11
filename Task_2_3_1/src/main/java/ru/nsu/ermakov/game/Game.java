@@ -127,7 +127,8 @@ public class Game {
         for (int i = 0; i < field.width; i++) {
             System.arraycopy(field.field[i], 0, fieldCopy[i], 0, field.height);
         }
-        return new GameState(bodyCopy, lastMoveDirection, fieldCopy, isGameOver, field.width, field.height, isPaused, score);
+        return new GameState(bodyCopy, lastMoveDirection, fieldCopy,
+                             isGameOver, field.width, field.height, isPaused, score);
     }
 
     /**
