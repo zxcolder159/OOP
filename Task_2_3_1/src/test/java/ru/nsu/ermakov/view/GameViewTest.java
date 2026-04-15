@@ -140,7 +140,7 @@ class GameViewTest {
     void testRenderWithWalls() {
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        GameView view = new GameView(gc, 40);
+
 
         Cell[][] field = new Cell[20][15];
         for (int x = 0; x < 20; x++) {
@@ -157,7 +157,7 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, false, 0, AppState.PLAYING
         );
-
+	    GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle walls");
     }
@@ -170,7 +170,7 @@ class GameViewTest {
     void testRenderWithFood() {
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        GameView view = new GameView(gc, 40);
+
 
         Cell[][] field = new Cell[20][15];
         for (int x = 0; x < 20; x++) {
@@ -187,7 +187,7 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, false, 0, AppState.PLAYING
         );
-
+	    GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle food");
     }
@@ -200,7 +200,6 @@ class GameViewTest {
     void testRenderLongerSnake() {
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        GameView view = new GameView(gc, 40);
 
         Cell[][] field = new Cell[20][15];
         for (int x = 0; x < 20; x++) {
@@ -219,7 +218,7 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, false, 2, AppState.PLAYING
         );
-
+	    GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle longer snake");
     }
