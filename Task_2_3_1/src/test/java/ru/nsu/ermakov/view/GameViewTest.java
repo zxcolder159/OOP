@@ -69,9 +69,9 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, false, 0, AppState.PLAYING
         );
-	    Canvas canvas = new Canvas(800, 600);
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	    GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "update method should not throw exception");
     }
@@ -98,9 +98,9 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, true, 0, AppState.PAUSED
         );
-	    Canvas canvas = new Canvas(800, 600);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-	    GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle paused state");
     }
@@ -126,9 +126,9 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, true, 20, 15, false, 10, AppState.GAME_OVER
         );
-	    Canvas canvas = new Canvas(800, 600);
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	    GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle game over state");
     }
@@ -157,9 +157,9 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, false, 0, AppState.PLAYING
         );
-	    Canvas canvas = new Canvas(800, 600);
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-		GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle walls");
     }
@@ -188,9 +188,9 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, false, 0, AppState.PLAYING
         );
-	    Canvas canvas = new Canvas(800, 600);
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	    GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle food");
     }
@@ -220,9 +220,9 @@ class GameViewTest {
         GameState state = new GameState(
                 snakeBody, Direction.UP, field, false, 20, 15, false, 2, AppState.PLAYING
         );
-	    Canvas canvas = new Canvas(800, 600);
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	    GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Assertions.assertDoesNotThrow(() -> view.update(state),
                 "render should handle longer snake");
     }
@@ -243,9 +243,9 @@ class GameViewTest {
         Point toLeft = new Point(4, 5);
         Point toDown = new Point(5, 6);
         Point toUp = new Point(5, 4);
-	    Canvas canvas = new Canvas(800, 600);
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	    GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Direction dirRight = (Direction) method.invoke(view, from, toRight);
         Direction dirLeft = (Direction) method.invoke(view, from, toLeft);
         Direction dirDown = (Direction) method.invoke(view, from, toDown);
@@ -268,9 +268,9 @@ class GameViewTest {
         Method method = GameView.class.getDeclaredMethod("getCornerDirection",
                 Direction.class, Direction.class);
         method.setAccessible(true);
-	    Canvas canvas = new Canvas(800, 600);
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	    GameView view = new GameView(gc, 40);
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GameView view = new GameView(gc, 40);
         Direction corner1 = (Direction) method.invoke(view, Direction.UP, Direction.RIGHT);
         Direction corner2 = (Direction) method.invoke(view, Direction.RIGHT, Direction.DOWN);
         Direction corner3 = (Direction) method.invoke(view, Direction.DOWN, Direction.LEFT);
