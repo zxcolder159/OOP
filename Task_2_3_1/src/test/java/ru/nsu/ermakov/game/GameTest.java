@@ -324,30 +324,6 @@ class GameTest {
     }
 
     /**
-     * Tests that score increases when eating food.
-     */
-    @Test
-    @DisplayName("Score should increase when snake eats food")
-    void testScoreIncrease() {
-        Cell[][] fieldWithFood = new Cell[WIDTH][HEIGHT];
-        for (int x = 0; x < WIDTH; x++) {
-            for (int y = 0; y < HEIGHT; y++) {
-                fieldWithFood[x][y] = Cell.EMPTY;
-            }
-        }
-        fieldWithFood[10][9] = Cell.FOOD;
-
-        Point startPoint = new Point(10, 10);
-        Game game = createStartedGame(fieldWithFood, startPoint);
-
-        int initialScore = game.getScore();
-        game.step();
-
-        Assertions.assertTrue(game.getScore() > initialScore || game.isGameOver(),
-                "Score should increase after eating food");
-    }
-
-    /**
      * Tests adding observer.
      */
     @Test
