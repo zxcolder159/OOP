@@ -68,7 +68,7 @@ class GameObserverTest {
     void testObserverReceivesMultipleStates() {
         List<GameState> receivedStates = new ArrayList<>();
 
-        GameObserver observer = state -> receivedStates.add(state);
+
 
         Cell[][] field = new Cell[10][10];
         for (int x = 0; x < 10; x++) {
@@ -88,7 +88,7 @@ class GameObserverTest {
         GameState state2 = new GameState(
                 snakeBody2, Direction.RIGHT, field, false, 10, 10, false, 1, AppState.PLAYING
         );
-
+	    GameObserver observer = state -> receivedStates.add(state);
         observer.update(state1);
         observer.update(state2);
 
