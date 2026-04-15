@@ -46,7 +46,7 @@ public class SnakeApplication extends Application {
         } catch (Exception e) {
             showErrorAlert("Ошибка загрузки ресурсов",
                     "Не удалось загрузить графические ресурсы игры.\n"
-                            + "Убедитесь, что все файлы изображений находятся в папке resources.",
+                    + "Убедитесь, что все файлы изображений находятся в папке resources.",
                     e);
             System.exit(1);
             return;
@@ -133,7 +133,8 @@ public class SnakeApplication extends Application {
         alert.setContentText(message);
         if (e != null) {
             alert.getDialogPane().setExpandableContent(
-                    new javafx.scene.control.TextArea("Детали ошибки:\n" + e.toString()));
+                    new javafx.scene.control.TextArea("Детали ошибки:\n"
+                            + e.toString()));
         }
         alert.showAndWait();
     }

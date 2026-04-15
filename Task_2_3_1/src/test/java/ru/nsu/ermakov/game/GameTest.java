@@ -404,8 +404,10 @@ class GameTest {
         game.step();
 
         Assertions.assertNotNull(receivedState[0], "Observer should receive state");
-        Assertions.assertEquals(WIDTH, receivedState[0].getWidth(), "State should have correct width");
-        Assertions.assertEquals(HEIGHT, receivedState[0].getHeight(), "State should have correct height");
+        Assertions.assertEquals(WIDTH, receivedState[0].getWidth(),
+                "State should have correct width");
+        Assertions.assertEquals(HEIGHT, receivedState[0].getHeight(),
+                "State should have correct height");
     }
 
     /**
@@ -426,7 +428,8 @@ class GameTest {
         game.togglePause();
         int callsAfter = callCount.get();
 
-        Assertions.assertTrue(callsAfter > callsBefore, "Observer should be notified on pause toggle");
+        Assertions.assertTrue(callsAfter > callsBefore,
+                "Observer should be notified on pause toggle");
     }
 
     /**

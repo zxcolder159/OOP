@@ -31,9 +31,12 @@ class MoveResultTest {
     @Test
     @DisplayName("MoveResult valueOf should work for all results")
     void testValueOf() {
-        Assertions.assertEquals(MoveResult.MOVED, MoveResult.valueOf("MOVED"), "Should get MOVED by name");
-        Assertions.assertEquals(MoveResult.ATE_FOOD, MoveResult.valueOf("ATE_FOOD"), "Should get ATE_FOOD by name");
-        Assertions.assertEquals(MoveResult.DIED, MoveResult.valueOf("DIED"), "Should get DIED by name");
+        Assertions.assertEquals(MoveResult.MOVED, MoveResult.valueOf("MOVED"),
+                "Should get MOVED by name");
+        Assertions.assertEquals(MoveResult.ATE_FOOD, MoveResult.valueOf("ATE_FOOD"),
+                "Should get ATE_FOOD by name");
+        Assertions.assertEquals(MoveResult.DIED, MoveResult.valueOf("DIED"),
+                "Should get DIED by name");
     }
 
     /**

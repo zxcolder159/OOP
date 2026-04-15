@@ -52,7 +52,8 @@ class PointTest {
         Point point1 = new Point(3, 4);
         Point point2 = new Point(3, 4);
         Assertions.assertEquals(point1, point2, "Points with same coordinates should be equal");
-        Assertions.assertEquals(point1.hashCode(), point2.hashCode(), "Hash codes should match for equal points");
+        Assertions.assertEquals(point1.hashCode(), point2.hashCode(),
+                "Hash codes should match for equal points");
     }
 
     /**
@@ -63,7 +64,8 @@ class PointTest {
     void testPointInequality() {
         Point point1 = new Point(3, 4);
         Point point2 = new Point(4, 3);
-        Assertions.assertNotEquals(point1, point2, "Points with different coordinates should not be equal");
+        Assertions.assertNotEquals(point1, point2,
+                "Points with different coordinates should not be equal");
     }
 
     /**
@@ -74,7 +76,9 @@ class PointTest {
     void testPointToString() {
         Point point = new Point(5, 10);
         String str = point.toString();
-        Assertions.assertTrue(str.contains("5"), "String representation should contain x coordinate");
-        Assertions.assertTrue(str.contains("10"), "String representation should contain y coordinate");
+        Assertions.assertTrue(str.contains("5"),
+                "String representation should contain x coordinate");
+        Assertions.assertTrue(str.contains("10"),
+                "String representation should contain y coordinate");
     }
 }

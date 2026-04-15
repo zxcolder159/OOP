@@ -30,8 +30,10 @@ class FieldTest {
     @Test
     @DisplayName("Field should have correct width and height")
     void testFieldDimensions() {
-        Assertions.assertEquals(WIDTH, field.getWidth(), "Width should match constructor parameter");
-        Assertions.assertEquals(HEIGHT, field.getHeight(), "Height should match constructor parameter");
+        Assertions.assertEquals(WIDTH, field.getWidth(),
+                "Width should match constructor parameter");
+        Assertions.assertEquals(HEIGHT, field.getHeight(),
+                "Height should match constructor parameter");
     }
 
     /**
@@ -55,10 +57,12 @@ class FieldTest {
     @DisplayName("Field should allow setting and getting cells")
     void testSetAndGetCell() {
         field.field[5][5] = Cell.FOOD;
-        Assertions.assertEquals(Cell.FOOD, field.getCell(5, 5), "Cell should be FOOD after setting");
+        Assertions.assertEquals(Cell.FOOD, field.getCell(5, 5),
+                "Cell should be FOOD after setting");
 
         field.field[3][4] = Cell.WALL;
-        Assertions.assertEquals(Cell.WALL, field.getCell(3, 4), "Cell should be WALL after setting");
+        Assertions.assertEquals(Cell.WALL, field.getCell(3, 4),
+                "Cell should be WALL after setting");
     }
 
     /**
@@ -80,7 +84,8 @@ class FieldTest {
         Field smallField = new Field(1, 1);
         Assertions.assertEquals(1, smallField.getWidth(), "Minimum width should be 1");
         Assertions.assertEquals(1, smallField.getHeight(), "Minimum height should be 1");
-        Assertions.assertEquals(Cell.EMPTY, smallField.getCell(0, 0), "Single cell should be EMPTY");
+        Assertions.assertEquals(Cell.EMPTY, smallField.getCell(0, 0),
+                "Single cell should be EMPTY");
     }
 
     /**
@@ -94,6 +99,7 @@ class FieldTest {
         Assertions.assertEquals(50, largeField.getHeight(), "Large height should be set correctly");
 
         largeField.field[25][25] = Cell.FOOD;
-        Assertions.assertEquals(Cell.FOOD, largeField.getCell(25, 25), "Cell in large field should be accessible");
+        Assertions.assertEquals(Cell.FOOD, largeField.getCell(25, 25),
+                "Cell in large field should be accessible");
     }
 }

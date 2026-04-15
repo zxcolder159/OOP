@@ -37,7 +37,8 @@ class GameStateTest {
         );
 
         Assertions.assertEquals(snakeBody, state.getSnakeBody(), "Snake body should match");
-        Assertions.assertEquals(Direction.RIGHT, state.getSnakeDirection(), "Direction should match");
+        Assertions.assertEquals(Direction.RIGHT, state.getSnakeDirection(),
+                "Direction should match");
         Assertions.assertEquals(10, state.getWidth(), "Width should match");
         Assertions.assertEquals(10, state.getHeight(), "Height should match");
         Assertions.assertFalse(state.isGameOver(), "Game should not be over");
@@ -147,21 +148,25 @@ class GameStateTest {
         GameState stateUp = new GameState(
                 snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
-        Assertions.assertEquals(Direction.UP, stateUp.getSnakeDirection(), "Direction should be UP");
+        Assertions.assertEquals(Direction.UP, stateUp.getSnakeDirection(),
+                "Direction should be UP");
 
         GameState stateDown = new GameState(
                 snakeBody, Direction.DOWN, field, false, 10, 10, false, 0, AppState.PLAYING
         );
-        Assertions.assertEquals(Direction.DOWN, stateDown.getSnakeDirection(), "Direction should be DOWN");
+        Assertions.assertEquals(Direction.DOWN, stateDown.getSnakeDirection(),
+                "Direction should be DOWN");
 
         GameState stateLeft = new GameState(
                 snakeBody, Direction.LEFT, field, false, 10, 10, false, 0, AppState.PLAYING
         );
-        Assertions.assertEquals(Direction.LEFT, stateLeft.getSnakeDirection(), "Direction should be LEFT");
+        Assertions.assertEquals(Direction.LEFT, stateLeft.getSnakeDirection(),
+                "Direction should be LEFT");
 
         GameState stateRight = new GameState(
                 snakeBody, Direction.RIGHT, field, false, 10, 10, false, 0, AppState.PLAYING
         );
-        Assertions.assertEquals(Direction.RIGHT, stateRight.getSnakeDirection(), "Direction should be RIGHT");
+        Assertions.assertEquals(Direction.RIGHT, stateRight.getSnakeDirection(),
+                "Direction should be RIGHT");
     }
 }

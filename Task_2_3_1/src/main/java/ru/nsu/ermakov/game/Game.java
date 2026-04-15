@@ -162,7 +162,8 @@ public class Game {
             System.arraycopy(field.field[i], 0, fieldCopy[i], 0, field.height);
         }
         return new GameState(bodyCopy, lastMoveDirection, fieldCopy,
-                             isGameOver, field.width, field.height, isPaused, score, appState);
+                             isGameOver, field.width, field.height, isPaused,
+                             score, appState);
     }
 
     /**

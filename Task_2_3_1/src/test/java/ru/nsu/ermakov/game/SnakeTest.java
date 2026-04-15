@@ -43,8 +43,10 @@ class SnakeTest {
         LinkedList<Point> body = snake.getBody();
         Assertions.assertEquals(3, body.size(), "Snake should have 3 body segments");
         Assertions.assertEquals(startPoint, body.get(0), "Head should be at start point");
-        Assertions.assertEquals(new Point(9, 7), body.get(1), "Second segment should be below head");
-        Assertions.assertEquals(new Point(8, 7), body.get(2), "Third segment should be below second");
+        Assertions.assertEquals(new Point(9, 7), body.get(1),
+                "Second segment should be below head");
+        Assertions.assertEquals(new Point(8, 7), body.get(2),
+                "Third segment should be below second");
     }
 
     /**
@@ -56,7 +58,8 @@ class SnakeTest {
         Point startPoint = new Point(10, 7);
         Snake snake = new Snake(startPoint);
 
-        Assertions.assertEquals(Direction.UP, snake.getDirection(), "Initial direction should be UP");
+        Assertions.assertEquals(Direction.UP, snake.getDirection(),
+                "Initial direction should be UP");
     }
 
     /**
@@ -114,7 +117,8 @@ class SnakeTest {
 
         boolean result = snake.changeDirection(Direction.UP);
         Assertions.assertFalse(result, "Should not be able to change from DOWN to UP");
-        Assertions.assertEquals(Direction.DOWN, snake.getDirection(), "Direction should remain DOWN");
+        Assertions.assertEquals(Direction.DOWN, snake.getDirection(),
+                "Direction should remain DOWN");
     }
 
     /**
@@ -131,7 +135,8 @@ class SnakeTest {
 
         boolean result = snake.changeDirection(Direction.RIGHT);
         Assertions.assertFalse(result, "Should not be able to change from LEFT to RIGHT");
-        Assertions.assertEquals(Direction.LEFT, snake.getDirection(), "Direction should remain LEFT");
+        Assertions.assertEquals(Direction.LEFT, snake.getDirection(),
+                "Direction should remain LEFT");
     }
 
     /**
@@ -148,7 +153,8 @@ class SnakeTest {
 
         boolean result = snake.changeDirection(Direction.LEFT);
         Assertions.assertFalse(result, "Should not be able to change from RIGHT to LEFT");
-        Assertions.assertEquals(Direction.RIGHT, snake.getDirection(), "Direction should remain RIGHT");
+        Assertions.assertEquals(Direction.RIGHT, snake.getDirection(),
+                "Direction should remain RIGHT");
     }
 
     /**
@@ -163,8 +169,10 @@ class SnakeTest {
         MoveResult result = snake.move(field);
 
         Assertions.assertEquals(MoveResult.MOVED, result, "Should have moved");
-        Assertions.assertEquals(new Point(10, 9), snake.getBody().getFirst(), "Head should move up");
-        Assertions.assertEquals(3, snake.getBody().size(), "Size should remain 3 after normal move");
+        Assertions.assertEquals(new Point(10, 9), snake.getBody().getFirst(),
+                "Head should move up");
+        Assertions.assertEquals(3, snake.getBody().size(),
+                "Size should remain 3 after normal move");
     }
 
     /**
@@ -180,7 +188,8 @@ class SnakeTest {
         MoveResult result = snake.move(field);
 
         Assertions.assertEquals(MoveResult.MOVED, result, "Should have moved");
-        Assertions.assertEquals(new Point(11, 10), snake.getBody().getFirst(), "Head should move right");
+        Assertions.assertEquals(new Point(11, 10), snake.getBody().getFirst(),
+                "Head should move right");
     }
 
     /**
@@ -284,6 +293,7 @@ class SnakeTest {
         LinkedList<Point> body = snake.getBody();
 
         Assertions.assertEquals(new Point(10, 9), body.get(0), "Head should be at new position");
-        Assertions.assertEquals(startPoint, body.get(1), "First body segment should be at old head position");
+        Assertions.assertEquals(startPoint, body.get(1),
+                "First body segment should be at old head position");
     }
 }

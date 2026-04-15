@@ -60,7 +60,8 @@ public class MenuPane extends VBox implements GameObserver {
         hintLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px; "
                 + "-fx-text-fill: #78909C;");
 
-        getChildren().addAll(titleLabel, subtitleLabel, levelButtonsContainer, descriptionLabel, hintLabel);
+        getChildren().addAll(titleLabel, subtitleLabel, levelButtonsContainer,
+                descriptionLabel, hintLabel);
 
         game.addObserver(this);
     }

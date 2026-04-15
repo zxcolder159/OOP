@@ -30,7 +30,8 @@ public class GameState {
      * @param appState состояние приложения
      */
     public GameState(List<Point> snakeBody, Direction snakeDirection, Cell[][] field,
-                     boolean gameOver, int width, int height, boolean paused, int score, AppState appState) {
+                     boolean gameOver, int width, int height, boolean paused,
+                     int score, AppState appState) {
         this.snakeBody = snakeBody;
         this.snakeDirection = snakeDirection;
         this.field = field;

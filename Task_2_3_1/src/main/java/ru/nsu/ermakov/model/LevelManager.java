@@ -21,7 +21,8 @@ public class LevelManager {
                 level1Field[i][j] = Cell.EMPTY;
             }
         }
-        levels.add(new Level("Level 1: Classic", level1Field, new Point(10, 7), "Empty field, classic snake"));
+        levels.add(new Level("Level 1: Classic", level1Field,
+                new Point(10, 7), "Empty field, classic snake"));
 
 
         Cell[][] level2Field = new Cell[width][height];
@@ -34,7 +35,8 @@ public class LevelManager {
             level2Field[i][6] = Cell.WALL;
             level2Field[i][8] = Cell.WALL;
         }
-        levels.add(new Level("Level 2: Center Walls", level2Field, new Point(10, 7), "Walls in the center"));
+        levels.add(new Level("Level 2: Center Walls", level2Field,
+                new Point(10, 7), "Walls in the center"));
 
 
         Cell[][] level3Field = new Cell[width][height];
@@ -49,7 +51,8 @@ public class LevelManager {
             level3Field[2][height - 1 - i] = Cell.WALL;
             level3Field[17][height - 1 - i] = Cell.WALL;
         }
-        levels.add(new Level("Level 3: Corners", level3Field, new Point(10, 7), "Walls in corners"));
+        levels.add(new Level("Level 3: Corners", level3Field,
+                new Point(10, 7), "Walls in corners"));
 
 
         Cell[][] level4Field = new Cell[width][height];
@@ -65,7 +68,8 @@ public class LevelManager {
             level4Field[10][j] = Cell.WALL;
         }
         level4Field[10][7] = Cell.EMPTY;
-        levels.add(new Level("Level 4: Cross", level4Field, new Point(10, 6), "Cross pattern walls"));
+        levels.add(new Level("Level 4: Cross", level4Field,
+                new Point(10, 6), "Cross pattern walls"));
 
 
         Cell[][] level5Field = new Cell[width][height];
@@ -83,7 +87,8 @@ public class LevelManager {
             level5Field[14][j] = Cell.WALL;
         }
         level5Field[9][7] = Cell.WALL;
-        levels.add(new Level("Level 5: Maze", level5Field, new Point(10, 7), "Maze-like obstacles"));
+        levels.add(new Level("Level 5: Maze", level5Field,
+                new Point(10, 7), "Maze-like obstacles"));
 
 
         Cell[][] level6Field = new Cell[width][height];
@@ -100,7 +105,8 @@ public class LevelManager {
         for (int[] pos : wallPositions) {
             level6Field[pos[0]][pos[1]] = Cell.WALL;
         }
-        levels.add(new Level("Level 6: Scattered", level6Field, new Point(10, 7), "Scattered obstacles"));
+        levels.add(new Level("Level 6: Scattered", level6Field,
+                new Point(10, 7), "Scattered obstacles"));
     }
 
     /**

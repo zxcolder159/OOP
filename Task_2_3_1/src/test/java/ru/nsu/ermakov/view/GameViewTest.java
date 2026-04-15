@@ -236,7 +236,8 @@ class GameViewTest {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameView view = new GameView(gc, 40);
 
-        Method method = GameView.class.getDeclaredMethod("getDirectionBetween", Point.class, Point.class);
+        Method method = GameView.class.getDeclaredMethod("getDirectionBetween",
+                Point.class, Point.class);
         method.setAccessible(true);
 
         Point from = new Point(5, 5);
@@ -266,7 +267,8 @@ class GameViewTest {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameView view = new GameView(gc, 40);
 
-        Method method = GameView.class.getDeclaredMethod("getCornerDirection", Direction.class, Direction.class);
+        Method method = GameView.class.getDeclaredMethod("getCornerDirection",
+                Direction.class, Direction.class);
         method.setAccessible(true);
 
         Direction corner1 = (Direction) method.invoke(view, Direction.UP, Direction.RIGHT);

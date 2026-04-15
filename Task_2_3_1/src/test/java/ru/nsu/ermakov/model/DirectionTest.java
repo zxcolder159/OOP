@@ -31,10 +31,14 @@ class DirectionTest {
     @Test
     @DisplayName("Direction valueOf should work for all directions")
     void testValueOf() {
-        Assertions.assertEquals(Direction.UP, Direction.valueOf("UP"), "Should get UP by name");
-        Assertions.assertEquals(Direction.DOWN, Direction.valueOf("DOWN"), "Should get DOWN by name");
-        Assertions.assertEquals(Direction.LEFT, Direction.valueOf("LEFT"), "Should get LEFT by name");
-        Assertions.assertEquals(Direction.RIGHT, Direction.valueOf("RIGHT"), "Should get RIGHT by name");
+        Assertions.assertEquals(Direction.UP, Direction.valueOf("UP"),
+                "Should get UP by name");
+        Assertions.assertEquals(Direction.DOWN, Direction.valueOf("DOWN"),
+                "Should get DOWN by name");
+        Assertions.assertEquals(Direction.LEFT, Direction.valueOf("LEFT"),
+                "Should get LEFT by name");
+        Assertions.assertEquals(Direction.RIGHT, Direction.valueOf("RIGHT"),
+                "Should get RIGHT by name");
     }
 
     /**
