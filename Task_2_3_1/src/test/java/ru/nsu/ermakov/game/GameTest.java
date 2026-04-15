@@ -9,7 +9,6 @@ import ru.nsu.ermakov.model.Direction;
 import ru.nsu.ermakov.model.GameObserver;
 import ru.nsu.ermakov.model.GameState;
 import ru.nsu.ermakov.model.Point;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

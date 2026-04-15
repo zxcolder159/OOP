@@ -8,11 +8,9 @@ import ru.nsu.ermakov.model.Cell;
 import ru.nsu.ermakov.model.Direction;
 import ru.nsu.ermakov.model.GameState;
 import ru.nsu.ermakov.model.Point;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.canvas.Canvas;
 
