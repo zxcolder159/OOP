@@ -82,6 +82,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameView</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../model/GameObserver.html" title="interface in ru.nsu.ermakov.model">GameObserver</a></span></div>
+<div class="block">Класс для отображения игры.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,7 +96,9 @@ implements <a href="../model/GameObserver.html" title="interface in ru.nsu.ermak
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(javafx.scene.canvas.GraphicsContext,int)" class="member-name-link">GameView</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  int&nbsp;cellSize)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор представления игры.</div>
+</div>
 </div>
 </section>
 </li>
@@ -112,10 +115,14 @@ implements <a href="../model/GameObserver.html" title="interface in ru.nsu.ermak
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(ru.nsu.ermakov.model.GameState)" class="member-name-link">render</a><wbr>(<a href="../model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a>&nbsp;state)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Отрисовывает состояние игры.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(ru.nsu.ermakov.model.GameState)" class="member-name-link">update</a><wbr>(<a href="../model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a>&nbsp;state)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Обновляет представление игры.</div>
+</div>
 </div>
 </div>
 </div>
@@ -138,6 +145,12 @@ implements <a href="../model/GameObserver.html" title="interface in ru.nsu.ermak
 <h3>GameView</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameView</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  int&nbsp;cellSize)</span></div>
+<div class="block">Конструктор представления игры.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>gc</code> - графический контекст</dd>
+<dd><code>cellSize</code> - размер ячейки</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -152,9 +165,12 @@ implements <a href="../model/GameObserver.html" title="interface in ru.nsu.ermak
 <section class="detail" id="update(ru.nsu.ermakov.model.GameState)">
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">update</span><wbr><span class="parameters">(<a href="../model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a>&nbsp;state)</span></div>
+<div class="block">Обновляет представление игры.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../model/GameObserver.html#update(ru.nsu.ermakov.model.GameState)">update</a></code>&nbsp;in interface&nbsp;<code><a href="../model/GameObserver.html" title="interface in ru.nsu.ermakov.model">GameObserver</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>state</code> - состояние игры</dd>
 </dl>
 </section>
 </li>
@@ -162,6 +178,11 @@ implements <a href="../model/GameObserver.html" title="interface in ru.nsu.ermak
 <section class="detail" id="render(ru.nsu.ermakov.model.GameState)">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(<a href="../model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a>&nbsp;state)</span></div>
+<div class="block">Отрисовывает состояние игры.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>state</code> - состояние игры</dd>
+</dl>
 </section>
 </li>
 </ul>

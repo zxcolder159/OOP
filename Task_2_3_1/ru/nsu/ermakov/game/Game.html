@@ -93,6 +93,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Конструктор игры.</div>
 </div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(ru.nsu.ermakov.model.Level)" class="member-name-link">Game</a><wbr>(<a href="../model/Level.html" title="class in ru.nsu.ermakov.model">Level</a>&nbsp;level)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Конструктор игры на основе уровня.</div>
+</div>
 </div>
 </section>
 </li>
@@ -109,56 +113,89 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addObserver(ru.nsu.ermakov.model.GameObserver)" class="member-name-link">addObserver</a><wbr>(<a href="../model/GameObserver.html" title="interface in ru.nsu.ermakov.model">GameObserver</a>&nbsp;observer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Добавляет наблюдателя игры.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#changeSnakeDirection(ru.nsu.ermakov.model.Direction)" class="member-name-link">changeSnakeDirection</a><wbr>(<a href="../model/Direction.html" title="enum class in ru.nsu.ermakov.model">Direction</a>&nbsp;direction)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Метод для изменения направления змейки с валидацией.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMoveIntervalNanos()" class="member-name-link">getMoveIntervalNanos</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAppState()" class="member-name-link">getAppState</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает состояние приложения.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMoveIntervalNanos()" class="member-name-link">getMoveIntervalNanos</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Получить интервал между шагами змейки в наносекундах.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScore()" class="member-name-link">getScore</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScore()" class="member-name-link">getScore</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Получить текущий счет (размер змеи - начальный размер).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getState()" class="member-name-link">getState</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getState()" class="member-name-link">getState</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Возвращает текущее состояние игры для отображения.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#increaseSpeed(long)" class="member-name-link">increaseSpeed</a><wbr>(long&nbsp;deltaNanos)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#increaseSpeed(long)" class="member-name-link">increaseSpeed</a><wbr>(long&nbsp;deltaNanos)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Увеличить скорость змейки (уменьшить интервал).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isGameOver()" class="member-name-link">isGameOver</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isGameOver()" class="member-name-link">isGameOver</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Проверяет, закончена ли игра.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPaused()" class="member-name-link">isPaused</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPaused()" class="member-name-link">isPaused</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Проверить, находится ли игра на паузе.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#notifyObservers()" class="member-name-link">notifyObservers</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Уведомляет всех наблюдателей об изменении состояния.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeObserver(ru.nsu.ermakov.model.GameObserver)" class="member-name-link">removeObserver</a><wbr>(<a href="../model/GameObserver.html" title="interface in ru.nsu.ermakov.model">GameObserver</a>&nbsp;observer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Удаляет наблюдателя игры.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#restart()" class="member-name-link">restart</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Перезапускает игру.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAppState(ru.nsu.ermakov.model.AppState)" class="member-name-link">setAppState</a><wbr>(<a href="../model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a>&nbsp;state)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Устанавливает состояние приложения.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMoveIntervalNanos(long)" class="member-name-link">setMoveIntervalNanos</a><wbr>(long&nbsp;intervalNanos)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Установить интервал между шагами змейки.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step()" class="member-name-link">step</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#startGame()" class="member-name-link">startGame</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Запускает игру.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#togglePause()" class="member-name-link">togglePause</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step()" class="member-name-link">step</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Выполняет один шаг игры.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#togglePause()" class="member-name-link">togglePause</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Переключает состояние паузы.</div>
+</div>
 </div>
 </div>
 </div>
@@ -186,6 +223,17 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>field</code> - игровое поле</dd>
 <dd><code>point</code> - начальная позиция змейки</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(ru.nsu.ermakov.model.Level)">
+<h3>Game</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Game</span><wbr><span class="parameters">(<a href="../model/Level.html" title="class in ru.nsu.ermakov.model">Level</a>&nbsp;level)</span></div>
+<div class="block">Конструктор игры на основе уровня.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>level</code> - уровень игры</dd>
 </dl>
 </section>
 </li>
@@ -276,24 +324,79 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="addObserver(ru.nsu.ermakov.model.GameObserver)">
 <h3>addObserver</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addObserver</span><wbr><span class="parameters">(<a href="../model/GameObserver.html" title="interface in ru.nsu.ermakov.model">GameObserver</a>&nbsp;observer)</span></div>
+<div class="block">Добавляет наблюдателя игры.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>observer</code> - наблюдатель</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="removeObserver(ru.nsu.ermakov.model.GameObserver)">
 <h3>removeObserver</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeObserver</span><wbr><span class="parameters">(<a href="../model/GameObserver.html" title="interface in ru.nsu.ermakov.model">GameObserver</a>&nbsp;observer)</span></div>
+<div class="block">Удаляет наблюдателя игры.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>observer</code> - наблюдатель</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="notifyObservers()">
+<h3>notifyObservers</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">notifyObservers</span>()</div>
+<div class="block">Уведомляет всех наблюдателей об изменении состояния.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="step()">
 <h3>step</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">step</span>()</div>
+<div class="block">Выполняет один шаг игры.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="togglePause()">
 <h3>togglePause</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">togglePause</span>()</div>
+<div class="block">Переключает состояние паузы.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setAppState(ru.nsu.ermakov.model.AppState)">
+<h3>setAppState</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setAppState</span><wbr><span class="parameters">(<a href="../model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a>&nbsp;state)</span></div>
+<div class="block">Устанавливает состояние приложения.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>state</code> - состояние приложения</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getAppState()">
+<h3>getAppState</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></span>&nbsp;<span class="element-name">getAppState</span>()</div>
+<div class="block">Возвращает состояние приложения.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>состояние приложения</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="startGame()">
+<h3>startGame</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">startGame</span>()</div>
+<div class="block">Запускает игру.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="restart()">
+<h3>restart</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">restart</span>()</div>
+<div class="block">Перезапускает игру.</div>
 </section>
 </li>
 </ul>

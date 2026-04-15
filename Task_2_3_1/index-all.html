@@ -49,15 +49,23 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<a href="#I:X">X</a>&nbsp;<a href="#I:Y">Y</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<a href="#I:X">X</a>&nbsp;<a href="#I:Y">Y</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/game/Game.html#addObserver(ru.nsu.ermakov.model.GameObserver)" class="member-name-link">addObserver(GameObserver)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Добавляет наблюдателя игры.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/gui/Assets.html#apple" class="member-name-link">apple</a> - Static variable in class ru.nsu.ermakov.gui.<a href="ru/nsu/ermakov/gui/Assets.html" title="class in ru.nsu.ermakov.gui">Assets</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/ermakov/model/AppState.html" class="type-name-link" title="enum class in ru.nsu.ermakov.model">AppState</a> - Enum Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
+<dd>
+<div class="block">Перечисление состояний приложения.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/gui/Assets.html" class="type-name-link" title="class in ru.nsu.ermakov.gui">Assets</a> - Class in <a href="ru/nsu/ermakov/gui/package-summary.html">ru.nsu.ermakov.gui</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Класс для загрузки графических ресурсов игры.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/gui/Assets.html#%3Cinit%3E()" class="member-name-link">Assets()</a> - Constructor for class ru.nsu.ermakov.gui.<a href="ru/nsu/ermakov/gui/Assets.html" title="class in ru.nsu.ermakov.gui">Assets</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/MoveResult.html#ATE_FOOD" class="member-name-link">ATE_FOOD</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/MoveResult.html" title="enum class in ru.nsu.ermakov.model">MoveResult</a></dt>
@@ -91,9 +99,11 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/model/MoveResult.html#DIED" class="member-name-link">DIED</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/MoveResult.html" title="enum class in ru.nsu.ermakov.model">MoveResult</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/ermakov/game/Snake.html#direction" class="member-name-link">direction</a> - Variable in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/Direction.html" class="type-name-link" title="enum class in ru.nsu.ermakov.model">Direction</a> - Enum Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
 <dd>
-<div class="block">Перечесление всех возможных направлений змеи.</div>
+<div class="block">Перечисление всех возможных направлений змеи.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/Direction.html#DOWN" class="member-name-link">DOWN</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Direction.html" title="enum class in ru.nsu.ermakov.model">Direction</a></dt>
 <dd>&nbsp;</dd>
@@ -130,52 +140,118 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Конструктор игры.</div>
 </dd>
+<dt><a href="ru/nsu/ermakov/game/Game.html#%3Cinit%3E(ru.nsu.ermakov.model.Level)" class="member-name-link">Game(Level)</a> - Constructor for class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
+<dd>
+<div class="block">Конструктор игры на основе уровня.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/AppState.html#GAME_OVER" class="member-name-link">GAME_OVER</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/controller/GameController.html" class="type-name-link" title="class in ru.nsu.ermakov.controller">GameController</a> - Class in <a href="ru/nsu/ermakov/controller/package-summary.html">ru.nsu.ermakov.controller</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/controller/GameController.html#%3Cinit%3E(ru.nsu.ermakov.game.Game,javafx.scene.Scene)" class="member-name-link">GameController(Game, Scene)</a> - Constructor for class ru.nsu.ermakov.controller.<a href="ru/nsu/ermakov/controller/GameController.html" title="class in ru.nsu.ermakov.controller">GameController</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Конструктор контроллера игры.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/GameObserver.html" class="type-name-link" title="interface in ru.nsu.ermakov.model">GameObserver</a> - Interface in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Интерфейс наблюдателя игры.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html" class="type-name-link" title="class in ru.nsu.ermakov.model">GameState</a> - Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/ermakov/model/GameState.html#%3Cinit%3E(java.util.List,ru.nsu.ermakov.model.Direction,ru.nsu.ermakov.model.Cell%5B%5D%5B%5D,boolean,int,int,boolean,int)" class="member-name-link">GameState(List&lt;Point&gt;, Direction, Cell[][], boolean, int, int, boolean, int)</a> - Constructor for class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Класс, хранящий состояние игры.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/GameState.html#%3Cinit%3E(java.util.List,ru.nsu.ermakov.model.Direction,ru.nsu.ermakov.model.Cell%5B%5D%5B%5D,boolean,int,int,boolean,int,ru.nsu.ermakov.model.AppState)" class="member-name-link">GameState(List&lt;Point&gt;, Direction, Cell[][], boolean, int, int, boolean, int, AppState)</a> - Constructor for class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
+<dd>
+<div class="block">Конструктор состояния игры.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/view/GameView.html" class="type-name-link" title="class in ru.nsu.ermakov.view">GameView</a> - Class in <a href="ru/nsu/ermakov/view/package-summary.html">ru.nsu.ermakov.view</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Класс для отображения игры.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/view/GameView.html#%3Cinit%3E(javafx.scene.canvas.GraphicsContext,int)" class="member-name-link">GameView(GraphicsContext, int)</a> - Constructor for class ru.nsu.ermakov.view.<a href="ru/nsu/ermakov/view/GameView.html" title="class in ru.nsu.ermakov.view">GameView</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Конструктор представления игры.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/game/Game.html#getAppState()" class="member-name-link">getAppState()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
+<dd>
+<div class="block">Возвращает состояние приложения.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/GameState.html#getAppState()" class="member-name-link">getAppState()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
+<dd>
+<div class="block">Возвращает состояние приложения.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Snake.html#getBody()" class="member-name-link">getBody()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
 <dd>
 <div class="block">Возвращает тело змейки.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/Field.html#getCell(int,int)" class="member-name-link">getCell(int, int)</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает ячейку поля по координатам.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Level.html#getDescription()" class="member-name-link">getDescription()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Level.html" title="class in ru.nsu.ermakov.model">Level</a></dt>
+<dd>
+<div class="block">Возвращает описание уровня.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Snake.html#getDirection()" class="member-name-link">getDirection()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
 <dd>
 <div class="block">Возвращает направление движения змейки.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#getField()" class="member-name-link">getField()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает игровое поле.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Level.html#getField()" class="member-name-link">getField()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Level.html" title="class in ru.nsu.ermakov.model">Level</a></dt>
+<dd>
+<div class="block">Возвращает игровое поле уровня.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/Field.html#getHeight()" class="member-name-link">getHeight()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
 <dd>
 <div class="block">Возвращает высоту поля.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#getHeight()" class="member-name-link">getHeight()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает высоту поля.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html#getLevels()" class="member-name-link">getLevels()</a> - Static method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/LevelManager.html" title="class in ru.nsu.ermakov.model">LevelManager</a></dt>
+<dd>
+<div class="block">Возвращает список всех уровней.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Game.html#getMoveIntervalNanos()" class="member-name-link">getMoveIntervalNanos()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
 <dd>
 <div class="block">Получить интервал между шагами змейки в наносекундах.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Level.html#getName()" class="member-name-link">getName()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Level.html" title="class in ru.nsu.ermakov.model">Level</a></dt>
+<dd>
+<div class="block">Возвращает название уровня.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/game/Game.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
 <dd>
 <div class="block">Получить текущий счет (размер змеи - начальный размер).</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает счет.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html#getSelectedLevel()" class="member-name-link">getSelectedLevel()</a> - Static method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/LevelManager.html" title="class in ru.nsu.ermakov.model">LevelManager</a></dt>
+<dd>
+<div class="block">Возвращает выбранный уровень.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html#getSelectedLevelIndex()" class="member-name-link">getSelectedLevelIndex()</a> - Static method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/LevelManager.html" title="class in ru.nsu.ermakov.model">LevelManager</a></dt>
+<dd>
+<div class="block">Возвращает индекс выбранного уровня.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#getSnakeBody()" class="member-name-link">getSnakeBody()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает тело змейки.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#getSnakeDirection()" class="member-name-link">getSnakeDirection()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает направление змейки.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Level.html#getStartPoint()" class="member-name-link">getStartPoint()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Level.html" title="class in ru.nsu.ermakov.model">Level</a></dt>
+<dd>
+<div class="block">Возвращает начальную точку змейки.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Game.html#getState()" class="member-name-link">getState()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
 <dd>
 <div class="block">Возвращает текущее состояние игры для отображения.</div>
@@ -185,7 +261,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Возвращает ширину поля.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#getWidth()" class="member-name-link">getWidth()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает ширину поля.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
@@ -207,34 +285,77 @@ loadScripts(document, 'script');</script>
 <div class="block">Проверяет, закончена ли игра.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#isGameOver()" class="member-name-link">isGameOver()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Проверяет, окончена ли игра.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Game.html#isPaused()" class="member-name-link">isPaused()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
 <dd>
 <div class="block">Проверить, находится ли игра на паузе.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/GameState.html#isPaused()" class="member-name-link">isPaused()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameState.html" title="class in ru.nsu.ermakov.model">GameState</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Проверяет, находится ли игра на паузе.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/model/Direction.html#LEFT" class="member-name-link">LEFT</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Direction.html" title="enum class in ru.nsu.ermakov.model">Direction</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/ermakov/gui/Assets.html#load()" class="member-name-link">load()</a> - Static method in class ru.nsu.ermakov.gui.<a href="ru/nsu/ermakov/gui/Assets.html" title="class in ru.nsu.ermakov.gui">Assets</a></dt>
+<dt><a href="ru/nsu/ermakov/model/Level.html" class="type-name-link" title="class in ru.nsu.ermakov.model">Level</a> - Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
+<dd>
+<div class="block">Класс, представляющий уровень игры.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Level.html#%3Cinit%3E(java.lang.String,ru.nsu.ermakov.model.Cell%5B%5D%5B%5D,ru.nsu.ermakov.model.Point,java.lang.String)" class="member-name-link">Level(String, Cell[][], Point, String)</a> - Constructor for class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Level.html" title="class in ru.nsu.ermakov.model">Level</a></dt>
+<dd>
+<div class="block">Конструктор уровня.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html" class="type-name-link" title="class in ru.nsu.ermakov.model">LevelManager</a> - Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
+<dd>
+<div class="block">Менеджер уровней игры.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html#%3Cinit%3E()" class="member-name-link">LevelManager()</a> - Constructor for class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/LevelManager.html" title="class in ru.nsu.ermakov.model">LevelManager</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/ermakov/gui/Assets.html#load()" class="member-name-link">load()</a> - Static method in class ru.nsu.ermakov.gui.<a href="ru/nsu/ermakov/gui/Assets.html" title="class in ru.nsu.ermakov.gui">Assets</a></dt>
+<dd>
+<div class="block">Загружает все графические ресурсы игры.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/SnakeApplication.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/SnakeApplication.html" title="class in ru.nsu.ermakov">SnakeApplication</a></dt>
+<dd>
+<div class="block">Точка входа в приложение.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/AppState.html#MENU" class="member-name-link">MENU</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/ermakov/view/MenuPane.html" class="type-name-link" title="class in ru.nsu.ermakov.view">MenuPane</a> - Class in <a href="ru/nsu/ermakov/view/package-summary.html">ru.nsu.ermakov.view</a></dt>
+<dd>
+<div class="block">Панель меню игры.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/view/MenuPane.html#%3Cinit%3E(ru.nsu.ermakov.game.Game)" class="member-name-link">MenuPane(Game)</a> - Constructor for class ru.nsu.ermakov.view.<a href="ru/nsu/ermakov/view/MenuPane.html" title="class in ru.nsu.ermakov.view">MenuPane</a></dt>
+<dd>
+<div class="block">Конструктор панели меню.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/MoveResult.html#MOVED" class="member-name-link">MOVED</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/MoveResult.html" title="enum class in ru.nsu.ermakov.model">MoveResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/MoveResult.html" class="type-name-link" title="enum class in ru.nsu.ermakov.model">MoveResult</a> - Enum Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
 <dd>
-<div class="block">Перечисление возможных результатов кода.</div>
+<div class="block">Перечисление возможных результатов движения.</div>
+</dd>
+</dl>
+<h2 class="title" id="I:N">N</h2>
+<dl class="index">
+<dt><a href="ru/nsu/ermakov/game/Game.html#notifyObservers()" class="member-name-link">notifyObservers()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
+<dd>
+<div class="block">Уведомляет всех наблюдателей об изменении состояния.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
+<dt><a href="ru/nsu/ermakov/model/AppState.html#PAUSED" class="member-name-link">PAUSED</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/ermakov/model/AppState.html#PLAYING" class="member-name-link">PLAYING</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/Point.html" class="type-name-link" title="class in ru.nsu.ermakov.model">Point</a> - Record Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
 <dd>
 <div class="block">Запись, которая хранит координаты точки.</div>
@@ -247,9 +368,21 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/game/Game.html#removeObserver(ru.nsu.ermakov.model.GameObserver)" class="member-name-link">removeObserver(GameObserver)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Удаляет наблюдателя игры.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/view/GameView.html#render(ru.nsu.ermakov.model.GameState)" class="member-name-link">render(GameState)</a> - Method in class ru.nsu.ermakov.view.<a href="ru/nsu/ermakov/view/GameView.html" title="class in ru.nsu.ermakov.view">GameView</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Отрисовывает состояние игры.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/game/Snake.html#resetDirection(ru.nsu.ermakov.model.Direction)" class="member-name-link">resetDirection(Direction)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
+<dd>
+<div class="block">Принудительно устанавливает направление без валидации.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/game/Game.html#restart()" class="member-name-link">restart()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
+<dd>
+<div class="block">Перезапускает игру.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/Direction.html#RIGHT" class="member-name-link">RIGHT</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Direction.html" title="enum class in ru.nsu.ermakov.model">Direction</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/package-summary.html">ru.nsu.ermakov</a> - package ru.nsu.ermakov</dt>
@@ -267,9 +400,25 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html#selectNextLevel()" class="member-name-link">selectNextLevel()</a> - Static method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/LevelManager.html" title="class in ru.nsu.ermakov.model">LevelManager</a></dt>
+<dd>
+<div class="block">Выбирает следующий уровень.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html#selectPreviousLevel()" class="member-name-link">selectPreviousLevel()</a> - Static method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/LevelManager.html" title="class in ru.nsu.ermakov.model">LevelManager</a></dt>
+<dd>
+<div class="block">Выбирает предыдущий уровень.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/game/Game.html#setAppState(ru.nsu.ermakov.model.AppState)" class="member-name-link">setAppState(AppState)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
+<dd>
+<div class="block">Устанавливает состояние приложения.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Game.html#setMoveIntervalNanos(long)" class="member-name-link">setMoveIntervalNanos(long)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
 <dd>
 <div class="block">Установить интервал между шагами змейки.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/LevelManager.html#setSelectedLevelIndex(int)" class="member-name-link">setSelectedLevelIndex(int)</a> - Static method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/LevelManager.html" title="class in ru.nsu.ermakov.model">LevelManager</a></dt>
+<dd>
+<div class="block">Устанавливает индекс выбранного уровня.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/game/Snake.html" class="type-name-link" title="class in ru.nsu.ermakov.game">Snake</a> - Class in <a href="ru/nsu/ermakov/game/package-summary.html">ru.nsu.ermakov.game</a></dt>
 <dd>
@@ -294,16 +443,28 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/ermakov/gui/Assets.html#snakeTail" class="member-name-link">snakeTail</a> - Static variable in class ru.nsu.ermakov.gui.<a href="ru/nsu/ermakov/gui/Assets.html" title="class in ru.nsu.ermakov.gui">Assets</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/SnakeApplication.html#start(javafx.stage.Stage)" class="member-name-link">start(Stage)</a> - Method in class ru.nsu.ermakov.<a href="ru/nsu/ermakov/SnakeApplication.html" title="class in ru.nsu.ermakov">SnakeApplication</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Запускает JavaFX приложение.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/game/Game.html#startGame()" class="member-name-link">startGame()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
+<dd>
+<div class="block">Запускает игру.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/controller/GameController.html#startGameLoop()" class="member-name-link">startGameLoop()</a> - Method in class ru.nsu.ermakov.controller.<a href="ru/nsu/ermakov/controller/GameController.html" title="class in ru.nsu.ermakov.controller">GameController</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Запускает игровой цикл.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Game.html#step()" class="member-name-link">step()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Выполняет один шаг игры.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/game/Game.html#togglePause()" class="member-name-link">togglePause()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Переключает состояние паузы.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/Point.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Point.html" title="class in ru.nsu.ermakov.model">Point</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
@@ -314,12 +475,24 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/ermakov/model/Direction.html#UP" class="member-name-link">UP</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Direction.html" title="enum class in ru.nsu.ermakov.model">Direction</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/GameObserver.html#update(ru.nsu.ermakov.model.GameState)" class="member-name-link">update(GameState)</a> - Method in interface ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/GameObserver.html" title="interface in ru.nsu.ermakov.model">GameObserver</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Обновляет состояние наблюдателя.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/view/GameView.html#update(ru.nsu.ermakov.model.GameState)" class="member-name-link">update(GameState)</a> - Method in class ru.nsu.ermakov.view.<a href="ru/nsu/ermakov/view/GameView.html" title="class in ru.nsu.ermakov.view">GameView</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Обновляет представление игры.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/view/MenuPane.html#update(ru.nsu.ermakov.model.GameState)" class="member-name-link">update(GameState)</a> - Method in class ru.nsu.ermakov.view.<a href="ru/nsu/ermakov/view/MenuPane.html" title="class in ru.nsu.ermakov.view">MenuPane</a></dt>
+<dd>
+<div class="block">Обновляет состояние панели меню.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:V">V</h2>
 <dl class="index">
+<dt><a href="ru/nsu/ermakov/model/AppState.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/Cell.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
@@ -331,6 +504,11 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/ermakov/model/MoveResult.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/MoveResult.html" title="enum class in ru.nsu.ermakov.model">MoveResult</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/AppState.html#values()" class="member-name-link">values()</a> - Static method in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/AppState.html" title="enum class in ru.nsu.ermakov.model">AppState</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/model/Cell.html#values()" class="member-name-link">values()</a> - Static method in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a></dt>
 <dd>
@@ -371,7 +549,7 @@ the order they are declared.</div>
 <div class="block">Returns the value of the <code>y</code> record component.</div>
 </dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<a href="#I:X">X</a>&nbsp;<a href="#I:Y">Y</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<a href="#I:X">X</a>&nbsp;<a href="#I:Y">Y</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
 </div>
 </div>
 </body>
