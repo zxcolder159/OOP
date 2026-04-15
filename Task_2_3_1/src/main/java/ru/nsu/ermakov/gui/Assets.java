@@ -1,8 +1,7 @@
 package ru.nsu.ermakov.gui;
 
-import javafx.scene.image.Image;
-
 import java.util.Objects;
+import javafx.scene.image.Image;
 
 /**
  * Класс для загрузки графических ресурсов игры.

@@ -1,5 +1,6 @@
 package ru.nsu.ermakov.view;
 
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -12,8 +13,6 @@ import ru.nsu.ermakov.model.Direction;
 import ru.nsu.ermakov.model.GameObserver;
 import ru.nsu.ermakov.model.GameState;
 import ru.nsu.ermakov.model.Point;
-
-import java.util.List;
 
 /**
  * Класс для отображения игры.
@@ -35,15 +34,15 @@ public class GameView implements GameObserver {
         gc.setImageSmoothing(false);
     }
 
-	/**
-	 * Обновляет представление игры.
-	 *
-	 * @param state состояние игры
-	 */
-	@Override
-	public void update(GameState state) {
-		render(state);
-	}
+    /**
+     * Обновляет представление игры.
+     *
+     * @param state состояние игры
+     */
+    @Override
+    public void update(GameState state) {
+        render(state);
+    }
 
     /**
      * Отрисовывает состояние игры.
@@ -56,27 +55,24 @@ public class GameView implements GameObserver {
         if (appState == AppState.MENU) {
             return;
         }
-        
+
         int width = state.getWidth();
         int height = state.getHeight();
         Cell[][] field = state.getField();
         List<Point> snakeBody = state.getSnakeBody();
         Direction snakeDirection = state.getSnakeDirection();
-        int score = state.getScore();
-        boolean paused = state.isPaused();
-        boolean gameOver = state.isGameOver();
 
         drawBackground(width, height);
         drawField(field, width, height);
         drawSnake(snakeBody, snakeDirection);
-        drawScore(score, width);
+        drawScore(state.getScore(), width);
 
-        if (paused) {
+        if (state.isPaused()) {
             drawPauseOverlay(width, height);
         }
-        
-        if (gameOver) {
-            drawGameOverOverlay(width, height, score);
+
+        if (state.isGameOver()) {
+            drawGameOverOverlay(width, height, state.getScore());
         }
     }
 
@@ -84,7 +80,6 @@ public class GameView implements GameObserver {
      * Отрисовывает счет.
      *
      * @param score текущий счет
-     *
      * @param width ширина поля
      */
     private void drawScore(int score, int width) {
@@ -98,7 +93,6 @@ public class GameView implements GameObserver {
      * Отрисовывает оверлей паузы.
      *
      * @param width ширина поля
-     *
      * @param height высота поля
      */
     private void drawPauseOverlay(int width, int height) {
@@ -119,7 +113,6 @@ public class GameView implements GameObserver {
      * Отрисовывает фон.
      *
      * @param width ширина поля
-     *
      * @param height высота поля
      */
     private void drawBackground(int width, int height) {
@@ -138,9 +131,7 @@ public class GameView implements GameObserver {
      * Отрисовывает поле.
      *
      * @param field игровое поле
-     *
      * @param width ширина поля
-     *
      * @param height высота поля
      */
     private void drawField(Cell[][] field, int width, int height) {
@@ -160,7 +151,6 @@ public class GameView implements GameObserver {
      * Отрисовывает змейку.
      *
      * @param body тело змейки
-     *
      * @param direction направление движения
      */
     private void drawSnake(List<Point> body, Direction direction) {
@@ -199,9 +189,7 @@ public class GameView implements GameObserver {
      * Отрисовывает повернутое изображение.
      *
      * @param image изображение
-     *
      * @param point позиция
-     *
      * @param direction направление поворота
      */
     private void drawRotatedImage(Image image, Point point, Direction direction) {
@@ -223,9 +211,7 @@ public class GameView implements GameObserver {
      * Определяет направление поворота для угла.
      *
      * @param d1 первое направление
-     *
      * @param d2 второе направление
-     *
      * @return направление поворота
      */
     private Direction getCornerDirection(Direction d1, Direction d2) {
@@ -252,16 +238,22 @@ public class GameView implements GameObserver {
      * Определяет направление между двумя точками.
      *
      * @param from начальная точка
-     *
      * @param to конечная точка
-     *
      * @return направление
      */
     private Direction getDirectionBetween(Point from, Point to) {
-        if (to.x() > from.x()) return Direction.RIGHT;
-        if (to.x() < from.x()) return Direction.LEFT;
-        if (to.y() > from.y()) return Direction.DOWN;
-        if (to.y() < from.y()) return Direction.UP;
+        if (to.x() > from.x()) {
+            return Direction.RIGHT;
+        }
+        if (to.x() < from.x()) {
+            return Direction.LEFT;
+        }
+        if (to.y() > from.y()) {
+            return Direction.DOWN;
+        }
+        if (to.y() < from.y()) {
+            return Direction.UP;
+        }
         return Direction.RIGHT;
     }
 
@@ -270,9 +262,7 @@ public class GameView implements GameObserver {
      * Отрисовывает оверлей окончания игры.
      *
      * @param width ширина поля
-     *
      * @param height высота поля
-     *
      * @param score итоговый счет
      */
     private void drawGameOverOverlay(int width, int height, int score) {

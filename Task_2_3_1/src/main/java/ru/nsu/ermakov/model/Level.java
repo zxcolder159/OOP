@@ -1,7 +1,5 @@
 package ru.nsu.ermakov.model;
 
-import ru.nsu.ermakov.model.Cell;
-
 /**
  * Класс, представляющий уровень игры.
  */
@@ -15,11 +13,8 @@ public class Level {
      * Конструктор уровня.
      *
      * @param name название уровня
-     *
      * @param field игровое поле уровня
-     *
      * @param startPoint начальная точка змейки
-     *
      * @param description описание уровня
      */
     public Level(String name, Cell[][] field, Point startPoint, String description) {

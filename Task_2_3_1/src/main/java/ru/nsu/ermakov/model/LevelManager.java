@@ -1,7 +1,5 @@
 package ru.nsu.ermakov.model;
 
-import ru.nsu.ermakov.model.Cell;
-
 import java.util.ArrayList;
 import java.util.List;
 

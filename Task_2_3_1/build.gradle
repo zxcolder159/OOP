@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'jacoco'
+    id 'checkstyle'
 
     id 'org.openjfx.javafxplugin' version '0.1.0'
 }
@@ -41,4 +42,20 @@ jacocoTestReport {
         xml.required = true
         html.required = true
     }
+}
+
+checkstyle {
+    toolVersion = '10.12.5'
+    configFile = file('../.github/google_checks.xml')
+    ignoreFailures = false
+    maxErrors = 0
+    maxWarnings = 0
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    source = 'src/test/java'
 }

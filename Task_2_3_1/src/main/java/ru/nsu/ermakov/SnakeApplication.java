@@ -17,6 +17,9 @@ import ru.nsu.ermakov.model.Point;
 import ru.nsu.ermakov.view.GameView;
 import ru.nsu.ermakov.view.MenuPane;
 
+/**
+ * Главный класс приложения Snake.
+ */
 public class SnakeApplication extends Application {
     private static final int CELL_SIZE = 40;
     private static final int WIDTH = 20;
@@ -31,56 +34,54 @@ public class SnakeApplication extends Application {
         launch(args);
     }
 
-	/**
-	 * Запускает JavaFX приложение.
-	 *
-	 * @param primaryStage главное окно приложения
-	 */
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			Assets.load();
-		} catch (Exception e) {
-			showErrorAlert("Ошибка загрузки ресурсов", 
-					"Не удалось загрузить графические ресурсы игры.\n" +
-					"Убедитесь, что все файлы изображений находятся в папке resources.",
-					e);
-			System.exit(1);
-			return;
-		}
+    /**
+     * Запускает JavaFX приложение.
+     *
+     * @param primaryStage главное окно приложения
+     */
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            Assets.load();
+        } catch (Exception e) {
+            showErrorAlert("Ошибка загрузки ресурсов",
+                    "Не удалось загрузить графические ресурсы игры.\n"
+                            + "Убедитесь, что все файлы изображений находятся в папке resources.",
+                    e);
+            System.exit(1);
+            return;
+        }
 
-		try {
-			Game game = createGameFromLevel();
+        try {
+            Game game = createGameFromLevel();
 
-			Canvas canvas = new Canvas(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
-			GraphicsContext gc = canvas.getGraphicsContext2D();
+            Canvas canvas = new Canvas(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
+            GraphicsContext gc = canvas.getGraphicsContext2D();
 
-			MenuPane menuPane = new MenuPane(game);
-			menuPane.setPrefSize(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
+            MenuPane menuPane = new MenuPane(game);
+            menuPane.setPrefSize(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
 
-			StackPane root = new StackPane(canvas, menuPane);
-			Scene scene = new Scene(root);
+            StackPane root = new StackPane(canvas, menuPane);
+            Scene scene = new Scene(root);
 
-			GameView view = new GameView(gc, CELL_SIZE);
+            GameView view = new GameView(gc, CELL_SIZE);
+            game.addObserver(view);
 
-			game.addObserver(view);
+            primaryStage.setTitle("Змейка");
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
-			GameController controller = new GameController(game, scene);
+            view.update(game.getState());
 
-			primaryStage.setTitle("Змейка");
-			primaryStage.setScene(scene);
-			primaryStage.show();
-
-			view.update(game.getState());
-
-			controller.startGameLoop();
-		} catch (Exception e) {
-			showErrorAlert("Ошибка инициализации игры",
-					"Произошла ошибка при запуске игры.",
-					e);
-			System.exit(1);
-		}
-	}
+            GameController controller = new GameController(game, scene);
+            controller.startGameLoop();
+        } catch (Exception e) {
+            showErrorAlert("Ошибка инициализации игры",
+                    "Произошла ошибка при запуске игры.",
+                    e);
+            System.exit(1);
+        }
+    }
 
     /**
      * Создает игру с пустым полем.
@@ -99,43 +100,41 @@ public class SnakeApplication extends Application {
         return new Game(field, startPoint);
     }
 
-	/**
-	 * Создает игру на основе выбранного уровня.
-	 *
-	 * @return объект Game
-	 */
-	private Game createGameFromLevel() {
-		Level level = LevelManager.getSelectedLevel();
-		Game game = new Game(level);
+    /**
+     * Создает игру на основе выбранного уровня.
+     *
+     * @return объект Game
+     */
+    private Game createGameFromLevel() {
+        Level level = LevelManager.getSelectedLevel();
+        Game game = new Game(level);
 
-		String levelName = level.getName();
-		if (levelName.contains("Easy")) {
-			game.setMoveIntervalNanos(150_000_000L);
-		} else if (levelName.contains("Hard")) {
-			game.setMoveIntervalNanos(70_000_000L);
-		}
-		
-		return game;
-	}
+        String levelName = level.getName();
+        if (levelName.contains("Easy")) {
+            game.setMoveIntervalNanos(150_000_000L);
+        } else if (levelName.contains("Hard")) {
+            game.setMoveIntervalNanos(70_000_000L);
+        }
 
-	/**
-	 * Показывает диалоговое окно с ошибкой.
-	 *
-	 * @param title заголовок ошибки
-	 *
-	 * @param message сообщение об ошибке
-	 *
-	 * @param e исключение (может быть null)
-	 */
-	private void showErrorAlert(String title, String message, Exception e) {
-		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setTitle(title);
-		alert.setHeaderText(null);
-		alert.setContentText(message);
-		if (e != null) {
-			alert.getDialogPane().setExpandableContent(
-					new javafx.scene.control.TextArea("Детали ошибки:\n" + e.toString()));
-		}
-		alert.showAndWait();
-	}
+        return game;
+    }
+
+    /**
+     * Показывает диалоговое окно с ошибкой.
+     *
+     * @param title заголовок ошибки
+     * @param message сообщение об ошибке
+     * @param e исключение (может быть null)
+     */
+    private void showErrorAlert(String title, String message, Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        if (e != null) {
+            alert.getDialogPane().setExpandableContent(
+                    new javafx.scene.control.TextArea("Детали ошибки:\n" + e.toString()));
+        }
+        alert.showAndWait();
+    }
 }

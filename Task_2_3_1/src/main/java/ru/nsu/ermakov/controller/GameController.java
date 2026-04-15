@@ -5,9 +5,10 @@ import javafx.scene.Scene;
 import ru.nsu.ermakov.game.Game;
 import ru.nsu.ermakov.model.AppState;
 import ru.nsu.ermakov.model.Direction;
-import ru.nsu.ermakov.model.GameState;
-import ru.nsu.ermakov.view.GameView;
 
+/**
+ * Контроллер игры, обрабатывающий ввод пользователя.
+ */
 public class GameController {
     private final Game game;
     private final Scene scene;
@@ -40,7 +41,9 @@ public class GameController {
                     }
                 }
                 case M -> {
-                    if (appState == AppState.PLAYING || appState == AppState.PAUSED || appState == AppState.GAME_OVER) {
+                    if (appState == AppState.PLAYING
+                            || appState == AppState.PAUSED
+                            || appState == AppState.GAME_OVER) {
                         game.restart();
                         game.setAppState(AppState.MENU);
                     }
@@ -56,47 +59,58 @@ public class GameController {
                     }
                 }
                 case UP -> {
-                    if (appState == AppState.PLAYING && canChangeDirection && game.changeSnakeDirection(Direction.UP)) {
+                    if (appState == AppState.PLAYING
+                            && canChangeDirection
+                            && game.changeSnakeDirection(Direction.UP)) {
                         canChangeDirection = false;
                     }
                 }
                 case DOWN -> {
-                    if (appState == AppState.PLAYING && canChangeDirection && game.changeSnakeDirection(Direction.DOWN)) {
+                    if (appState == AppState.PLAYING
+                            && canChangeDirection
+                            && game.changeSnakeDirection(Direction.DOWN)) {
                         canChangeDirection = false;
                     }
                 }
                 case LEFT -> {
-                    if (appState == AppState.PLAYING && canChangeDirection && game.changeSnakeDirection(Direction.LEFT)) {
+                    if (appState == AppState.PLAYING
+                            && canChangeDirection
+                            && game.changeSnakeDirection(Direction.LEFT)) {
                         canChangeDirection = false;
                     }
                 }
                 case RIGHT -> {
-                    if (appState == AppState.PLAYING && canChangeDirection && game.changeSnakeDirection(Direction.RIGHT)) {
+                    if (appState == AppState.PLAYING
+                            && canChangeDirection
+                            && game.changeSnakeDirection(Direction.RIGHT)) {
                         canChangeDirection = false;
                     }
+                }
+                default -> {
+                    // Do nothing for other keys
                 }
             }
         });
     }
 
-	/**
-	 * Запускает игровой цикл.
-	 */
-	public void startGameLoop() {
-		AnimationTimer timer = new AnimationTimer() {
-			private long lastMove = 0;
+    /**
+     * Запускает игровой цикл.
+     */
+    public void startGameLoop() {
+        AnimationTimer timer = new AnimationTimer() {
+            private long lastMove = 0;
 
-			@Override
-			public void handle(long now) {
-				long moveInterval = game.getMoveIntervalNanos();
+            @Override
+            public void handle(long now) {
+                long moveInterval = game.getMoveIntervalNanos();
 
-				if (now - lastMove >= moveInterval) {
-					game.step();
-					lastMove = now;
-					canChangeDirection = true;
-				}
-			}
-		};
-		timer.start();
-	}
+                if (now - lastMove >= moveInterval) {
+                    game.step();
+                    lastMove = now;
+                    canChangeDirection = true;
+                }
+            }
+        };
+        timer.start();
+    }
 }

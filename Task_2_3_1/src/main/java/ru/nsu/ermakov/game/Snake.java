@@ -1,18 +1,17 @@
 package ru.nsu.ermakov.game;
 
+import java.util.LinkedList;
 import ru.nsu.ermakov.model.Cell;
 import ru.nsu.ermakov.model.Direction;
 import ru.nsu.ermakov.model.Field;
 import ru.nsu.ermakov.model.MoveResult;
 import ru.nsu.ermakov.model.Point;
 
-import java.util.LinkedList;
-
 /**
  * Класс, хранящий змейку.
  */
 public class Snake {
-    final LinkedList<Point> body = new LinkedList<>();
+    public final LinkedList<Point> body = new LinkedList<>();
     protected Direction direction;
 
     /**
@@ -22,8 +21,8 @@ public class Snake {
      */
     public Snake(Point startPoint) {
         body.add(startPoint);
-		body.add(new Point(startPoint.x()-1, startPoint.y()));
-	    body.add(new Point(startPoint.x()-2, startPoint.y()));
+        body.add(new Point(startPoint.x() - 1, startPoint.y()));
+        body.add(new Point(startPoint.x() - 2, startPoint.y()));
         direction = Direction.UP;
     }
 
@@ -31,20 +30,19 @@ public class Snake {
      * Изменить направление с валидацией (нельзя двигаться в противоположную сторону).
      *
      * @param direction новое направление
-     *
      * @return true если направление изменено, false если изменение отклонено
      */
     public boolean changeDirection(Direction direction) {
-        if(this.direction == Direction.UP && direction == Direction.DOWN) {
+        if (this.direction == Direction.UP && direction == Direction.DOWN) {
             return false;
         }
-        if(this.direction == Direction.DOWN && direction == Direction.UP) {
+        if (this.direction == Direction.DOWN && direction == Direction.UP) {
             return false;
         }
-        if(this.direction == Direction.LEFT && direction == Direction.RIGHT) {
+        if (this.direction == Direction.LEFT && direction == Direction.RIGHT) {
             return false;
         }
-        if(this.direction == Direction.RIGHT && direction == Direction.LEFT) {
+        if (this.direction == Direction.RIGHT && direction == Direction.LEFT) {
             return false;
         }
         this.direction = direction;
@@ -55,15 +53,13 @@ public class Snake {
      * Движение змейки.
      *
      * @param field игровое поле
-     *
      * @return результат движения
      */
     MoveResult move(Field field) {
-        int newX, newY;
-        newX = body.getFirst().x();
-        newY = body.getFirst().y();
+        int newX = body.getFirst().x();
+        int newY = body.getFirst().y();
         switch (direction) {
-            case UP :
+            case UP:
                 newY -= 1;
                 break;
             case DOWN:
@@ -75,18 +71,20 @@ public class Snake {
             case RIGHT:
                 newX += 1;
                 break;
+            default:
+                break;
         }
         newX = (newX + field.getWidth()) % field.getWidth();
         newY = (newY + field.getHeight()) % field.getHeight();
         Point newPoint = new Point(newX, newY);
-        if(body.contains(newPoint)) {
+        if (body.contains(newPoint)) {
             return MoveResult.DIED;
         }
         body.addFirst(newPoint);
-        if(field.field[newX][newY] == Cell.FOOD) {
+        if (field.field[newX][newY] == Cell.FOOD) {
             return MoveResult.ATE_FOOD;
         }
-        if(field.field[newX][newY] == Cell.WALL) {
+        if (field.field[newX][newY] == Cell.WALL) {
             return MoveResult.DIED;
         }
         body.removeLast();

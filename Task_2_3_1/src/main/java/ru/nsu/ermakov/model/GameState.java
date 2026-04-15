@@ -20,21 +20,13 @@ public class GameState {
      * Конструктор состояния игры.
      *
      * @param snakeBody тело змейки
-     *
      * @param snakeDirection направление змейки
-     *
      * @param field игровое поле
-     *
      * @param gameOver флаг окончания игры
-     *
      * @param width ширина поля
-     *
      * @param height высота поля
-     *
      * @param paused флаг паузы
-     *
      * @param score счет
-     *
      * @param appState состояние приложения
      */
     public GameState(List<Point> snakeBody, Direction snakeDirection, Cell[][] field,

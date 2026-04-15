@@ -1,22 +1,17 @@
 package ru.nsu.ermakov.view;
 
+import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import ru.nsu.ermakov.game.Game;
 import ru.nsu.ermakov.model.AppState;
 import ru.nsu.ermakov.model.GameObserver;
 import ru.nsu.ermakov.model.GameState;
 import ru.nsu.ermakov.model.Level;
 import ru.nsu.ermakov.model.LevelManager;
-
-import java.util.List;
 
 /**
  * Панель меню игры.
@@ -41,25 +36,29 @@ public class MenuPane extends VBox implements GameObserver {
 
         Label titleLabel = new Label("SNAKE");
         titleLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 64px; -fx-text-fill: #4CAF50;"
-                + " -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, #2E7D32, 4, 0.5, 0, 2);");
+                + " -fx-font-weight: bold; "
+                + "-fx-effect: dropshadow(gaussian, #2E7D32, 4, 0.5, 0, 2);");
 
         Label subtitleLabel = new Label("SELECT LEVEL");
-        subtitleLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 28px; -fx-text-fill: #FFFFFF;");
+        subtitleLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 28px; "
+                + "-fx-text-fill: #FFFFFF;");
 
         levelButtonsContainer = new VBox(10);
         levelButtonsContainer.setAlignment(Pos.CENTER);
         buildLevelButtons();
 
         descriptionLabel = new Label();
-        descriptionLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 16px; -fx-text-fill: #B0BEC5;"
-                + " -fx-alignment: center;");
+        descriptionLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 16px; "
+                + "-fx-text-fill: #B0BEC5; -fx-alignment: center;");
         descriptionLabel.setWrapText(true);
         descriptionLabel.setMaxWidth(500);
         descriptionLabel.setAlignment(Pos.CENTER);
         updateDescription();
 
-        Label hintLabel = new Label("Click a level to start  |  M — menu  |  R — restart  |  ESC — pause");
-        hintLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-text-fill: #78909C;");
+        Label hintLabel = new Label(
+                "Click a level to start  |  M — menu  |  R — restart  |  ESC — pause");
+        hintLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px; "
+                + "-fx-text-fill: #78909C;");
 
         getChildren().addAll(titleLabel, subtitleLabel, levelButtonsContainer, descriptionLabel, hintLabel);
 
@@ -91,11 +90,8 @@ public class MenuPane extends VBox implements GameObserver {
      * Создает кнопку уровня.
      *
      * @param level уровень
-     *
      * @param index индекс уровня
-     *
      * @param selected флаг выбранности
-     *
      * @return кнопка уровня
      */
     private Button createLevelButton(Level level, int index, boolean selected) {

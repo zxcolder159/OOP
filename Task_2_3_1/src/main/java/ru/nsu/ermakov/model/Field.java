@@ -30,7 +30,6 @@ public class Field {
         return width;
     }
 
-
     /**
      * Возвращает высоту поля.
      */
@@ -42,8 +41,8 @@ public class Field {
      * Очищает поле.
      */
     void clear() {
-        for(int i = 0; i < width; i++) {
-            for(int j = 0; j < height; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 field[i][j] = Cell.EMPTY;
             }
         }
@@ -53,9 +52,7 @@ public class Field {
      * Возвращает ячейку поля по координатам.
      *
      * @param x координата X
-     *
      * @param y координата Y
-     *
      * @return ячейка поля
      */
     public Cell getCell(int x, int y) {
