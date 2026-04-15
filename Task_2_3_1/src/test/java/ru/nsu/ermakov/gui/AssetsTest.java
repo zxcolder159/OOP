@@ -16,11 +16,11 @@ class AssetsTest {
     @Test
     @DisplayName("Assets should declare all required image fields")
     void testImageFieldsExist() {
-	    try {
-		    Assets.load();
-	    } catch (Exception e) {
-		    throw new RuntimeException(e);
-	    }
+        try {
+            Assets.load();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assertions.assertNotNull(Assets.snakeHead, "snakeHead field should exist");
         Assertions.assertNotNull(Assets.snakeBody, "snakeBody field should exist");
         Assertions.assertNotNull(Assets.snakeChange, "snakeChange field should exist");
@@ -58,13 +58,13 @@ class AssetsTest {
         Assets.banana = null;
         Assets.wall = null;
 
-	    try {
-		    Assets.load();
-	    } catch (Exception e) {
-		    throw new RuntimeException(e);
-	    }
+        try {
+            Assets.load();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-	    Assertions.assertNotNull(Assets.snakeHead, "snakeHead should be initialized");
+        Assertions.assertNotNull(Assets.snakeHead, "snakeHead should be initialized");
         Assertions.assertNotNull(Assets.snakeBody, "snakeBody should be initialized");
         Assertions.assertNotNull(Assets.snakeChange, "snakeChange should be initialized");
         Assertions.assertNotNull(Assets.snakeTail, "snakeTail should be initialized");
