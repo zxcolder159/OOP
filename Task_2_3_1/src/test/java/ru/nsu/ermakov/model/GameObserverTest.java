@@ -66,7 +66,7 @@ class GameObserverTest {
     @Test
     @DisplayName("GameObserver should receive multiple states")
     void testObserverReceivesMultipleStates() {
-        List<GameState> receivedStates = new ArrayList<>();
+
 
 
 
@@ -88,7 +88,8 @@ class GameObserverTest {
         GameState state2 = new GameState(
                 snakeBody2, Direction.RIGHT, field, false, 10, 10, false, 1, AppState.PLAYING
         );
-	    GameObserver observer = state -> receivedStates.add(state);
+        List<GameState> receivedStates = new ArrayList<>();
+        GameObserver observer = state -> receivedStates.add(state);
         observer.update(state1);
         observer.update(state2);
 
