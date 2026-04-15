@@ -13,7 +13,7 @@ import java.util.LinkedList;
  */
 public class Snake {
     final LinkedList<Point> body = new LinkedList<>();
-    Direction direction;
+    protected Direction direction;
 
     /**
      * Конструктор змейки.
@@ -31,6 +31,7 @@ public class Snake {
      * Изменить направление с валидацией (нельзя двигаться в противоположную сторону).
      *
      * @param direction новое направление
+     *
      * @return true если направление изменено, false если изменение отклонено
      */
     public boolean changeDirection(Direction direction) {
@@ -52,6 +53,10 @@ public class Snake {
 
     /**
      * Движение змейки.
+     *
+     * @param field игровое поле
+     *
+     * @return результат движения
      */
     MoveResult move(Field field) {
         int newX, newY;
@@ -100,5 +105,15 @@ public class Snake {
      */
     public Direction getDirection() {
         return direction;
+    }
+
+    /**
+     * Принудительно устанавливает направление без валидации.
+     * Используется при рестарте игры.
+     *
+     * @param direction новое направление
+     */
+    public void resetDirection(Direction direction) {
+        this.direction = direction;
     }
 }

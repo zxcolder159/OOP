@@ -36,6 +36,18 @@ class GameTest {
         }
     }
 
+    private Game createStartedGame(Point startPoint) {
+        Game game = new Game(emptyField, startPoint);
+        game.startGame();
+        return game;
+    }
+
+    private Game createStartedGame(Cell[][] field, Point startPoint) {
+        Game game = new Game(field, startPoint);
+        game.startGame();
+        return game;
+    }
+
     /**
      * Tests game creation with valid parameters.
      */
@@ -43,7 +55,7 @@ class GameTest {
     @DisplayName("Game should be created with valid parameters")
     void testGameCreation() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         Assertions.assertNotNull(game, "Game should be created");
         Assertions.assertFalse(game.isGameOver(), "Game should not be over initially");
@@ -58,7 +70,7 @@ class GameTest {
     @DisplayName("Game should spawn food on creation")
     void testFoodSpawned() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         GameState state = game.getState();
         boolean hasFood = false;
@@ -81,7 +93,7 @@ class GameTest {
     @DisplayName("Game should allow setting move interval")
     void testSetMoveInterval() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         game.setMoveIntervalNanos(50_000_000L);
         Assertions.assertEquals(50_000_000L, game.getMoveIntervalNanos(),
@@ -95,7 +107,7 @@ class GameTest {
     @DisplayName("Game should reject negative move interval")
     void testRejectNegativeMoveInterval() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         long originalInterval = game.getMoveIntervalNanos();
         game.setMoveIntervalNanos(-100);
@@ -110,7 +122,7 @@ class GameTest {
     @DisplayName("Game should increase speed")
     void testIncreaseSpeed() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         long originalInterval = game.getMoveIntervalNanos();
         game.increaseSpeed(10_000_000L);
@@ -125,7 +137,7 @@ class GameTest {
     @DisplayName("Game speed should not go below minimum")
     void testSpeedMinimum() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         game.setMoveIntervalNanos(55_000_000L);
         game.increaseSpeed(10_000_000L);
@@ -140,7 +152,7 @@ class GameTest {
     @DisplayName("Game should allow changing snake direction")
     void testChangeSnakeDirection() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         boolean result = game.changeSnakeDirection(Direction.LEFT);
         Assertions.assertTrue(result, "Should be able to change direction to LEFT");
@@ -156,7 +168,7 @@ class GameTest {
     @DisplayName("Game should reject invalid direction change")
     void testRejectInvalidDirection() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         boolean result = game.changeSnakeDirection(Direction.DOWN);
         Assertions.assertFalse(result, "Should not be able to change from UP to DOWN");
@@ -169,7 +181,7 @@ class GameTest {
     @DisplayName("Game step should advance snake")
     void testGameStep() {
         Point startPoint = new Point(10, 10);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
         game.changeSnakeDirection(Direction.RIGHT);
 
         GameState initialState = game.getState();
@@ -191,7 +203,7 @@ class GameTest {
     @DisplayName("Game state should contain correct values")
     void testGameState() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         GameState state = game.getState();
 
@@ -211,7 +223,7 @@ class GameTest {
     @DisplayName("Game should toggle pause state")
     void testTogglePause() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         Assertions.assertFalse(game.isPaused(), "Game should not be paused initially");
 
@@ -229,7 +241,7 @@ class GameTest {
     @DisplayName("Game step should do nothing when paused")
     void testStepWhenPaused() {
         Point startPoint = new Point(10, 10);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
         game.changeSnakeDirection(Direction.RIGHT);
 
         GameState initialState = game.getState();
@@ -259,7 +271,7 @@ class GameTest {
         fieldWithWall[10][9] = Cell.WALL;
 
         Point startPoint = new Point(10, 10);
-        Game game = new Game(fieldWithWall, startPoint);
+        Game game = createStartedGame(fieldWithWall, startPoint);
 
         game.step();
 
@@ -280,7 +292,7 @@ class GameTest {
     @DisplayName("Game togglePause should work when game is running")
     void testTogglePauseWhenRunning() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         game.togglePause();
         Assertions.assertTrue(game.isPaused(), "Game should be paused");
@@ -304,7 +316,7 @@ class GameTest {
         fieldWithWall[10][9] = Cell.WALL;
 
         Point startPoint = new Point(10, 10);
-        Game game = new Game(fieldWithWall, startPoint);
+        Game game = createStartedGame(fieldWithWall, startPoint);
 
         game.step();
 
@@ -326,7 +338,7 @@ class GameTest {
         fieldWithFood[10][9] = Cell.FOOD;
 
         Point startPoint = new Point(10, 10);
-        Game game = new Game(fieldWithFood, startPoint);
+        Game game = createStartedGame(fieldWithFood, startPoint);
 
         int initialScore = game.getScore();
         game.step();
@@ -342,7 +354,7 @@ class GameTest {
     @DisplayName("Game should allow adding observers")
     void testAddObserver() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         AtomicInteger callCount = new AtomicInteger(0);
         GameObserver observer = state -> callCount.incrementAndGet();
@@ -360,7 +372,7 @@ class GameTest {
     @DisplayName("Game should allow removing observers")
     void testRemoveObserver() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         AtomicInteger callCount = new AtomicInteger(0);
         GameObserver observer = state -> callCount.incrementAndGet();
@@ -384,7 +396,7 @@ class GameTest {
     @DisplayName("Game should notify multiple observers")
     void testMultipleObservers() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         AtomicInteger callCount1 = new AtomicInteger(0);
         AtomicInteger callCount2 = new AtomicInteger(0);
@@ -407,7 +419,7 @@ class GameTest {
     @DisplayName("Observer should receive correct game state")
     void testObserverReceivesState() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         GameState[] receivedState = new GameState[1];
         GameObserver observer = state -> receivedState[0] = state;
@@ -427,7 +439,7 @@ class GameTest {
     @DisplayName("Observer should be notified on pause toggle")
     void testNotifyOnPause() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         AtomicInteger callCount = new AtomicInteger(0);
         GameObserver observer = state -> callCount.incrementAndGet();
@@ -448,7 +460,7 @@ class GameTest {
     @DisplayName("Game state should be isolated from internal state")
     void testStateIsolation() {
         Point startPoint = new Point(10, 7);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
 
         GameState state1 = game.getState();
         game.step();
@@ -467,7 +479,7 @@ class GameTest {
     @DisplayName("Game state should track last move direction")
     void testLastMoveDirectionTracking() {
         Point startPoint = new Point(10, 10);
-        Game game = new Game(emptyField, startPoint);
+        Game game = createStartedGame(startPoint);
         game.changeSnakeDirection(Direction.RIGHT);
 
         game.step();

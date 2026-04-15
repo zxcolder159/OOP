@@ -33,7 +33,7 @@ class GameStateTest {
         field[7][7] = Cell.FOOD;
 
         GameState state = new GameState(
-                snakeBody, Direction.RIGHT, field, false, 10, 10, false, 42
+                snakeBody, Direction.RIGHT, field, false, 10, 10, false, 42, AppState.PLAYING
         );
 
         Assertions.assertEquals(snakeBody, state.getSnakeBody(), "Snake body should match");
@@ -57,7 +57,7 @@ class GameStateTest {
         Cell[][] field = new Cell[10][10];
 
         GameState state = new GameState(
-                snakeBody, Direction.UP, field, true, 10, 10, false, 0
+                snakeBody, Direction.UP, field, true, 10, 10, false, 0, AppState.GAME_OVER
         );
 
         Assertions.assertTrue(state.isGameOver(), "Game should be over");
@@ -76,7 +76,7 @@ class GameStateTest {
         Cell[][] field = new Cell[10][10];
 
         GameState state = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, true, 10
+                snakeBody, Direction.UP, field, false, 10, 10, true, 10, AppState.PAUSED
         );
 
         Assertions.assertTrue(state.isPaused(), "Game should be paused");
@@ -103,7 +103,7 @@ class GameStateTest {
         field[3][3] = Cell.WALL;
 
         GameState state = new GameState(
-                snakeBody, Direction.LEFT, field, false, 5, 5, false, 0
+                snakeBody, Direction.LEFT, field, false, 5, 5, false, 0, AppState.PLAYING
         );
 
         Cell[][] storedField = state.getField();
@@ -124,12 +124,12 @@ class GameStateTest {
         Cell[][] field = new Cell[10][10];
 
         GameState stateZero = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
         Assertions.assertEquals(0, stateZero.getScore(), "Score should be 0");
 
         GameState stateHigh = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 999
+                snakeBody, Direction.UP, field, false, 10, 10, false, 999, AppState.PLAYING
         );
         Assertions.assertEquals(999, stateHigh.getScore(), "Score should be 999");
     }
@@ -145,22 +145,22 @@ class GameStateTest {
         Cell[][] field = new Cell[10][10];
 
         GameState stateUp = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
         Assertions.assertEquals(Direction.UP, stateUp.getSnakeDirection(), "Direction should be UP");
 
         GameState stateDown = new GameState(
-                snakeBody, Direction.DOWN, field, false, 10, 10, false, 0
+                snakeBody, Direction.DOWN, field, false, 10, 10, false, 0, AppState.PLAYING
         );
         Assertions.assertEquals(Direction.DOWN, stateDown.getSnakeDirection(), "Direction should be DOWN");
 
         GameState stateLeft = new GameState(
-                snakeBody, Direction.LEFT, field, false, 10, 10, false, 0
+                snakeBody, Direction.LEFT, field, false, 10, 10, false, 0, AppState.PLAYING
         );
         Assertions.assertEquals(Direction.LEFT, stateLeft.getSnakeDirection(), "Direction should be LEFT");
 
         GameState stateRight = new GameState(
-                snakeBody, Direction.RIGHT, field, false, 10, 10, false, 0
+                snakeBody, Direction.RIGHT, field, false, 10, 10, false, 0, AppState.PLAYING
         );
         Assertions.assertEquals(Direction.RIGHT, stateRight.getSnakeDirection(), "Direction should be RIGHT");
     }

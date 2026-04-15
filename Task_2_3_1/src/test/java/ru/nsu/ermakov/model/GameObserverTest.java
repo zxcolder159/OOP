@@ -52,7 +52,7 @@ class GameObserverTest {
         snakeBody.add(new Point(5, 5));
 
         GameState state = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
 
         observer.update(state);
@@ -81,13 +81,13 @@ class GameObserverTest {
         List<Point> snakeBody1 = new ArrayList<>();
         snakeBody1.add(new Point(5, 5));
         GameState state1 = new GameState(
-                snakeBody1, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody1, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
 
         List<Point> snakeBody2 = new ArrayList<>();
         snakeBody2.add(new Point(6, 5));
         GameState state2 = new GameState(
-                snakeBody2, Direction.RIGHT, field, false, 10, 10, false, 1
+                snakeBody2, Direction.RIGHT, field, false, 10, 10, false, 1, AppState.PLAYING
         );
 
         observer.update(state1);
@@ -119,11 +119,11 @@ class GameObserverTest {
         snakeBody.add(new Point(5, 5));
 
         GameState runningState = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
 
         GameState gameOverState = new GameState(
-                snakeBody, Direction.UP, field, true, 10, 10, false, 10
+                snakeBody, Direction.UP, field, true, 10, 10, false, 10, AppState.GAME_OVER
         );
 
         observer.update(runningState);
@@ -154,11 +154,11 @@ class GameObserverTest {
         snakeBody.add(new Point(5, 5));
 
         GameState runningState = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
 
         GameState pausedState = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, true, 0
+                snakeBody, Direction.UP, field, false, 10, 10, true, 0, AppState.PAUSED
         );
 
         observer.update(runningState);
@@ -195,7 +195,7 @@ class GameObserverTest {
         snakeBody.add(new Point(5, 5));
 
         GameState state = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 42
+                snakeBody, Direction.UP, field, false, 10, 10, false, 42, AppState.PLAYING
         );
 
         observer.update(state);
@@ -226,7 +226,7 @@ class GameObserverTest {
         snakeBody.add(new Point(5, 5));
 
         GameState state = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
 
         lambdaObserver.update(state);
@@ -260,7 +260,7 @@ class GameObserverTest {
         snakeBody.add(new Point(5, 5));
 
         GameState state = new GameState(
-                snakeBody, Direction.UP, field, false, 10, 10, false, 0
+                snakeBody, Direction.UP, field, false, 10, 10, false, 0, AppState.PLAYING
         );
 
         anonymousObserver.update(state);

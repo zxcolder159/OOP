@@ -13,6 +13,7 @@ public class Field {
      * Конструктор поля.
      *
      * @param width ширина поля
+     *
      * @param height высота поля
      */
     public Field(int width, int height) {
@@ -48,6 +49,15 @@ public class Field {
         }
     }
 
+    /**
+     * Возвращает ячейку поля по координатам.
+     *
+     * @param x координата X
+     *
+     * @param y координата Y
+     *
+     * @return ячейка поля
+     */
     public Cell getCell(int x, int y) {
         return field[x][y];
     }
