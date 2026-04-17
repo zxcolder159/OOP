@@ -1,6 +1,6 @@
 students {
     student {
-        fio = "Ермаков Александр"
+        fio = "Ермаков Александр Владиславович"
         githubNick = "zxcolder159"
         repoUrl = "https://github.com/zxcolder159/OOP"
     }
