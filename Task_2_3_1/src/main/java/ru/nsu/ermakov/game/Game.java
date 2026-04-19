@@ -1,6 +1,7 @@
 package ru.nsu.ermakov.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import ru.nsu.ermakov.model.AppState;
 import ru.nsu.ermakov.model.Cell;
@@ -47,9 +48,7 @@ public class Game {
         this.originalStartPoint = point;
         this.field = new Field(field.length, field[0].length);
         this.snake = new Snake(point);
-        for (int i = 0; i < field.length; i++) {
-            System.arraycopy(field[i], 0, this.field.field[i], 0, field[0].length);
-        }
+        this.field.copyFrom(field);
         spawnFood();
     }
 
@@ -65,9 +64,7 @@ public class Game {
         Cell[][] levelField = level.getField();
         this.field = new Field(levelField.length, levelField[0].length);
         this.snake = new Snake(level.getStartPoint());
-        for (int i = 0; i < levelField.length; i++) {
-            System.arraycopy(levelField[i], 0, this.field.field[i], 0, levelField[0].length);
-        }
+        this.field.copyFrom(levelField);
         spawnFood();
     }
 
@@ -124,8 +121,8 @@ public class Game {
 
         while (true) {
             Point point = getRandomCord();
-            if (field.field[point.x()][point.y()] == Cell.EMPTY && !snake.body.contains(point)) {
-                field.field[point.x()][point.y()] = Cell.FOOD;
+            if (field.getCell(point.x(), point.y()) == Cell.EMPTY && !snake.contains(point)) {
+                field.setCell(point.x(), point.y(), Cell.FOOD);
                 break;
             }
         }
@@ -135,8 +132,8 @@ public class Game {
      * Возвращает случайные координаты на поле.
      */
     private Point getRandomCord() {
-        int randomNumberX = (int) (Math.random() * field.width);
-        int randomNumberY = (int) (Math.random() * field.height);
+        int randomNumberX = (int) (Math.random() * field.getWidth());
+        int randomNumberY = (int) (Math.random() * field.getHeight());
         return new Point(randomNumberX, randomNumberY);
     }
 
@@ -157,12 +154,9 @@ public class Game {
      */
     public GameState getState() {
         List<Point> bodyCopy = new ArrayList<>(snake.getBody());
-        Cell[][] fieldCopy = new Cell[field.width][field.height];
-        for (int i = 0; i < field.width; i++) {
-            System.arraycopy(field.field[i], 0, fieldCopy[i], 0, field.height);
-        }
+        Cell[][] fieldCopy = field.copyCells();
         return new GameState(bodyCopy, lastMoveDirection, fieldCopy,
-                             isGameOver, field.width, field.height, isPaused,
+                             isGameOver, field.getWidth(), field.getHeight(), isPaused,
                              score, appState);
     }
 
@@ -216,7 +210,8 @@ public class Game {
             appState = AppState.GAME_OVER;
         }
         if (moveResult == MoveResult.ATE_FOOD) {
-            field.field[snake.body.getFirst().x()][snake.body.getFirst().y()] = Cell.EMPTY;
+            Point head = snake.getHead();
+            field.setCell(head.x(), head.y(), Cell.EMPTY);
             spawnFood();
             score++;
             increaseSpeed(2_000_000L);
@@ -257,25 +252,16 @@ public class Game {
         if (level != null) {
             Level newLevel = LevelManager.getSelectedLevel();
             Cell[][] newField = newLevel.getField();
-
-            for (int i = 0; i < field.width; i++) {
-                System.arraycopy(newField[i], 0, this.field.field[i], 0, field.height);
-            }
+            this.field.copyFrom(newField);
 
             Point startPoint = newLevel.getStartPoint();
-            snake.body.clear();
-            snake.body.add(startPoint);
-            snake.body.add(new Point(startPoint.x(), startPoint.y() + 1));
-            snake.body.add(new Point(startPoint.x(), startPoint.y() + 2));
+            snake.resetBody(Arrays.asList(
+                    startPoint,
+                    new Point(startPoint.x(), startPoint.y() + 1),
+                    new Point(startPoint.x(), startPoint.y() + 2)));
             snake.resetDirection(Direction.UP);
 
-            for (int i = 0; i < field.width; i++) {
-                for (int j = 0; j < field.height; j++) {
-                    if (field.field[i][j] == Cell.FOOD) {
-                        field.field[i][j] = Cell.EMPTY;
-                    }
-                }
-            }
+            field.clearCellsOfType(Cell.FOOD);
             spawnFood();
 
             String levelName = newLevel.getName();
@@ -287,23 +273,15 @@ public class Game {
                 moveIntervalNanos = 100_000_000L;
             }
         } else {
-            for (int i = 0; i < field.width; i++) {
-                System.arraycopy(originalField[i], 0, this.field.field[i], 0, field.height);
-            }
+            this.field.copyFrom(originalField);
 
-            snake.body.clear();
-            snake.body.add(originalStartPoint);
-            snake.body.add(new Point(originalStartPoint.x(), originalStartPoint.y() + 1));
-            snake.body.add(new Point(originalStartPoint.x(), originalStartPoint.y() + 2));
+            snake.resetBody(Arrays.asList(
+                    originalStartPoint,
+                    new Point(originalStartPoint.x(), originalStartPoint.y() + 1),
+                    new Point(originalStartPoint.x(), originalStartPoint.y() + 2)));
             snake.resetDirection(Direction.UP);
 
-            for (int i = 0; i < field.width; i++) {
-                for (int j = 0; j < field.height; j++) {
-                    if (field.field[i][j] == Cell.FOOD) {
-                        field.field[i][j] = Cell.EMPTY;
-                    }
-                }
-            }
+            field.clearCellsOfType(Cell.FOOD);
             spawnFood();
 
             moveIntervalNanos = 100_000_000L;

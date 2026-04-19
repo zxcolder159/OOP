@@ -253,7 +253,7 @@ class SnakeTest {
         Point startPoint = new Point(10, 10);
         Snake snake = new Snake(startPoint);
 
-        field.field[10][9] = Cell.FOOD;
+        field.setCell(10, 9, Cell.FOOD);
 
         int sizeBefore = snake.getBody().size();
         MoveResult result = snake.move(field);
@@ -272,7 +272,7 @@ class SnakeTest {
         Point startPoint = new Point(10, 10);
         Snake snake = new Snake(startPoint);
 
-        field.field[10][9] = Cell.WALL;
+        field.setCell(10, 9, Cell.WALL);
 
         MoveResult result = snake.move(field);
 

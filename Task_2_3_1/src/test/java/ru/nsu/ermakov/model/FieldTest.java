@@ -56,23 +56,23 @@ class FieldTest {
     @Test
     @DisplayName("Field should allow setting and getting cells")
     void testSetAndGetCell() {
-        field.field[5][5] = Cell.FOOD;
+        field.setCell(5, 5, Cell.FOOD);
         Assertions.assertEquals(Cell.FOOD, field.getCell(5, 5),
                 "Cell should be FOOD after setting");
 
-        field.field[3][4] = Cell.WALL;
+        field.setCell(3, 4, Cell.WALL);
         Assertions.assertEquals(Cell.WALL, field.getCell(3, 4),
                 "Cell should be WALL after setting");
     }
 
     /**
-     * Tests direct field array access.
+     * Tests repeated cell updates via API.
      */
     @Test
-    @DisplayName("Field array should be accessible and modifiable")
-    void testFieldArrayAccess() {
-        field.field[0][0] = Cell.SNAKE;
-        Assertions.assertEquals(Cell.SNAKE, field.field[0][0], "Direct array access should work");
+    @DisplayName("Field should be modifiable through public API")
+    void testFieldModificationViaApi() {
+        field.setCell(0, 0, Cell.SNAKE);
+        Assertions.assertEquals(Cell.SNAKE, field.getCell(0, 0), "Cell should be updated to SNAKE");
     }
 
     /**
@@ -98,7 +98,7 @@ class FieldTest {
         Assertions.assertEquals(50, largeField.getWidth(), "Large width should be set correctly");
         Assertions.assertEquals(50, largeField.getHeight(), "Large height should be set correctly");
 
-        largeField.field[25][25] = Cell.FOOD;
+        largeField.setCell(25, 25, Cell.FOOD);
         Assertions.assertEquals(Cell.FOOD, largeField.getCell(25, 25),
                 "Cell in large field should be accessible");
     }

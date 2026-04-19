@@ -1,6 +1,7 @@
 package ru.nsu.ermakov.game;
 
 import java.util.LinkedList;
+import java.util.List;
 import ru.nsu.ermakov.model.Cell;
 import ru.nsu.ermakov.model.Direction;
 import ru.nsu.ermakov.model.Field;
@@ -11,8 +12,8 @@ import ru.nsu.ermakov.model.Point;
  * Класс, хранящий змейку.
  */
 public class Snake {
-    public final LinkedList<Point> body = new LinkedList<>();
-    protected Direction direction;
+    private final LinkedList<Point> body = new LinkedList<>();
+    private Direction direction;
 
     /**
      * Конструктор змейки.
@@ -81,10 +82,10 @@ public class Snake {
             return MoveResult.DIED;
         }
         body.addFirst(newPoint);
-        if (field.field[newX][newY] == Cell.FOOD) {
+        if (field.getCell(newX, newY) == Cell.FOOD) {
             return MoveResult.ATE_FOOD;
         }
-        if (field.field[newX][newY] == Cell.WALL) {
+        if (field.getCell(newX, newY) == Cell.WALL) {
             return MoveResult.DIED;
         }
         body.removeLast();
@@ -95,7 +96,21 @@ public class Snake {
      * Возвращает тело змейки.
      */
     public LinkedList<Point> getBody() {
-        return body;
+        return new LinkedList<>(body);
+    }
+
+    /**
+     * Проверяет, занимает ли змейка указанную точку.
+     */
+    public boolean contains(Point point) {
+        return body.contains(point);
+    }
+
+    /**
+     * Возвращает текущую позицию головы.
+     */
+    public Point getHead() {
+        return body.getFirst();
     }
 
     /**
@@ -113,5 +128,13 @@ public class Snake {
      */
     public void resetDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    /**
+     * Полностью заменяет тело змейки переданными сегментами.
+     */
+    public void resetBody(List<Point> segments) {
+        body.clear();
+        body.addAll(segments);
     }
 }
