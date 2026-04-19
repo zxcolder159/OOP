@@ -104,7 +104,7 @@ public class LevelManager {
         }
         level5Field[9][7] = Cell.WALL;
 
-		level5Field[10][3] = Cell.EMPTY;
+        level5Field[10][3] = Cell.EMPTY;
         for (int dy = 0; dy < 3; dy++) {
             level5Field[10][7 + - dy] = Cell.EMPTY;
         }
