@@ -79,8 +79,6 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/gui/Assets.html#bg2" class="member-name-link">bg2</a> - Static variable in class ru.nsu.ermakov.gui.<a href="ru/nsu/ermakov/gui/Assets.html" title="class in ru.nsu.ermakov.gui">Assets</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/ermakov/game/Snake.html#body" class="member-name-link">body</a> - Variable in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
@@ -96,12 +94,26 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Метод для изменения направления змейки с валидацией.</div>
 </dd>
+<dt><a href="ru/nsu/ermakov/model/Field.html#clearCellsOfType(ru.nsu.ermakov.model.Cell)" class="member-name-link">clearCellsOfType(Cell)</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
+<dd>
+<div class="block">Очищает все ячейки заданного типа.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/game/Snake.html#contains(ru.nsu.ermakov.model.Point)" class="member-name-link">contains(Point)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
+<dd>
+<div class="block">Проверяет, занимает ли змейка указанную точку.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Field.html#copyCells()" class="member-name-link">copyCells()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
+<dd>
+<div class="block">Возвращает полную копию поля.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Field.html#copyFrom(ru.nsu.ermakov.model.Cell%5B%5D%5B%5D)" class="member-name-link">copyFrom(Cell[][])</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
+<dd>
+<div class="block">Копирует все ячейки из переданного массива на текущее поле.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
 <dt><a href="ru/nsu/ermakov/model/MoveResult.html#DIED" class="member-name-link">DIED</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/MoveResult.html" title="enum class in ru.nsu.ermakov.model">MoveResult</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/ermakov/game/Snake.html#direction" class="member-name-link">direction</a> - Variable in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/Direction.html" class="type-name-link" title="enum class in ru.nsu.ermakov.model">Direction</a> - Enum Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
 <dd>
@@ -121,8 +133,6 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
-<dt><a href="ru/nsu/ermakov/model/Field.html#field" class="member-name-link">field</a> - Variable in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/Field.html" class="type-name-link" title="class in ru.nsu.ermakov.model">Field</a> - Class in <a href="ru/nsu/ermakov/model/package-summary.html">ru.nsu.ermakov.model</a></dt>
 <dd>
 <div class="block">Поле для змейки.</div>
@@ -210,6 +220,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Возвращает игровое поле уровня.</div>
 </dd>
+<dt><a href="ru/nsu/ermakov/game/Snake.html#getHead()" class="member-name-link">getHead()</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
+<dd>
+<div class="block">Возвращает текущую позицию головы.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/model/Field.html#getHeight()" class="member-name-link">getHeight()</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
 <dd>
 <div class="block">Возвращает высоту поля.</div>
@@ -277,8 +291,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
-<dt><a href="ru/nsu/ermakov/model/Field.html#height" class="member-name-link">height</a> - Variable in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
@@ -381,6 +393,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Отрисовывает состояние игры.</div>
 </dd>
+<dt><a href="ru/nsu/ermakov/game/Snake.html#resetBody(java.util.List)" class="member-name-link">resetBody(List&lt;Point&gt;)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
+<dd>
+<div class="block">Полностью заменяет тело змейки переданными сегментами.</div>
+</dd>
 <dt><a href="ru/nsu/ermakov/game/Snake.html#resetDirection(ru.nsu.ermakov.model.Direction)" class="member-name-link">resetDirection(Direction)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Snake.html" title="class in ru.nsu.ermakov.game">Snake</a></dt>
 <dd>
 <div class="block">Принудительно устанавливает направление без валидации.</div>
@@ -417,6 +433,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/ermakov/game/Game.html#setAppState(ru.nsu.ermakov.model.AppState)" class="member-name-link">setAppState(AppState)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
 <dd>
 <div class="block">Устанавливает состояние приложения.</div>
+</dd>
+<dt><a href="ru/nsu/ermakov/model/Field.html#setCell(int,int,ru.nsu.ermakov.model.Cell)" class="member-name-link">setCell(int, int, Cell)</a> - Method in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
+<dd>
+<div class="block">Устанавливает значение ячейки по координатам.</div>
 </dd>
 <dt><a href="ru/nsu/ermakov/game/Game.html#setMoveIntervalNanos(long)" class="member-name-link">setMoveIntervalNanos(long)</a> - Method in class ru.nsu.ermakov.game.<a href="ru/nsu/ermakov/game/Game.html" title="class in ru.nsu.ermakov.game">Game</a></dt>
 <dd>
@@ -539,8 +559,6 @@ the order they are declared.</div>
 <dt><a href="ru/nsu/ermakov/gui/Assets.html#wall" class="member-name-link">wall</a> - Static variable in class ru.nsu.ermakov.gui.<a href="ru/nsu/ermakov/gui/Assets.html" title="class in ru.nsu.ermakov.gui">Assets</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/ermakov/model/Cell.html#WALL" class="member-name-link">WALL</a> - Enum constant in enum class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/ermakov/model/Field.html#width" class="member-name-link">width</a> - Variable in class ru.nsu.ermakov.model.<a href="ru/nsu/ermakov/model/Field.html" title="class in ru.nsu.ermakov.model">Field</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:X">X</h2>

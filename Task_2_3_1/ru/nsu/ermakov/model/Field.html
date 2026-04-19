@@ -44,13 +44,13 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -81,27 +81,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- =========== FIELD SUMMARY =========== -->
-<li>
-<section class="field-summary" id="field-summary">
-<h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>[][]</code></div>
-<div class="col-second even-row-color"><code><a href="#field" class="member-name-link">field</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>final int</code></div>
-<div class="col-second odd-row-color"><code><a href="#height" class="member-name-link">height</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>final int</code></div>
-<div class="col-second even-row-color"><code><a href="#width" class="member-name-link">width</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-</div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -129,21 +108,43 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCell(int,int)" class="member-name-link">getCell</a><wbr>(int&nbsp;x,
- int&nbsp;y)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clearCellsOfType(ru.nsu.ermakov.model.Cell)" class="member-name-link">clearCellsOfType</a><wbr>(<a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>&nbsp;cellType)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Очищает все ячейки заданного типа.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>[][]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copyCells()" class="member-name-link">copyCells</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает полную копию поля.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copyFrom(ru.nsu.ermakov.model.Cell%5B%5D%5B%5D)" class="member-name-link">copyFrom</a><wbr>(<a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>[][]&nbsp;source)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Копирует все ячейки из переданного массива на текущее поле.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCell(int,int)" class="member-name-link">getCell</a><wbr>(int&nbsp;x,
+ int&nbsp;y)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Возвращает ячейку поля по координатам.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHeight()" class="member-name-link">getHeight</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHeight()" class="member-name-link">getHeight</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Возвращает высоту поля.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWidth()" class="member-name-link">getWidth</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWidth()" class="member-name-link">getWidth</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Возвращает ширину поля.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCell(int,int,ru.nsu.ermakov.model.Cell)" class="member-name-link">setCell</a><wbr>(int&nbsp;x,
+ int&nbsp;y,
+ <a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>&nbsp;cell)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Устанавливает значение ячейки по координатам.</div>
 </div>
 </div>
 </div>
@@ -157,32 +158,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="width">
-<h3>width</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">width</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="height">
-<h3>height</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">height</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="field">
-<h3>field</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>[][]</span>&nbsp;<span class="element-name">field</span></div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -236,6 +211,50 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>ячейка поля</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setCell(int,int,ru.nsu.ermakov.model.Cell)">
+<h3>setCell</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCell</span><wbr><span class="parameters">(int&nbsp;x,
+ int&nbsp;y,
+ <a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>&nbsp;cell)</span></div>
+<div class="block">Устанавливает значение ячейки по координатам.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - координата X</dd>
+<dd><code>y</code> - координата Y</dd>
+<dd><code>cell</code> - новое значение ячейки</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="copyFrom(ru.nsu.ermakov.model.Cell[][])">
+<h3>copyFrom</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">copyFrom</span><wbr><span class="parameters">(<a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>[][]&nbsp;source)</span></div>
+<div class="block">Копирует все ячейки из переданного массива на текущее поле.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>source</code> - источник данных поля</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="clearCellsOfType(ru.nsu.ermakov.model.Cell)">
+<h3>clearCellsOfType</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clearCellsOfType</span><wbr><span class="parameters">(<a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>&nbsp;cellType)</span></div>
+<div class="block">Очищает все ячейки заданного типа.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>cellType</code> - тип ячейки для удаления</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="copyCells()">
+<h3>copyCells</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Cell.html" title="enum class in ru.nsu.ermakov.model">Cell</a>[][]</span>&nbsp;<span class="element-name">copyCells</span>()</div>
+<div class="block">Возвращает полную копию поля.</div>
 </section>
 </li>
 </ul>
