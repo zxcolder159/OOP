@@ -2,12 +2,12 @@ package ru.nsu.ermakov.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import java.util.List;
+import java.time.LocalDateTime;
 
 
-@Getter
 @AllArgsConstructor
-public class Group {
+@Getter
+public class Checkpoint {
 	private final String name;
-	private final List<Student> students;
+	private final LocalDateTime date;
 }

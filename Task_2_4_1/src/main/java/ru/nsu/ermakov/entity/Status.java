@@ -1,7 +1,7 @@
 package ru.nsu.ermakov.entity;
 
 public enum Status {
-	NOT_SUMBITTED,
+	NOT_SUBMITTED,
 	SUBMITTED,
 	PASSED,
 	FAILED

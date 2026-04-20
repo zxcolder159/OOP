@@ -2,16 +2,8 @@ groups {
     group {
         name = "24216"
         students = [
-            {
-                fio = "Ермаков Александр Владиславович"
-                githubNick = "zxcolder159"
-                repoUrl = "https://github.com/zxcolder159/OOP"
-            },
-            {
-                fio = "Максим Ущербный Дмитриевич"
-                githubNick = "vylegzhaninn"
-                repoUrl = "https://github.com/vylegzhaninn/OOP"
-            }
+            [fio: "Ермаков Александр Владиславович", githubNick: "zxcolder159", repoUrl: "https://github.com/zxcolder159/OOP"],
+            [fio: "Максим Ущербный Дмитриевич", githubNick: "vylegzhaninn", repoUrl: "https://github.com/vylegzhaninn/OOP"]
         ]
     }
 }
@@ -56,7 +48,7 @@ tasks {
     task {
         name = "Task_1_4_1"
         softDeadline = null
-        hardDeadline = "31-11-2025"
+        hardDeadline = "30-11-2025"
         maxScore = 1
     }
     task {
@@ -94,5 +86,16 @@ tasks {
         softDeadline = null
         hardDeadline = null
         maxScore = 1
+    }
+}
+
+checkpoints {
+    checkpoint {
+        name = "Midterm"
+        date = "01-11-2025"
+    }
+    checkpoint {
+        name = "Final"
+        date = "31-12-2025"
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 public class Task {
 	private final String name;
-	private final LocalDateTime softDeadLine;
+	private final LocalDateTime softDeadline;
 	private final LocalDateTime hardDeadline;
 	private final byte maxScore;
 }
