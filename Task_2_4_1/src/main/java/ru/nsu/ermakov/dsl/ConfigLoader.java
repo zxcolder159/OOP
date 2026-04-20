@@ -1,6 +1,6 @@
 package ru.nsu.ermakov.dsl;
 
-import ru.nsu.ermakov.student.Student;
+import ru.nsu.ermakov.entity.Student;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import org.codehaus.groovy.control.CompilerConfiguration;

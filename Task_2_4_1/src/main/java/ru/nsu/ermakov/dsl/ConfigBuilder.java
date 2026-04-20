@@ -1,13 +1,14 @@
 package ru.nsu.ermakov.dsl;
 
 import groovy.lang.Closure;
-import ru.nsu.ermakov.student.Student;
+import lombok.Getter;
+import ru.nsu.ermakov.entity.Student;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
 public class ConfigBuilder {
-	private List<Student> students = new ArrayList<>();
+	private final List<Student> students = new ArrayList<>();
 	public void students(Closure<?> closure) {
 		closure.setDelegate(this);
 		closure.setResolveStrategy(Closure.DELEGATE_FIRST);
@@ -22,10 +23,6 @@ public class ConfigBuilder {
 
 
 		students.add(new Student(data.fio, data.githubNick, data.repoUrl));
-	}
-
-	public List<Student> getStudents() {
-		return students;
 	}
 
 	public static class StudentData {

@@ -1,4 +1,4 @@
-package ru.nsu.ermakov.student;
+package ru.nsu.ermakov.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -6,12 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class Student {
 
-	private String fio;
-	private String githubNick;
-	private String repoUrl;
+	private final String fio;
+	private final String githubNick;
+	private final String repoUrl;
 
 }
