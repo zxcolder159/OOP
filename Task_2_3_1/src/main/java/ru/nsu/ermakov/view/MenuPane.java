@@ -79,8 +79,14 @@ public class MenuPane extends VBox implements GameObserver {
             Button btn = createLevelButton(level, i, i == selectedIndex);
             int index = i;
             btn.setOnAction(e -> {
-                LevelManager.setSelectedLevelIndex(index);
-                game.startGame();
+                int prevSelected = LevelManager.getSelectedLevelIndex();
+                if (prevSelected == index) {
+                    game.startGame();
+                } else {
+                    LevelManager.setSelectedLevelIndex(index);
+                    buildLevelButtons();
+                    updateDescription();
+                }
             });
             levelButtonsContainer.getChildren().add(btn);
         }
