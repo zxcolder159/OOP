@@ -1,0 +1,323 @@
+package ru.nsu.ermakov.game;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import ru.nsu.ermakov.model.AppState;
+import ru.nsu.ermakov.model.Cell;
+import ru.nsu.ermakov.model.Direction;
+import ru.nsu.ermakov.model.Field;
+import ru.nsu.ermakov.model.GameObserver;
+import ru.nsu.ermakov.model.GameState;
+import ru.nsu.ermakov.model.Level;
+import ru.nsu.ermakov.model.LevelManager;
+import ru.nsu.ermakov.model.MoveResult;
+import ru.nsu.ermakov.model.Point;
+
+/**
+ * Класс, управляющий игрой.
+ */
+public class Game {
+    private final Field field;
+    private final Snake snake;
+    private boolean isGameOver = false;
+    private boolean isPaused = false;
+    private int score = 0;
+    private long moveIntervalNanos = 100_000_000L;
+    private Direction lastMoveDirection = Direction.UP;
+    private static final int INITIAL_SNAKE_SIZE = 3;
+    private AppState appState = AppState.MENU;
+    private final Level level;
+    private final Cell[][] originalField;
+    private final Point originalStartPoint;
+
+    private final List<GameObserver> observers = new ArrayList<>();
+
+    /**
+     * Конструктор игры.
+     *
+     * @param field игровое поле
+     * @param point начальная позиция змейки
+     */
+    public Game(Cell[][] field, Point point) {
+        this.level = null;
+        this.originalField = new Cell[field.length][field[0].length];
+        for (int i = 0; i < field.length; i++) {
+            System.arraycopy(field[i], 0, this.originalField[i], 0, field[0].length);
+        }
+        this.originalStartPoint = point;
+        this.field = new Field(field.length, field[0].length);
+        this.snake = new Snake(point);
+        this.field.copyFrom(field);
+        spawnFood();
+    }
+
+    /**
+     * Конструктор игры на основе уровня.
+     *
+     * @param level уровень игры
+     */
+    public Game(Level level) {
+        this.level = level;
+        this.originalField = null;
+        this.originalStartPoint = null;
+        Cell[][] levelField = level.getField();
+        this.field = new Field(levelField.length, levelField[0].length);
+        this.snake = new Snake(level.getStartPoint());
+        this.field.copyFrom(levelField);
+        spawnFood();
+    }
+
+    /**
+     * Проверить, находится ли игра на паузе.
+     */
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    /**
+     * Получить текущий счет (размер змеи - начальный размер).
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Получить интервал между шагами змейки в наносекундах.
+     */
+    public long getMoveIntervalNanos() {
+        return moveIntervalNanos;
+    }
+
+    /**
+     * Установить интервал между шагами змейки.
+     * Меньше значение = быстрее змейка.
+     *
+     * @param intervalNanos интервал в наносекундах
+     */
+    public void setMoveIntervalNanos(long intervalNanos) {
+        if (intervalNanos > 0) {
+            this.moveIntervalNanos = intervalNanos;
+        }
+    }
+
+    /**
+     * Увеличить скорость змейки (уменьшить интервал).
+     *
+     * @param deltaNanos на сколько уменьшить интервал
+     */
+    public void increaseSpeed(long deltaNanos) {
+        long newInterval = moveIntervalNanos - deltaNanos;
+        if (newInterval < 50_000_000L) {
+            newInterval = 50_000_000L;
+        }
+        moveIntervalNanos = newInterval;
+    }
+
+    /**
+     * Спавнит еду на случайной пустой клетке.
+     */
+    private void spawnFood() {
+
+        while (true) {
+            Point point = getRandomCord();
+            if (field.getCell(point.x(), point.y()) == Cell.EMPTY && !snake.contains(point)) {
+                field.setCell(point.x(), point.y(), Cell.FOOD);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Возвращает случайные координаты на поле.
+     */
+    private Point getRandomCord() {
+        int randomNumberX = (int) (Math.random() * field.getWidth());
+        int randomNumberY = (int) (Math.random() * field.getHeight());
+        return new Point(randomNumberX, randomNumberY);
+    }
+
+    /**
+     * Метод для изменения направления змейки с валидацией.
+     *
+     * @param direction новое направление
+     * @return true если направление изменено, false если изменение отклонено
+     */
+    public boolean changeSnakeDirection(Direction direction) {
+        return snake.changeDirection(direction);
+    }
+
+    /**
+     * Возвращает текущее состояние игры для отображения.
+     *
+     * @return объект GameState с копией данных
+     */
+    public GameState getState() {
+        List<Point> bodyCopy = new ArrayList<>(snake.getBody());
+        Cell[][] fieldCopy = field.copyCells();
+        return new GameState(bodyCopy, lastMoveDirection, fieldCopy,
+                             isGameOver, field.getWidth(), field.getHeight(), isPaused,
+                             score, appState);
+    }
+
+    /**
+     * Проверяет, закончена ли игра.
+     */
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    /**
+     * Добавляет наблюдателя игры.
+     *
+     * @param observer наблюдатель
+     */
+    public void addObserver(GameObserver observer) {
+        observers.add(observer);
+    }
+
+    /**
+     * Удаляет наблюдателя игры.
+     *
+     * @param observer наблюдатель
+     */
+    public void removeObserver(GameObserver observer) {
+        observers.remove(observer);
+    }
+
+    /**
+     * Уведомляет всех наблюдателей об изменении состояния.
+     */
+    public void notifyObservers() {
+        GameState state = getState();
+        for (GameObserver observer : observers) {
+            observer.update(state);
+        }
+    }
+
+    /**
+     * Выполняет один шаг игры.
+     */
+    public void step() {
+        if (isGameOver || isPaused || appState != AppState.PLAYING) {
+            return;
+        }
+        lastMoveDirection = snake.getDirection();
+        MoveResult moveResult = snake.move(field);
+
+        if (moveResult == MoveResult.DIED) {
+            isGameOver = true;
+            appState = AppState.GAME_OVER;
+        }
+        if (moveResult == MoveResult.ATE_FOOD) {
+            Point head = snake.getHead();
+            field.setCell(head.x(), head.y(), Cell.EMPTY);
+            spawnFood();
+            score++;
+            increaseSpeed(2_000_000L);
+        }
+
+        notifyObservers();
+    }
+
+    /**
+     * Переключает состояние паузы.
+     */
+    public void togglePause() {
+        if (!isGameOver) {
+            isPaused = !isPaused;
+            if (isPaused) {
+                appState = AppState.PAUSED;
+            } else {
+                appState = AppState.PLAYING;
+            }
+            notifyObservers();
+        }
+    }
+
+    /**
+     * Устанавливает состояние приложения.
+     *
+     * @param state состояние приложения
+     */
+    public void setAppState(AppState state) {
+        this.appState = state;
+        notifyObservers();
+    }
+
+    /**
+     * Загружает уровень.
+     */
+    private void loadLevel() {
+        if (level != null) {
+            Level newLevel = LevelManager.getSelectedLevel();
+            Cell[][] newField = newLevel.getField();
+            this.field.copyFrom(newField);
+
+            Point startPoint = newLevel.getStartPoint();
+            snake.resetBody(Arrays.asList(
+                    startPoint,
+                    new Point(startPoint.x(), startPoint.y() + 1),
+                    new Point(startPoint.x(), startPoint.y() + 2)));
+            snake.resetDirection(Direction.UP);
+
+            field.clearCellsOfType(Cell.FOOD);
+            spawnFood();
+
+            String levelName = newLevel.getName();
+            if (levelName.contains("Easy")) {
+                moveIntervalNanos = 150_000_000L;
+            } else if (levelName.contains("Hard")) {
+                moveIntervalNanos = 70_000_000L;
+            } else {
+                moveIntervalNanos = 100_000_000L;
+            }
+        } else {
+            this.field.copyFrom(originalField);
+
+            snake.resetBody(Arrays.asList(
+                    originalStartPoint,
+                    new Point(originalStartPoint.x(), originalStartPoint.y() + 1),
+                    new Point(originalStartPoint.x(), originalStartPoint.y() + 2)));
+            snake.resetDirection(Direction.UP);
+
+            field.clearCellsOfType(Cell.FOOD);
+            spawnFood();
+
+            moveIntervalNanos = 100_000_000L;
+        }
+    }
+
+    /**
+     * Возвращает состояние приложения.
+     *
+     * @return состояние приложения
+     */
+    public AppState getAppState() {
+        return appState;
+    }
+
+    /**
+     * Запускает игру.
+     */
+    public void startGame() {
+        loadLevel();
+        appState = AppState.PLAYING;
+        isGameOver = false;
+        isPaused = false;
+        notifyObservers();
+    }
+
+    /**
+     * Перезапускает игру.
+     */
+    public void restart() {
+        loadLevel();
+        isGameOver = false;
+        isPaused = false;
+        score = 0;
+        lastMoveDirection = Direction.UP;
+        appState = AppState.PLAYING;
+        notifyObservers();
+    }
+}
