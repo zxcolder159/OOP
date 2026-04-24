@@ -10,5 +10,7 @@ public class Config {
     private final List<Group> groups;
     private final List<Task> tasks;
     private final List<Checkpoint> checkpoints;
+    private final List<StudentTaskSelection> taskSelections;
+    private final SystemSettings settings;
 
 }

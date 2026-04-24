@@ -99,3 +99,35 @@ checkpoints {
         date = "31-12-2025"
     }
 }
+
+settings {
+    buildTimeoutSeconds = 300
+    gitTimeoutSeconds = 60
+
+    // Components of task score (normalized automatically if sum != 1.0)
+    compilePart = 1.00
+    docsStylePart = 0.00
+    testsPart = 0.00
+
+    deadlineMissPenalty = 0.50
+    maxDeadlinePenalty = 1.00
+
+    // Grade thresholds in percent
+    excellentThreshold = 85.0
+    goodThreshold = 70.0
+    satisfactoryThreshold = 50.0
+
+    // Activity influence on final grade
+    activityBonusThreshold = 0.60
+    activityPenaltyThreshold = 0.30
+}
+
+// Example: explicit selection of students/tasks for checking.
+// If this block is omitted, checker runs all tasks for all students.
+// assignments {
+//     assignment {
+//         githubNick = "zxcolder159"
+//         tasks = ["Task_2_4_1"]
+//     }
+// }
+
