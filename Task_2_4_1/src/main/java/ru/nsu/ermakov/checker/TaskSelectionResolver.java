@@ -1,18 +1,25 @@
 package ru.nsu.ermakov.checker;
-
 import ru.nsu.ermakov.entity.Config;
 import ru.nsu.ermakov.entity.Student;
 import ru.nsu.ermakov.entity.StudentTaskSelection;
 import ru.nsu.ermakov.entity.Task;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * Решатель выбора задач для проверки студентов.
+ */
 public class TaskSelectionResolver {
 
+    /**
+     * Определяет, следует ли проверять данного студента.
+     * @param config конфигурация
+     * @param student студент
+     * @return true если нужно проверять
+     */
     public boolean shouldCheckStudent(Config config, Student student) {
         List<StudentTaskSelection> matches = findMatches(config, student);
         if (!hasConfiguredSelections(config)) {
@@ -21,6 +28,13 @@ public class TaskSelectionResolver {
         return !matches.isEmpty();
     }
 
+    /**
+     * Разрешает список задач для проверки для студента.
+     * @param config конфигурация
+     * @param student студент
+     * @param allTasks все доступные задачи
+     * @return список задач для проверки
+     */
     public List<Task> resolveTasks(Config config, Student student, List<Task> allTasks) {
         if (allTasks == null || allTasks.isEmpty()) {
             return List.of();
@@ -66,10 +80,16 @@ public class TaskSelectionResolver {
         return filtered;
     }
 
+    /**
+     * Проверяет наличие настроек выборки задач в конфиге.
+     */
     private boolean hasConfiguredSelections(Config config) {
         return config != null && config.getTaskSelections() != null && !config.getTaskSelections().isEmpty();
     }
 
+    /**
+     * Находит совпадающие записи выбора задач для студента.
+     */
     private List<StudentTaskSelection> findMatches(Config config, Student student) {
         if (config == null || config.getTaskSelections() == null || student == null) {
             return List.of();
@@ -94,6 +114,9 @@ public class TaskSelectionResolver {
         return matches;
     }
 
+    /**
+     * Нормализует строку для сравнения (trim + toLowerCase).
+     */
     private String normalize(String value) {
         if (value == null || value.isBlank()) {
             return "";

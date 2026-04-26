@@ -1,9 +1,11 @@
 package ru.nsu.ermakov.entity;
 
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
+/**
+ * Описание задачи курса: идентификатор, имя, дедлайны и максимальный балл.
+ */
 @Getter
 public class Task {
 	private final String id;
@@ -12,6 +14,9 @@ public class Task {
 	private final LocalDateTime hardDeadline;
 	private final byte maxScore;
 
+	/**
+	 * Конструктор с явным id и именем.
+	 */
 	public Task(String id, String name, LocalDateTime softDeadline, LocalDateTime hardDeadline, byte maxScore) {
 		String normalizedId = id == null || id.isBlank() ? null : id.trim();
 		String normalizedName = name == null || name.isBlank() ? null : name.trim();
@@ -32,6 +37,9 @@ public class Task {
 		this.maxScore = maxScore;
 	}
 
+	/**
+	 * Удобный конструктор, когда id совпадает с именем.
+	 */
 	public Task(String name, LocalDateTime softDeadline, LocalDateTime hardDeadline, byte maxScore) {
 		this(name, name, softDeadline, hardDeadline, maxScore);
 	}

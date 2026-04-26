@@ -1,11 +1,12 @@
 package ru.nsu.ermakov.checker;
-
 import ru.nsu.ermakov.entity.Task;
-
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Сервис проверки одной задачи в репозитории студента.
+ */
 public class TaskCheckService {
 
     private static final int NOTE_LIMIT = 300;
@@ -16,6 +17,9 @@ public class TaskCheckService {
     private final TestReportParser testReportParser;
     private final ScoringPolicy scoringPolicy;
 
+    /**
+     * Создаёт сервис проверки задач с зависимостями.
+     */
     public TaskCheckService(
             TaskPathResolver taskPathResolver,
             GitRepositoryInspector gitInspector,
@@ -30,6 +34,12 @@ public class TaskCheckService {
         this.scoringPolicy = scoringPolicy;
     }
 
+    /**
+     * Выполняет полный цикл проверки задачи: сборка, документация, стиль, тесты и расчёт балла.
+     * @param repoPath путь к клонированному репозиторию студента
+     * @param task описание задачи
+     * @return результат проверки задачи
+     */
     public TaskCheckResult checkTask(Path repoPath, Task task) {
         TaskCheckResult result = new TaskCheckResult(task);
 

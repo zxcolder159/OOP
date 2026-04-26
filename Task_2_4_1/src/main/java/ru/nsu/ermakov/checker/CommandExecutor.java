@@ -6,8 +6,18 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Выполняет внешние команды в указанной директории и собирает их вывод.
+ */
 public class CommandExecutor {
 
+    /**
+     * Запускает команду в рабочей директории и возвращает результат с выводом.
+     * @param workingDirectory рабочая директория
+     * @param timeoutSeconds таймаут выполнения в секундах
+     * @param command список аргументов команды
+     * @return результат выполнения с флагом успеха и выводом
+     */
     public ExecResult run(Path workingDirectory, long timeoutSeconds, List<String> command) {
         if (workingDirectory == null || command == null || command.isEmpty()) {
             return ExecResult.failure("Invalid command arguments");
@@ -28,7 +38,9 @@ public class CommandExecutor {
                 process.destroyForcibly();
                 String output = Files.readString(tempLog);
                 Files.deleteIfExists(tempLog);
-                return ExecResult.failure(output + "\nCommand timed out: " + String.join(" ", command));
+                String cmd = String.join(" ", command);
+                String message = output + "\nCommand timed out: " + cmd;
+                return ExecResult.failure(message);
             }
 
             String output = Files.readString(tempLog);

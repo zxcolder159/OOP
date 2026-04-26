@@ -1,5 +1,4 @@
 package ru.nsu.ermakov.checker;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,12 +7,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+/**
+ * Парсер JUnit XML-отчётов для тестов сборки.
+ */
 public class TestReportParser {
 
     private static final Pattern TESTS_PATTERN = Pattern.compile("tests=\"(\\d+)\"");
     private static final Pattern FAILURES_PATTERN = Pattern.compile("failures=\"(\\d+)\"");
     private static final Pattern SKIPPED_PATTERN = Pattern.compile("skipped=\"(\\d+)\"");
 
+    /**
+     * Парсит статистику тестов из папки с результатами.
+     * @param taskPath путь к директории задачи
+     * @return статистика тестов
+     */
     public TestStats parse(Path taskPath) {
         if (taskPath == null) {
             return TestStats.empty();
@@ -51,6 +58,9 @@ public class TestReportParser {
         return new TestStats(passed, failed, skipped);
     }
 
+    /**
+     * Вспомогательный метод для извлечения целого числа по шаблону из текста.
+     */
     private int matchInt(Pattern pattern, String text) {
         Matcher matcher = pattern.matcher(text);
         if (!matcher.find()) {

@@ -2,9 +2,11 @@ package ru.nsu.ermakov.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import java.util.List;
 
+/**
+ * Представление отчёта курса с итоговыми данными по группам и задачам.
+ */
 @Getter
 @AllArgsConstructor
 public class Report {

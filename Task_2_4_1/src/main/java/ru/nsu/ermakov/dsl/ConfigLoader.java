@@ -4,7 +4,6 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import ru.nsu.ermakov.entity.Config;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +11,17 @@ import java.nio.file.Path;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Загружает конфигурацию курса из Groovy DSL-файла, поддерживает include.
+ */
 public class ConfigLoader {
+
+    /**
+     * Загружает конфигурацию по пути к файлу.
+     * @param filePath путь к DSL файлу
+     * @return объект Config
+     * @throws IOException при ошибках чтения или синтаксиса
+     */
     public Config loadConfig(String filePath) throws IOException {
         if (filePath == null || filePath.isBlank()) {
             throw new IOException("Config path is empty");
@@ -22,6 +31,9 @@ public class ConfigLoader {
         return loadConfig(configPath, new LinkedHashSet<>());
     }
 
+    /**
+     * Внутренний загрузчик с поддержкой detection циклических include.
+     */
     Config loadConfig(Path configPath, Set<Path> loadingStack) throws IOException {
         if (configPath == null) {
             throw new IOException("Config path is null");

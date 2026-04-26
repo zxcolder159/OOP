@@ -1,19 +1,27 @@
+
 package ru.nsu.ermakov.vcs;
-
 import ru.nsu.ermakov.entity.Student;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Загрузчик репозиториев студентов.
+ */
 public class RepoDownloader {
 
 	private static final long PULL_TIMEOUT_SECONDS = 120;
 	private static final long CLONE_TIMEOUT_SECONDS = 240;
 	private static volatile boolean gitValidated = false;
 
+	/**
+	 * Клонирует или обновляет репозиторий студента.
+	 * @param student студент
+	 * @param groupName имя группы
+	 * @return путь к локальному репозиторию
+	 */
 	public Path cloneRepo(Student student, String groupName) {
 		ensureGitReady();
 
@@ -78,6 +86,9 @@ public class RepoDownloader {
 		}
 	}
 
+	/**
+	 * Проверяет доступность git в окружении и кэширует результат.
+	 */
 	private void ensureGitReady() {
 		if (gitValidated) {
 			return;
@@ -110,18 +121,26 @@ public class RepoDownloader {
 		}
 	}
 
+	/**
+	 * Конфигурирует переменные окружения для неинтерактивного вызова git.
+	 * @param processBuilder процесс билдера
+	 */
 	private void configureNonInteractiveGit(ProcessBuilder processBuilder) {
 		processBuilder.environment().put("GIT_TERMINAL_PROMPT", "0");
 		processBuilder.environment().put("GCM_INTERACTIVE", "never");
 	}
 
+	/**
+	 * Очищает строку для использования в имени директории.
+	 * @param s входная строка
+	 * @return безопасная строка
+	 */
 	private static String sanitize(String s) {
 		if (s == null || s.isBlank()) {
 			return "unknown";
 		}
 
 		String sanitized = s.trim();
-		// Keep Cyrillic/Unicode letters and replace only path-forbidden symbols.
 		sanitized = sanitized.replaceAll("[\\\\/:*?\"<>|\\p{Cntrl}]", "_");
 		sanitized = sanitized.replaceAll("\\s+", " ").trim();
 		sanitized = sanitized.replaceAll("[. ]+$", "");

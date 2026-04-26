@@ -1,6 +1,6 @@
 package ru.nsu.ermakov;
-
 import ru.nsu.ermakov.checker.CourseChecker;
+import ru.nsu.ermakov.util.Log;
 import ru.nsu.ermakov.checker.StudentCheckResult;
 import ru.nsu.ermakov.checker.TaskSelectionResolver;
 import ru.nsu.ermakov.dsl.ConfigLoader;
@@ -9,16 +9,22 @@ import ru.nsu.ermakov.entity.Group;
 import ru.nsu.ermakov.entity.Student;
 import ru.nsu.ermakov.report.HtmlReportRenderer;
 import ru.nsu.ermakov.vcs.RepoDownloader;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+/**
+ * Точка входа приложения.
+ */
 public class Main {
     private static final String DEFAULT_CONFIG_FILE = "config.groovy";
     private static final String COMMAND_REPORT = "report";
     private static final String COMMAND_CLONE = "clone";
 
+    /**
+     * Главный метод приложения.
+     * @param args аргументы командной строки
+     */
     public static void main(String[] args) {
         CliArgs cliArgs = parseArgs(args);
 
@@ -28,7 +34,7 @@ public class Main {
         try {
             Config config = configLoader.loadConfig(cliArgs.configPath());
             if (COMMAND_CLONE.equals(cliArgs.command())) {
-                cloneRepositories(config, repoDownloader);
+                new Main().cloneRepositories(config, repoDownloader);
                 return;
             }
 
@@ -37,13 +43,18 @@ public class Main {
                 return;
             }
 
-            System.err.println("Unknown command: " + cliArgs.command());
-            System.err.println("Usage: java Main [report|clone] [config-path]");
+            Log.info("Unknown command: %s", cliArgs.command());
+            Log.info("Usage: java Main [report|clone] [config-path]");
         } catch (IOException e) {
-            System.err.println("Failed to load config: " + e.getMessage());
+            Log.info("Failed to load config: %s", e.getMessage());
         }
     }
 
+    /**
+     * Генерирует и выводит HTML-отчёт.
+     * @param config конфигурация
+     * @param repoDownloader загрузчик репозиториев
+     */
     private static void printHtmlReport(Config config, RepoDownloader repoDownloader) {
         CourseChecker checker = new CourseChecker(repoDownloader);
         List<StudentCheckResult> results = checker.check(config);
@@ -53,7 +64,12 @@ public class Main {
         System.out.println(html);
     }
 
-    private static void cloneRepositories(Config config, RepoDownloader repoDownloader) {
+    /**
+     * Клонирует репозитории студентов.
+     * @param config конфигурация
+     * @param repoDownloader загрузчик репозиториев
+     */
+    private void cloneRepositories(Config config, RepoDownloader repoDownloader) {
         if (config.getGroups() == null || config.getGroups().isEmpty()) {
             System.out.println("No groups found in config.");
             return;
@@ -62,7 +78,12 @@ public class Main {
         TaskSelectionResolver selectionResolver = new TaskSelectionResolver();
 
         for (Group group : config.getGroups()) {
-            String groupName = group.getName() == null || group.getName().isBlank() ? "unknown-group" : group.getName();
+            String groupName;
+            if (group.getName() == null || group.getName().isBlank()) {
+                groupName = "unknown-group";
+            } else {
+                groupName = group.getName();
+            }
             System.out.println("Group: " + groupName);
 
             if (group.getStudents() == null || group.getStudents().isEmpty()) {
@@ -74,17 +95,25 @@ public class Main {
                 if (student == null || !selectionResolver.shouldCheckStudent(config, student)) {
                     continue;
                 }
-                String studentName = student != null && student.getFio() != null ? student.getFio() : "unknown-student";
+                String studentName = "unknown-student";
+                if (student != null && student.getFio() != null) {
+                    studentName = student.getFio();
+                }
                 try {
                     Path repoPath = repoDownloader.cloneRepo(student, groupName);
-                    System.out.println("  Cloned: " + studentName + " -> " + repoPath);
+                    Log.info("  Cloned: %s -> %s", studentName, repoPath);
                 } catch (RuntimeException e) {
-                    System.err.println("  Failed: " + studentName + " -> " + e.getMessage());
+                    Log.info("  Failed: %s -> %s", studentName, e.getMessage());
                 }
             }
         }
     }
 
+    /**
+     * Парсит аргументы командной строки.
+     * @param args аргументы
+     * @return объект с командой и путём к конфигу
+     */
     private static CliArgs parseArgs(String[] args) {
         if (args == null || args.length == 0) {
             return new CliArgs(COMMAND_REPORT, DEFAULT_CONFIG_FILE);
@@ -99,6 +128,9 @@ public class Main {
         return new CliArgs(COMMAND_REPORT, first);
     }
 
+    /**
+     * DTO для аргументов командной строки.
+     */
     private record CliArgs(String command, String configPath) {
     }
 }

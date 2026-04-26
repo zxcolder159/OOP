@@ -6,10 +6,19 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
+/**
+ * Находит директорию задачи в репозитории, обходя дерево до заданной глубины.
+ */
 public class TaskPathResolver {
 
     private static final int SEARCH_DEPTH = 5;
 
+    /**
+     * Ищет директорию с именем задачи в репозитории.
+     * @param repoPath корень репозитория
+     * @param taskName имя задачи
+     * @return путь к директории задачи или null
+     */
     public Path findTaskDirectory(Path repoPath, String taskName) {
         if (repoPath == null || taskName == null || taskName.isBlank()) {
             return null;

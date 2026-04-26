@@ -1,9 +1,11 @@
 package ru.nsu.ermakov.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Сведения о студенте: ФИО, GitHub ник и URL репозитория.
+ */
 @Getter
 @AllArgsConstructor
 public class Student {

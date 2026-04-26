@@ -15,42 +15,50 @@ public class HtmlReportRenderer {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
+    /**
+     * Рендерит HTML-отчёт по результатам проверки.
+     */
     public String render(Config config, List<StudentCheckResult> results) {
         List<StudentCheckResult> safeResults = results == null ? List.of() : results;
         Map<String, List<StudentCheckResult>> groupedResults = groupByName(safeResults);
 
         StringBuilder html = new StringBuilder();
-        html.append("<!doctype html>\n");
-        html.append("<html lang=\"ru\">\n");
-        html.append("<head>\n");
-        html.append("  <meta charset=\"UTF-8\">\n");
-        html.append("  <title>OOP Course Report</title>\n");
-        html.append("  <style>\n");
-        html.append("    body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 24px; color: #1f2937; }\n");
-        html.append("    h1, h2, h3 { margin-bottom: 8px; }\n");
-        html.append("    .muted { color: #6b7280; }\n");
-        html.append("    .ok { color: #166534; font-weight: 600; }\n");
-        html.append("    .fail { color: #991b1b; font-weight: 600; }\n");
-        html.append("    .warn { color: #9a3412; font-weight: 600; }\n");
-        html.append("    .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; margin-bottom: 18px; }\n");
-        html.append("    table { border-collapse: collapse; width: 100%; margin-top: 10px; }\n");
-        html.append("    th, td { border: 1px solid #d1d5db; padding: 6px 8px; text-align: left; vertical-align: top; }\n");
-        html.append("    th { background: #f3f4f6; }\n");
-        html.append("    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }\n");
-        html.append("  </style>\n");
-        html.append("</head>\n");
-        html.append("<body>\n");
+        html.append("""
+                <!doctype html>
+                <html lang="ru">
+                <head>
+                  <meta charset="UTF-8">
+                  <title>OOP Course Report</title>
+                  <style>
+                    body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 24px; color: #1f2937; }
+                    h1, h2, h3 { margin-bottom: 8px; }
+                    .muted { color: #6b7280; }
+                    .ok { color: #166534; font-weight: 600; }
+                    .fail { color: #991b1b; font-weight: 600; }
+                    .warn { color: #9a3412; font-weight: 600; }
+                    .card { border: 1px solid #e5e7eb;
+                             border-radius: 8px; padding: 16px; margin-bottom: 18px; }
+                    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+                    th, td { border: 1px solid #d1d5db; padding: 6px 8px;
+                               text-align: left; vertical-align: top; }
+                    th { background: #f3f4f6; }
+                    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+                  </style>
+                </head>
+                <body>
+                """);
 
         html.append("<h1>Автоматическая проверка ООП</h1>\n");
-        html.append("<p class=\"muted\">Всего студентов: ").append(safeResults.size()).append("</p>\n");
+        html.append(String.format("<p class=\"muted\">Всего студентов: %d</p>%n", safeResults.size()));
 
         if (config != null && config.getTasks() != null) {
-            html.append("<p class=\"muted\">Задач в конфиге: ").append(config.getTasks().size()).append("</p>\n");
+            html.append(String.format("<p class=\"muted\">Задач в конфиге: %d</p>%n", config.getTasks().size()));
         }
 
-        String scoringDescription = "Формула балла задачи: maxScore минус штраф за пропущенные дедлайны; "
-                + "compile/docs/style/tests выводятся в таблице как индикаторы есть/нет и не уменьшают балл.";
-        html.append("<p class=\"muted\">").append(escape(scoringDescription)).append("</p>\n");
+        String scoringDescriptionPart1 = "Формула балла задачи: maxScore минус штраф за пропущенные дедлайны; ";
+        String scoringDescriptionPart2 = "compile/docs/style/tests выводятся в таблице как индикаторы есть/нет и не уменьшают балл.";
+        String scoringDescription = scoringDescriptionPart1 + scoringDescriptionPart2;
+        html.append(String.format("<p class=\"muted\">%s</p>%n", escape(scoringDescription)));
 
         for (Map.Entry<String, List<StudentCheckResult>> entry : groupedResults.entrySet()) {
             renderGroup(html, entry.getKey(), entry.getValue(), scoringDescription);
@@ -61,9 +69,12 @@ public class HtmlReportRenderer {
         return html.toString();
     }
 
+    /**
+     * Рендерит блок группы со списком студентов.
+     */
     private void renderGroup(StringBuilder html, String groupName, List<StudentCheckResult> students, String scoringDescription) {
         html.append("<div class=\"card\">\n");
-        html.append("<h2>Группа: ").append(escape(groupName)).append("</h2>\n");
+        html.append(String.format("<h2>Группа: %s</h2>%n", escape(groupName)));
 
         int scoreSum = 0;
         int maxSum = 0;
@@ -72,11 +83,7 @@ public class HtmlReportRenderer {
             maxSum += studentResult.getMaxScore();
         }
 
-        html.append("<p class=\"muted\">Суммарный балл группы: ")
-            .append(scoreSum)
-            .append(" / ")
-            .append(maxSum)
-            .append("</p>\n");
+        html.append(String.format("<p class=\"muted\">Суммарный балл группы: %d / %d</p>%n", scoreSum, maxSum));
 
         for (StudentCheckResult studentResult : students) {
             renderStudent(html, studentResult, scoringDescription);
@@ -85,46 +92,32 @@ public class HtmlReportRenderer {
         html.append("</div>\n");
     }
 
+    /**
+     * Рендерит карточку одного студента с деталями и таблицами.
+     */
     private void renderStudent(StringBuilder html, StudentCheckResult result, String scoringDescription) {
         String fio = result.getStudent() == null ? "Unknown" : result.getStudent().getFio();
         String github = result.getStudent() == null ? "" : result.getStudent().getGithubNick();
         String repoUrl = result.getStudent() == null ? "" : result.getStudent().getRepoUrl();
 
         html.append("<div class=\"card\">\n");
-        html.append("<h3>").append(escape(fio)).append("</h3>\n");
-        html.append("<p><b>GitHub:</b> <span class=\"mono\">@")
-            .append(escape(github))
-            .append("</span></p>\n");
+        html.append(String.format("<h3>%s</h3>%n", escape(fio)));
+        html.append(String.format("<p><b>GitHub:</b> <span class=\"mono\">@%s</span></p>%n", escape(github)));
 
-        html.append("<p><b>Repo:</b> ").append(escape(repoUrl)).append("</p>\n");
+        html.append(String.format("<p><b>Repo:</b> %s</p>%n", escape(repoUrl)));
 
         if (result.hasCloneError()) {
-            html.append("<p class=\"fail\">Ошибка репозитория: ")
-                .append(escape(result.getCloneError()))
-                .append("</p>\n");
+            html.append(String.format("<p class=\"fail\">Ошибка репозитория: %s</p>%n", escape(result.getCloneError())));
             html.append("</div>\n");
             return;
         }
+        html.append(String.format("<p><b>Локальный путь:</b> <span class=\"mono\">%s</span></p>%n", escape(result.getRepoPath())));
 
-        html.append("<p><b>Локальный путь:</b> <span class=\"mono\">")
-            .append(escape(result.getRepoPath()))
-            .append("</span></p>\n");
+        html.append(String.format("<p><b>Баллы:</b> %d / %d; <b>Итоговая оценка:</b> %s</p>%n",
+            result.getTotalScore(), result.getMaxScore(), String.valueOf(result.getFinalGrade())));
 
-        html.append("<p><b>Баллы:</b> ")
-            .append(result.getTotalScore())
-            .append(" / ")
-            .append(result.getMaxScore())
-            .append("; <b>Итоговая оценка:</b> ")
-            .append(result.getFinalGrade())
-            .append("</p>\n");
-
-        html.append("<p><b>Активность:</b> ")
-            .append(result.getActiveWeeks())
-            .append(" из ")
-            .append(result.getTotalWeeks())
-            .append(" недель (")
-            .append(String.format("%.0f", result.getActivityRatio() * 100))
-            .append("%)</p>\n");
+        html.append(String.format("<p><b>Активность:</b> %d из %d недель (%s%%)</p>%n",
+            result.getActiveWeeks(), result.getTotalWeeks(), String.format("%.0f", result.getActivityRatio() * 100)));
 
         renderTaskTable(html, result.getTaskResults(), scoringDescription);
         renderCheckpointTable(html, result);
@@ -132,6 +125,9 @@ public class HtmlReportRenderer {
         html.append("</div>\n");
     }
 
+    /**
+     * Рендерит таблицу с результатами по задачам для студента.
+     */
     private void renderTaskTable(StringBuilder html, List<TaskCheckResult> taskResults, String scoringDescription) {
         html.append("<p class=\"muted\">").append(escape(scoringDescription)).append("</p>\n");
         html.append("<table>\n");
@@ -193,6 +189,9 @@ public class HtmlReportRenderer {
         html.append("</table>\n");
     }
 
+    /**
+     * Рендерит таблицу с результатами по контрольным точкам.
+     */
     private void renderCheckpointTable(StringBuilder html, StudentCheckResult result) {
         if (result.getCheckpointScores().isEmpty()) {
             return;
@@ -218,6 +217,9 @@ public class HtmlReportRenderer {
         html.append("</table>\n");
     }
 
+    /**
+     * Группирует результаты по имени группы.
+     */
     private Map<String, List<StudentCheckResult>> groupByName(List<StudentCheckResult> results) {
         Map<String, List<StudentCheckResult>> grouped = new LinkedHashMap<>();
         for (StudentCheckResult result : results) {
@@ -229,6 +231,9 @@ public class HtmlReportRenderer {
         return grouped;
     }
 
+    /**
+     * Экранирует специальные символы в тексте для вставки в HTML.
+     */
     private String escape(String text) {
         if (text == null) {
             return "";

@@ -121,7 +121,7 @@ settings {
     activityBonusThreshold = 0.60
     activityPenaltyThreshold = 0.30
 }
-
+ 
 // Example: explicit selection of students/tasks for checking.
 // If this block is omitted, checker runs all tasks for all students.
 // assignments {

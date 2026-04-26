@@ -2,6 +2,9 @@ package ru.nsu.ermakov.entity;
 
 import lombok.Getter;
 
+/**
+ * Системные настройки для процесса проверки: таймауты, веса частей и пороги оценок.
+ */
 @Getter
 public class SystemSettings {
 
@@ -45,8 +48,17 @@ public class SystemSettings {
             double activityBonusThreshold,
             double activityPenaltyThreshold
     ) {
-        this.buildTimeoutSeconds = buildTimeoutSeconds > 0 ? buildTimeoutSeconds : DEFAULT_BUILD_TIMEOUT_SECONDS;
-        this.gitTimeoutSeconds = gitTimeoutSeconds > 0 ? gitTimeoutSeconds : DEFAULT_GIT_TIMEOUT_SECONDS;
+        if (buildTimeoutSeconds > 0) {
+            this.buildTimeoutSeconds = buildTimeoutSeconds;
+        } else {
+            this.buildTimeoutSeconds = DEFAULT_BUILD_TIMEOUT_SECONDS;
+        }
+
+        if (gitTimeoutSeconds > 0) {
+            this.gitTimeoutSeconds = gitTimeoutSeconds;
+        } else {
+            this.gitTimeoutSeconds = DEFAULT_GIT_TIMEOUT_SECONDS;
+        }
 
         double normalizedCompile = compilePart >= 0 ? compilePart : DEFAULT_COMPILE_PART;
         double normalizedDocs = docsStylePart >= 0 ? docsStylePart : DEFAULT_DOCS_STYLE_PART;
@@ -63,15 +75,53 @@ public class SystemSettings {
             this.testsPart = normalizedTests / sum;
         }
 
-        this.deadlineMissPenalty = clamp(deadlineMissPenalty, 0.0, 1000.0, DEFAULT_DEADLINE_MISS_PENALTY);
-        this.maxDeadlinePenalty = clamp(maxDeadlinePenalty, 0.0, 1000.0, DEFAULT_MAX_DEADLINE_PENALTY);
-        this.excellentThreshold = clamp(excellentThreshold, 0.0, 100.0, DEFAULT_EXCELLENT_THRESHOLD);
-        this.goodThreshold = clamp(goodThreshold, 0.0, 100.0, DEFAULT_GOOD_THRESHOLD);
-        this.satisfactoryThreshold = clamp(satisfactoryThreshold, 0.0, 100.0, DEFAULT_SATISFACTORY_THRESHOLD);
-        this.activityBonusThreshold = clamp(activityBonusThreshold, 0.0, 1.0, DEFAULT_ACTIVITY_BONUS_THRESHOLD);
-        this.activityPenaltyThreshold = clamp(activityPenaltyThreshold, 0.0, 1.0, DEFAULT_ACTIVITY_PENALTY_THRESHOLD);
+        this.deadlineMissPenalty = clamp(
+                deadlineMissPenalty,
+                0.0,
+                1000.0,
+                DEFAULT_DEADLINE_MISS_PENALTY
+        );
+        this.maxDeadlinePenalty = clamp(
+                maxDeadlinePenalty,
+                0.0,
+                1000.0,
+                DEFAULT_MAX_DEADLINE_PENALTY
+        );
+        this.excellentThreshold = clamp(
+                excellentThreshold,
+                0.0,
+                100.0,
+                DEFAULT_EXCELLENT_THRESHOLD
+        );
+        this.goodThreshold = clamp(
+                goodThreshold,
+                0.0,
+                100.0,
+                DEFAULT_GOOD_THRESHOLD
+        );
+        this.satisfactoryThreshold = clamp(
+                satisfactoryThreshold,
+                0.0,
+                100.0,
+                DEFAULT_SATISFACTORY_THRESHOLD
+        );
+        this.activityBonusThreshold = clamp(
+                activityBonusThreshold,
+                0.0,
+                1.0,
+                DEFAULT_ACTIVITY_BONUS_THRESHOLD
+        );
+        this.activityPenaltyThreshold = clamp(
+                activityPenaltyThreshold,
+                0.0,
+                1.0,
+                DEFAULT_ACTIVITY_PENALTY_THRESHOLD
+        );
     }
 
+    /**
+     * Возвращает настройки по умолчанию.
+     */
     public static SystemSettings defaults() {
         return new SystemSettings(
                 DEFAULT_BUILD_TIMEOUT_SECONDS,
@@ -89,6 +139,9 @@ public class SystemSettings {
         );
     }
 
+    /**
+     * Ограничивает значение заданным диапазоном, возвращая fallback при некорректных входных данных.
+     */
     private static double clamp(double value, double min, double max, double fallback) {
         if (Double.isNaN(value) || Double.isInfinite(value)) {
             return fallback;
