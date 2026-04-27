@@ -12,12 +12,15 @@ import ru.nsu.ermakov.vcs.RepoDownloader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Точка входа приложения.
  */
 public class Main {
     private static final String DEFAULT_CONFIG_FILE = "config.groovy";
+    private static final String DEFAULT_REPORT_FILE = "report.html";
     private static final String COMMAND_REPORT = "report";
     private static final String COMMAND_CLONE = "clone";
 
@@ -39,12 +42,12 @@ public class Main {
             }
 
             if (COMMAND_REPORT.equals(cliArgs.command())) {
-                printHtmlReport(config, repoDownloader);
+                printHtmlReport(config, repoDownloader, cliArgs.outputPath(), cliArgs.tasksFilter());
                 return;
             }
 
             Log.info("Unknown command: %s", cliArgs.command());
-            Log.info("Usage: java Main [report|clone] [config-path]");
+            Log.info("Usage: java Main [report|clone] [config-path] [output-file] [--tasks=task1,task2]");
         } catch (IOException e) {
             Log.info("Failed to load config: %s", e.getMessage());
         }
@@ -55,13 +58,32 @@ public class Main {
      * @param config конфигурация
      * @param repoDownloader загрузчик репозиториев
      */
-    private static void printHtmlReport(Config config, RepoDownloader repoDownloader) {
+    private static void printHtmlReport(Config config, RepoDownloader repoDownloader, String outputPath, List<String> tasksFilter) {
+        List<String> filter = tasksFilter == null ? List.of() : tasksFilter;
+        Config filteredConfig = config;
+        if (!filter.isEmpty() && config != null && config.getTasks() != null) {
+            List<ru.nsu.ermakov.entity.Task> filteredTasks = config.getTasks().stream()
+                .filter(task -> filter.contains(task.getId()) || filter.contains(task.getName()))
+                .collect(Collectors.toList());
+            filteredConfig = new ru.nsu.ermakov.entity.Config(
+                config.getGroups(),
+                filteredTasks,
+                config.getCheckpoints(),
+                config.getTaskSelections(),
+                config.getSettings()
+            );
+        }
         CourseChecker checker = new CourseChecker(repoDownloader);
-        List<StudentCheckResult> results = checker.check(config);
+        List<StudentCheckResult> results = checker.check(filteredConfig);
 
         HtmlReportRenderer renderer = new HtmlReportRenderer();
-        String html = renderer.render(config, results);
-        System.out.println(html);
+        String html = renderer.render(filteredConfig, results);
+        try {
+            java.nio.file.Files.writeString(java.nio.file.Path.of(outputPath), html);
+            Log.info("HTML-отчёт сохранён в файл: %s", outputPath);
+        } catch (IOException e) {
+            Log.info("Ошибка записи отчёта: %s", e.getMessage());
+        }
     }
 
     /**
@@ -116,21 +138,35 @@ public class Main {
      */
     private static CliArgs parseArgs(String[] args) {
         if (args == null || args.length == 0) {
-            return new CliArgs(COMMAND_REPORT, DEFAULT_CONFIG_FILE);
+            return new CliArgs(COMMAND_REPORT, DEFAULT_CONFIG_FILE, DEFAULT_REPORT_FILE, List.of());
         }
 
         String first = args[0];
-        if (COMMAND_REPORT.equals(first) || COMMAND_CLONE.equals(first)) {
-            String configPath = args.length > 1 ? args[1] : DEFAULT_CONFIG_FILE;
-            return new CliArgs(first, configPath);
+        String configPath = args.length > 1 ? args[1] : DEFAULT_CONFIG_FILE;
+        String outputPath = args.length > 2 && !args[2].startsWith("--tasks=") ? args[2] : DEFAULT_REPORT_FILE;
+        List<String> tasksFilter = List.of();
+        for (String arg : args) {
+            if (arg != null && arg.startsWith("--tasks=")) {
+                String tasksStr = arg.substring("--tasks=".length());
+                tasksFilter = Arrays.stream(tasksStr.split(","))
+                        .map(String::trim)
+                        .filter(s -> !s.isEmpty())
+                        .collect(Collectors.toList());
+            }
         }
-
-        return new CliArgs(COMMAND_REPORT, first);
+        if (COMMAND_REPORT.equals(first) || COMMAND_CLONE.equals(first)) {
+            return new CliArgs(first, configPath, outputPath, tasksFilter);
+        }
+        // Если первый аргумент не команда, считаем это путём к конфигу
+        return new CliArgs(COMMAND_REPORT, first, DEFAULT_REPORT_FILE, tasksFilter);
     }
 
     /**
      * DTO для аргументов командной строки.
      */
-    private record CliArgs(String command, String configPath) {
+    private record CliArgs(String command, String configPath, String outputPath, List<String> tasksFilter) {
+        public List<String> tasksFilter() {
+            return tasksFilter == null ? List.of() : tasksFilter;
+        }
     }
 }

@@ -3,7 +3,7 @@ package ru.nsu.ermakov.checker;
 /**
  * Вспомогательные утилиты для обработки вывода и текста.
  */
-public final class OutputUtils {
+public class OutputUtils {
 
     /**
      * Приватный конструктор для утилитарного класса.

@@ -10,7 +10,7 @@ echo 📄 Используем конфигурацию: %CONFIG%
 echo 📊 Результат будет сохранен в: %REPORT%
 echo --------------------------------------------------------
 
-call gradlew.bat -q run --args="report %CONFIG%" > "%REPORT%"
+call gradlew.bat -q run --args="report %CONFIG% %REPORT%"
 
 echo --------------------------------------------------------
 echo ✅ Проверка завершена!
