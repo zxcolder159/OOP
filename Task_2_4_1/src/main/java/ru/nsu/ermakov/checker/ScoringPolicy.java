@@ -38,7 +38,7 @@ public class ScoringPolicy {
         }
 
         double max = task.getMaxScore();
-        if (result.getStatus() == Status.NOT_SUBMITTED) {
+        if (result.getStatus() == Status.NOT_SUBMITTED || result.getStatus() == Status.FAILED) {
             return 0;
         }
 
