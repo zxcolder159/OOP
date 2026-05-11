@@ -14,7 +14,7 @@ public class RepoDownloader {
 
 	private static final long PULL_TIMEOUT_SECONDS = 120;
 	private static final long CLONE_TIMEOUT_SECONDS = 240;
-	private static volatile boolean gitValidated = false;
+	private static boolean gitValidated = false;
 
 	/**
 	 * Клонирует или обновляет репозиторий студента.
