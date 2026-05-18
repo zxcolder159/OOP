@@ -20,6 +20,8 @@ public class SystemSettings {
     private static final double DEFAULT_SATISFACTORY_THRESHOLD = 50.0;
     private static final double DEFAULT_ACTIVITY_BONUS_THRESHOLD = 0.60;
     private static final double DEFAULT_ACTIVITY_PENALTY_THRESHOLD = 0.30;
+    /** 0 = auto (current behaviour), 1 = first semester (Sep–Jan), 2 = second semester (Feb–Jun). */
+    private static final int DEFAULT_SEMESTER = 0;
 
     private final long buildTimeoutSeconds;
     private final long gitTimeoutSeconds;
@@ -33,6 +35,7 @@ public class SystemSettings {
     private final double satisfactoryThreshold;
     private final double activityBonusThreshold;
     private final double activityPenaltyThreshold;
+    private final int semester;
 
     public SystemSettings(
             long buildTimeoutSeconds,
@@ -46,7 +49,8 @@ public class SystemSettings {
             double goodThreshold,
             double satisfactoryThreshold,
             double activityBonusThreshold,
-            double activityPenaltyThreshold
+            double activityPenaltyThreshold,
+            int semester
     ) {
         if (buildTimeoutSeconds > 0) {
             this.buildTimeoutSeconds = buildTimeoutSeconds;
@@ -117,6 +121,7 @@ public class SystemSettings {
                 1.0,
                 DEFAULT_ACTIVITY_PENALTY_THRESHOLD
         );
+        this.semester = (semester == 1 || semester == 2) ? semester : DEFAULT_SEMESTER;
     }
 
     /**
@@ -135,7 +140,8 @@ public class SystemSettings {
                 DEFAULT_GOOD_THRESHOLD,
                 DEFAULT_SATISFACTORY_THRESHOLD,
                 DEFAULT_ACTIVITY_BONUS_THRESHOLD,
-                DEFAULT_ACTIVITY_PENALTY_THRESHOLD
+                DEFAULT_ACTIVITY_PENALTY_THRESHOLD,
+                DEFAULT_SEMESTER
         );
     }
 

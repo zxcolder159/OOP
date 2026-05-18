@@ -1,12 +1,4 @@
-groups {
-    group {
-        name = "24216"
-        students = [
-            [fio: "Ермаков Александр Владиславович", githubNick: "zxcolder159", repoUrl: "https://github.com/zxcolder159/OOP"],
-            [fio: "Максим Ущербный Дмитриевич", githubNick: "vylegzhaninn", repoUrl: "https://github.com/vylegzhaninn/OOP"]
-        ]
-    }
-}
+include "groups.groovy"
 
 tasks {
     task {
@@ -120,6 +112,7 @@ settings {
     // Activity influence on final grade
     activityBonusThreshold = 0.60
     activityPenaltyThreshold = 0.30
+    semester = 1
 }
  
 // Example: explicit selection of students/tasks for checking.

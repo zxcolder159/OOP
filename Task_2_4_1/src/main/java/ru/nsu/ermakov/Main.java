@@ -157,7 +157,6 @@ public class Main {
         if (COMMAND_REPORT.equals(first) || COMMAND_CLONE.equals(first)) {
             return new CliArgs(first, configPath, outputPath, tasksFilter);
         }
-        // Если первый аргумент не команда, считаем это путём к конфигу
         return new CliArgs(COMMAND_REPORT, first, DEFAULT_REPORT_FILE, tasksFilter);
     }
 

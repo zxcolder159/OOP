@@ -28,3 +28,8 @@ test {
 application {
     mainClass = 'ru.nsu.ermakov.Main'
 }
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}

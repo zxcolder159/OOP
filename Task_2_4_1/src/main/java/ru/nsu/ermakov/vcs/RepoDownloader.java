@@ -62,7 +62,7 @@ public class RepoDownloader {
 				Files.move(destinationPath, backup);
 			}
 
-			ProcessBuilder pbClone = new ProcessBuilder("git", "clone", "--depth", "1", repoUrl, destinationPath.toString());
+			ProcessBuilder pbClone = new ProcessBuilder("git", "clone", repoUrl, destinationPath.toString());
 			configureNonInteractiveGit(pbClone);
 			pbClone.redirectErrorStream(true);
 			Files.createDirectories(destinationPath.getParent());

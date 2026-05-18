@@ -26,7 +26,8 @@ class ScoringPolicyTest {
                 70.0,
                 50.0,
                 0.60,
-                0.30
+                0.30,
+                0
         );
         ScoringPolicy scoringPolicy = new ScoringPolicy(settings);
 
@@ -59,7 +60,8 @@ class ScoringPolicyTest {
                 70.0,
                 50.0,
                 0.60,
-                0.30
+                0.30,
+                0
         );
         ScoringPolicy scoringPolicy = new ScoringPolicy(settings);
 

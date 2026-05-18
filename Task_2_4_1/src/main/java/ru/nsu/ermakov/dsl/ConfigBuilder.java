@@ -23,8 +23,7 @@ public class ConfigBuilder {
     private final List<Task> tasks = new ArrayList<>();
     private final List<Checkpoint> checkpoints = new ArrayList<>();
     private final List<StudentTaskSelection> taskSelections = new ArrayList<>();
-    private static final DateTimeFormatter DATE_FORMATTER =
-            DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private SystemSettings settings = SystemSettings.defaults();
     private final ConfigLoader loader;
     private final Path baseDir;
@@ -296,6 +295,7 @@ public class ConfigBuilder {
         public Double satisfactoryThreshold;
         public Double activityBonusThreshold;
         public Double activityPenaltyThreshold;
+        public Integer semester;
 
         private final SystemSettings defaults;
 
@@ -317,6 +317,7 @@ public class ConfigBuilder {
             satisfactoryThreshold = this.defaults.getSatisfactoryThreshold();
             activityBonusThreshold = this.defaults.getActivityBonusThreshold();
             activityPenaltyThreshold = this.defaults.getActivityPenaltyThreshold();
+            semester = this.defaults.getSemester();
         }
 
         /**
@@ -335,7 +336,8 @@ public class ConfigBuilder {
                     valueOrDefault(goodThreshold, defaults.getGoodThreshold()),
                     valueOrDefault(satisfactoryThreshold, defaults.getSatisfactoryThreshold()),
                     valueOrDefault(activityBonusThreshold, defaults.getActivityBonusThreshold()),
-                    valueOrDefault(activityPenaltyThreshold, defaults.getActivityPenaltyThreshold())
+                    valueOrDefault(activityPenaltyThreshold, defaults.getActivityPenaltyThreshold()),
+                    valueOrDefault(semester, defaults.getSemester())
             );
         }
 
@@ -344,6 +346,10 @@ public class ConfigBuilder {
         }
 
         private double valueOrDefault(Double value, double fallback) {
+            return value == null ? fallback : value;
+        }
+
+        private int valueOrDefault(Integer value, int fallback) {
             return value == null ? fallback : value;
         }
     }

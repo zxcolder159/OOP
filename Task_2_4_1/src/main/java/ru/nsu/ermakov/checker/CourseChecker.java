@@ -37,7 +37,7 @@ public class CourseChecker {
 
         SystemSettings settings = config.getSettings();
         CommandExecutor commandExecutor = new CommandExecutor();
-        GitRepositoryInspector gitInspector = new GitRepositoryInspector(commandExecutor, settings.getGitTimeoutSeconds());
+        GitRepositoryInspector gitInspector = new GitRepositoryInspector(commandExecutor, settings.getGitTimeoutSeconds(), settings.getSemester());
         ScoringPolicy scoringPolicy = new ScoringPolicy(settings);
         TaskCheckService taskCheckService = new TaskCheckService(
                 new TaskPathResolver(),
@@ -96,6 +96,7 @@ public class CourseChecker {
                 continue;
             }
             List<Task> selectedTasks = taskSelectionResolver.resolveTasks(config, student, tasks);
+            selectedTasks = filterTasksBySemester(selectedTasks, config.getSettings().getSemester());
             results.add(checkStudent(groupName, student, selectedTasks, gitInspector, taskCheckService));
         }
 
@@ -148,6 +149,30 @@ public class CourseChecker {
     }
 
     /**
+     * Filters tasks to only those belonging to the given semester.
+     * Semester 0 (auto) returns all tasks unchanged.
+     * Semester N filters to tasks whose name starts with "Task_N_" (case-insensitive).
+     */
+    private List<Task> filterTasksBySemester(List<Task> tasks, int semester) {
+        if (semester == 0 || tasks == null) {
+            return tasks;
+        }
+        String prefix = "task_" + semester + "_";
+        List<Task> filtered = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task == null) {
+                continue;
+            }
+            String id = task.getId() != null ? task.getId().toLowerCase(java.util.Locale.ROOT) : "";
+            String name = task.getName() != null ? task.getName().toLowerCase(java.util.Locale.ROOT) : "";
+            if (id.startsWith(prefix) || name.startsWith(prefix)) {
+                filtered.add(task);
+            }
+        }
+        return filtered;
+    }
+
+    /**
      * Нормализует имя группы для вывода/логирования.
      */
     private String sanitizeGroupName(String groupName) {
@@ -156,4 +181,5 @@ public class CourseChecker {
         }
         return groupName;
     }
+
 }

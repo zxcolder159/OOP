@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class ConfigLoader {
         }
 
         Path configPath = Path.of(filePath).toAbsolutePath().normalize();
-        return loadConfig(configPath, new LinkedHashSet<>());
+        return loadConfig(configPath, new HashSet<>());
     }
 
     /**
