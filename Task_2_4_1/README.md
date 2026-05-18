@@ -1,0 +1,1 @@
+bash ./check.sh config.groovy report-test.html
