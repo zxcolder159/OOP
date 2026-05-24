@@ -11,12 +11,9 @@ public class ParallelChecker {
      * runTest.
      */
     public boolean runTest(long[] array) {
-        long startTime = System.currentTimeMillis();
-        boolean check = Arrays.stream(array)
+        boolean allPrime = Arrays.stream(array)
                 .parallel()
                 .allMatch(IsPrime::isPrime);
-        System.out.println("Время выполнения для Stream Parallel:"
-                + (System.currentTimeMillis() - startTime));
-        return check;
+        return allPrime;
     }
 }
