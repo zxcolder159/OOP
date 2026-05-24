@@ -1,6 +1,6 @@
 package ru.nsu.ermakov;
 
-R/**
+/**
  * Класс со статистическим методом для проверки на простату.
  */
 public class IsPrime {
